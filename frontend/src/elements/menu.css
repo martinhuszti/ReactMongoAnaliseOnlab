@@ -67,3 +67,12 @@
     float: left;
     margin-left: 200px;
 }
+
+ul{
+list-style-type: none;
+margin: 0px;
+}
+
+li{
+margin: 0px;
+}
