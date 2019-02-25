@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import Button from '@material-ui/core/Button';
-import Header from './elements/Header.jsx';
-import RegForm from './elements/RegistrationForm.jsx'
 
-//import Footer from './elements/Footer';
+import Header from './elements/Header.jsx';
+import Footer from './elements/Footer';
+
 
 
 class App extends Component {
 
-    state = {}
-
-    constructor(props) {
-        super(props);
-
-        // This binding is necessary to make `this` work in the callback
-    }
+    state = {};
 
     componentDidMount() {
         setInterval(this.hello, 250);
@@ -31,29 +24,23 @@ class App extends Component {
             });
     };
 
-
     render() {
         return (
             <div className="App">
                 <Header/>
-
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
-
-                    <h1 className="App-title">asdasd</h1>
-
+                    <h1 className="App-title">{this.state.message}</h1>
                 </header>
-
-                <RegForm/>
-
-                <p className="App-intro">
+                <p className="App-intro">F
                     To get started, edit <code>src/App.js</code> and save to reload.
                 </p>
-
+                <Footer/>
             </div>
         );
     }
 }
+
 
 
 export default App;
