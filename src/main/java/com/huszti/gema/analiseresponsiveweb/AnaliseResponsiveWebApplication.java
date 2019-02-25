@@ -20,6 +20,6 @@ public class AnaliseResponsiveWebApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        userRepository.save(new User("Martin", "passw", "sdsad"));
+        userRepository.save(new User("Martin","Huszti", "passw", "sdsad"));
     }
 }
