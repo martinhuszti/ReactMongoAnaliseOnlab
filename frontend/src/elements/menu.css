@@ -2,6 +2,7 @@
     background-color: #1D155D;
 }
 
+
 .menuitem{
     position: relative;
     text-align: center;
@@ -70,9 +71,5 @@
 
 ul{
 list-style-type: none;
-margin: 0px;
-}
-
-li{
-margin: 0px;
+margin: 0rem;
 }
