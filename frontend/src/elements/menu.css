@@ -29,6 +29,14 @@
 .padding_menu{
     padding: 10px 15px 10px 15px;
 }
+
+li > a{
+    color: #fff;
+}
+ul>a{
+color: #fff;
+}
+
 @media( max-width: 880px ){
     #loginitem{
         margin-left: 0px;
