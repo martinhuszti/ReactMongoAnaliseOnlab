@@ -3,10 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import News from './News';
+import Requirements from './requirements';
 
 const Home = () => (
     <News/>
   );
+
 
 const Header = () => (
     <Router>
@@ -18,20 +20,20 @@ const Header = () => (
                         <Link to="/">Hírek</Link>
                     </li>
                     <li className="col menuitem padding_menu">
-                        <Link to="/News">Számonkérés</Link>
+                        <Link to="/Exams">Számonkérés</Link>
                     </li>
                     <li className="col menuitem padding_menu">
-                        <Link to="/">Információ</Link>
+                        <Link to="/Informations">Információ</Link>
                     </li>
                     <li className="col menuitem padding_menu">
-                        <Link to="/"> Feladatok</Link>
+                        <Link to="/Excercises"> Feladatok</Link>
                     </li>
                     <li className="col menuitem padding_menu">
-                        <Link to="/"> Követelmény</Link>
+                        <Link to="/Requirements"> Követelmény</Link>
                     </li>
                     <li id="loginitem" className="col menuitem">
-                        <ul id="login" className="padding_menu">
-                            <Link to="/">Profil</Link>
+                        <ul id="login" onClick="" className="padding_menu login_button">
+                            <p id="login"to="/">Profil</p>
                         </ul>
 
                     </li>
@@ -39,8 +41,13 @@ const Header = () => (
             </div>
         </nav>
 
-        <Route exact path="/News" component={() => <p style={{marginTop: '200px'}}>asdasdasdasd</p>} />
+        <Route exact path="/Exams" component={() => <p style={{marginTop: '200px'}}>asdasdasdasd</p>} />
         <Route exact path="/" component={Home} />
+        
+        <Route exact path="/Informations" component={Requirements} />
+        <Route exact path="/Excercises" component={Requirements} 
+        />
+        <Route exact path="/Requirements" component={Requirements} />
      </div>
     </Router>
 );

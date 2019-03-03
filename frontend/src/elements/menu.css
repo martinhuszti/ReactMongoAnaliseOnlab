@@ -19,12 +19,17 @@
     margin-left: 70px;
     padding-right: 0px;
 }
-#login{
+
+.login_button{
     text-align: center;
     background-color: #009FE3;
-    margin: 0;
+   
     padding-left: 20px;
     padding-right: 20px;
+}
+
+#login{
+    margin: 0;
 }
 .padding_menu{
     padding: 10px 15px 10px 15px;
