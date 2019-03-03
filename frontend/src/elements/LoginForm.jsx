@@ -39,9 +39,10 @@ import ButtonToolbar from'react-bootstrap/ButtonToolbar'
               <div className="helper_text">Felhasználónév:</div> 
                 <input className="login_color" type="text" name="name" />
               <div className="helper_text">Jelszó:</div> 
-                <input className="login_color" type="text" name="password"/>
-                <input type="checkbox" id="remember_me" name="_remember_me" checked />
-                <p>Remember me</p>
+                <input className="login_color" type="password" name="password"/>
+                <div className="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" checked />
+                <label className="remember_me_text helper_text">Maradjak bejelentkezve</label></div>
+                
              </label>
                </form>
                <div className="center_login">

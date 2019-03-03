@@ -1,6 +1,9 @@
 #login_width{
     max-width: 600px;
     margin: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .login_text{
@@ -48,3 +51,18 @@ input[type=text] {
     border: none;
     border-bottom: 2px solid #1D155D;
   }
+
+  input[type=password] {
+    width: 100%;
+    padding: 12px 10px;
+    margin: 0px 0 30px 0;
+    border: none;
+    border-bottom: 2px solid #1D155D;
+  }
+
+.remember_me{
+display: inline-block;
+}
+.remember_me_text{
+    margin-left: 10px;
+}
