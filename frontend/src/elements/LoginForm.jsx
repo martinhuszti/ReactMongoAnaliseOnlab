@@ -2,11 +2,9 @@ import './news.css';
 import './LoginForm.css'
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from'react-bootstrap/ButtonToolbar'
 
 
-
-     class RegistrationForm extends Component {
+class RegistrationForm extends Component {
 
 
         handleSubmit = () => {

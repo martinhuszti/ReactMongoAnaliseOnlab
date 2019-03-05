@@ -20,7 +20,7 @@
 }
 .news_body{
     padding: 20px;
-    min-height: calc(100%-100px);
+    min-height: calc(100%- 100px);
     text-align: left;
 }
 .news_text{
@@ -38,3 +38,7 @@ height:56px;
 #placeholder_news{
     height:100vh;
     }
+
+#buttonFrom  *{
+    margin: 10px;
+}
