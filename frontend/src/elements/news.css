@@ -28,16 +28,16 @@
     font-size: 18px;
     float: left;
     margin: 0;
-    margin-left: 10px;
-    
-    
+    margin-left: 10px; 
 }
+
 #placeholder_header{
-height:56px;
+    height:56px;
 }
+
 #placeholder_news{
     height:100vh;
-    }
+}
 
 #buttonFrom  *{
     margin: 10px;

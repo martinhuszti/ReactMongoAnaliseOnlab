@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import News from './News';
 import Requirements from './requirements';
 import LoginForm from './LoginForm';
+import LoggedIn from './loggedin';
 
 const Home = () => (
     <News />
@@ -29,7 +30,7 @@ const Header = () => (
                             <Link to="/Informations">Információ</Link>
                         </li>
                         <li className="col menuitem padding_menu">
-                            <Link to="/Excercises"> Feladatok</Link>
+                            <Link to="/LoggedIn"> Feladatok</Link>
                         </li>
                         <li className="col menuitem padding_menu">
                             <Link to="/Requirements"> Követelmény</Link>
@@ -50,7 +51,7 @@ const Header = () => (
             <Route exact path="/" component={Home} />
 
             <Route exact path="/Informations" component={Requirements} />
-            <Route exact path="/Excercises" component={Requirements}
+            <Route exact path="/LoggedIn" component={LoggedIn}
             />
             <Route exact path="/Requirements" component={Requirements} />
             <Route exact path="/LoginForm" component={LoginForm} />
