@@ -1,0 +1,24 @@
+.menu_items{
+    background-color: #1D155D;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 80vh;
+}
+
+.news_body_padding{
+    padding: 0;
+}
+
+.item{
+padding-left: 20px;
+padding-right: 20px;
+}
+.item_text_color{
+    color: white;
+    font-size: 16px;
+}
+
+.random_place{
+    height: 100px;
+}
