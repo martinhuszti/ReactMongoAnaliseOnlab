@@ -11,21 +11,20 @@ import java.time.LocalDate;
 public class User {
 
     @Id
-    private String id;
+    private String _id;
+    private String neptun_code;
     private String name;
     private String password;
     private String email;
+    private String role;
     private LocalDate registration_date;
     private LocalDate last_login;
 
-    public User(){}
 
-    public User(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.registration_date = LocalDate.now();
-        this.last_login = LocalDate.now();
+    public User() {
+        role = "student";
+        registration_date = LocalDate.now();
+        last_login = LocalDate.now();
     }
 
 }

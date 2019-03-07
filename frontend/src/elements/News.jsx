@@ -1,15 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './news.css';
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import { Container, Form, FormGroup, Input, Label } from 'reactstrap';
+import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
+import Login from './LoginForm.jsx';
 
 
 const thisIsMyCopy = '<p>copy copy copy <strong>strong copy</strong></p>';
 
 
-const simplenews = ({ match }) => (
+const simplenews = ({match}) => (
     <div>
 
         <div className="news news_head">
@@ -22,41 +23,51 @@ const simplenews = ({ match }) => (
 
 class Class extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            item: this.emptyItem,
+            items: [],
+            redirect: false,
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
+
+    }
+    renderRedirect = () => {
+        const logged = sessionStorage.getItem("loggedin");
+
+        if (logged !== "true") {
+            return <Redirect to='/LoginForm'/>
+        }
+    }
+
     emptyItem = {
         title: '',
         text: ''
 
     };
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            item: this.emptyItem,
-            items: []
-        };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.refreshPage = this.refreshPage.bind(this);
-    }
 
     handleChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item });
+        this.setState({item});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        const {item} = this.state;
 
         await fetch('/addnews', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         })
 
@@ -67,64 +78,67 @@ class Class extends Component {
         event.preventDefault();
         await fetch(`/getnews`)
             .then(result => result.json())
-            .then(items => this.setState({ items }))
+            .then(items => this.setState({items}))
 
         console.log("betöltés befejeeződött")
     }
 
-     
-    
-
 
     render() {
 
-        const { item } = this.state;
+        const {item} = this.state;
 
         return (
-            <Router>
-                <div id="placeholder_news">
-                    <div id="placeholder_header" />
-                    <div id="width_class">
+            <div>
+                {this.renderRedirect()}
+                <Router>
 
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Label for="head">Hír címe</Label>
-                                <Input type="text" name="title" id="title"
-                                    value={item.title || ''} onChange={this.handleChange}
-                                />
-                            </FormGroup>
+                    <div id="placeholder_news">
 
-                            <FormGroup>
-                                <Label for="head">Hír szövege</Label>
-                                <Input type="text" name="text" id="text"
-                                    value={item.text || ''} onChange={this.handleChange}
-                                />
-                            </FormGroup>
+                        <div id="placeholder_header"/>
+                        <div id="width_class">
 
-                            <FormGroup id="buttonFrom">
-                                <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
-                                <Button variant={'info'} color="primary" onClick={this.refreshPage} >Frissítés</Button>
-                            </FormGroup>
+                            <Form onSubmit={this.handleSubmit}>
+                                <FormGroup>
+                                    <Label for="head">Hír címe</Label>
+                                    <Input type="text" name="title" id="title"
+                                           value={item.title || ''} onChange={this.handleChange}
+                                    />
+                                </FormGroup>
 
-                        </Form>
+                                <FormGroup>
+                                    <Label for="head">Hír szövege</Label>
+                                    <Input type="text" name="text" id="text"
+                                           value={item.text || ''} onChange={this.handleChange}
+                                    />
+                                </FormGroup>
+
+                                <FormGroup id="buttonFrom">
+                                    <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
+                                    <Button variant={'info'} color="primary"
+                                            onClick={this.refreshPage}>Frissítés</Button>
+                                </FormGroup>
+
+                            </Form>
 
 
+                            {this.state.items.slice(3, 5).map(item => <li key={item.id}>
+                                <div className="news news_head">
+                                    <Link to={item.id} className="news_text" href="">{item.title}</Link>
+                                </div>
 
-                        {this.state.items.slice(3,5).map(item => <li key={item.id}>
-                            <div className="news news_head">
-                                <Link to={item.id} className="news_text" href="">{item.title}</Link>
-                            </div>
+                                <div className="news news_body"> {item.text}</div>
+                            </li>)}
 
-                            <div className="news news_body"> {item.text}</div>
-                        </li>)}
+                        </div>
+                        <Switch>
 
+                            <Route path="/:news" component={simplenews}/>
+                            <Route path="/login" component={Login}/>
+                        </Switch>
                     </div>
-                    <Switch>
-
-                        <Route path="/:news" component={simplenews} />
-                    </Switch>
-                </div>
-            </Router>
+                </Router>
+            </div>
         )
     }
 

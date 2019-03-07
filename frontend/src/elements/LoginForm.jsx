@@ -24,7 +24,7 @@ class RegistrationForm extends Component {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(usrs)
                 })
-    
+            sessionStorage.setItem('loggedin', "true");
     
         }
         render() {
@@ -34,7 +34,7 @@ class RegistrationForm extends Component {
                 <div className="center_login">
                 <form>
               <label className="center_login">
-              <div className="helper_text">Felhasználónév:</div> 
+              <div className="helper_text">Neptun kód:</div>
                 <input className="login_color" type="text" name="name" />
               <div className="helper_text">Jelszó:</div> 
                 <input className="login_color" type="password" name="password"/>

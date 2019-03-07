@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class AnaliseResponsiveWebApplication implements CommandLineRunner {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository sda;
 
     public static void main(String[] args) {
         SpringApplication.run(AnaliseResponsiveWebApplication.class, args);
