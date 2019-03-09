@@ -30,6 +30,8 @@
 
 #login{
     margin: 0;
+    display: table;
+    width: 100%;
 }
 .padding_menu{
     padding: 10px 15px 10px 15px;

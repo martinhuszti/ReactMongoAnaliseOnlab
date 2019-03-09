@@ -11,33 +11,36 @@ class LoggedIn extends Component {
         return (
             <div id="placeholder_news">
                 <div id="placeholder_header"></div>
-                <div id="width_class">
 
                     <div className="news news_head">
-                        <p className="news_text " >Login</p>
+                        <h1 className="news_text " >Login</h1>
                     </div>
-                    
-                    <div className="news news_body news_body_padding">
-                        <div className="row">
-                            <div className="col-md-auto menu_items">
-                                <div className="item">
-                                    <p className="item_text_color">Adatok</p>
-                                </div>
-                                <div className="item">
-                                    <p className="item_text_color">Eredmények</p>
-                                </div>
-                                <div className="item">
-                                    <p className="item_text_color">Jelszó változtatás</p>
-                                </div><div className="item random_place">
-                                    
-                                </div><div className="item">
-                                    <p className="item_text_color order-12">Kijelentkezés</p>
-                                </div>
-                         </div>
-                            <div className="col">
-                                2 of 3
-                          </div>
-                        </div>
+
+                    <div className="news news_body news_body_padding flex_container">
+                        
+                        <div className="menu_items flex_column">
+                            <div className="menu_items box_1">
+                            <p className="menu_items_text">Adatok</p>
+                            </div>
+                            <div className="menu_items box_1">
+                            <p className="menu_items_text">Eredmények</p>
+                            </div>
+                            <div className="menu_items box_1">
+                            <p className="menu_items_text">Jelszó változtatás</p>
+                            </div>
+                            <div className="menu_items box_1">
+                            <p className="menu_items_text">Chat</p>
+                            </div>
+                            <div className="box_flex">
+                            
+                            </div>
+                            <div className="menu_items box_1 logout_color">
+                            <p className="menu_items_text">Kijelentkezés</p>
+                            </div>
+                            </div>
+                            <div className="content_box">
+                                2 of 3ssdsdsdsdsdsdsdsdsd
+                         
                     </div>
                 </div>
             </div>
