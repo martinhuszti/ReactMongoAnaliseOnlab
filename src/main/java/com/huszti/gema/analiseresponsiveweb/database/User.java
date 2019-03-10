@@ -12,7 +12,7 @@ public class User {
 
     @Id
     private String _id;
-    private String neptun_code;
+    private String neptun;
     private String name;
     private String password;
     private String email;

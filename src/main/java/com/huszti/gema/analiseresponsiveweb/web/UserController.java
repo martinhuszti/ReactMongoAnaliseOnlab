@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Map;
+
 //push it to the limit
 
 @RestController
@@ -18,9 +21,21 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/adduser")
-    public User addUser(@RequestBody User user)
-    {
+    public User addUser(@RequestBody User user) {
         userRepository.save(user);
         return user;
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping(value = "/loginUser", produces = "application/json")
+    public Map loginUser(@RequestBody User user) {
+        User repoUser = userRepository.findByNeptun(user.getNeptun());
+        if (repoUser == null) return Collections.singletonMap("response", "-1");
+
+        if (repoUser.getPassword().equals(user.getPassword()))
+            return Collections.singletonMap("response", repoUser.get_id());
+        else return Collections.singletonMap("response", "-1");
+    }
+
+
 }
