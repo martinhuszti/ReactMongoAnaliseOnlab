@@ -9,6 +9,10 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-ro
 
 
 class LoggedIn extends Component {
+    constructor(props){
+        super(props);
+
+    }
 
     routes = [
         {
@@ -35,6 +39,7 @@ class LoggedIn extends Component {
     ];
 
     render() {
+
         return (
             <Router>
                 <div id="placeholder_news">
@@ -75,7 +80,8 @@ class LoggedIn extends Component {
                                     exact={route.exact}
                                     component={route.main}
                                 />
-                            ))}
+                            )
+                            )}
 
                         </div>
                     </div>

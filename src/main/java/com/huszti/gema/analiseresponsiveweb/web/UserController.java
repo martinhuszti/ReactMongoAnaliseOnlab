@@ -3,10 +3,7 @@ package com.huszti.gema.analiseresponsiveweb.web;
 import com.huszti.gema.analiseresponsiveweb.database.User;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Map;
@@ -35,6 +32,13 @@ public class UserController {
         if (repoUser.getPassword().equals(user.getPassword()))
             return Collections.singletonMap("response", repoUser.get_id());
         else return Collections.singletonMap("response", "-1");
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getDetails")
+    public User getDetails(@RequestParam String id) {
+        User us = userRepository.findById(id).orElse(null);
+        return us;
     }
 
 

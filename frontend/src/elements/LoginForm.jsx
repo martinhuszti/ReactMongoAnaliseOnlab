@@ -44,6 +44,7 @@ class RegistrationForm extends Component {
                 if (json.response == "-1") alert("Hibás felhasználónév vagy jelszó");
                 else {
                     console.log(json);
+                    sessionStorage.setItem("id", json.response);
                     alert("Sikeresen bejelentkezve!")
                     this.props.history.push('/LoggedIn');
                 }
