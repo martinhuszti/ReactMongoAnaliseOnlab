@@ -1,0 +1,20 @@
+.result_height{
+    
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.result_height>*{
+     
+    display: flex;
+    flex-direction: row;
+    min-width: 100px;
+    max-width: 600px;
+    justify-content: space-between;
+    border-bottom: 2px solid #1D155D;
+    margin: 10px;
+}
+.all_bold>*{
+    font-weight: bold;
+}

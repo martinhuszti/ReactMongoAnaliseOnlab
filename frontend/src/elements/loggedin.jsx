@@ -3,12 +3,36 @@ import './news.css';
 import './loggedin.css';
 import React, { Component } from 'react';
 import LoggedIn_Data from './loggedin_data';
+import LoggedIn_Result from './loggedin_results';
 
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
 class LoggedIn extends Component {
 
+    routes = [
+        {
+            path: "/LoggedIn/data",
+            exact: true,
+            main: () => <LoggedIn_Data/>
+        },
+        {
+            path: "/LoggedIn/result",
+            main: () => <LoggedIn_Result/>
+        },
+        {
+            path: "/LoggedIn/change_pass",
+            main: () => <h2>Shoelaces</h2>
+        },
+        {
+            path: "/LoggedIn/chat",
+            main: () => <h2>Shoelaces</h2>
+        },
+        {
+            path: "/logout",
+            main: () => <h2>Shoelaces</h2>
+        }
+    ];
 
     render() {
         return (
@@ -23,33 +47,41 @@ class LoggedIn extends Component {
                     <div className="news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column">
-                            <div className="menu_items box_1">
+                            <Link to="/LoggedIn/data" className="menu_items box_1">
                                 <p className="menu_items_text">Adatok</p>
-                            </div>
-                            <div className="menu_items box_1">
+                            </Link>
+                            <Link to="/LoggedIn/result" className="menu_items box_1">
                                 <p className="menu_items_text">Eredmények</p>
-                            </div>
-                            <div className="menu_items box_1">
+                            </Link>
+                            <Link to="/LoggedIn/change_pass" className="menu_items box_1">
                                 <p className="menu_items_text">Jelszó változtatás</p>
-                            </div>
-                            <div className="menu_items box_1">
+                            </Link>
+                            <Link to="/LoggedIn/chat" className="menu_items box_1">
                                 <p className="menu_items_text">Chat</p>
-                            </div>
+                            </Link>
                             <div className="box_flex">
 
                             </div>
-                            <div className="menu_items box_1 logout_color">
+                            <Link to="/logout" className="menu_items box_1 logout_color">
                                 <p className="menu_items_text">Kijelentkezés</p>
-                            </div>
+                            </Link>
                         </div>
                         <div className="content_box">
-                            <LoggedIn_Data />
+                            {this.routes.map((route, index) => (
+
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    component={route.main}
+                                />
+                            ))}
 
                         </div>
                     </div>
                 </div>
 
-                
+
             </Router>
         );
     }
