@@ -75,8 +75,8 @@ class RegistrationForm extends Component {
                                            onChange={this.handleChange}
                                     />
 
-                                    <div className="helper_text">Jelszó:</div>
-                                    <input className="login_color"
+                                    <div className="helper_text ">Jelszó:</div>
+                                    <input className="login_color loginform_pass"
                                            type="password"
                                            name="password"
                                            id='password'

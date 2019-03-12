@@ -1,0 +1,43 @@
+.pass_flex_display{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.pass_long_area{
+    flex-grow: 2;
+}
+.pass_short_area{
+    flex-grow: 0.5;
+}
+.pass_list>li>span{
+    font-style: italic;
+    padding: 12px 10px;
+    padding-right: 20px;
+}
+.pass_list>li{
+    margin: 10px;
+    margin-left: 0;
+    display: flex;
+    flex-direction: row;
+}
+.pass_list>li>div{
+    min-width: 100px;
+    border-bottom: 2px solid #1D155D;
+    border-style: solid;
+}
+.pass_newpass {
+    max-width: 30%;
+    min-width: 200px;
+    padding: 12px 10px;
+    
+    border: none;
+    border-bottom: 2px solid #1D155D;
+  }
+
+
+  @media( max-width: 450px ){
+.pass_list{
+    padding: 0;
+}
+  }
