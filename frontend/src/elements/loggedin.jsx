@@ -4,7 +4,7 @@ import './loggedin.css';
 import React, { Component } from 'react';
 import LoggedIn_Data from './loggedin_data';
 import LoggedIn_Result from './loggedin_results';
-
+import Change_Pass from './change_pass';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
@@ -26,7 +26,7 @@ class LoggedIn extends Component {
         },
         {
             path: "/LoggedIn/change_pass",
-            main: () => <h2>Shoelaces</h2>
+            main: () => <Change_Pass/>
         },
         {
             path: "/LoggedIn/chat",
@@ -42,14 +42,14 @@ class LoggedIn extends Component {
 
         return (
             <Router>
-                <div id="placeholder_news">
+                <div id="loggedin_placeholder_news">
                     <div id="placeholder_header"></div>
 
                     <div className="news news_head">
                         <h1 className="news_text " >Login</h1>
                     </div>
 
-                    <div className="news news_body news_body_padding flex_container">
+                    <div className="loggedin_news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column">
                             <Link to="/LoggedIn/data" className="menu_items box_1">

@@ -122,7 +122,7 @@ class Class extends Component {
                             </Form>
 
 
-                            {this.state.items.slice(3, 5).map(item => <li key={item.id}>
+                            {this.state.items.map(item => <li key={item.id}>
                                 <div className="news news_head">
                                     <Link to={item.id} className="news_text" href="">{item.title}</Link>
                                 </div>
