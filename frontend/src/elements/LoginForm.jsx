@@ -31,6 +31,13 @@ class RegistrationForm extends Component {
         this.setState({item});
     }
 
+    handleKeyPress(e){
+        if (e.key === 'Enter') {
+            console.log('Nem nyomtam enter');
+          this.handleChange(e);
+        }
+      }
+
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
@@ -68,7 +75,7 @@ class RegistrationForm extends Component {
                             <form Submit={this.handleSubmit}>
                                 <label className="center_login">
                                     <div className="helper_text">Neptun kód:</div>
-                                    <input className="login_color" type="text"
+                                    <input className="login_color loginform_text" type="text"
                                            name="neptun"
                                            id="neptun"
                                            value={item.neptun || ''}
@@ -92,7 +99,7 @@ class RegistrationForm extends Component {
                                 </label>
 
                                 <div className="center_login">
-                                    <Button className="button_color button_width" onClick={this.handleSubmit}
+                                    <Button className="button_color button_width" onClick={this.handleSubmit} onKeyPress={this.handleKeyPress}
                                             variant="primary">
                                         <p className="button_width">Belépés</p></Button>
                                 </div>

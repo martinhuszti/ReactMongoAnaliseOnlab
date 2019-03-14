@@ -4,29 +4,31 @@ import Button from 'react-bootstrap/Button';
 
 class Change_Pass extends Component {
 
-
-    styles = theme => ({
-        eye: {
-          cursor: 'pointer',
-        },
-      });
+  passStyles = {
+    passwordText:'text',
+    css_style: 'pass_lookup_button'
+};
 
       constructor(props) {
         super(props);
     
         this.state = {
-          passwordIsMasked: true,
-        };
+          color:true,
+          textPass:"password",
+      };
+
+      this.showPass=this.showPass.bind(this);
       }
     
-      togglePasswordMask = () => {
-        this.setState(prevState => ({
-          passwordIsMasked: !prevState.passwordIsMasked,
-        }));
-    };
+    
+    showPass(event){
+      
+      this.setState({color: !this.state.color});
+    }
 
     render() {
-
+      let btn_class = this.state.color ?  "pass_lookup_button" : "pass_lookup_button_asd"
+      let pass_style=this.state.color ? "password" : "text"
         
 
         return (
@@ -34,8 +36,9 @@ class Change_Pass extends Component {
                 <ul className="pass_list">
                     <li >
                         <span >Régi jelszó:</span>
+                        <i className="fa fa-eye"/>
                         <input className="pass_newpass"
-                                           type={this.state.type}
+                                           type="password"
                                            name="password"
                                            id='new_password'
                                            
@@ -44,14 +47,17 @@ class Change_Pass extends Component {
                                     
                     </li>
                     
+                    
                     <li>
                         <span>Új jelszó: </span>
                         <input className="pass_newpass"
-                                           type="password"
+                                           type={pass_style}
                                            name="password"
                                            id='re_password'
                                            onChange={this.handleChange}
                                     />
+                    
+                    <div onClick={this.showPass} className={btn_class}></div>
                     </li>
                     <li>
                         <span>Megerősítés:</span>

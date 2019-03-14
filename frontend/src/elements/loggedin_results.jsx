@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './loggedin_result.css';
+import Button from 'react-bootstrap/Button';
 
 class LoggedIn_Result extends Component{
 
@@ -13,7 +14,6 @@ class LoggedIn_Result extends Component{
                     <span>Számonkérés</span>
                     <span>Pont</span>
                     <span>Jegy</span>
-                    <span>Megjegyzés</span>
                 </li>
                 <li className="result_font">
                     <span>ZH1:</span>
@@ -72,6 +72,18 @@ class LoggedIn_Result extends Component{
 
                 </ul>
                 </div>
+                <div className="result_flex_markref">
+                <div>
+
+                <span className="result_endmark">Végső jegy:</span>
+                <span className="result_endmark result_number">5</span>
+                </div>
+                <div className="result_autobox">
+                <Button className="button_color button_width result_refresh_button" onClick={this.refreshMark}
+                                            variant="primary">
+                                        <p className="button_width">Eredmény frissítése</p></Button>
+                                        </div>
+                                        </div>
             </div>
 
             

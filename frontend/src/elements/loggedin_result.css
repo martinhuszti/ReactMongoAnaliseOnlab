@@ -65,4 +65,25 @@ background-color: lightgreen;
     padding: 40px;
 }
 
-
+.result_endmark{
+    margin: 20px;
+    font-size: 30px;
+}
+.result_number{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+    font-weight: bold; 
+    color: #1D155D;
+    border-bottom: 2px solid #1D155D;
+}
+.result_flex_markref{
+    display: flex;
+    flex-direction: column;
+}
+.result_refresh_button{
+    top: 50%;
+}
+.result_autobox{
+    flex: 1;
+}

@@ -38,6 +38,11 @@ class LoggedIn extends Component {
         }
     ];
 
+    logout(){
+        sessionStorage.removeItem("id");
+        sessionStorage.removeItem("loggedin");
+    }
+
     render() {
 
         return (
@@ -67,7 +72,7 @@ class LoggedIn extends Component {
                             <div className="box_flex">
 
                             </div>
-                            <Link to="/logout" className="menu_items box_1 logout_color">
+                            <Link to="/logout" onClick={this.logout.bind(this)} className="menu_items box_1 logout_color">
                                 <p className="menu_items_text">Kijelentkezés</p>
                             </Link>
                         </div>
