@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import LoggedIn_Data from './loggedin_data';
 import LoggedIn_Result from './loggedin_results';
 import Change_Pass from './change_pass';
+import Chat from './loggedin_chat';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
@@ -30,7 +31,7 @@ class LoggedIn extends Component {
         },
         {
             path: "/LoggedIn/chat",
-            main: () => <h2>Shoelaces</h2>
+            main: () => <Chat/>
         },
         {
             path: "/logout",
