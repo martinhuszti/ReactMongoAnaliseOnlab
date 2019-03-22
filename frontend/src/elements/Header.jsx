@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { browserHistory} from 'react-router'
 import { Redirect } from 'react-router-dom';
 
 import News from './News';
@@ -17,7 +18,7 @@ const Home = () => (
 
 const Header = () => (
 
-    <Router>
+    <Router >
         <div>
             <nav className="header">
                 <div className="container-fluid">

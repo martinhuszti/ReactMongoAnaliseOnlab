@@ -23,10 +23,11 @@
     background: #f2f2f2;
     border-radius: 15px 0 0 15px ;
     border: 1px solid #1D155D;
+    padding-left: 15px;
 }
 .chat_overflow_container{
     flex:1;
-    height: 560px;
+    height: 600px;
   overflow: auto;
   scrollbar-width: none;
 }

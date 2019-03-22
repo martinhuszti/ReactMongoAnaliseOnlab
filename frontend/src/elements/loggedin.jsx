@@ -6,7 +6,7 @@ import LoggedIn_Data from './loggedin_data';
 import LoggedIn_Result from './loggedin_results';
 import Change_Pass from './change_pass';
 import Chat from './loggedin_chat';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
 class LoggedIn extends Component {
@@ -17,20 +17,20 @@ class LoggedIn extends Component {
 
     routes = [
         {
-            path: "/LoggedIn/data",
+            path: "/data",
             exact: true,
             main: () => <LoggedIn_Data/>
         },
         {
-            path: "/LoggedIn/result",
+            path: "/result",
             main: () => <LoggedIn_Result/>
         },
         {
-            path: "/LoggedIn/change_pass",
+            path: "/change_pass",
             main: () => <Change_Pass/>
         },
         {
-            path: "/LoggedIn/chat",
+            path: "/chat",
             main: () => <Chat/>
         },
         {
@@ -58,16 +58,16 @@ class LoggedIn extends Component {
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column">
-                            <Link to="/LoggedIn/data" className="menu_items box_1">
+                            <Link to="data" className="menu_items box_1">
                                 <p className="menu_items_text">Adatok</p>
                             </Link>
-                            <Link to="/LoggedIn/result" className="menu_items box_1">
+                            <Link to="/result" className="menu_items box_1">
                                 <p className="menu_items_text">Eredmények</p>
                             </Link>
-                            <Link to="/LoggedIn/change_pass" className="menu_items box_1">
+                            <Link to="/change_pass" className="menu_items box_1">
                                 <p className="menu_items_text">Jelszó változtatás</p>
                             </Link>
-                            <Link to="/LoggedIn/chat" className="menu_items box_1">
+                            <Link to="/chat" className="menu_items box_1">
                                 <p className="menu_items_text">Chat</p>
                             </Link>
                             <div className="box_flex">
