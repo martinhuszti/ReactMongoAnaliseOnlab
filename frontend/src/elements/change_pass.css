@@ -32,14 +32,8 @@
     border-bottom: 2px solid #1D155D;
   }
 .pass_lookup_button{
-    width: 40px;
-    background-color: aqua;
-    height: 40px;
-}
-.pass_lookup_button_asd{
-    width: 40px;
-    background-color:black;
-    height: 40px;
+    padding-top: 10px;
+    text-align: center
 }
 
   @media( max-width: 450px ){
