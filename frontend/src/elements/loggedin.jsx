@@ -6,32 +6,71 @@ import LoggedIn_Data from './loggedin_data';
 import LoggedIn_Result from './loggedin_results';
 import Change_Pass from './change_pass';
 import Chat from './loggedin_chat';
+import NewsPublication from './Teacher/news_publication';
 import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
 class LoggedIn extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+        this.state = {
+            items: this.emptyItem,
+            redirect: false,
+        };
 
     }
+    emptyItem = [
+        {
+            link: "/data",
+            text: 'Adatok'
+        },
+        {
+            link: "/result",
+            text: 'Eredmények'
+        },
+        {
+            link: "/change_pass",
+            text: 'Jelszó változtatás'
+        },
+        {
+            link: "/chat",
+            text: 'Chat'
+        },
+        {
+            link: "/students",
+            text: 'Diákok'
+        },
+        {
+            link: "/newPublication",
+            text: 'Új hír közzététele'
+        }
+    ];
 
     routes = [
         {
             path: "/data",
             exact: true,
-            main: () => <LoggedIn_Data/>
+            main: () => <LoggedIn_Data />
         },
         {
             path: "/result",
-            main: () => <LoggedIn_Result/>
+            main: () => <LoggedIn_Result />
         },
         {
             path: "/change_pass",
-            main: () => <Change_Pass/>
+            main: () => <Change_Pass />
         },
         {
             path: "/chat",
-            main: () => <Chat/>
+            main: () => <Chat />
+        },
+        {
+            path: "/students",
+            main: () => <Chat />
+        },
+        {
+            path: "/newPublication",
+            main: () => <NewsPublication/>
         },
         {
             path: "/logout",
@@ -39,7 +78,7 @@ class LoggedIn extends Component {
         }
     ];
 
-    logout(){
+    logout() {
         sessionStorage.removeItem("id");
         sessionStorage.removeItem("loggedin");
     }
@@ -57,19 +96,14 @@ class LoggedIn extends Component {
 
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
-                        <div className="menu_items flex_column">
-                            <Link to="data" className="menu_items box_1">
-                                <p className="menu_items_text">Adatok</p>
+                    <div className="menu_items flex_column">
+                        {this.state.items.map(items => 
+                            <Link to={items.link} className="menu_items box_1">
+                                <p className="menu_items_text">{items.text}</p>
                             </Link>
-                            <Link to="/result" className="menu_items box_1">
-                                <p className="menu_items_text">Eredmények</p>
-                            </Link>
-                            <Link to="/change_pass" className="menu_items box_1">
-                                <p className="menu_items_text">Jelszó változtatás</p>
-                            </Link>
-                            <Link to="/chat" className="menu_items box_1">
-                                <p className="menu_items_text">Chat</p>
-                            </Link>
+
+                        )}
+
                             <div className="box_flex">
 
                             </div>

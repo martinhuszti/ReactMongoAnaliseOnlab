@@ -7,8 +7,6 @@ import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import Login from './LoginForm.jsx';
 
 
-const thisIsMyCopy = '<p>copy copy copy <strong>strong copy</strong></p>';
-
 
 const simplenews = ({match}) => (
     <div>
