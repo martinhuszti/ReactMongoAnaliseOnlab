@@ -3,7 +3,7 @@ import './news.css';
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import {Container, Form, FormGroup, Input, Label} from 'reactstrap';
+import {Form, FormGroup, Input, Label} from 'reactstrap';
 import Login from './LoginForm.jsx';
 
 

@@ -7,6 +7,7 @@ import LoggedIn_Result from './loggedin_results';
 import Change_Pass from './change_pass';
 import Chat from './loggedin_chat';
 import NewsPublication from './Teacher/news_publication';
+import AddStudent from './Admin/add_person';
 import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 
 
@@ -41,6 +42,10 @@ class LoggedIn extends Component {
             text: 'Diákok'
         },
         {
+            link: "/addPerson",
+            text: 'Új felhasználó'
+        },
+        {
             link: "/newPublication",
             text: 'Új hír közzététele'
         }
@@ -71,6 +76,10 @@ class LoggedIn extends Component {
         {
             path: "/newPublication",
             main: () => <NewsPublication/>
+        },
+        {
+            path: "/addPerson",
+            main: () => <AddStudent/>
         },
         {
             path: "/logout",
