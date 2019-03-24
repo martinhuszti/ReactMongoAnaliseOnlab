@@ -13,51 +13,101 @@ const Home = () => (
     <News />
 );
 
+class Header extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            logged: ''
 
 
-const Header = () => (
+        };
+        
+        this.profilClick = this.profilClick.bind(this);
 
-    <Router >
-        <div>
-            <nav className="header">
-                <div className="container-fluid">
-                    <ul id="largemenu" className="row">
-                        <li className="col menuitem padding_menu">
-                            <Link to="/">Hírek</Link>
-                        </li>
-                        <li className="col menuitem padding_menu">
-                            <Link to="/Exams">Számonkérés</Link>
-                        </li>
-                        <li className="col menuitem padding_menu">
-                            <Link to="/Informations">Információ</Link>
-                        </li>
-                        <li className="col menuitem padding_menu">
-                            <Link to="/LoggedIn"> Feladatok</Link>
-                        </li>
-                        <li className="col menuitem padding_menu">
-                            <Link to="/Requirements"> Követelmény</Link>
-                        </li>
-                        <li id="loginitem" className="col menuitem">
+        
+    }
 
-                            <Link id="login" to="/LoginForm" className="padding_menu login_button">Profil</Link>
+    profilClick(){
+        if (localStorage.getItem("loggedin") !== null || sessionStorage.getItem("loggedin") !== null) {
+            this.setState({ logged: "/LoggedIn" })
+            sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
+            sessionStorage.setItem("id", localStorage.getItem("id"))
+            console.log("Kiskacsa22");
+        }
 
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        else {
+            this.setState({ logged: "/LoginForm" })
+            console.log("Kiskacsa535235");
+        }
+    }
 
-            <Route exact path="/Exams" component={Home} />
-            <Route exact path="/" component={Home} />
+    componentDidMount() {
+        if (localStorage.getItem("loggedin") !== null || sessionStorage.getItem("loggedin") !== null) {
+            this.setState({ logged: "/LoggedIn" })
+            sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
+            sessionStorage.setItem("id", localStorage.getItem("id"))
+        }
 
-            <Route exact path="/Informations" component={Requirements} />
-            <Route exact path="/LoggedIn" component={LoggedIn} />
+        else {
+            this.setState({ logged: "/LoginForm" })
+            console.log("Kiskacsa44");
+        }
 
-            <Route exact path="/Requirements" component={Requirements} />
-            <Route exact path="/LoginForm" component={LoginForm} />
 
-            )} />
-        </div>
-    </Router>
-);
+        console.log(this.state.logged);
+    }
+
+
+    render() {
+        return (
+            <Router >
+                <div>
+                    <nav className="header">
+                        <div className="container-fluid">
+                            <ul id="largemenu" className="row">
+                                <li className="col menuitem padding_menu">
+                                    <Link to="/">Hírek</Link>
+                                </li>
+                                <li className="col menuitem padding_menu">
+                                    <Link to="/Exams">Számonkérés</Link>
+                                </li>
+                                <li className="col menuitem padding_menu">
+                                    <Link to="/Informations">Információ</Link>
+                                </li>
+                                <li className="col menuitem padding_menu">
+                                    <Link to="/LoggedIn"> Feladatok</Link>
+                                </li>
+                                <li className="col menuitem padding_menu">
+                                    <Link to="/Requirements"> Követelmény</Link>
+                                </li>
+                                <li id="loginitem" className="col menuitem">
+
+                                    <Link id="login" onClick={this.profilClick} to={this.state.logged} className="padding_menu login_button">Profil</Link>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+                    <Route exact path="/Exams" component={Home} />
+                    <Route exact path="/" component={Home} />
+
+                    <Route exact path="/Informations" component={Requirements} />
+                    <Route exact path="/LoggedIn" component={LoggedIn} />
+
+                    <Route exact path="/Requirements" component={Requirements} />
+                    <Route exact path="/LoginForm" component={LoginForm} />
+
+                    )} />
+            </div>
+            </Router>);
+    }
+
+
+}
+
+
 
 export default Header;

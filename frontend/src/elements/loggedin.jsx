@@ -75,11 +75,11 @@ class LoggedIn extends Component {
         },
         {
             path: "/newPublication",
-            main: () => <NewsPublication/>
+            main: () => <NewsPublication />
         },
         {
             path: "/addPerson",
-            main: () => <AddStudent/>
+            main: () => <AddStudent />
         },
         {
             path: "/logout",
@@ -90,6 +90,9 @@ class LoggedIn extends Component {
     logout() {
         sessionStorage.removeItem("id");
         sessionStorage.removeItem("loggedin");
+        localStorage.removeItem("id");
+        localStorage.removeItem("loggedin");
+        
     }
 
     render() {
@@ -105,13 +108,13 @@ class LoggedIn extends Component {
 
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
-                    <div className="menu_items flex_column">
-                        {this.state.items.map(items => 
-                            <Link to={items.link} className="menu_items box_1">
-                                <p className="menu_items_text">{items.text}</p>
-                            </Link>
+                        <div className="menu_items flex_column">
+                            {this.state.items.map(items =>
+                                <Link to={items.link} className="menu_items box_1">
+                                    <p className="menu_items_text">{items.text}</p>
+                                </Link>
 
-                        )}
+                            )}
 
                             <div className="box_flex">
 
