@@ -1,0 +1,48 @@
+.news{
+    border-style: solid;
+    border-width: 2px;
+}
+.news_head {
+    background-color: #1D155D;
+    margin-top: 20px;
+    padding: 10px;
+    display: table;
+    width: 100%;
+}
+.marg{
+    margin: 10px;
+}
+#width_class{
+    max-width: 1366px;
+    padding:0 16px;
+    margin: 0 auto;
+
+}
+.news_body{
+    padding: 20px;
+    min-height: calc(100%- 100px);
+    text-align: left;
+}
+.news_text{
+    color: white;
+    font-size: 18px;
+    float: left;
+    margin: 0;
+    margin-left: 10px; 
+}
+
+#placeholder_header{
+    height:56px;
+}
+
+#placeholder_news{
+    height:100vh;
+    max-width: 1366px;
+    padding:0 16px;
+    margin: 0 auto;
+  
+}
+
+#buttonFrom  *{
+    margin: 10px;
+}

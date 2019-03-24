@@ -1,0 +1,15 @@
+.extra_info{
+    border: 1px solid #a9c0d6;
+    background-color: #f2f2f2;
+}
+.extra-file-upload {
+    border: 1px solid #1D155D;
+    display: inline-block;
+    background-color: #f2f2f2;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.extra-input {
+    display: none;
+}
