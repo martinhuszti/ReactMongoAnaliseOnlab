@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input, Label } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
+import './extra_person.css'
 
 class ExtraAdmin extends Component {
 
@@ -55,14 +56,14 @@ class ExtraAdmin extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Név:</Label>
-                        <Input required type="text" name="title" id="title"
+                        <Input className="extra_info"  required type="text" name="title" id="title"
                             value={item.title || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
-                        <Input required type="text" name="text" id="text"
+                        <Input className="extra_info"  required type="text" name="text" id="text"
                             value={item.text || ''} onChange={this.handleChange}
                         />
                     </FormGroup>

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import './add_person.css';
 import Select from '../../../node_modules/react-select';
 import ExtraAdmin from './AddStudent/extra_admin'
-import {Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import ExtraTeacher from './AddStudent/extra_teacher';
+import ExtraStudent from './AddStudent/extra_student';
 
 const options = [
     { value: 'Student', label: 'Diák' },
@@ -34,7 +34,7 @@ class AddStudent extends Component {
             this.item=<ExtraAdmin />
         }
         if(selectedOption.value==='Student'){
-            this.item=null
+            this.item=<ExtraStudent />
         }
         if(selectedOption.value==='Teacher'){
             this.item=<ExtraTeacher />

@@ -21,6 +21,7 @@ public class NewsController {
     @GetMapping("/getnews")
     public List<News> getNews()
     {
+
         return newsRepository.findAll();
     }
 
