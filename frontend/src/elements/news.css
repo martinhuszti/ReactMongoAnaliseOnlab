@@ -18,6 +18,7 @@
     margin: 0 auto;
 
 }
+
 .news_body{
     padding: 20px;
     min-height: calc(100%- 100px);
@@ -41,6 +42,11 @@
     padding:0 16px;
     margin: 0 auto;
   
+}
+@media( max-width: 1000px ){
+    #placeholder_news{
+        padding:0;
+    }
 }
 
 #buttonFrom  *{
