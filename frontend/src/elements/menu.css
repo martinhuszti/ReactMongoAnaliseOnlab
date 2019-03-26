@@ -19,8 +19,27 @@
     margin: 0;
     margin-left: 70px;
     padding-right: 0px;
+    max-width: 200px;
 }
-
+.header_drpdwn{
+    float: left;
+    height: 100%;
+}
+.header_background{
+border: none;
+    background-color:  #1D155D;
+}
+.header_flex{
+    display: flex;
+    flex-direction: row;
+}
+.header_flex_placeholder{
+    flex: 1;
+}
+.btn-secondary:hover{
+    background-color: #1D155D;
+    border: none;
+}
 .login_button {
     text-align: center;
     background-color: #009FE3;
@@ -55,15 +74,15 @@ ul > a {
     }
 }
 
-@media ( max-width: 700px ) {
+@media ( max-width: 950px ) {
     #largemenu {
         display: none;
     }
 
 }
 
-@media ( min-width: 700px ) {
-    #smallmenu {
+@media ( min-width: 950px ) {
+    .header_flex {
         display: none;
         padding: 0px 0px 0px 0px;
     }

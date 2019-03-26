@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './menu.css';
+
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import Requirements from './requirements';
 import LoginForm from './LoginForm';
 import LoggedIn from './loggedin';
 import News from './News';
+import MenuIcon from '@material-ui/icons/Menu';
+import './menu.css';
 
 const Home = () => (
     <News/>
@@ -18,14 +21,20 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            logged: ''
-
+            logged: '',
+            dropdownOpen: false
 
         };
+        this.toggle = this.toggle.bind(this);
 
         this.profilClick = this.profilClick.bind(this);
 
 
+    }
+    toggle() {
+        this.setState(prevState => ({
+            dropdownOpen: !prevState.dropdownOpen
+        }));
     }
 
     profilClick = () => {
@@ -67,7 +76,7 @@ class Header extends Component {
                                     <Link to="/Informations">Információ</Link>
                                 </li>
                                 <li className="col menuitem padding_menu">
-                                    <Link to="/LoggedIn"> Feladatok</Link>
+                                    <Link to="/LoggedIn">Feladatok</Link>
                                 </li>
                                 <li className="col menuitem padding_menu">
                                     <Link to="/Requirements"> Követelmény</Link>
@@ -78,6 +87,27 @@ class Header extends Component {
 
                                 </li>
                             </ul>
+                        </div>
+                        <div className="header_flex">
+                            <Dropdown className="header_drpdwn" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                <DropdownToggle  className="header_background" caret>
+                                    <MenuIcon/>
+                                    </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem><Link to="/News">Hírek</Link></DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem><Link to="/Exams">Számonkérés</Link></DropdownItem>
+                                    <DropdownItem><Link to="/Informations">Információ</Link></DropdownItem>
+                                    <DropdownItem><Link to="/LoggedIn">Feladatok</Link></DropdownItem>
+                                    <DropdownItem><Link to="/Requirements"> Követelmény</Link></DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            <div className="header_flex_placeholder"></div>
+                            <li id="loginitem" className="col menuitem">
+
+                                    <Link id="login" to="/LoggedIn" className="padding_menu login_button">Profil</Link>
+
+                                </li>
                         </div>
                     </nav>
 
