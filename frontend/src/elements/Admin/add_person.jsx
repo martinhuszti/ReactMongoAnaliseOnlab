@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './add_person.css';
-import Select from '../../../node_modules/react-select';
+import Select from 'react-select';
 import ExtraAdmin from './AddStudent/extra_admin'
 import ExtraTeacher from './AddStudent/extra_teacher';
 import ExtraStudent from './AddStudent/extra_student';
 
 const options = [
-    { value: 'Student', label: 'Diák' },
-    { value: 'Teacher', label: 'Gyakorlatvezető / Előadó' },
-    { value: 'Admin', label: 'Admin' }
+    {value: 'Student', label: 'Diák'},
+    {value: 'Teacher', label: 'Gyakorlatvezető / Előadó'},
+    {value: 'Admin', label: 'Admin'}
 ];
 
 class AddStudent extends Component {
@@ -25,33 +25,33 @@ class AddStudent extends Component {
 
 
     state = {
-        selectedOption:' Student'
+        selectedOption: ' Student'
     }
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
+        this.setState({selectedOption});
         console.log(selectedOption.value);
-        if(selectedOption.value==='Admin'){
-            this.item=<ExtraAdmin />
+        if (selectedOption.value === 'Admin') {
+            this.item = <ExtraAdmin/>
         }
-        if(selectedOption.value==='Student'){
-            this.item=<ExtraStudent />
+        if (selectedOption.value === 'Student') {
+            this.item = <ExtraStudent/>
         }
-        if(selectedOption.value==='Teacher'){
-            this.item=<ExtraTeacher />
+        if (selectedOption.value === 'Teacher') {
+            this.item = <ExtraTeacher/>
         }
     }
 
     render() {
-        const { selectedOption } = this.state;
-        
+        const {selectedOption} = this.state;
+
         return (
             <div>
                 <Select className="addP_select"
-                    value={selectedOption}
-                    onChange={this.handleChange}
-                    options={options}
+                        value={selectedOption}
+                        onChange={this.handleChange}
+                        options={options}
                 />
-               {this.item}
+                {this.item}
             </div>
         );
     }

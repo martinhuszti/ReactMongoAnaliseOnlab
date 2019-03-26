@@ -64,6 +64,10 @@ class LoggedIn_Data extends Component {
                         <span>Gyakorlatvezető:</span>
                         <span>{this.userDetails.registration_date}</span>
                     </li>
+                    <li className="data_font">
+                        <span>Csoport:</span>
+                        <span>{this.userDetails.registration_date}</span>
+                    </li>
                 </ul>
             </div>
 

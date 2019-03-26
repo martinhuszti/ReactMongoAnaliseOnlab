@@ -1,4 +1,4 @@
-.header{
+.header {
     background-color: #1D155D;
     position: fixed;
     top: 0;
@@ -6,70 +6,78 @@
     z-index: 99999;
 }
 
-.menuitem{
+.menuitem {
     position: relative;
     text-align: center;
     font-size: 24px;
     margin: 0;
-    
+
     color: #fff;
 }
-#loginitem{
+
+#loginitem {
     margin: 0;
     margin-left: 70px;
     padding-right: 0px;
 }
 
-.login_button{
+.login_button {
     text-align: center;
     background-color: #009FE3;
-    cursor:pointer;
+    cursor: pointer;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-#login{
+#login {
     margin: 0;
     display: table;
     width: 100%;
 }
-.padding_menu{
+
+.padding_menu {
     padding: 10px 15px 10px 15px;
 }
 
-li > a{
+li > a {
     color: #fff;
 }
-ul>a{
-color: #fff;
+
+ul > a {
+    color: #fff;
 }
 
-@media( max-width: 880px ){
-    #loginitem{
+@media ( max-width: 880px ) {
+    #loginitem {
         margin-left: 0px;
         padding-left: 0px;
         display: block;
     }
 }
-@media( max-width: 700px ){
-    #largemenu{
+
+@media ( max-width: 700px ) {
+    #largemenu {
         display: none;
     }
-    
+
 }
-@media( min-width: 700px ){
-    #smallmenu{
+
+@media ( min-width: 700px ) {
+    #smallmenu {
         display: none;
         padding: 0px 0px 0px 0px;
     }
-    
+
 }
-.navbar{
+
+.navbar {
     padding: 0;
 }
-#collapse-item{
+
+#collapse-item {
     margin-left: 20px;
 }
+
 .footer {
     position: static;
     width: 100%;
@@ -77,26 +85,28 @@ color: #fff;
     color: white;
     text-align: center;
     padding: 50px;
-  }
-#Img_logo{
+}
+
+#Img_logo {
     width: 150px;
     float: left;
     left: 30px;
     bottom: 10px;
-   
+
 }
 
-ul{
-list-style-type: none;
-margin: 0rem;
+ul {
+    list-style-type: none;
+    margin: 0rem;
 }
 
-.footer_max{
+.footer_max {
     max-width: 1366px;
-    padding:0px 10px 16px;
+    padding: 0px 10px 16px;
     margin: 0 auto;
-    
+
 }
-li{
+
+li {
     list-style-type: none;
 }

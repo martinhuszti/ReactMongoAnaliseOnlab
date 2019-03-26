@@ -7,7 +7,6 @@ import {Form, FormGroup, Input, Label} from 'reactstrap';
 import Login from './LoginForm.jsx';
 
 
-
 const simplenews = ({match}) => (
     <div>
 
@@ -35,6 +34,7 @@ class Class extends Component {
         this.refreshPage = this.refreshPage.bind(this);
 
     }
+
     renderRedirect = () => {
         const logged = sessionStorage.getItem("loggedin");
 

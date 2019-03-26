@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import Button from 'react-bootstrap/Button';
-import ButtonToolbar from'react-bootstrap/ButtonToolbar'
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 
 class RegistrationForm extends Component {
 
@@ -9,20 +9,20 @@ class RegistrationForm extends Component {
     handleSubmit = () => {
 
         let usrs = {
-            "firstName" : "OCUW5I",
-            "lastName" : "OCUW5I",
-            "neptun" : "OCUW5I",
-            "password" : "OCUW5I",
-            "email" : "OCUW5I"
+            "firstName": "OCUW5I",
+            "lastName": "OCUW5I",
+            "neptun": "OCUW5I",
+            "password": "OCUW5I",
+            "email": "OCUW5I"
         }
 
         console.log('this is:', this);
 
-            fetch('/adduser', {
-                method:"POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(usrs)
-            })
+        fetch('/adduser', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(usrs)
+        })
 
 
     }

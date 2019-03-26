@@ -1,7 +1,5 @@
 package com.huszti.gema.analiseresponsiveweb;
 
-import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,9 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @SpringBootApplication
 public class AnaliseResponsiveWebApplication implements CommandLineRunner {
-
-    @Autowired
-    private UserRepository sda;
 
     public static void main(String[] args) {
         SpringApplication.run(AnaliseResponsiveWebApplication.class, args);

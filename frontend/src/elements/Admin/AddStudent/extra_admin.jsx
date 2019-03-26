@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
+import React, {Component} from 'react';
+import {Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import './extra_person.css'
 
@@ -29,18 +29,18 @@ class ExtraAdmin extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item });
+        this.setState({item});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        const {item} = this.state;
 
         await fetch('/addadmin', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         })
 
@@ -50,21 +50,21 @@ class ExtraAdmin extends Component {
 
     render() {
 
-        const { item } = this.state;
+        const {item} = this.state;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Név:</Label>
-                        <Input className="extra_info"  required type="text" name="title" id="title"
-                            value={item.title || ''} onChange={this.handleChange}
+                        <Input className="extra_info" required type="text" name="title" id="title"
+                               value={item.title || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
-                        <Input className="extra_info"  required type="text" name="text" id="text"
-                            value={item.text || ''} onChange={this.handleChange}
+                        <Input className="extra_info" required type="text" name="text" id="text"
+                               value={item.text || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 

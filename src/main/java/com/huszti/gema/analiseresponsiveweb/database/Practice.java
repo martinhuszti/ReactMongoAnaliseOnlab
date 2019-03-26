@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.ManyToMany;
 import java.util.List;
 
-@Data @Document
+@Data
+@Document
 public class Practice {
     @Id
     private String id;
