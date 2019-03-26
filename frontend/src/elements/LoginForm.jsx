@@ -22,6 +22,7 @@ class RegistrationForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
 
     handleChange(event) {
@@ -39,9 +40,11 @@ class RegistrationForm extends Component {
     }
 
     handleKeyPress(e) {
+        
+        console.log('Nem nyomtam semmit');
         if (e.key === 'Enter') {
             console.log('Nem nyomtam enter');
-            this.handleChange(e);
+            this.handleSubmit(e);
         }
     }
 
@@ -110,7 +113,7 @@ class RegistrationForm extends Component {
                                 </label>
 
                                 <div className="center_login">
-                                    <Button className="button_color button_width" onClick={this.handleSubmit} onKeyPress={this.handleKeyPress}
+                                    <Button className="button_color button_width" onClick={this.handleSubmit} onKeyPress={this.handleKeyPress} type="submit"
                                         variant="primary">
                                         <p className="button_width">Belépés</p></Button>
                                 </div>

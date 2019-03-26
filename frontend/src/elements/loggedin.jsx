@@ -8,6 +8,7 @@ import Change_Pass from './change_pass';
 import Chat from './loggedin_chat';
 import NewsPublication from './Teacher/news_publication';
 import AddStudent from './Admin/add_person';
+import AddReq from './Admin/add_req';
 import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import News from './News';
 
@@ -53,6 +54,10 @@ class LoggedIn extends Component {
         {
             link: "/newPublication",
             text: 'Új hír közzététele'
+        },
+        {
+            link: "/addReq",
+            text: 'Követelmények'
         }
     ];
 
@@ -86,6 +91,10 @@ class LoggedIn extends Component {
             path: "/addPerson",
             main: () => <AddStudent />
         },
+        {
+            path: "/addReq",
+            main: () => <AddReq />
+        },
     ];
 
     logout() {
@@ -94,7 +103,7 @@ class LoggedIn extends Component {
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
         
-       this.props.history.push("/")
+        this.props.history.push("/")
         
     }
     

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './add_person.css';
-import Select from '../../../node_modules/react-select';
+import Select from 'react-select';
 import ExtraAdmin from './AddStudent/extra_admin'
 import ExtraTeacher from './AddStudent/extra_teacher';
 import ExtraStudent from './AddStudent/extra_student';

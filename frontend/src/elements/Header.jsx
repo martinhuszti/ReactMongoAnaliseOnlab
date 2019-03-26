@@ -95,9 +95,6 @@ class Header extends Component {
             </Router>);
     }
 
-
 }
-
-
 
 export default Header;
