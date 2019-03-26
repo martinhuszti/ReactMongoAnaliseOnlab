@@ -43,9 +43,9 @@ class ExtraStudent extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createdUser)
-        })
+        });
 
-        alert("Sikeres regisztáció!")
+        alert("Sikeres regisztáció!");
         console.log("feltöltés befejeződött")
     }
 
