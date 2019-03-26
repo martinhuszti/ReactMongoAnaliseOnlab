@@ -7,6 +7,7 @@ import Requirements from './requirements';
 import LoginForm from './LoginForm';
 import LoggedIn from './loggedin';
 import News from './News';
+
 const Home = () => (
     <News />
 );
