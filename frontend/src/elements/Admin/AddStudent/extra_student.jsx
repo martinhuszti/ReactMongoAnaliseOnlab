@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from 'react-bootstrap/Button';
+import AsyncSelect from 'react-select/lib/Async';
 import './extra_person.css'
 
 class ExtraStudent extends Component {
@@ -11,7 +12,9 @@ class ExtraStudent extends Component {
         "email": "",
         "password": "default",
         "role": "student",
-    }
+        "gyakvez": "",
+    };
+
 
     constructor(props) {
         super(props);
@@ -25,6 +28,7 @@ class ExtraStudent extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
+
 
     handleChange(event) {
         const target = event.target;
@@ -52,7 +56,30 @@ class ExtraStudent extends Component {
 
     render() {
 
+        const getgyak = (inputValue, callback) => {
+
+            fetch(`/getUsers`, {
+                method: "GET",
+                headers: {"Content-Type": "application/json"},
+                //body: JSON.stringify(item)
+
+            }).then(response => response.json())
+                .then(response => {
+                    console.log(response);
+                    callback(response);
+                })
+        };
+
+       const getOptionLabel = option => {
+            return option.neptun;
+        };
+
+        const getOptionValue = option => {
+            return option.id;
+        };
+
         const {createdUser} = this.state;
+
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
@@ -82,6 +109,22 @@ class ExtraStudent extends Component {
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
                                value={createdUser.neptun || ''} onChange={this.handleChange}
                         />
+                    </FormGroup>
+
+                    <FormGroup>
+
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions
+                            loadOptions={getgyak}
+                            name="password"
+                            getOptionLabel={getOptionLabel}
+                            getOptionValue={getOptionValue}
+
+
+
+                        />
+
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">

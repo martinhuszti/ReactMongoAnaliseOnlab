@@ -24,7 +24,7 @@ class LoggedIn_Data extends Component {
     fetchData = () => {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/getDetails?id=${encodedValue}`, {
-            method: "POST",
+            method: "GET",
             headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
@@ -32,9 +32,9 @@ class LoggedIn_Data extends Component {
             .then(response => {
                 this.userDetails = response;
                 console.log(this.userDetails);
-            })
+            });
         console.log("yes");
-    }
+    };
 
     render() {
         return (

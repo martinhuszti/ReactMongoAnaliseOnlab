@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 //push it to the limit
@@ -73,6 +74,13 @@ public class UserController {
         us.setPassword(obj.newPassword);
         userRepository.save(us);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping("/getUsers")
+    public List<User> getUsers() {
+        return userRepository.findAll();
+
     }
 
 
