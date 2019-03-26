@@ -39,8 +39,8 @@ class Header extends Component {
                 
             }
             else{
-                if(loclogged == "true"){
-                    sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
+                if(loclogged === "true"){
+                    sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"));
                     sessionStorage.setItem("id", localStorage.getItem("id"))
                 }
                 
@@ -48,7 +48,7 @@ class Header extends Component {
                 this.setState({logged:'LoggedIn'})
             }
         
-    }
+    };
 
 
     render() {
@@ -59,7 +59,7 @@ class Header extends Component {
                         <div className="container-fluid">
                             <ul id="largemenu" className="row">
                                 <li className="col menuitem padding_menu">
-                                    <Link to="/">Hírek</Link>
+                                    <Link to="/News">Hírek</Link>
                                 </li>
                                 <li className="col menuitem padding_menu">
                                     <Link to="/Exams">Számonkérés</Link>
@@ -82,14 +82,17 @@ class Header extends Component {
                         </div>
                     </nav>
 
-                    <Route exact path="/Exams" component={Home} />
-                    <Route exact path="/" component={Home} />
+                    <Route  path="/Exams" component={Home} />
+                    <Route  path="/News" component={Home} />
+                    <Route exact path="/" render={() => (
+                        <Redirect to="/News"/>
+                    )}/>
 
-                    <Route exact path="/Informations" component={Requirements} />
-                    <Route exact path="/LoggedIn" component={LoggedIn} />
+                    <Route  path="/Informations" component={Requirements} />
+                    <Route  path="/LoggedIn" component={LoggedIn} />
 
-                    <Route exact path="/Requirements" component={Requirements} />
-                    <Route exact path="/LoginForm" component={LoginForm} />
+                    <Route  path="/Requirements" component={Requirements} />
+                    <Route  path="/LoginForm" component={LoginForm} />
 
                     )} />
             </div>
