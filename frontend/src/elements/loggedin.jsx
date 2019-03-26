@@ -9,7 +9,11 @@ import Chat from './loggedin_chat';
 import NewsPublication from './Teacher/news_publication';
 import AddStudent from './Admin/add_person';
 import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import News from './News';
 
+const Home = () => (
+    <News />
+);
 
 class LoggedIn extends Component {
     constructor(props) {
@@ -17,6 +21,7 @@ class LoggedIn extends Component {
         this.state = {
             items: this.emptyItem,
             redirect: false,
+            isLoggedIn: '',
         };
 
     }
@@ -81,10 +86,6 @@ class LoggedIn extends Component {
             path: "/addPerson",
             main: () => <AddStudent />
         },
-        {
-            path: "/logout",
-            main: () => <h2>Shoelaces</h2>
-        }
     ];
 
     logout() {
@@ -93,9 +94,34 @@ class LoggedIn extends Component {
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
         
+       this.props.history.push("/")
+        
+    }
+    
+    componentDidMount() {
+        const sesslogged = sessionStorage.getItem("loggedin");
+        const loclogged = localStorage.getItem("loggedin");
+
+        if (sesslogged != "true" && loclogged != "true") {
+            this.setState({
+                isLoggedIn: "false"
+            })
+            
+        }
+        else{
+            if (loclogged == "true") {
+                sessionStorage.setItem("loggedin", loclogged);
+                }
+            this.setState({isLoggedIn:"true"})
+        }
     }
 
+
     render() {
+
+        if(this.state.isLoggedIn=="false") {
+            console.log(this.state.isLoggedIn);
+            return <Redirect to="/LoginForm"/>}
 
         return (
             <Router>
@@ -119,9 +145,9 @@ class LoggedIn extends Component {
                             <div className="box_flex">
 
                             </div>
-                            <Link to="/logout" onClick={this.logout.bind(this)} className="menu_items box_1 logout_color">
+                            <div  onClick={this.logout.bind(this)} className="menu_items box_1 logout_color">
                                 <p className="menu_items_text">Kijelentkezés</p>
-                            </Link>
+                            </div>
                         </div>
                         <div className="content_box">
                             {this.routes.map((route, index) => (
@@ -138,7 +164,6 @@ class LoggedIn extends Component {
                         </div>
                     </div>
                 </div>
-
 
             </Router>
         );

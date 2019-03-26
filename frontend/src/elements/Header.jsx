@@ -3,12 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
-
-import News from './News';
 import Requirements from './requirements';
 import LoginForm from './LoginForm';
 import LoggedIn from './loggedin';
-
+import News from './News';
 const Home = () => (
     <News />
 );
@@ -29,34 +27,26 @@ class Header extends Component {
         
     }
 
-    profilClick(){
-        if (localStorage.getItem("loggedin") !== null || sessionStorage.getItem("loggedin") !== null) {
-            this.setState({ logged: "/LoggedIn" })
-            sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
-            sessionStorage.setItem("id", localStorage.getItem("id"))
-            console.log("Kiskacsa22");
-        }
+    profilClick= () =>{
 
-        else {
-            this.setState({ logged: "/LoginForm" })
-            console.log("Kiskacsa535235");
-        }
-    }
-
-    componentDidMount() {
-        if (localStorage.getItem("loggedin") !== null || sessionStorage.getItem("loggedin") !== null) {
-            this.setState({ logged: "/LoggedIn" })
-            sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
-            sessionStorage.setItem("id", localStorage.getItem("id"))
-        }
-
-        else {
-            this.setState({ logged: "/LoginForm" })
-            console.log("Kiskacsa44");
-        }
-
-
-        console.log(this.state.logged);
+            const sesslogged = sessionStorage.getItem("loggedin");
+            const loclogged = localStorage.getItem("loggedin");
+    
+            if (sesslogged !== "true" || loclogged !== "true") {
+                console.log("Loginfrom1");
+                this.props.history.push(`/LoginForm`)
+                
+            }
+            else{
+                if(loclogged == "true"){
+                    sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"))
+                    sessionStorage.setItem("id", localStorage.getItem("id"))
+                }
+                
+                
+                this.setState({logged:'LoggedIn'})
+            }
+        
     }
 
 
@@ -84,7 +74,7 @@ class Header extends Component {
                                 </li>
                                 <li id="loginitem" className="col menuitem">
 
-                                    <Link id="login" onClick={this.profilClick} to={this.state.logged} className="padding_menu login_button">Profil</Link>
+                                    <Link id="login" to="/LoggedIn"  className="padding_menu login_button">Profil</Link>
 
                                 </li>
                             </ul>
