@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './news.css';
 import './loggedin.css';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import LoggedIn_Data from './loggedin_data';
 import LoggedIn_Result from './loggedin_results';
 import Change_Pass from './change_pass';
@@ -9,11 +9,11 @@ import Chat from './loggedin_chat';
 import NewsPublication from './Teacher/news_publication';
 import AddStudent from './Admin/add_person';
 import AddReq from './Admin/add_req';
-import { HashRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
+import {HashRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
 import News from './News';
 
 const Home = () => (
-    <News />
+    <News/>
 );
 
 class LoggedIn extends Component {
@@ -26,6 +26,7 @@ class LoggedIn extends Component {
         };
 
     }
+
     emptyItem = [
         {
             link: "/data",
@@ -65,35 +66,35 @@ class LoggedIn extends Component {
         {
             path: "/data",
             exact: true,
-            main: () => <LoggedIn_Data />
+            main: () => <LoggedIn_Data/>
         },
         {
             path: "/result",
-            main: () => <LoggedIn_Result />
+            main: () => <LoggedIn_Result/>
         },
         {
             path: "/change_pass",
-            main: () => <Change_Pass />
+            main: () => <Change_Pass/>
         },
         {
             path: "/chat",
-            main: () => <Chat />
+            main: () => <Chat/>
         },
         {
             path: "/students",
-            main: () => <Chat />
+            main: () => <Chat/>
         },
         {
             path: "/newPublication",
-            main: () => <NewsPublication />
+            main: () => <NewsPublication/>
         },
         {
             path: "/addPerson",
-            main: () => <AddStudent />
+            main: () => <AddStudent/>
         },
         {
             path: "/addReq",
-            main: () => <AddReq />
+            main: () => <AddReq/>
         },
     ];
 
@@ -102,11 +103,11 @@ class LoggedIn extends Component {
         sessionStorage.removeItem("loggedin");
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
-        
+
         this.props.history.push("/")
-        
+
     }
-    
+
     componentDidMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
@@ -115,22 +116,22 @@ class LoggedIn extends Component {
             this.setState({
                 isLoggedIn: "false"
             })
-            
-        }
-        else{
+
+        } else {
             if (loclogged == "true") {
                 sessionStorage.setItem("loggedin", loclogged);
-                }
-            this.setState({isLoggedIn:"true"})
+            }
+            this.setState({isLoggedIn: "true"})
         }
     }
 
 
     render() {
 
-        if(this.state.isLoggedIn=="false") {
+        if (this.state.isLoggedIn == "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm"/>}
+            return <Redirect to="/LoginForm"/>
+        }
 
         return (
             <Router>
@@ -138,7 +139,7 @@ class LoggedIn extends Component {
                     <div id="placeholder_header"></div>
 
                     <div className="news news_head">
-                        <h1 className="news_text " >Login</h1>
+                        <h1 className="news_text ">Login</h1>
                     </div>
 
                     <div className="loggedin_news news_body news_body_padding flex_container">
@@ -148,26 +149,25 @@ class LoggedIn extends Component {
                                 <Link to={items.link} className="menu_items box_1">
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
-
                             )}
 
                             <div className="box_flex">
 
                             </div>
-                            <div  onClick={this.logout.bind(this)} className="menu_items box_1 logout_color">
+                            <div onClick={this.logout.bind(this)} className="menu_items box_1 logout_color">
                                 <p className="menu_items_text">Kijelentkezés</p>
                             </div>
                         </div>
                         <div className="content_box">
                             {this.routes.map((route, index) => (
 
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    component={route.main}
-                                />
-                            )
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.main}
+                                    />
+                                )
                             )}
 
                         </div>
@@ -178,7 +178,6 @@ class LoggedIn extends Component {
         );
     }
 }
-
 
 
 export default LoggedIn;

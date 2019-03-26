@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './menu.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Redirect } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import Requirements from './requirements';
 import LoginForm from './LoginForm';
 import LoggedIn from './loggedin';
 import News from './News';
+
 const Home = () => (
-    <News />
+    <News/>
 );
 
 class Header extends Component {
@@ -21,38 +22,37 @@ class Header extends Component {
 
 
         };
-        
+
         this.profilClick = this.profilClick.bind(this);
 
-        
+
     }
 
-    profilClick= () =>{
+    profilClick = () => {
 
-            const sesslogged = sessionStorage.getItem("loggedin");
-            const loclogged = localStorage.getItem("loggedin");
-    
-            if (sesslogged !== "true" || loclogged !== "true") {
-                console.log("Loginfrom1");
-                this.props.history.push(`/LoginForm`)
-                
+        const sesslogged = sessionStorage.getItem("loggedin");
+        const loclogged = localStorage.getItem("loggedin");
+
+        if (sesslogged !== "true" || loclogged !== "true") {
+            console.log("Loginfrom1");
+            this.props.history.push(`/LoginForm`)
+
+        } else {
+            if (loclogged === "true") {
+                sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"));
+                sessionStorage.setItem("id", localStorage.getItem("id"))
             }
-            else{
-                if(loclogged === "true"){
-                    sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"));
-                    sessionStorage.setItem("id", localStorage.getItem("id"))
-                }
-                
-                
-                this.setState({logged:'LoggedIn'})
-            }
-        
+
+
+            this.setState({logged: 'LoggedIn'})
+        }
+
     };
 
 
     render() {
         return (
-            <Router >
+            <Router>
                 <div>
                     <nav className="header">
                         <div className="container-fluid">
@@ -74,27 +74,27 @@ class Header extends Component {
                                 </li>
                                 <li id="loginitem" className="col menuitem">
 
-                                    <Link id="login" to="/LoggedIn"  className="padding_menu login_button">Profil</Link>
+                                    <Link id="login" to="/LoggedIn" className="padding_menu login_button">Profil</Link>
 
                                 </li>
                             </ul>
                         </div>
                     </nav>
 
-                    <Route  path="/Exams" component={Home} />
-                    <Route  path="/News" component={Home} />
+                    <Route path="/Exams" component={Home}/>
+                    <Route path="/News" component={Home}/>
                     <Route exact path="/" render={() => (
                         <Redirect to="/News"/>
                     )}/>
 
-                    <Route  path="/Informations" component={Requirements} />
-                    <Route  path="/LoggedIn" component={LoggedIn} />
+                    <Route path="/Informations" component={Requirements}/>
+                    <Route path="/LoggedIn" component={LoggedIn}/>
 
-                    <Route  path="/Requirements" component={Requirements} />
-                    <Route  path="/LoginForm" component={LoginForm} />
+                    <Route path="/Requirements" component={Requirements}/>
+                    <Route path="/LoginForm" component={LoginForm}/>
 
                     )} />
-            </div>
+                </div>
             </Router>);
     }
 

@@ -6,16 +6,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Data
-    @Document(collection = "exams")
-    public class Exam {
+@Document(collection = "exams")
+public class Exam {
 
-        @Id
-        private String _id;
-        private String name;
-        private float score;
-        private float mark;
+    @Id
+    private String _id;
+    private String name;
+    private float score;
+    private float mark;
 
-        public Exam() {
-        }
+    public Exam() {
+    }
 
 }

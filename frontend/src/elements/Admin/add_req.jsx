@@ -1,7 +1,7 @@
 import './add_req.css'
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import {Button,Form, FormGroup, Input, Label} from 'reactstrap';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
+import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 
 class Addrequirements extends Component {
     constructor(props) {
@@ -22,6 +22,7 @@ class Addrequirements extends Component {
         text: ''
 
     };
+
     async handleSubmit(event) {
         event.preventDefault();
         const {item} = this.state;
@@ -34,6 +35,7 @@ class Addrequirements extends Component {
 
         console.log("feltöltés befejeződött")
     }
+
     handleChange(event) {
         const target = event.target;
         const value = target.value;
@@ -44,29 +46,29 @@ class Addrequirements extends Component {
     }
 
     render() {
-        const{item}=this.state
+        const {item} = this.state
         return (
-            <div >
-              <Form >
-                                <FormGroup>
-                                    <Label for="head">Hír címe</Label>
-                                    <Input className="newsP_title" type="text" name="title" id="title"
-                                           value={item.title || ''} onChange={this.handleChange}
-                                    />
-                                </FormGroup>
+            <div>
+                <Form>
+                    <FormGroup>
+                        <Label for="head">Hír címe</Label>
+                        <Input className="newsP_title" type="text" name="title" id="title"
+                               value={item.title || ''} onChange={this.handleChange}
+                        />
+                    </FormGroup>
 
-                                <FormGroup>
-                                    <Label for="head">Hír szövege</Label>
-                                    <textarea className="newsP_textarea" type="text" name="text" id="text"
-                                           value={item.text || ''} onChange={this.handleChange}
-                                    />
-                                </FormGroup>
+                    <FormGroup>
+                        <Label for="head">Hír szövege</Label>
+                        <textarea className="newsP_textarea" type="text" name="text" id="text"
+                                  value={item.text || ''} onChange={this.handleChange}
+                        />
+                    </FormGroup>
 
-                                <FormGroup id="buttonFrom">
-                                    <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
-                                </FormGroup>
+                    <FormGroup id="buttonFrom">
+                        <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
+                    </FormGroup>
 
-                            </Form>
+                </Form>
             </div>
 
 

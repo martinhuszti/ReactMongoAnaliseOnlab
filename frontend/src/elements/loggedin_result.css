@@ -1,30 +1,32 @@
-.result_margin{
+.result_margin {
     margin: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    
-}
-.result_list{
-padding: 0;
-padding-left: 10px;
+
 }
 
-.result_font :first-child{
-  font-weight: bold;  
+.result_list {
+    padding: 0;
+    padding-left: 10px;
+}
+
+.result_font :first-child {
+    font-weight: bold;
     margin-right: 20px;
     margin-bottom: 10px;
 }
-.result_height{
+
+.result_height {
     flex: 1;
     display: flex;
     flex-direction: column;
-    
+
 }
 
-.result_height>*{
-     
+.result_height > * {
+
     display: flex;
     flex-direction: row;
     min-width: 130px;
@@ -33,66 +35,77 @@ padding-left: 10px;
     border-bottom: 2px solid #1D155D;
     margin: 10px;
 }
-.all_bold>*{
+
+.all_bold > * {
     font-weight: bold;
 }
-#square{
+
+#square {
     width: 20px;
     height: 20px;
     margin-left: 10px;
     margin-right: 10px;
     display: inline-block;
-    
+
 }
 
-.green_square{
-background-color: lightgreen;
+.green_square {
+    background-color: lightgreen;
 }
-.red_square{
+
+.red_square {
     background-color: orangered;
 }
-.blue_square{
+
+.blue_square {
     background-color: cornflowerblue;
 }
 
-.result_informations{
+.result_informations {
     padding-top: 30px;
     padding-left: 30px;
     padding-right: 30px;
-    
+
 }
-.result_placeholder{
+
+.result_placeholder {
     padding: 40px;
 }
 
-.result_endmark{
+.result_endmark {
     margin: 20px;
     font-size: 30px;
 }
-.result_number{
+
+.result_number {
     padding-left: 20px;
     padding-right: 20px;
     margin: 0;
-    font-weight: bold; 
+    font-weight: bold;
     color: #1D155D;
     border-bottom: 2px solid #1D155D;
 }
-.result_flex_markref{
+
+.result_flex_markref {
     display: flex;
     flex-direction: column;
-   
+
 }
-.result_refresh_button{
-align-self: flex-end;
+
+.result_refresh_button {
+    align-self: flex-end;
 }
-.result_autobox{
-   display: flex;
-   flex-direction: row;
-   min-height: 70px;
+
+.result_autobox {
+    display: flex;
+    flex-direction: row;
+    min-height: 70px;
 }
-.result_halfbox{
+
+.result_halfbox {
     flex-grow: 0.8;
 }
-.result_twobox{
+
+.result_twobox {
     flex-grow: 2;
 }

@@ -19,8 +19,7 @@ public class NewsController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getnews")
-    public List<News> getNews()
-    {
+    public List<News> getNews() {
 
         return newsRepository.findAll();
     }
@@ -28,8 +27,7 @@ public class NewsController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addnews")
-    public News addNews(@RequestBody News news)
-    {
+    public News addNews(@RequestBody News news) {
         newsRepository.save(news);
         return news;
     }

@@ -1,14 +1,15 @@
-.data_margin{
+.data_margin {
     margin: 0;
-    
-}
-.data_list{
-padding: 0;
-padding-left: 10px;
+
 }
 
-.data_font :first-child{
-  font-weight: bold;  
+.data_list {
+    padding: 0;
+    padding-left: 10px;
+}
+
+.data_font :first-child {
+    font-weight: bold;
     margin-right: 20px;
     margin-bottom: 10px;
 }

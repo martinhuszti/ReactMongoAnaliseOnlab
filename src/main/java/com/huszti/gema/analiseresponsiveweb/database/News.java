@@ -12,5 +12,6 @@ public class News {
     private String title;
     private String text;
 
-    public News(){}
+    public News() {
+    }
 }

@@ -45,7 +45,11 @@ class Change_Pass extends Component {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(passwObj)
-            }).then((resp)=>{ return resp.text() }).then((text)=>{ console.log(text) })
+            }).then((resp) => {
+                return resp.text()
+            }).then((text) => {
+                console.log(text)
+            })
 
         }
     }

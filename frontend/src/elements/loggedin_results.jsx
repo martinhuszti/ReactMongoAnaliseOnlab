@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './loggedin_result.css';
 import Button from 'react-bootstrap/Button';
 
@@ -43,28 +43,28 @@ class LoggedIn_Result extends Component {
                     </ul>
 
                     <ul className="result_informations">
-                        <li >
+                        <li>
                             <div id="square" className="green_square"></div>
                             <span>Aláírás megszerezve</span>
                         </li>
-                        <li >
+                        <li>
                             <div id="square" className="red_square"></div>
                             <span>Aláírás megtagadva</span>
                         </li>
-                        <li >
+                        <li>
                             <div id="square" className="blue_square"></div>
                             <span>Nem szerzett még aláírást</span>
                         </li>
                         <li className="result_placeholder"></li>
-                        <li >
+                        <li>
                             <div id="square" className="green_square"></div>
                             <span>Jegy megszerezve</span>
                         </li>
-                        <li >
+                        <li>
                             <div id="square" className="red_square"></div>
                             <span>Jegy megtagadva</span>
                         </li>
-                        <li >
+                        <li>
                             <div id="square" className="blue_square"></div>
                             <span>Nem szerzett még Jegyet</span>
                         </li>
@@ -79,11 +79,11 @@ class LoggedIn_Result extends Component {
                         <span className="result_endmark result_number">5</span>
                     </div>
                     <div className="result_autobox">
-                    <div className="result_halfbox"></div>
+                        <div className="result_halfbox"></div>
                         <Button className="button_color button_width result_refresh_button" onClick={this.refreshMark}
-                            variant="primary">
+                                variant="primary">
                             <p className="button_width">Eredmény frissítése</p></Button>
-                            <div className="result_twobox"></div>
+                        <div className="result_twobox"></div>
                     </div>
                 </div>
             </div>
