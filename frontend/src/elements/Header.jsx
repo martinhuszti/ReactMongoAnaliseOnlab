@@ -7,6 +7,8 @@ import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap
 import Requirements from './requirements';
 import LoginForm from './LoginForm';
 import LoggedIn from './loggedin';
+import Informations from './Informations'
+import Excercises from './Excercises'
 import News from './News';
 import MenuIcon from '@material-ui/icons/Menu';
 import './menu.css';
@@ -76,7 +78,7 @@ class Header extends Component {
                                     <Link to="/Informations">Információ</Link>
                                 </li>
                                 <li className="col menuitem padding_menu">
-                                    <Link to="/LoggedIn">Feladatok</Link>
+                                    <Link to="/Excercises">Feladatok</Link>
                                 </li>
                                 <li className="col menuitem padding_menu">
                                     <Link to="/Requirements"> Követelmény</Link>
@@ -98,7 +100,7 @@ class Header extends Component {
                                     <DropdownItem divider />
                                     <DropdownItem><Link to="/Exams">Számonkérés</Link></DropdownItem>
                                     <DropdownItem><Link to="/Informations">Információ</Link></DropdownItem>
-                                    <DropdownItem><Link to="/LoggedIn">Feladatok</Link></DropdownItem>
+                                    <DropdownItem><Link to="/Excercises">Feladatok</Link></DropdownItem>
                                     <DropdownItem><Link to="/Requirements"> Követelmény</Link></DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -117,8 +119,9 @@ class Header extends Component {
                         <Redirect to="/News"/>
                     )}/>
 
-                    <Route path="/Informations" component={Requirements}/>
+                    <Route path="/Informations" component={Informations}/>
                     <Route path="/LoggedIn" component={LoggedIn}/>
+                    <Route path="/Excercises" component={Excercises}/>
 
                     <Route path="/Requirements" component={Requirements}/>
                     <Route path="/LoginForm" component={LoginForm}/>

@@ -1,0 +1,31 @@
+.exc_flexbox{
+    display: flex;
+    flex-direction: row;
+}
+.exc_flexbox>div{
+    flex:1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.exc_flexbox>div>div{
+    margin-bottom: 20px;
+}
+
+.exc_sub_type{
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+.exc_flexbox>div>.exc_main_title{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.exc_sub_type>div{
+    max-width: 500px;
+}
+@media( max-width: 850px ){
+    .exc_flexbox{
+        flex-direction: column;
+    }
+}

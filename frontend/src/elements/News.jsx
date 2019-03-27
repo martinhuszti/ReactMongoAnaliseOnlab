@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './news.css';
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route, Link, Switch, Redirect} from "react-router-dom";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import {Form, FormGroup, Input, Label} from 'reactstrap';
+import { Form, FormGroup, Input, Label } from 'reactstrap';
 import Login from './LoginForm.jsx';
 
 
-const simplenews = ({match}) => (
+const simplenews = ({ match }) => (
     <div>
 
         <div className="news news_head">
@@ -39,7 +39,7 @@ class Class extends Component {
         const logged = sessionStorage.getItem("loggedin");
 
         if (logged !== "true") {
-            return <Redirect to='/LoginForm'/>
+            return <Redirect to='/LoginForm' />
         }
     }
 
@@ -54,18 +54,18 @@ class Class extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = {...this.state.item};
+        let item = { ...this.state.item };
         item[name] = value;
-        this.setState({item});
+        this.setState({ item });
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const {item} = this.state;
+        const { item } = this.state;
 
         await fetch('/addnews', {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
         })
 
@@ -76,7 +76,15 @@ class Class extends Component {
         event.preventDefault();
         await fetch(`/getnews`)
             .then(result => result.json())
-            .then(items => this.setState({items}))
+            .then(items => this.setState({ items }))
+
+        console.log("betöltés befejeeződött")
+    }
+    componentDidMount() {
+
+        fetch(`/getnews`)
+            .then(result => result.json())
+            .then(items => this.setState({ items }))
 
         console.log("betöltés befejeeződött")
     }
@@ -84,7 +92,7 @@ class Class extends Component {
 
     render() {
 
-        const {item} = this.state;
+        const { item } = this.state;
 
         return (
             <div>
@@ -93,32 +101,8 @@ class Class extends Component {
 
                     <div id="placeholder_news">
 
-                        <div id="placeholder_header"/>
+                        <div id="placeholder_header" />
                         <div id="width_class">
-
-                            <Form onSubmit={this.handleSubmit}>
-                                <FormGroup>
-                                    <Label for="head">Hír címe</Label>
-                                    <Input type="text" name="title" id="title"
-                                           value={item.title || ''} onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-
-                                <FormGroup>
-                                    <Label for="head">Hír szövege</Label>
-                                    <Input type="text" name="text" id="text"
-                                           value={item.text || ''} onChange={this.handleChange}
-                                    />
-                                </FormGroup>
-
-                                <FormGroup id="buttonFrom">
-                                    <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
-                                    <Button variant={'info'} color="primary"
-                                            onClick={this.refreshPage}>Frissítés</Button>
-                                </FormGroup>
-
-                            </Form>
-
 
                             {this.state.items.map(item => <li key={item.id}>
                                 <div className="news news_head">
@@ -131,8 +115,8 @@ class Class extends Component {
                         </div>
                         <Switch>
 
-                            <Route path="/:news" component={simplenews}/>
-                            <Route path="/login" component={Login}/>
+                            <Route path="/:news" component={simplenews} />
+                            <Route path="/login" component={Login} />
                         </Switch>
                     </div>
                 </Router>
