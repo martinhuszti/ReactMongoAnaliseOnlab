@@ -12,7 +12,7 @@ class ExtraStudent extends Component {
         "email": "",
         "password": "default",
         "role": "student",
-        "gyakvez": "",
+        
     };
 
 
