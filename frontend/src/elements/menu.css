@@ -28,7 +28,7 @@
     margin: 8px;
 }
 .header_background{
-border: none;
+    border: none;
     background-color:  #1D155D;
 }
 .header_flex{
@@ -100,8 +100,8 @@ ul > a {
 }
 
 .footer {
-    position: static;
     width: 100%;
+   
     background-color: #1D155D;
     color: white;
     text-align: center;

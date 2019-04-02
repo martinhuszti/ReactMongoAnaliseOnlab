@@ -54,6 +54,7 @@
     max-width: 1366px;
     padding: 0 16px;
     margin: 0 auto;
+    min-height: 100vh;
 }
 
 .loggedin_news {

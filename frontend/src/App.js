@@ -28,14 +28,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Header/>
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">{this.state.message}</h1>
-                </header>
-                <RegFrom/>
-                <p className="App-intro">F
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+
                 <Footer/>
             </div>
         );

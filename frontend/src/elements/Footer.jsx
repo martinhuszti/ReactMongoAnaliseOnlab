@@ -6,11 +6,11 @@ import logo from '../img/Analisys_logo.svg';
 class Footer extends Component {
     render() {
         return (
-            <div className="footer">
+            <footer  className="footer">
                 <div className="footer_max">
                     <img id="Img_logo" src={logo} alt="Logo"/>
                 </div>
-            </div>
+            </footer >
 
         );
     }

@@ -5,6 +5,7 @@ import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -20,8 +21,14 @@ public class NewsController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getnews")
     public List<News> getNews() {
-
-        return newsRepository.findAll();
+        System.out.println(newsRepository.findAll());
+        List tempnews = new ArrayList(newsRepository.findAll());
+        System.out.println(tempnews);
+        List returnNews = new ArrayList();
+        for (int i=1;i<6;i++)
+        returnNews.add(tempnews.get(tempnews.size()-i));
+        System.out.println(returnNews);
+        return returnNews;
     }
 
 

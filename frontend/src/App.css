@@ -1,6 +1,12 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 
+}
+
+.App:first-child{
+flex:1;
 }
 
 .App-logo {
