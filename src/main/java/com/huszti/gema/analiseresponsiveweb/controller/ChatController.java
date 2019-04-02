@@ -1,18 +1,16 @@
 package com.huszti.gema.analiseresponsiveweb.controller;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.huszti.gema.analiseresponsiveweb.database.User;
+import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ChatController {
@@ -35,7 +33,7 @@ public class ChatController {
     @SendTo("/topic/all")
     public Map<String, String> post(@Payload Map<String, String> message) {
 
-        User repoUser = userRepository.findBy_id((String) message.values().toArray()[1]);
+        SimpleUser repoUser = userRepository.findBy_id((String) message.values().toArray()[1]);
         String name=repoUser.getName();
         message.put(message.keySet().iterator().next(), name);
 

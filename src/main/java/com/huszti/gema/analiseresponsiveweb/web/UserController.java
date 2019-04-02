@@ -1,6 +1,6 @@
 package com.huszti.gema.analiseresponsiveweb.web;
 
-import com.huszti.gema.analiseresponsiveweb.database.User;
+import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,24 +30,28 @@ public class UserController {
 
     private final UserRepository userRepository;
 
+
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
+
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/adduser")
-    public User addUser(@RequestBody User user) {
+    public SimpleUser addUser(@RequestBody SimpleUser user) {
         userRepository.save(user);
         return user;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/loginUser", produces = "application/json")
-    public Map loginUser(@RequestBody User user) {
-        User repoUser = userRepository.findByNeptun(user.getNeptun());
+    public Map loginUser(@RequestBody SimpleUser user) {
+
+        SimpleUser repoUser = userRepository.findByNeptun(user.getNeptun());
+
         if (repoUser == null)
-            return Collections.singletonMap("response", "-1");
+            return Collections.singletonMap("response", "nincs ilyen neptun");
 
         if (repoUser.getPassword().equals(user.getPassword())) {
             repoUser.setLast_login(LocalDate.now());
@@ -55,11 +59,13 @@ public class UserController {
             return Collections.singletonMap("response", repoUser.get_id());
         } else
             return Collections.singletonMap("response", "-1");
+
+
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getDetails")
-    public User getDetails(@RequestParam String id) {
+    public SimpleUser getDetails(@RequestParam String id) {
         return userRepository.findById(id).orElse(null);
 
     }
@@ -67,7 +73,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/changePassword", produces = "application/json")
     ResponseEntity changePassword(@RequestBody passObj obj) {
-        User us = userRepository.findById(obj.id).orElse(null);
+        SimpleUser us = userRepository.findById(obj.id).orElse(null);
         if (us == null)
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Nincs ilyen id");
         if (!us.getPassword().equals(obj.oldPassword))
@@ -80,7 +86,7 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping("/getUsers")
-    public List<User> getUsers() {
+    public List<SimpleUser> getUsers() {
         return userRepository.findAll();
 
     }

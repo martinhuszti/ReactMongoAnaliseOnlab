@@ -1,9 +1,11 @@
 package com.huszti.gema.analiseresponsiveweb.repository;
 
-import com.huszti.gema.analiseresponsiveweb.database.User;
+import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface UserRepository extends MongoRepository<User, String> {
-    User findByNeptun(String neptun_code);
-    User findBy_id(String _id);
+public interface UserRepository extends MongoRepository<SimpleUser, String> {
+    SimpleUser findByNeptun(String neptun_code);
+
+    SimpleUser findBy_id(String _id);
+
 }
