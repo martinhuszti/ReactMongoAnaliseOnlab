@@ -1,8 +1,10 @@
 package com.huszti.gema.analiseresponsiveweb.controller;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.huszti.gema.analiseresponsiveweb.database.User;
+import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -17,6 +19,12 @@ public class ChatController {
 
     @Autowired
     private ChatHistoryDao chatHistoryDao;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public ChatController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /*
      * This MessageMapping annotated method will be handled by
@@ -26,8 +34,14 @@ public class ChatController {
     @MessageMapping("/all")
     @SendTo("/topic/all")
     public Map<String, String> post(@Payload Map<String, String> message) {
+
+        User repoUser = userRepository.findBy_id((String) message.values().toArray()[1]);
+        String name=repoUser.getName();
+        message.put(message.keySet().iterator().next(), name);
+
         message.put("timestamp", Long.toString(System.currentTimeMillis()));
         chatHistoryDao.save(message);
+
         return message;
     }
 
