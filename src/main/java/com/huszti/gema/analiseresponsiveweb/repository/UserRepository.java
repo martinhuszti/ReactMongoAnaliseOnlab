@@ -5,5 +5,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<User, String> {
     User findByNeptun(String neptun_code);
-
+    User findBy_id(String _id);
 }
