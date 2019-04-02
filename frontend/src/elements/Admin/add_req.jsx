@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import './add_req.css'
+import { FileService } from './UploadFile/FileService.jsx';
 
 class Addrequirements extends Component {
     constructor(props) {
         super(props);
-
+        this.fileService = new FileService();
         this.state = {
             item: this.emptyReq,
             items: [],
@@ -46,6 +47,30 @@ class Addrequirements extends Component {
         item[name] = value;
         this.setState({ item });
     }
+
+    handleUploadFile = (event) => {
+        const data = new FormData();
+        //using File API to get chosen file
+        let file = event.target.files[0];
+        console.log("Uploading file", event.target.files[0]);
+        data.append('file', event.target.files[0]);
+        data.append('name', 'my_file');
+        data.append('description', 'this file is uploaded by young padawan');
+        let self = this;
+        //calling async Promise and handling response or error situation
+        this.fileService.uploadFileToServer(data).then((response) => {
+            console.log("File " + file.name + " is uploaded");
+        }).catch(function (error) {
+            console.log(error);
+            if (error.response) {
+                //HTTP error happened
+                console.log("Upload error. HTTP error/status code=",error.response.status);
+            } else {
+                //some other error happened
+               console.log("Upload error. HTTP error/status code=",error.message);
+            }
+        });
+    };
 
     render() {
         const { item } = this.state
@@ -100,8 +125,7 @@ class Addrequirements extends Component {
                             <label for="file-upload" class="addreq_file_upload">
                                 Tallózás...</label>
 
-                            <input class="extra-input" id="file-upload" type="file" accept=".doc,.docx, .pdf" onChange={(event) => this.uploadFile(event)} />
-                            <span >Ide kerül a feltöltendő fájl neve</span>
+                            <input class="extra-input" id="file-upload" type="file" accept=".doc,.docx, .pdf" onChange={this.handleUploadFile} />
                         </div>
 
                    
@@ -110,9 +134,6 @@ class Addrequirements extends Component {
                         <span className="addreq_extra_text">*Tallózás gombra kattintva követelményt leíró fáljt jelölhetsz ki, majd tölthetsz fel</span>
                         </div>
                     </div>
-                    </div>
-                    <div className="addreq_uploadbutton">
-                        <Button className="addreq_uploadbutton" color="primary" >Feltöltés</Button>
                     </div>
                 </div>
             </div>

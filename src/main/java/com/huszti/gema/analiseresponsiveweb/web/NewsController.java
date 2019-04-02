@@ -21,9 +21,8 @@ public class NewsController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getnews")
     public List<News> getNews() {
-        System.out.println(newsRepository.findAll());
         List tempnews = new ArrayList(newsRepository.findAll());
-        System.out.println(tempnews);
+
         List returnNews = new ArrayList();
         for (int i=1;i<6;i++)
         returnNews.add(tempnews.get(tempnews.size()-i));
