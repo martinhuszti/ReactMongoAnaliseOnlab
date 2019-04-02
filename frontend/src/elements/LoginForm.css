@@ -12,6 +12,9 @@
     margin: 0;
     font-weight: bold;
 }
+#login_placeholder{
+    height: 100vh;
+}
 
 .rounded_corners_top {
     border-radius: 15px 15px 0 0;

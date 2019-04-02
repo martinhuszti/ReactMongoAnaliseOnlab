@@ -78,7 +78,7 @@ class RegistrationForm extends Component {
     render() {
         const {item} = this.state;
         return (
-            <div id="placeholder_news">
+            <div id="login_placeholder">
                 <div id="placeholder_header"></div>
                 <div id="login_width">
 
