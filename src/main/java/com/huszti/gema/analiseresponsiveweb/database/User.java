@@ -2,13 +2,12 @@ package com.huszti.gema.analiseresponsiveweb.database;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Document(collection = "users")
@@ -24,17 +23,13 @@ public class User {
     private LocalDate registration_date;
     private LocalDate last_login;
 
-    @ManyToOne
-    private ArrayList<Exam> exams;
+    private List<Exam> exams;
 
-    @OneToMany
-    ArrayList<User> gyakvez;
-
+    private String gyakvez_id;
 
     public User() {
         role = "student";
         registration_date = LocalDate.now();
-        last_login = LocalDate.now();
     }
 
 }
