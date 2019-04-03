@@ -1,16 +1,16 @@
 package com.huszti.gema.analiseresponsiveweb.controller;
 
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import org.springframework.stereotype.Component;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Component;
-
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 
 @Component
 public class ChatHistoryDao {
@@ -26,8 +26,7 @@ public class ChatHistoryDao {
 
     public List<Map<String, String>> get() {
         return chatHistoryCache.asMap().values().stream()
-                .sorted((c1, c2) -> Long.valueOf(c1.get("timestamp"))
-                        .compareTo(Long.valueOf(c2.get("timestamp"))))
+                .sorted(Comparator.comparing(c -> Long.valueOf(c.get("timestamp"))))
                 .collect(Collectors.toList());
     }
 

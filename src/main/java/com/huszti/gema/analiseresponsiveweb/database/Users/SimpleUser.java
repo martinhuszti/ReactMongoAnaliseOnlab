@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Document (collection = "users")
+@Document(collection = "users")
 public class SimpleUser {
 
     @Id
@@ -25,8 +25,8 @@ public class SimpleUser {
     protected String gyakvez_id;
 
     public SimpleUser() {
-          registration_date = LocalDate.now();
-          password = "default"; // password = neptun lehetne (de hogy fut le?)
+        registration_date = LocalDate.now();
+        password = "default"; // password = neptun lehetne (de hogy fut le?)
     }
 
 }

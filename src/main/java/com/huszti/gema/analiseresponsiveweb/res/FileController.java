@@ -1,19 +1,18 @@
 package com.huszti.gema.analiseresponsiveweb.res;
 
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,7 +24,7 @@ public class FileController {
     @RequestMapping(path = "/files", method = RequestMethod.POST)
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
         try {
-            System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(),file.getSize());
+            System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(), file.getSize());
             //creating a new file in some local directory
             File fileToSave = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\" + "requirements.pdf");
             fileToSave.delete();
@@ -41,7 +40,7 @@ public class FileController {
 
     @RequestMapping(path = "/dwnload", method = RequestMethod.GET)
     public ResponseEntity<Resource> download() throws IOException {
-System.out.println("asdkezd");
+        System.out.println("asdkezd");
 
         File file = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\requirements.pdf");
 

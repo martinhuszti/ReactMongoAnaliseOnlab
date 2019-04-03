@@ -15,13 +15,13 @@ import java.util.Map;
 @RestController
 public class ChatController {
 
-    @Autowired
-    private ChatHistoryDao chatHistoryDao;
     private final UserRepository userRepository;
+    private final ChatHistoryDao chatHistoryDao;
 
     @Autowired
-    public ChatController(UserRepository userRepository) {
+    public ChatController(UserRepository userRepository, ChatHistoryDao chatHistoryDao) {
         this.userRepository = userRepository;
+        this.chatHistoryDao = chatHistoryDao;
     }
 
     /*
@@ -34,7 +34,7 @@ public class ChatController {
     public Map<String, String> post(@Payload Map<String, String> message) {
 
         SimpleUser repoUser = userRepository.findBy_id((String) message.values().toArray()[1]);
-        String name=repoUser.getName();
+        String name = repoUser.getName();
         message.put(message.keySet().iterator().next(), name);
 
         message.put("timestamp", Long.toString(System.currentTimeMillis()));

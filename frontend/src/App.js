@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-import Header from './elements/Header.jsx';
-import Footer from './elements/Footer';
-import RegFrom from './elements/RegistrationForm';
+import Header from './elements/header.jsx';
+import Footer from './elements/footer';
 
 
 class App extends Component {
@@ -15,7 +13,6 @@ class App extends Component {
 
         document.title = "Login Page";
     }
-
 
 
     render() {

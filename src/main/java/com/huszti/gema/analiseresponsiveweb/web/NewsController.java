@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,19 +14,27 @@ import java.util.List;
 @RestController
 public class NewsController {
 
+    private final NewsRepository newsRepository;
+
     @Autowired
-    private NewsRepository newsRepository;
+    public NewsController(NewsRepository newsRepository) {
+        this.newsRepository = newsRepository;
+    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getnews")
     public List<News> getNews() {
-        List tempnews = new ArrayList(newsRepository.findAll());
 
-        List returnNews = new ArrayList();
-        for (int i=1;i<6;i++)
-        returnNews.add(tempnews.get(tempnews.size()-i));
-        System.out.println(returnNews);
-        return returnNews;
+        ArrayList<News> tempnews = new ArrayList(newsRepository.findAll());
+
+        int size = tempnews.size();
+        List<News> list =tempnews.subList(size-6,size-1);
+
+        Collections.reverse(list);
+        System.out.println(list);
+
+        return list;
+
     }
 
 
