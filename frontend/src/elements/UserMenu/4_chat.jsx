@@ -1,7 +1,6 @@
 import React from "react";
 
 import SockJsClient from "react-stomp";
-import UsernameGenerator from "username-generator";
 import Fetch from "json-fetch";
 import {TalkBox} from "react-talk";
 import './css/chat_box.css'
@@ -10,7 +9,7 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         // randomUserId is used to emulate a unique user id for this demo usage
-        this.randomUserName = UsernameGenerator.generateUsername("-");
+        this.randomUserName = '';
         this.randomUserId = sessionStorage.getItem("id");
         this.state = {
             clientConnected: false,

@@ -23,8 +23,7 @@
     "react-talk": "^1.0.0",
     "reactstrap": "^7.1.0",
     "sockjs": "^0.3.19",
-    "stomp": "^0.1.1",
-    "username-generator": "^1.1.0"
+    "stomp": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
