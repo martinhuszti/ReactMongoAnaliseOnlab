@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.web;
+package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;

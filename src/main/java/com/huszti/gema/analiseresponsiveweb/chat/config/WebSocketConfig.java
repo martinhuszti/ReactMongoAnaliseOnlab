@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.config;
+package com.huszti.gema.analiseresponsiveweb.chat.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.controller;
+package com.huszti.gema.analiseresponsiveweb.chat;
 
 
 import com.google.common.cache.Cache;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component
 public class ChatHistoryDao {
 
-    // A simple cache for temporarily storing chat data
+    // A simple cache for temporarily storing controller data
     private final Cache<UUID, Map<String, String>> chatHistoryCache = CacheBuilder
             .newBuilder().maximumSize(20).expireAfterWrite(10, TimeUnit.MINUTES)
             .build();

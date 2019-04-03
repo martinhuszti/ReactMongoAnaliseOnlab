@@ -1,8 +1,8 @@
 import './css/news.css';
 import './css/loginForm.css'
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class RegistrationForm extends Component {
     emptyUser = {
@@ -29,14 +29,14 @@ class RegistrationForm extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = {...this.state.item};
+        let item = { ...this.state.item };
         item[name] = value;
-        this.setState({item: item});
+        this.setState({ item: item });
     }
 
     handleCheck() {
         console.log('NemCsekked');
-        this.setState({checklook: !this.state.checklook});
+        this.setState({ checklook: !this.state.checklook });
         console.log(this.state.checklook);
     }
 
@@ -51,35 +51,43 @@ class RegistrationForm extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const {item} = this.state;
+        const { item } = this.state;
 
         await fetch('/loginUser', {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
-        }).then(response => response.json())
+        }).then(response => {
+            if (response.ok) { return response.json() }
+
+            else
+                throw new Error('Sikertelen bejelentkezés!')
+        }
+        )
             .then(json => {
-                if (json.response === -1) alert("Hibás felhasználónév vagy jelszó");
-                else {
-                    console.log(json);
-                    if (this.state.checklook === true) {
-                        localStorage.setItem("loggedin", "true");
-                        localStorage.setItem("id", json.response);
-                    }
-                    sessionStorage.setItem("loggedin", "true");
-                    sessionStorage.setItem("id", json.response);
-                    alert("Sikeresen bejelentkezve!");
-                    this.props.history.push('/LoggedIn');
+
+                console.log(json);
+
+                if (this.state.checklook === true) {
+                    localStorage.setItem("loggedin", "true");
+                    localStorage.setItem("id", json.id);
                 }
+
+                sessionStorage.setItem("loggedin", "true");
+                sessionStorage.setItem("id", json.id);
+
+                alert("Sikeresen bejelentkezve!");
+                this.props.history.push('/LoggedIn');
+
             })
 
     }
 
     render() {
-        const {item} = this.state;
+        const { item } = this.state;
         return (
             <div id="login_placeholder">
-                <div id="placeholder_header"/>
+                <div id="placeholder_header" />
                 <div id="login_width">
 
                     <div className="news news_head rounded_corners_top">
@@ -91,23 +99,23 @@ class RegistrationForm extends Component {
                                 <label className="center_login">
                                     <div className="helper_text">Neptun kód:</div>
                                     <input className="login_color loginform_text" type="text"
-                                           name="neptun"
-                                           id="neptun"
-                                           value={item.neptun || ''}
-                                           onChange={this.handleChange}
+                                        name="neptun"
+                                        id="neptun"
+                                        value={item.neptun || ''}
+                                        onChange={this.handleChange}
                                     />
 
                                     <div className="helper_text ">Jelszó:</div>
                                     <input className="login_color loginform_pass"
-                                           type="password"
-                                           name="password"
-                                           id='password'
-                                           value={item.password || ''}
-                                           onChange={this.handleChange}
+                                        type="password"
+                                        name="password"
+                                        id='password'
+                                        value={item.password || ''}
+                                        onChange={this.handleChange}
                                     />
                                     <div className="remember_me">
                                         <input type="checkbox" id="remember_me"
-                                               name="_remember_me" onClick={this.handleCheck}/>
+                                            name="_remember_me" onClick={this.handleCheck} />
                                         <label className="remember_me_text helper_text">Maradjak bejelentkezve</label>
                                     </div>
 
@@ -115,8 +123,8 @@ class RegistrationForm extends Component {
 
                                 <div className="center_login">
                                     <Button className="button_color button_width" onClick={this.handleSubmit}
-                                            onKeyPress={this.handleKeyPress} type="submit"
-                                            variant="primary">
+                                        onKeyPress={this.handleKeyPress} type="submit"
+                                        variant="primary">
                                         <p className="button_width">Belépés</p></Button>
                                 </div>
                             </form>

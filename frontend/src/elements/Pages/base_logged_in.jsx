@@ -27,7 +27,7 @@ class LoggedIn extends Component {
             text: 'Jelszó változtatás'
         },
         {
-            link: "/chat",
+            link: "/controller",
             text: 'Chat'
         },
         {
@@ -62,7 +62,7 @@ class LoggedIn extends Component {
             main: () => <Change_Pass/>
         },
         {
-            path: "/chat",
+            path: "/controller",
             main: () => <Chat/>
         },
         {

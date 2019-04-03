@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.controller;
+package com.huszti.gema.analiseresponsiveweb.chat;
 
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;

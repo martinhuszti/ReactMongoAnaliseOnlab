@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.res;
+package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;

@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.web;
+package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
@@ -9,9 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //push it to the limit
 
@@ -46,21 +45,30 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/loginUser", produces = "application/json")
-    public Map loginUser(@RequestBody SimpleUser user) {
+    public ResponseEntity loginUser(@RequestBody SimpleUser user) {
 
         SimpleUser repoUser = userRepository.findByNeptun(user.getNeptun());
 
-        if (repoUser == null)
-            return Collections.singletonMap("response", "nincs ilyen neptun");
+        if (repoUser == null) {
+            System.out.println(user.getNeptun() + "tried to connect, but not found in repository");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ilyen neptun nem található a rendszerben.");
+        }
 
         if (repoUser.getPassword().equals(user.getPassword())) {
+
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
-            return Collections.singletonMap("response", repoUser.get_id());
-        } else
-            return Collections.singletonMap("response", "-1");
 
+            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.get_id() +" id");
 
+            HashMap<String, String> json = new HashMap<>();
+            json.put("id",repoUser.get_id());
+            System.out.println(json);
+
+            return new ResponseEntity<>(json,HttpStatus.OK);
+
+        }
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("valami hiba történt");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
