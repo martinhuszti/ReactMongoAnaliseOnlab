@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {Redirect} from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import Requirements from './requirements';
-import LoginForm from './LoginForm';
-import LoggedIn from './loggedin';
-import Informations from './Informations'
-import Excercises from './Excercises'
-import News from './News';
+import Requirements from './Menus/requirements';
+import LoginForm from './Menus/LoginForm';
+import LoggedIn from './Menus/loggedin';
+import Informations from './Menus/Informations'
+import Excercises from './Menus/Excercises'
+import News from './Menus/News';
 import MenuIcon from '@material-ui/icons/Menu';
 import './menu.css';
 
