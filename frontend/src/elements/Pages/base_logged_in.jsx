@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/news.css';
-import './css/loggedin.css';
-import React, {Component} from 'react';
+
+import React, { Component } from 'react';
 import LoggedIn_Data from '../UserMenu/1_data';
 import LoggedIn_Result from '../UserMenu/2_results';
 import Change_Pass from '../UserMenu/3_change_pass';
@@ -9,7 +8,11 @@ import Chat from '../UserMenu/4_chat';
 import NewsPublication from '../UserMenu/7_news_publication';
 import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
-import {HashRouter as Router, Link, Redirect, Route} from "react-router-dom";
+import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
+import { UncontrolledAlert } from 'reactstrap';
+import './css/news.css';
+import './css/loggedin.css';
+
 
 
 class LoggedIn extends Component {
@@ -51,35 +54,35 @@ class LoggedIn extends Component {
         {
             path: "/data",
             exact: true,
-            main: () => <LoggedIn_Data/>
+            main: () => <LoggedIn_Data />
         },
         {
             path: "/result",
-            main: () => <LoggedIn_Result/>
+            main: () => <LoggedIn_Result />
         },
         {
             path: "/change_pass",
-            main: () => <Change_Pass/>
+            main: () => <Change_Pass />
         },
         {
             path: "/controller",
-            main: () => <Chat/>
+            main: () => <Chat />
         },
         {
             path: "/students",
-            main: () => <Chat/>
+            main: () => <Chat />
         },
         {
             path: "/newPublication",
-            main: () => <NewsPublication/>
+            main: () => <NewsPublication />
         },
         {
             path: "/addPerson",
-            main: () => <AddStudent/>
+            main: () => <AddStudent />
         },
         {
             path: "/addReq",
-            main: () => <AddReq/>
+            main: () => <AddReq />
         },
     ];
 
@@ -116,7 +119,7 @@ class LoggedIn extends Component {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
             }
-            this.setState({isLoggedIn: "true"})
+            this.setState({ isLoggedIn: "true" })
         }
     }
 
@@ -125,13 +128,17 @@ class LoggedIn extends Component {
 
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm"/>
+            return <Redirect to="/LoginForm" />
         }
 
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
-                    <div id="placeholder_header"/>
+                    <div id="placeholder_header" />
+
+                    <UncontrolledAlert id="loggedin_alertbox" color="primary" >
+                        Sikeresen bejelentkeztél! Üdv az oldalon!
+                        </UncontrolledAlert>
 
                     <div className="news news_head">
                         <h1 className="news_text ">Login</h1>
@@ -156,13 +163,13 @@ class LoggedIn extends Component {
                         <div className="content_box">
                             {this.routes.map((route, index) => (
 
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        component={route.main}
-                                    />
-                                )
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    component={route.main}
+                                />
+                            )
                             )}
 
                         </div>

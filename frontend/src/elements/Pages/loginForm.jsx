@@ -3,6 +3,8 @@ import './css/loginForm.css'
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
+import { UncontrolledAlert } from 'reactstrap';
+
 
 class RegistrationForm extends Component {
     emptyUser = {
@@ -15,7 +17,8 @@ class RegistrationForm extends Component {
 
         this.state = {
             item: this.emptyUser,
-            checklook: false
+            checklook: false,
+            visible: false,
 
         };
 
@@ -23,6 +26,9 @@ class RegistrationForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+
+        this.alertboxshow = this.alertboxshow.bind(this);
+        this.onDismiss = this.onDismiss.bind(this);
     }
 
     handleChange(event) {
@@ -49,6 +55,14 @@ class RegistrationForm extends Component {
         }
     }
 
+    alertboxshow() {
+        this.setState({ visible: true });
+    }
+
+    onDismiss() {
+        this.setState({ visible: false });
+    }
+
     async handleSubmit(event) {
         event.preventDefault();
         const { item } = this.state;
@@ -60,8 +74,11 @@ class RegistrationForm extends Component {
         }).then(response => {
             if (response.ok) { return response.json() }
 
-            else
-                throw new Error('Sikertelen bejelentkezés!')
+            else {
+                this.alertboxshow();
+                throw new Error("Sikertelen bejelentkezés");
+            }
+            //throw new Error('Sikertelen bejelentkezés!')
         }
         )
             .then(json => {
@@ -89,6 +106,10 @@ class RegistrationForm extends Component {
             <div id="login_placeholder">
                 <div id="placeholder_header" />
                 <div id="login_width">
+
+                    <UncontrolledAlert isOpen={this.state.visible} color="danger" toggle={this.onDismiss} >
+                        Sikertelen bejelentkezés! Rossz neptun kód vagy jelszó.
+                        </UncontrolledAlert>
 
                     <div className="news news_head rounded_corners_top">
                         <p className="login_text">Bejelentkezés</p>

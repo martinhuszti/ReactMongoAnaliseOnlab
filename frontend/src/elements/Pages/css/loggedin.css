@@ -4,6 +4,11 @@
     vertical-align: middle;
 }
 
+#loggedin_alertbox {
+    font-weight: bold;
+    margin: 10px 20px 0 20px;
+}
+
 .news_body_padding {
     padding: 0;
 }
@@ -62,7 +67,7 @@
     border-width: 2px;
 }
 
-@media ( max-width: 750px ) {
+@media (max-width: 750px) {
     .box_flex {
         display: none;
     }

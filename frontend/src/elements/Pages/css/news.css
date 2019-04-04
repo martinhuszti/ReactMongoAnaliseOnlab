@@ -27,7 +27,8 @@
     min-height: calc(100% - 100px);
     text-align: left;
 }
-.news_pointer{
+
+.news_pointer {
     cursor: pointer;
 }
 
@@ -51,7 +52,7 @@
 
 }
 
-@media ( max-width: 1000px ) {
+@media (max-width: 1000px) {
     #placeholder_news {
         padding: 0;
     }
