@@ -26,10 +26,26 @@ public class FileController {
         try {
             System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(), file.getSize());
             //creating a new file in some local directory
-            File fileToSave = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\" + "requirements.pdf");
-            fileToSave.delete();
+            Path path = Paths.get("./src/main/java/com/huszti/gema/analiseresponsiveweb/resource/");
+            File fileToSave = new File(path + "/requirements.pdf");
+            File newFile = new File(fileToSave.getCanonicalPath());
+            System.out.println(fileToSave.getPath());
+            System.out.println(fileToSave.getAbsolutePath());
+            System.out.println(fileToSave.getCanonicalPath());
+            if (fileToSave.createNewFile())
+            {
+                System.out.println("File is created!");
+            } else {
+                System.out.println("File already exists.");
+                //fileToSave.delete();
+            }
+
+
+            System.out.println(newFile.getPath());
+            System.out.println(newFile.getAbsolutePath());
+            System.out.println(newFile.getCanonicalPath());
             //copy file content from received file to new local file
-            file.transferTo(fileToSave);
+            file.transferTo(newFile);
         } catch (IOException ioe) {
             //if something went bad, we need to inform client about it
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
