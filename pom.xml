@@ -26,6 +26,17 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>24.0-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -66,6 +77,22 @@
             <version>4.3.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+
+
+
     </dependencies>
 
 
@@ -84,36 +111,7 @@
                     <workingDirectory>frontend</workingDirectory>
                     <installDirectory>target</installDirectory>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v8.9.4</nodeVersion>
-                            <npmVersion>5.6.0</npmVersion>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>npm run build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
+                
             </plugin>
 
             <plugin>

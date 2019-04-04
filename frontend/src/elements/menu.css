@@ -18,7 +18,34 @@
 #loginitem {
     margin: 0;
     margin-left: 70px;
-    padding-right: 0px;
+    padding-right: 0;
+    max-width: 200px;
+    height: 100%;
+}
+
+.header_drpdwn {
+    float: left;
+    height: 100%;
+    margin: 8px;
+}
+
+.header_background {
+    border: none;
+    background-color: #1D155D;
+}
+
+.header_flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.header_flex_placeholder {
+    flex: 1;
+}
+
+.btn-secondary:hover {
+    background-color: #1D155D;
+    border: none;
 }
 
 .login_button {
@@ -49,23 +76,23 @@ ul > a {
 
 @media ( max-width: 880px ) {
     #loginitem {
-        margin-left: 0px;
-        padding-left: 0px;
+        margin-left: 0;
+        padding-left: 0;
         display: block;
     }
 }
 
-@media ( max-width: 700px ) {
+@media ( max-width: 950px ) {
     #largemenu {
         display: none;
     }
 
 }
 
-@media ( min-width: 700px ) {
-    #smallmenu {
+@media ( min-width: 950px ) {
+    .header_flex {
         display: none;
-        padding: 0px 0px 0px 0px;
+        padding: 0;
     }
 
 }
@@ -79,8 +106,8 @@ ul > a {
 }
 
 .footer {
-    position: static;
     width: 100%;
+
     background-color: #1D155D;
     color: white;
     text-align: center;
@@ -95,14 +122,20 @@ ul > a {
 
 }
 
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: #009FE3;;
+    border-color: #009FE3;;
+}
+
 ul {
     list-style-type: none;
-    margin: 0rem;
+    margin: 0;
 }
 
 .footer_max {
     max-width: 1366px;
-    padding: 0px 10px 16px;
+    padding: 0 10px 16px;
     margin: 0 auto;
 
 }
