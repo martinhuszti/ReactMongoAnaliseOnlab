@@ -3,48 +3,8 @@ import './css/news.css';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Link, Redirect, Route, Switch } from "react-router-dom";
 import Login from './loginForm.jsx';
-import { string } from 'prop-types';
+import Popup from "./popup"
 
-
-class Popup extends Component {
-
-    componentWillMount() {
-        document.addEventListener('click', this.handleClick, false);
-        console.log(this.props.title)
-        console.log("toogleval")
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('click', this.handleClick, false);
-    }
-
-    handleClick = (e) => {
-        if (this.node.contains(e.target)) {
-            console.log("bele van kattintva")
-            return;
-        }
-
-        this.handleOutsideClick();
-    }
-
-    handleOutsideClick() {
-        this.props.closePopup();
-
-    }
-
-    render() {
-        return (
-            <div className='news_popup'>
-                <div ref={node => { this.node = node; }} className='news_popup_inner'>
-                    <h1>{this.props.title}</h1>
-                    
-                    <p>{this.props.text}</p>
-                    <button onClick={this.props.closePopup}>close me</button>
-                </div>
-            </div>
-        );
-    }
-}
 
 class Class extends Component {
 
