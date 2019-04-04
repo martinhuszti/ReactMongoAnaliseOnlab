@@ -5,8 +5,8 @@ import {FileService} from './8_AddRequirements/FileService.jsx';
 
 class Addrequirements extends Component {
     emptyReq = {
-        attendance: '',
-        mark: '',
+        presence: '',
+        signature: '',
         exam: '',
         tests: '',
         points: '',
@@ -15,10 +15,13 @@ class Addrequirements extends Component {
 
     constructor(props) {
         super(props);
+        console.log("ASDASDASD");
         this.fileService = new FileService();
+      
         this.state = {
             item: this.emptyReq,
             items: [],
+            data:[],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -31,16 +34,39 @@ class Addrequirements extends Component {
         const {item} = this.state;
 
         console.log(item);
-        await fetch('/changereq', {
+        await fetch('/uploadreq', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-
         console.log("feltöltés befejeződött")
     }
 
+    
+    componentWillMount() {
+        fetch(`/getreq`)
+            .then(result => result.json())
+            .then(items => {
+                console.log(items);
+                this.setState({
+                    item: {
+                        presence: items[0],
+                        signature: items[1],
+                        exam: items[2],
+                        tests: items[3],
+                        points: items[4],
+                    }
+                });
+                console.log('itemelőtt');
+                console.log(this.state.item);
+                console.log('itemután');
+            });
+        console.log(this.state.item.presence);
+        console.log("betöltés befejeeződött")
+    }
+
     handleChange(event) {
+        console.log(this.state.item.presence);
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -80,15 +106,15 @@ class Addrequirements extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Jelenlét</Label>
-                        <Input className="newsP_title" type="text" name="attendance" id="attendance"
-                               value={item.attendance || ''} onChange={this.handleChange}
+                        <Input className="newsP_title" type="text" name="presence" id="presence" defaultValue={this.state.items.presence}
+                               value={item.presence || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Aláírás</Label>
-                        <Input className="newsP_title" type="text" name="mark" id="mark"
-                               value={item.mark || ''} onChange={this.handleChange}
+                        <Input className="newsP_title" type="text" name="signature" id="signature"
+                               value={item.signature || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 

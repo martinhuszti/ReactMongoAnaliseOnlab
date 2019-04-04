@@ -15,9 +15,19 @@ class Requirements extends Component {
         this.state = {
             dwnloadlnk: '',
             files: '',
+            items:[]
         };
         this.downloadRandomImage = this.downloadRandomImage.bind(this);
 
+    }
+    componentWillMount() {
+        fetch(`/getreq`)
+            .then(result => result.json())
+            .then(items => {
+                console.log(items);
+                this.setState({ items});
+                
+            });
     }
 
     async downloadRandomImage() {
@@ -59,26 +69,26 @@ class Requirements extends Component {
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Jelenlét:</span>
-                                    <p>Elő.</p>
+                                    <p>{this.state.items[0]}</p>
                                 </li>
                                 <li>
                                     <span>Aláírás:</span>
-                                    <p>Aláíyit külön-külön legalább 40%-ra megírta.</p>
+                                    <p>{this.state.items[1]}</p>
                                 </li>
                                 <li>
                                     <span>Vizsga:</span>
-                                    <p>Csak A 90 perces
+                                    <p>{this.state.items[2]}
                                     </p>
                                 </li>
                             </ul>
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Számonkérések:</span>
-                                    <p>Minden zárthelyi írásbeli dolgozat, melyen semmiféle segédn.</p>
+                                    <p>{this.state.items[3]}</p>
                                 </li>
                                 <li>
                                     <span>Pontszámítás:</span>
-                                    <p>Az így00 esetén jeles (5)
+                                    <p>{this.state.items[4]}
                                     </p>
                                 </li>
                             </ul>
