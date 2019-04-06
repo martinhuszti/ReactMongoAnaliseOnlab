@@ -4,6 +4,11 @@ import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,14 +41,33 @@ public class NewsController {
         return list;
 
     }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getallnews")
+    public List<News> getallNews() {
+
+        return newsRepository.findAll();
+
+    }
 
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addnews")
     public News addNews(@RequestBody News news) {
         newsRepository.save(news);
+
         return news;
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/deletenews")
+    public String deleteNews(@RequestBody News news){
+
+        System.out.println(news);
+        newsRepository.deleteById(news.getId());
+        return "Történt valami";
+    }
+
+
 
 
 }

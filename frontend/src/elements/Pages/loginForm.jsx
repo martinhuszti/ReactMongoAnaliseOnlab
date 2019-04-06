@@ -93,7 +93,6 @@ class RegistrationForm extends Component {
                 sessionStorage.setItem("loggedin", "true");
                 sessionStorage.setItem("id", json.id);
 
-                alert("Sikeresen bejelentkezve!");
                 this.props.history.push('/LoggedIn');
 
             })

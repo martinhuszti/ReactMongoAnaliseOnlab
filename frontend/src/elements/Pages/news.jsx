@@ -120,7 +120,7 @@ class Class extends Component {
                                     <p onClick={this.toggleupPopup.bind(this, item)} value={item} className="news_text news_pointer">{item.title}</p>
                                 </div>
 
-                                <div className="news news_body"> {item.text}</div>
+                                <div className="news news_body"> {item.text.substring(0,200)} . . .</div>
                             </li>)}
 
                             {this.state.showPopup ?

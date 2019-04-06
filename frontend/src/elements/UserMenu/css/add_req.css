@@ -14,7 +14,7 @@
     border-radius: 5px;
 }
 
-.addreq_textholder > div {
+.addreq_textholder>div {
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -30,10 +30,9 @@
     flex: 1;
 }
 
-.addreq_line_text > span {
+.addreq_line_text>span {
     margin-left: 10px;
     text-align: center;
-
 }
 
 .addreq_line_text {
@@ -44,25 +43,21 @@
 .addreq_extra_text {
     font-style: italic;
     word-break: break-all;
-
 }
 
 .addreq_uploadbutton {
-
     margin-left: 0;
     margin-right: 0;
 }
 
-@media ( max-width: 850px ) {
+@media ( max-width: 850px) {
     .addreq_file_lookup {
         flex-direction: column;
     }
-
     .addreq_line_text {
         margin-left: auto;
         margin-right: auto;
     }
-
     .addreq_uploadbutton {
         margin-top: 20px;
         display: block;

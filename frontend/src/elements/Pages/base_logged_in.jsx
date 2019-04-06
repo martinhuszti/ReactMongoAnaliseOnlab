@@ -8,6 +8,7 @@ import Chat from '../UserMenu/4_chat';
 import NewsPublication from '../UserMenu/7_news_publication';
 import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
+import DeletePublication from '../UserMenu/9_deleteNews';
 import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { UncontrolledAlert } from 'reactstrap';
 import './css/news.css';
@@ -48,6 +49,10 @@ class LoggedIn extends Component {
         {
             link: "/addReq",
             text: 'Követelmények'
+        },
+        {
+            link: "/deletePublication",
+            text: 'Hír törlése'
         }
     ];
     routes = [
@@ -75,6 +80,10 @@ class LoggedIn extends Component {
         {
             path: "/newPublication",
             main: () => <NewsPublication />
+        },
+        {
+            path: "/deletePublication",
+            main: () => <DeletePublication />
         },
         {
             path: "/addPerson",

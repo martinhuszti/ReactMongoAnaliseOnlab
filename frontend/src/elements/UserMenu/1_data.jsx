@@ -3,14 +3,15 @@ import './css/data.css';
 
 class LoggedIn_Data extends Component {
     userDetails = {
-        email: null,
-        last_login: null,
-        name: null,
-        neptun: null,
-        password: null,
-        registration_date: null,
-        role: null,
         _id: null,
+        neptun: null,
+        name: null,
+        password: null,
+        email: null,
+        role: null,
+        last_login: null,
+        registration_date: null,
+        gyakvez_id: null,
 
 
     };
@@ -21,7 +22,7 @@ class LoggedIn_Data extends Component {
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/getDetails?id=${encodedValue}`, {
             method: "GET",
@@ -51,6 +52,10 @@ class LoggedIn_Data extends Component {
                     <li className="data_font">
                         <span>E-mail:</span>
                         <span>{this.userDetails.email}</span>
+                    </li>
+                    <li className="data_font">
+                        <span>E-Role:</span>
+                        <span>{this.userDetails.role}</span>
                     </li>
                     <li className="data_font">
                         <span>Utoljára bejelentkezve:</span>
