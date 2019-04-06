@@ -9,6 +9,7 @@ import NewsPublication from '../UserMenu/7_news_publication';
 import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
 import DeletePublication from '../UserMenu/9_deleteNews';
+import AddLab from '../UserMenu/10_new_labor'
 import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { UncontrolledAlert } from 'reactstrap';
 import './css/news.css';
@@ -53,6 +54,10 @@ class LoggedIn extends Component {
         {
             link: "/deletePublication",
             text: 'Hír törlése'
+        },
+        {
+            link: "/addLab",
+            text: 'Új gyakorlat'
         }
     ];
     routes = [
@@ -92,6 +97,10 @@ class LoggedIn extends Component {
         {
             path: "/addReq",
             main: () => <AddReq />
+        },
+        {
+            path: "/addLab",
+            main: () => <AddLab />
         },
     ];
 

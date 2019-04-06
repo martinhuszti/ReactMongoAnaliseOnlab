@@ -1,6 +1,8 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
+import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
+import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;

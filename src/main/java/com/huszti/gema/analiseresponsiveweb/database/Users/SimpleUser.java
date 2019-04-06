@@ -21,12 +21,26 @@ public class SimpleUser {
     protected LocalDate registration_date;
     protected LocalDate last_login;
 
-    protected List<String> exams_ids;
-    protected String gyakvez_id;
+
 
     public SimpleUser() {
         registration_date = LocalDate.now();
         password = "default"; // password = neptun lehetne (de hogy fut le?)
     }
 
+    public String get_id() {
+        return _id;
+    }
+
+    public String getNeptun() {
+        return neptun;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
 }

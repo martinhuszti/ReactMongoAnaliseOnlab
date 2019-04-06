@@ -12,9 +12,13 @@ class ExtraStudent extends Component {
         email: "",
         password: "default",
         role: "student",
-        gyakvez_id: "",
+        
 
     };
+    createdStudent={
+        neptun:"",
+        gyak_id:"",
+    }
 
 
     constructor(props) {
@@ -22,6 +26,7 @@ class ExtraStudent extends Component {
 
         this.state = {
             createdUser: this.createdUser,
+            createdStudent: this.createdStudent,
             redirect: false,
         };
 
@@ -41,16 +46,19 @@ class ExtraStudent extends Component {
         this.setState({createdUser});
     }
 
-    selectGyak(gyakvez) {
+    selectGyak(gyak) {
         let createdUser = {...this.state.createdUser};
-        createdUser.gyakvez_id = gyakvez._id;
-        this.setState({createdUser});
-        return gyakvez;
+        createdUser.gyak_id = gyak._id;
+        this.setState({
+            createdStudent:{
+                neptun:createdUser.neptun,
+                gyak_id:gyak._id,
+            }});
+        console.log(gyak._id)
+        return gyak;
     }
 
-
-    async handleSubmit(event) {
-        event.preventDefault();
+    async adduser(event) {
         const {createdUser} = this.state;
 
         await fetch('/adduser', {
@@ -60,7 +68,25 @@ class ExtraStudent extends Component {
         });
 
         alert("Sikeres regisztáció!");
-        console.log("feltöltés befejeződött")
+        console.log("új felhasználó")
+    }
+    async addgyak(event) {
+        
+        const {createdStudent} = this.state;
+        await fetch('/addstudent', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(createdStudent)
+        });
+
+        console.log("új diák")
+    }
+
+
+     handleSubmit(event) {
+        event.preventDefault();
+       this.adduser(event);
+       this.addgyak(event);
     }
 
 
@@ -68,7 +94,7 @@ class ExtraStudent extends Component {
 
         const getgyak = (inputValue, callback) => {
 
-            fetch(`/getUsers`, {
+            fetch(`/getLabs`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
@@ -120,7 +146,7 @@ class ExtraStudent extends Component {
                             className="extra_info"
                             defaultOptions
                             loadOptions={getgyak}
-                            getOptionLabel={option => option.neptun}
+                            getOptionLabel={option => option.title}
                             getOptionValue={option => option._id}
                             onChange={this.selectGyak}
                         />
