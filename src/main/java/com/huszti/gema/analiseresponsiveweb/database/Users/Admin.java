@@ -10,4 +10,16 @@ public class Admin {
     @Id
     protected String _id;
     protected String neptun;
+
+
+    public Admin() {
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public String getNeptun() {
+        return neptun;
+    }
 }
