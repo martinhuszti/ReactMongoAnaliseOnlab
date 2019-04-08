@@ -2,10 +2,7 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 
 import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
-import com.huszti.gema.analiseresponsiveweb.database.News;
-import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
-import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +28,7 @@ public class LaborController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getLabs")
+    @GetMapping("/getLabs")
     public List<Labor> getUsers() {
         return laborRepository.findAll();
 

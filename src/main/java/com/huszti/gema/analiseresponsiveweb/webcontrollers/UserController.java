@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getDetails")
+    @GetMapping("/getDetails")
     public SimpleUser getDetails(@RequestParam String id) {
         return userRepository.findById(id).orElse(null);
 
@@ -95,7 +95,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getUsers")
+    @GetMapping("/getUsers")
     public List<SimpleUser> getUsers() {
         return userRepository.findAll();
 
