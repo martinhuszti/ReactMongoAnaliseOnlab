@@ -11,9 +11,7 @@
 
     <groupId>com.huszti.gema</groupId>
     <artifactId>analise-responsive-web</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
-    <name>analise-responsive-web</name>
-    <description>Analise web BME</description>
+
 
     <properties>
         <java.version>1.8</java.version>
