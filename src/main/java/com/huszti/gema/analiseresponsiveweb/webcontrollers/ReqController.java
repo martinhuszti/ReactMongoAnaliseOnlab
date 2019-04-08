@@ -30,6 +30,7 @@ public class ReqController {
 
         return newreq;
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getreq")
     public List<String> getReq() throws FileNotFoundException {
