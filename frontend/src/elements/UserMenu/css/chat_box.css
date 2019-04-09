@@ -1,18 +1,18 @@
-.talk-box-wrapper {
+.talk-box-wrapper.custom {
     width: 100%;
 }
 
-.talk-box-header {
+.custom .talk-box-header {
     background: white;
     height: 20px;
 }
 
-.talk-box-status {
+.custom .talk-box-status {
     padding: 0;
     font-size: 24px;
 }
 
-.talk-input-raw {
+.custom .talk-input-raw {
     min-height: 40px;
     border: 1px solid #1D155D;
     resize: vertical;
@@ -22,24 +22,24 @@
 
 }
 
-.talk-input-wrapper {
+.custom .talk-input-wrapper {
     margin-top: 15px;
 }
 
-.talk-box-body {
+.custom .talk-box-body {
     height: 600px;
     background-color: white;
     scrollbar-width: none;
 }
 
-.talk-input-raw:disabled {
+.custom .talk-input-raw:disabled {
     background-color: rgb(205, 240, 255);
 }
 
-.talk-message-content-wrapper.right {
+.custom .talk-message-content-wrapper.right {
     background: #cce2eb;
 }
 
-.talk-message-content-wrapper.left {
+.custom .talk-message-content-wrapper.left {
     background: #f2f2f2;
 }

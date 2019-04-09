@@ -24,7 +24,8 @@
     "react-talk": "^1.0.0",
     "reactstrap": "^7.1.0",
     "sockjs": "^0.3.19",
-    "stomp": "^0.1.1"
+    "stomp": "^0.1.1",
+    "css-loader": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,11 +36,19 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "proxy": "https://analisebme.herokuapp.com",
+  "proxy": "http://localhost:8080",
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "css-loader": "^2.1.1"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
