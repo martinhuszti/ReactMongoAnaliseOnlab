@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,9 +35,13 @@ public class ReqController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getreq")
-    public List<String> getReq() throws FileNotFoundException {
+    public List<String> getReq() throws FileNotFoundException, UnsupportedEncodingException {
 
         File file = new File("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt");
+        if(!file.exists()) {
+
+            PrintWriter writer = new PrintWriter(file, "UTF-8");
+        }
         Scanner sc = new Scanner(file);
         ArrayList<String> tempread = new ArrayList<>();
 

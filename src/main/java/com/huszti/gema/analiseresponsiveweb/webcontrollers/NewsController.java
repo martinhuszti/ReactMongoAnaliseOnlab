@@ -33,12 +33,20 @@ public class NewsController {
         ArrayList<News> tempnews = new ArrayList(newsRepository.findAll());
 
         int size = tempnews.size();
-        List<News> list =tempnews.subList(size-6,size-1);
+        if(size<=6){
 
-        Collections.reverse(list);
-        System.out.println(list);
+            Collections.reverse(tempnews);
+            System.out.println(tempnews);
+            return  tempnews;
+        }
+        else{
+            List<News> list=tempnews.subList(size-5,size);
 
-        return list;
+            Collections.reverse(list);
+            System.out.println(list);
+            return list;
+        }
+
 
     }
     @CrossOrigin(origins = "http://localhost:3000")

@@ -96,7 +96,13 @@ class Class extends Component {
 
         fetch(`/getnews`)
             .then(result => result.json())
-            .then(items => this.setState({ items }));
+            .then(items => {
+                this.setState({ items })
+            
+        console.log(this.state.items);
+            }
+                
+                );
 
         console.log("betöltés befejeeződött")
     }

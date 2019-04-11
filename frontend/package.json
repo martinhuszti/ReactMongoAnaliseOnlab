@@ -9,11 +9,13 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "css-loader": "^2.1.1",
     "json-fetch": "^8.0.0",
     "material-ui": "^0.20.2",
     "multi-select-react": "^0.1.8",
     "prop-types": "^15.6.1",
     "react": "^16.8.3",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.3",
     "react-router": "^4.3.1",
@@ -22,10 +24,10 @@
     "react-select": "^2.4.2",
     "react-stomp": "^4.1.0",
     "react-talk": "^1.0.0",
+    "react-transition-group": "^2.9.0",
     "reactstrap": "^7.1.0",
     "sockjs": "^0.3.19",
-    "stomp": "^0.1.1",
-    "css-loader": "^2.1.1"
+    "stomp": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
