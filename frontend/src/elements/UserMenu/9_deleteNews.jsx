@@ -8,7 +8,6 @@ class Delete_Publication extends Component {
     emptyItem = {
         title: '',
         text: '',
-        menuActive: false,
 
     };
     constructor(props) {
@@ -18,12 +17,7 @@ class Delete_Publication extends Component {
             items: [],
         };
     }
-    toggleMenu = (item, ev) => {
-        let menuState = !item.menuActive;
-        this.setState({
-            item: { menuActive: menuState }
-        });
-    }
+   
 
     deleteNewsClick = (item, ev) => {
 
@@ -62,15 +56,12 @@ class Delete_Publication extends Component {
 
                 {this.state.items.map(item => <li id="dnews_first" key={item.id}>
                     <div className="news dnews_head dnews_flex">
-                        <p onClick={this.toggleMenu.bind(this, item)} className="news_text dnews_flexiable">{item.title}</p>
+                        <p className="news_text dnews_flexiable">{item.title}</p>
                         <Clear className='dnews_clear' value={item} onClick={this.deleteNewsClick.bind(this, item)}></Clear>
                     </div>
-                    <CSSTransition
-                        timeout={350}
-                        classNames="menu"
-                        key={item.menuActive}>
-                        <div className="news news_body"> {item.text.substring(0, 200)} . . .</div>
-                    </CSSTransition>
+                    
+                       
+                    
                 </li>)}
             </div>
         )

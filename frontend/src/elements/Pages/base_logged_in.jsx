@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { Component } from 'react';
+
+import { withRouter } from "react-router";
 import LoggedIn_Data from '../UserMenu/1_data';
 import LoggedIn_Result from '../UserMenu/2_results';
 import Change_Pass from '../UserMenu/3_change_pass';
@@ -10,7 +12,7 @@ import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
 import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
-import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { UncontrolledAlert } from 'reactstrap';
 import './css/news.css';
 import './css/loggedin.css';
@@ -20,86 +22,86 @@ import './css/loggedin.css';
 class LoggedIn extends Component {
     emptyItem = [
         {
-            link: "/data",
+            link: "/LoggedIn/data",
             text: 'Adatok'
         },
         {
-            link: "/result",
+            link: "/LoggedIn/result",
             text: 'Eredmények'
         },
         {
-            link: "/change_pass",
+            link: "/LoggedIn/change_pass",
             text: 'Jelszó változtatás'
         },
         {
-            link: "/controller",
+            link: "/LoggedIn/controller",
             text: 'Chat'
         },
         {
-            link: "/students",
+            link: "/LoggedIn/students",
             text: 'Diákok'
         },
         {
-            link: "/addPerson",
+            link: "/LoggedIn/addPerson",
             text: 'Új felhasználó'
         },
         {
-            link: "/newPublication",
+            link: "/LoggedIn/newPublication",
             text: 'Új hír közzététele'
         },
         {
-            link: "/addReq",
+            link: "/LoggedIn/addReq",
             text: 'Követelmények'
         },
         {
-            link: "/deletePublication",
+            link: "/LoggedIn/deletePublication",
             text: 'Hír törlése'
         },
         {
-            link: "/addLab",
+            link: "/LoggedIn/addLab",
             text: 'Új gyakorlat'
         }
     ];
     routes = [
         {
-            path: "/data",
+            path: "/LoggedIn/data",
             exact: true,
             main: () => <LoggedIn_Data />
         },
         {
-            path: "/result",
+            path: "/LoggedIn/result",
             main: () => <LoggedIn_Result />
         },
         {
-            path: "/change_pass",
+            path: "/LoggedIn/change_pass",
             main: () => <Change_Pass />
         },
         {
-            path: "/controller",
+            path: "/LoggedIn/controller",
             main: () => <Chat />
         },
         {
-            path: "/students",
+            path: "/LoggedIn/students",
             main: () => <Chat />
         },
         {
-            path: "/newPublication",
+            path: "/LoggedIn/newPublication",
             main: () => <NewsPublication />
         },
         {
-            path: "/deletePublication",
+            path: "/LoggedIn/deletePublication",
             main: () => <DeletePublication />
         },
         {
-            path: "/addPerson",
+            path: "/LoggedIn/addPerson",
             main: () => <AddStudent />
         },
         {
-            path: "/addReq",
+            path: "/LoggedIn/addReq",
             main: () => <AddReq />
         },
         {
-            path: "/addLab",
+            path: "/LoggedIn/addLab",
             main: () => <AddLab />
         },
     ];
@@ -124,7 +126,7 @@ class LoggedIn extends Component {
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
 
@@ -139,16 +141,18 @@ class LoggedIn extends Component {
             }
             this.setState({ isLoggedIn: "true" })
         }
-    }
-
-
-    render() {
-
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
             return <Redirect to="/LoginForm" />
         }
+    }
 
+
+
+    render() {
+
+
+        console.log(this.state.isLoggedIn);
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
@@ -200,4 +204,4 @@ class LoggedIn extends Component {
 }
 
 
-export default LoggedIn;
+export default withRouter(LoggedIn);

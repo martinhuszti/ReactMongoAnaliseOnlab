@@ -42,4 +42,20 @@ public class Student {
         this.neptun = neptun;
         this.gyak_id = gyak_id;
     }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public String getNeptun() {
+        return neptun;
+    }
+
+    public List<String> getExams_ids() {
+        return exams_ids;
+    }
+
+    public String getGyak_id() {
+        return gyak_id;
+    }
 }
