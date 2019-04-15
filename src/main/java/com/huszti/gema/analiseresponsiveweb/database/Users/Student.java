@@ -21,21 +21,6 @@ public class Student {
     public Student() {
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
-    }
-
-    public void setNeptun(String neptun) {
-        this.neptun = neptun;
-    }
-
-    public void setExams_ids(List<String> exams_ids) {
-        this.exams_ids = exams_ids;
-    }
-
-    public void setGyak_id(String gyak_id) {
-        this.gyak_id = gyak_id;
-    }
 
     public Student(String _id, String neptun, String gyak_id) {
         this._id = _id;
@@ -43,19 +28,5 @@ public class Student {
         this.gyak_id = gyak_id;
     }
 
-    public String get_id() {
-        return _id;
-    }
 
-    public String getNeptun() {
-        return neptun;
-    }
-
-    public List<String> getExams_ids() {
-        return exams_ids;
-    }
-
-    public String getGyak_id() {
-        return gyak_id;
-    }
 }

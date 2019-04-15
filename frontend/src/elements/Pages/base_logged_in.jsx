@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 import LoggedIn_Data from '../UserMenu/1_data';
 import LoggedIn_Result from '../UserMenu/2_results';
 import Change_Pass from '../UserMenu/3_change_pass';
@@ -12,11 +12,10 @@ import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
 import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
-import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
-import { UncontrolledAlert } from 'reactstrap';
+import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
+import {Alert} from 'reactstrap';
 import './css/news.css';
 import './css/loggedin.css';
-
 
 
 class LoggedIn extends Component {
@@ -66,43 +65,43 @@ class LoggedIn extends Component {
         {
             path: "/LoggedIn/data",
             exact: true,
-            main: () => <LoggedIn_Data />
+            main: () => <LoggedIn_Data/>
         },
         {
             path: "/LoggedIn/result",
-            main: () => <LoggedIn_Result />
+            main: () => <LoggedIn_Result/>
         },
         {
             path: "/LoggedIn/change_pass",
-            main: () => <Change_Pass />
+            main: () => <Change_Pass/>
         },
         {
             path: "/LoggedIn/controller",
-            main: () => <Chat />
+            main: () => <Chat/>
         },
         {
             path: "/LoggedIn/students",
-            main: () => <Chat />
+            main: () => <Chat/>
         },
         {
             path: "/LoggedIn/newPublication",
-            main: () => <NewsPublication />
+            main: () => <NewsPublication/>
         },
         {
             path: "/LoggedIn/deletePublication",
-            main: () => <DeletePublication />
+            main: () => <DeletePublication/>
         },
         {
             path: "/LoggedIn/addPerson",
-            main: () => <AddStudent />
+            main: () => <AddStudent/>
         },
         {
             path: "/LoggedIn/addReq",
-            main: () => <AddReq />
+            main: () => <AddReq/>
         },
         {
             path: "/LoggedIn/addLab",
-            main: () => <AddLab />
+            main: () => <AddLab/>
         },
     ];
 
@@ -112,8 +111,22 @@ class LoggedIn extends Component {
             items: this.emptyItem,
             redirect: false,
             isLoggedIn: '',
+            visible: false,
         };
 
+
+        if (sessionStorage.getItem("newLogin") === "true") {
+            this.state.visible = true;
+            sessionStorage.setItem("newLogin", false);
+        }
+
+        this.closeAlert = this.closeAlert.bind(this);
+
+    }
+
+
+    closeAlert() {
+        this.setState({visible: false});
     }
 
     logout() {
@@ -121,6 +134,7 @@ class LoggedIn extends Component {
         sessionStorage.removeItem("loggedin");
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
+        sessionStorage.removeItem("newLogin")
 
         this.props.history.push("/")
 
@@ -139,28 +153,27 @@ class LoggedIn extends Component {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
             }
-            this.setState({ isLoggedIn: "true" })
+            this.setState({isLoggedIn: "true"})
         }
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm" />
+            return <Redirect to="/LoginForm"/>
         }
     }
 
 
-
     render() {
 
-
         console.log(this.state.isLoggedIn);
+
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
-                    <div id="placeholder_header" />
+                    <div id="placeholder_header"/>
 
-                    <UncontrolledAlert id="loggedin_alertbox" color="primary" >
+                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} id="loggedin_alertbox" color="primary">
                         Sikeresen bejelentkeztél! Üdv az oldalon!
-                        </UncontrolledAlert>
+                    </Alert>
 
                     <div className="news news_head">
                         <h1 className="news_text ">Login</h1>
@@ -185,13 +198,13 @@ class LoggedIn extends Component {
                         <div className="content_box">
                             {this.routes.map((route, index) => (
 
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    component={route.main}
-                                />
-                            )
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.main}
+                                    />
+                                )
                             )}
 
                         </div>

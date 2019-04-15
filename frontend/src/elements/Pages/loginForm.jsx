@@ -1,9 +1,10 @@
 import './css/news.css';
 import './css/loginForm.css'
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Button from 'react-bootstrap/Button';
-import { withRouter } from 'react-router-dom';
-import { UncontrolledAlert } from 'reactstrap';
+import {withRouter} from 'react-router-dom';
+import {Alert} from 'reactstrap';
+import {any} from "prop-types";
 
 
 class RegistrationForm extends Component {
@@ -35,14 +36,14 @@ class RegistrationForm extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item: item });
+        this.setState({item: item});
     }
 
     handleCheck() {
         console.log('NemCsekked');
-        this.setState({ checklook: !this.state.checklook });
+        this.setState({checklook: !this.state.checklook});
         console.log(this.state.checklook);
     }
 
@@ -56,31 +57,31 @@ class RegistrationForm extends Component {
     }
 
     alertboxshow() {
-        this.setState({ visible: true });
+        this.setState({visible: true});
     }
 
     onDismiss() {
-        this.setState({ visible: false });
+        this.setState({visible: false});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        const {item} = this.state;
 
         await fetch('/loginUser', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         }).then(response => {
-            if (response.ok) { return response.json() }
-
-            else {
-                this.alertboxshow();
-                throw new Error("Sikertelen bejelentkezés");
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    this.alertboxshow();
+                    throw new Error("Sikertelen bejelentkezés");
+                }
             }
-            //throw new Error('Sikertelen bejelentkezés!')
-        }
-        )
+        ).catch(any)
+
             .then(json => {
 
                 console.log(json);
@@ -92,6 +93,7 @@ class RegistrationForm extends Component {
 
                 sessionStorage.setItem("loggedin", "true");
                 sessionStorage.setItem("id", json.id);
+                sessionStorage.setItem("newLogin", true);
 
                 this.props.history.push('/LoggedIn');
 
@@ -100,15 +102,15 @@ class RegistrationForm extends Component {
     }
 
     render() {
-        const { item } = this.state;
+        const {item} = this.state;
         return (
             <div id="login_placeholder">
-                <div id="placeholder_header" />
+                <div id="placeholder_header"/>
                 <div id="login_width">
 
-                    <UncontrolledAlert isOpen={this.state.visible} color="danger" toggle={this.onDismiss} >
+                    <Alert isOpen={this.state.visible} color="danger" toggle={this.onDismiss}>
                         Sikertelen bejelentkezés! Rossz neptun kód vagy jelszó.
-                        </UncontrolledAlert>
+                    </Alert>
 
                     <div className="news news_head rounded_corners_top">
                         <p className="login_text">Bejelentkezés</p>
@@ -119,23 +121,23 @@ class RegistrationForm extends Component {
                                 <label className="center_login">
                                     <div className="helper_text">Neptun kód:</div>
                                     <input className="login_color loginform_text" type="text"
-                                        name="neptun"
-                                        id="neptun"
-                                        value={item.neptun || ''}
-                                        onChange={this.handleChange}
+                                           name="neptun"
+                                           id="neptun"
+                                           value={item.neptun || ''}
+                                           onChange={this.handleChange}
                                     />
 
                                     <div className="helper_text ">Jelszó:</div>
                                     <input className="login_color loginform_pass"
-                                        type="password"
-                                        name="password"
-                                        id='password'
-                                        value={item.password || ''}
-                                        onChange={this.handleChange}
+                                           type="password"
+                                           name="password"
+                                           id='password'
+                                           value={item.password || ''}
+                                           onChange={this.handleChange}
                                     />
                                     <div className="remember_me">
                                         <input type="checkbox" id="remember_me"
-                                            name="_remember_me" onClick={this.handleCheck} />
+                                               name="_remember_me" onClick={this.handleCheck}/>
                                         <label className="remember_me_text helper_text">Maradjak bejelentkezve</label>
                                     </div>
 
@@ -143,8 +145,8 @@ class RegistrationForm extends Component {
 
                                 <div className="center_login">
                                     <Button className="button_color button_width" onClick={this.handleSubmit}
-                                        onKeyPress={this.handleKeyPress} type="submit"
-                                        variant="primary">
+                                            onKeyPress={this.handleKeyPress} type="submit"
+                                            variant="primary">
                                         <p className="button_width">Belépés</p></Button>
                                 </div>
                             </form>

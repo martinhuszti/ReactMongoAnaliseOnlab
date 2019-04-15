@@ -65,7 +65,7 @@ class LoggedIn_Data extends Component {
             console.log("kacsa")
         }).then(item => {
 
-            console.log(item.);
+            console.log(item);
             console.log("csibe")
         })
 

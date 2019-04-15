@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Document(collection = "users")
@@ -28,19 +27,5 @@ public class SimpleUser {
         password = "default"; // password = neptun lehetne (de hogy fut le?)
     }
 
-    public String get_id() {
-        return _id;
-    }
 
-    public String getNeptun() {
-        return neptun;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getRole() {
-        return role;
-    }
 }
