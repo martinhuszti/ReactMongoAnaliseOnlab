@@ -28,5 +28,7 @@ public class Student {
         this.gyak_id = gyak_id;
     }
 
-
+    public String getGyak_id() {
+        return gyak_id;
+    }
 }

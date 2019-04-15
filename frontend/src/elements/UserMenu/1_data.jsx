@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/data.css';
-import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Redirect} from "react-router-dom";
 
 class LoggedIn_Data extends Component {
     userDetails = {
@@ -15,13 +15,18 @@ class LoggedIn_Data extends Component {
 
 
     };
+    userLabor = {
+        title: null,
+        place: null,
+        time: null,
+    }
 
     constructor(props) {
         super(props);
         this.state = {
             item: this.userDetails,
             isLoggedIn: '',
-            gyak: '',
+            gyak: this.userLabor,
         };
 
     }
@@ -60,12 +65,14 @@ class LoggedIn_Data extends Component {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: this.state.item.neptun
-        }).then(response => {
-          
-            console.log("kacsa")
-        }).then(item => {
+        }).then(res => {
+            return res.json()
 
-            console.log(item);
+        }).then(json => {
+            this.setState({ gyak: json });
+            console.log("csibék közt");
+            console.log(this.state.gyak);
+            console.log(this.state.gyak.title);
             console.log("csibe")
         })
 
@@ -106,12 +113,16 @@ class LoggedIn_Data extends Component {
                         <span>{this.state.item.registration_date}</span>
                     </li>
                     <li className="data_font">
-                        <span>Gyakorlatvezető:</span>
-                        <span>{this.state.item.registration_date}</span>
+                        <span>Csoport:</span>
+                        <span>{this.state.gyak.title}</span>
                     </li>
                     <li className="data_font">
-                        <span>Csoport:</span>
-                        <span>{this.state.item.gyak_id}</span>
+                        <span>Hely:</span>
+                        <span>{this.state.gyak.place}</span>
+                    </li>
+                    <li className="data_font">
+                        <span>Idő:</span>
+                        <span>{this.state.gyak.time}</span>
                     </li>
                 </ul>
             </div>

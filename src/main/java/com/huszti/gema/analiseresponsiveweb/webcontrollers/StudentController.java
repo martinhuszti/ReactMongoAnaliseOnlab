@@ -35,7 +35,15 @@ public class StudentController {
     @PostMapping("/getstudentgyak")
     public Labor getStudentgyak(@RequestBody String neptuns) {
         System.out.println(studentRepository.findByNeptun(neptuns));
-        String getID= studentRepository.findByNeptun(neptuns).get_id();
+        String getID= studentRepository.findByNeptun(neptuns).getGyak_id();
+if(getID==null){
+    try {
+        throw new Exception();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+        System.out.println(getID);
         Labor stdntlab= laborRepository.findBy_id(getID);
         System.out.println(stdntlab);
         return stdntlab;
