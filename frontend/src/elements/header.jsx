@@ -10,6 +10,7 @@ import Excercises from './Pages/excercises'
 import News from './Pages/news';
 import MenuIcon from '@material-ui/icons/Menu';
 import './menu.css';
+import PageNotFound from './pageNotFound'
 
 const Home = () => (
     <News/>
@@ -124,6 +125,7 @@ class Header extends Component {
 
                     <Route path="/Requirements" component={Requirements}/>
                     <Route path="/LoginForm" component={LoginForm}/>
+                    <Route component={PageNotFound} />
 
                     )} />
                 </div>
