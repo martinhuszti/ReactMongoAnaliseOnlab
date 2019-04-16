@@ -117,7 +117,7 @@ class RegistrationForm extends Component {
                     </div>
                     <div className="news news_body login_color rounded_corners_bottom">
                         <div className="center_login">
-                            <form Submit={this.handleSubmit}>
+                            <form onSubmit={this.handleSubmit}>
                                 <label className="center_login">
                                     <div className="helper_text">Neptun kód:</div>
                                     <input className="login_color loginform_text" type="text"

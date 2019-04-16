@@ -61,8 +61,8 @@ class Requirements extends Component {
                 <div id="placeholder_header"/>
                 <div id="width_class">
 
-                    <div class="news news_head">
-                        <p class="news_text" dangerouslySetInnerHTML={{__html: PlaceString}}/>
+                    <div className="news news_head">
+                        <p className="news_text" dangerouslySetInnerHTML={{__html: PlaceString}}/>
                     </div>
                     <div className="news news_body">
                         <div className="req_flex">

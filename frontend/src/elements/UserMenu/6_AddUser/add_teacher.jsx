@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Form, FormGroup, Input, Label} from 'reactstrap';
+import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import './css/extra_person.css'
 import AsyncSelect from "react-select/lib/Async";
+
 
 
 class ExtraTeacher extends Component {
@@ -10,7 +11,7 @@ class ExtraTeacher extends Component {
     emptyTeacher = {
         name: '',
         neptun: '',
-        labor_ids: '',
+        labor_ids: [],
     };
 
     constructor(props) {
@@ -20,11 +21,13 @@ class ExtraTeacher extends Component {
             item: this.emptyTeacher,
             crazy: false,
             value: [],
+            visible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
+        this.closeAlert = this.closeAlert.bind(this);
 
     }
 
@@ -48,15 +51,23 @@ class ExtraTeacher extends Component {
 
         console.log(item);
 
-        await fetch('/addteacher', {
+         await fetch('/addteacher', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
 
         console.log("feltöltés befejeződött")
+        this.setState({visible: true});
+        window.setTimeout(()=>{
+            this.setState({visible:false})
+        },2000)
     }
 
+
+    closeAlert() {
+        this.setState({visible: false});
+    }
 
     render() {
 
@@ -77,8 +88,11 @@ class ExtraTeacher extends Component {
         };
 
 
+
+
         return (
             <div>
+
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Név:</Label>
@@ -107,8 +121,7 @@ class ExtraTeacher extends Component {
                         isMulti
                         cacheOptions
                         defaultOptions
-                        onChange={
-                            users => this.state.item.labor_ids = users.map(user => user.id)}
+                        onChange={users => item.labor_ids = users.map(u => u.id)}
                         loadOptions={getStudents}
                         getOptionLabel={option => option.title}
                         getOptionValue={option => option.id}
@@ -119,6 +132,10 @@ class ExtraTeacher extends Component {
                         <Button variant={'success'} color="primary" type="submit">Regisztrálás</Button>
 
                     </FormGroup>
+
+                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} color="success">
+                        Sikeresen felveted a gyakorlatvezetőt!
+                    </Alert>
 
                 </Form>
 

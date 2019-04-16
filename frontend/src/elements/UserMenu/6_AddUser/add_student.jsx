@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, FormGroup, Input, Label} from 'reactstrap';
+import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import AsyncSelect from 'react-select/lib/Async';
 import './css/extra_person.css'
@@ -28,6 +28,7 @@ class ExtraStudent extends Component {
             createdUser: this.createdUser,
             createdStudent: this.createdStudent,
             redirect: false,
+            visible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -67,7 +68,10 @@ class ExtraStudent extends Component {
             body: JSON.stringify(createdUser)
         });
 
-        alert("Sikeres regisztáció!");
+        this.setState({visible: true});
+        window.setTimeout(()=>{
+            this.setState({visible:false})
+        },2000)
         console.log("új felhasználó")
     }
     async addgyak() {
@@ -83,12 +87,15 @@ class ExtraStudent extends Component {
     }
 
 
-     handleSubmit(event) {
-        event.preventDefault();
-       this.adduser(event);
-       this.addgyak(event);
+     handleSubmit(ev) {
+        ev.preventDefault()
+       this.adduser();
+       this.addgyak();
     }
 
+    closeAlert() {
+        this.setState({visible: false});
+    }
 
     render() {
 
@@ -135,7 +142,7 @@ class ExtraStudent extends Component {
 
                     <FormGroup>
 
-                        <p>Gyakorlatvezető:</p>
+                        <p>Gyakorlat:</p>
                         <AsyncSelect
                             placeholder={"Név"}
                             className="extra_info"
@@ -158,6 +165,10 @@ class ExtraStudent extends Component {
                     </label>
                     <input className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
                            onChange={(event) => this.uploadFile(event)}/>
+
+                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} color="success">
+                        Sikeresen felveted a diákot!
+                    </Alert>
                 </Form>
 
             </div>

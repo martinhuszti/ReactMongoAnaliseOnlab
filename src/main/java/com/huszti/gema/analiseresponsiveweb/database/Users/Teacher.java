@@ -15,4 +15,8 @@ public class Teacher {
     protected String name;
     protected String neptun;
     protected List<String> labor_ids;
+
+    Teacher(){
+
+    }
 }
