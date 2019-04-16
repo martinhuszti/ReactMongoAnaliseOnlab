@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Clear from '@material-ui/icons/Clear';
-import { CSSTransition } from 'react-transition-group';
 import "./css/delete_news.css"
 
 

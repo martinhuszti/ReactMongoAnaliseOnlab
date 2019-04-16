@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/news.css';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Login from './loginForm.jsx';
 import Popup from "./popup"
 
