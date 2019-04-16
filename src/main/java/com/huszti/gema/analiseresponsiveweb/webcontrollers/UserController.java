@@ -98,5 +98,11 @@ public class UserController {
         return userRepository.findAll();
 
     }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/getrole")
+    public String getrole(@RequestBody String user) {
+
+        return userRepository.findById(user).orElse(null).getRole();
+    }
 
 }

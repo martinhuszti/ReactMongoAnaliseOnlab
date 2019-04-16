@@ -19,48 +19,7 @@ import './css/loggedin.css';
 
 
 class LoggedIn extends Component {
-    emptyItem = [
-        {
-            link: "/LoggedIn/data",
-            text: 'Adatok'
-        },
-        {
-            link: "/LoggedIn/result",
-            text: 'Eredmények'
-        },
-        {
-            link: "/LoggedIn/change_pass",
-            text: 'Jelszó változtatás'
-        },
-        {
-            link: "/LoggedIn/controller",
-            text: 'Chat'
-        },
-        {
-            link: "/LoggedIn/students",
-            text: 'Diákok'
-        },
-        {
-            link: "/LoggedIn/addPerson",
-            text: 'Új felhasználó'
-        },
-        {
-            link: "/LoggedIn/newPublication",
-            text: 'Új hír közzététele'
-        },
-        {
-            link: "/LoggedIn/addReq",
-            text: 'Követelmények'
-        },
-        {
-            link: "/LoggedIn/deletePublication",
-            text: 'Hír törlése'
-        },
-        {
-            link: "/LoggedIn/addLab",
-            text: 'Új gyakorlat'
-        }
-    ];
+    
     routes = [
         {
             path: "/LoggedIn/data",
@@ -108,10 +67,11 @@ class LoggedIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            items: this.emptyItem,
+            items: emptyStudent,
             redirect: false,
             isLoggedIn: '',
             visible: false,
+            role:null,
         };
 
 
@@ -160,6 +120,27 @@ class LoggedIn extends Component {
             return <Redirect to="/LoginForm"/>
         }
     }
+componentDidMount(){
+    const loginid=sessionStorage.getItem("id")
+    console.log(loginid)
+    fetch(`/getrole`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: loginid
+    }).then(res => {
+        return res.text()
+
+    }).then(json => {
+        this.setState({ role: json });
+
+        if(this.state.role==="admin"){
+            this.setState({items:emptyAdmin})
+        }
+        if(this.state.role==="teacher"){
+            this.setState({items:emptyTeacher})
+        }
+    })
+}
 
 
     render() {
@@ -218,3 +199,98 @@ class LoggedIn extends Component {
 
 
 export default withRouter(LoggedIn);
+
+const emptyAdmin = [
+    {
+        link: "/LoggedIn/data",
+        text: 'Adatok'
+    },
+    {
+        link: "/LoggedIn/result",
+        text: 'Eredmények'
+    },
+    {
+        link: "/LoggedIn/change_pass",
+        text: 'Jelszó változtatás'
+    },
+    {
+        link: "/LoggedIn/controller",
+        text: 'Chat'
+    },
+    {
+        link: "/LoggedIn/students",
+        text: 'Diákok'
+    },
+    {
+        link: "/LoggedIn/addPerson",
+        text: 'Új felhasználó'
+    },
+    {
+        link: "/LoggedIn/newPublication",
+        text: 'Új hír közzététele'
+    },
+    {
+        link: "/LoggedIn/addReq",
+        text: 'Követelmények'
+    },
+    {
+        link: "/LoggedIn/deletePublication",
+        text: 'Hír törlése'
+    },
+    {
+        link: "/LoggedIn/addLab",
+        text: 'Új gyakorlat'
+    }
+];
+const emptyTeacher = [
+    {
+        link: "/LoggedIn/data",
+        text: 'Adatok'
+    },
+    {
+        link: "/LoggedIn/result",
+        text: 'Eredmények'
+    },
+    {
+        link: "/LoggedIn/change_pass",
+        text: 'Jelszó változtatás'
+    },
+    {
+        link: "/LoggedIn/controller",
+        text: 'Chat'
+    },
+    {
+        link: "/LoggedIn/students",
+        text: 'Diákok'
+    },
+    {
+        link: "/LoggedIn/addPerson",
+        text: 'Új felhasználó'
+    },
+    {
+        link: "/LoggedIn/newPublication",
+        text: 'Új hír közzététele'
+    },
+    {
+        link: "/LoggedIn/deletePublication",
+        text: 'Hír törlése'
+    },
+];
+const emptyStudent = [
+    {
+        link: "/LoggedIn/data",
+        text: 'Adatok'
+    },
+    {
+        link: "/LoggedIn/result",
+        text: 'Eredmények'
+    },
+    {
+        link: "/LoggedIn/change_pass",
+        text: 'Jelszó változtatás'
+    },
+    {
+        link: "/LoggedIn/controller",
+        text: 'Chat'
+    }
+];

@@ -5,10 +5,13 @@ import ExtraAdmin from './6_AddUser/add_admin'
 import ExtraTeacher from './6_AddUser/add_teacher';
 import ExtraStudent from './6_AddUser/add_student';
 
-const options = [
+const optionsAdmin = [
     {value: 'Student', label: 'Diák'},
     {value: 'Teacher', label: 'Gyakorlatvezető / Előadó'},
     {value: 'Admin', label: 'Admin'}
+];
+const optionsTeacher = [
+    {value: 'Student', label: 'Diák'}
 ];
 
 class AddStudent extends Component {
@@ -22,9 +25,29 @@ class AddStudent extends Component {
         this.state = {
             items: this.emptyItem,
             redirect: false,
-            value: 'a'
+            value: 'a',
+            options:optionsTeacher,
         };
 
+    }
+    componentDidMount(){
+        const loginid=sessionStorage.getItem("id")
+        console.log(loginid)
+        fetch(`/getrole`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: loginid
+        }).then(res => {
+            return res.text()
+    
+        }).then(json => {
+            if(json==="admin"){
+                this.setState({options:optionsAdmin})
+            }
+            if(json==="teacher"){
+                this.setState({options:optionsTeacher})
+            }
+        })
     }
 
     handleChange = (selectedOption) => {
@@ -51,7 +74,7 @@ class AddStudent extends Component {
                 <Select className="addP_select"
                         value={selectedOption}
                         onChange={this.handleChange}
-                        options={options}
+                        options={this.state.options}
                         placeholder="Típus"
                 />
                 {this.item}

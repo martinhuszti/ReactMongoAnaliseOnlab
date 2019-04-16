@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Col from 'react-bootstrap/Col'
-import {BrowserRouter as Router, Link, Redirect, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import Requirements from './Pages/requirements';
 import LoginForm from './Pages/loginForm';
@@ -112,7 +112,7 @@ class Header extends Component {
                             </li>
                         </div>
                     </nav>
-
+                    <Switch>
                     <Route path="/Exams" component={Home}/>
                     <Route path="/News" component={Home}/>
                     <Route exact path="/" render={() => (
@@ -126,7 +126,7 @@ class Header extends Component {
                     <Route path="/Requirements" component={Requirements}/>
                     <Route path="/LoginForm" component={LoginForm}/>
                     <Route component={PageNotFound} />
-
+                    </Switch>
                     )} />
                 </div>
             </Router>);
