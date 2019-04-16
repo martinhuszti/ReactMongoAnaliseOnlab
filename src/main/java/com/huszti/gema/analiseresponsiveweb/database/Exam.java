@@ -10,8 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Exam {
 
     @Id
-    private String _id;
+    private String id;
     private String name;
+
+    private String student_id;
+
     private float score;
     private float mark;
 

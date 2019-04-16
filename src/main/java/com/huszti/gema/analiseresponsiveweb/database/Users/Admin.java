@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "admin")
 public class Admin {
     @Id
-    protected String _id;
+    protected String id;
     protected String neptun;
 
 

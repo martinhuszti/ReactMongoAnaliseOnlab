@@ -1,8 +1,6 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
-import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
-import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,10 +59,10 @@ public class UserController {
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
 
-            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.get_id() +" id");
+            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() +" id");
 
             HashMap<String, String> json = new HashMap<>();
-            json.put("id",repoUser.get_id());
+            json.put("id",repoUser.getId());
             System.out.println(json);
 
             return new ResponseEntity<>(json,HttpStatus.OK);

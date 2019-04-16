@@ -45,11 +45,14 @@ class AddStudent extends Component {
         const {selectedOption} = this.state;
 
         return (
+
             <div>
+                <p>Felhasználó fevétele:</p>
                 <Select className="addP_select"
                         value={selectedOption}
                         onChange={this.handleChange}
                         options={options}
+                        placeholder="Típus"
                 />
                 {this.item}
             </div>

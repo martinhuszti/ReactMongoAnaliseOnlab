@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class SimpleUser {
 
     @Id
-    protected String _id;
+    protected String id;
     protected String neptun;
     protected String name;
     protected String password;

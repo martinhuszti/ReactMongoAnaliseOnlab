@@ -7,8 +7,6 @@ import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 public class StudentController {
 
@@ -35,8 +33,8 @@ public class StudentController {
     @PostMapping("/getstudentgyak")
     public Labor getStudentgyak(@RequestBody String neptuns) {
         System.out.println(studentRepository.findByNeptun(neptuns));
-        String getID= studentRepository.findByNeptun(neptuns).get_id();
-        Labor stdntlab= laborRepository.findBy_id(getID);
+        String getID= studentRepository.findByNeptun(neptuns).getId();
+        Labor stdntlab= laborRepository.findById(getID).orElse(null);
         System.out.println(stdntlab);
         return stdntlab;
 

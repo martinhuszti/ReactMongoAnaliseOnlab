@@ -18,7 +18,7 @@ class ExtraStudent extends Component {
     createdStudent={
         neptun:"",
         gyak_id:"",
-    }
+    };
 
 
     constructor(props) {
@@ -48,17 +48,17 @@ class ExtraStudent extends Component {
 
     selectGyak(gyak) {
         let createdUser = {...this.state.createdUser};
-        createdUser.gyak_id = gyak._id;
+        createdUser.gyak_id = gyak.id;
         this.setState({
             createdStudent:{
                 neptun:createdUser.neptun,
-                gyak_id:gyak._id,
+                gyak_id:gyak.id,
             }});
-        console.log(gyak._id)
+        console.log(gyak.id);
         return gyak;
     }
 
-    async adduser(event) {
+    async adduser() {
         const {createdUser} = this.state;
 
         await fetch('/adduser', {
@@ -70,7 +70,7 @@ class ExtraStudent extends Component {
         alert("Sikeres regisztáció!");
         console.log("új felhasználó")
     }
-    async addgyak(event) {
+    async addgyak() {
         
         const {createdStudent} = this.state;
         await fetch('/addstudent', {
@@ -126,13 +126,6 @@ class ExtraStudent extends Component {
                         />
                     </FormGroup>
 
-                    {/*<FormGroup>*/}
-                    {/*<Label for="head">Gyakorlat vezető: //(Itt majd kiválasztással kellene) </Label>*/}
-                    {/*<Input className="extra_info" type="text" name="gyakvez_name" id="gyakvez_name"*/}
-                    {/*value={createdUser.text || ''} onChange={this.handleChange}*/}
-                    {/*/>*/}
-                    {/*</FormGroup>*/}
-
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
@@ -142,12 +135,14 @@ class ExtraStudent extends Component {
 
                     <FormGroup>
 
+                        <p>Gyakorlatvezető:</p>
                         <AsyncSelect
+                            placeholder={"Név"}
                             className="extra_info"
                             defaultOptions
                             loadOptions={getgyak}
                             getOptionLabel={option => option.title}
-                            getOptionValue={option => option._id}
+                            getOptionValue={option => option.id}
                             onChange={this.selectGyak}
                         />
 

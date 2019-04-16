@@ -11,7 +11,8 @@ import java.util.List;
 public class Teacher {
 
     @Id
-    protected String _id;
+    protected String id;
+    protected String name;
     protected String neptun;
-    protected List<String> gyak_ids;
+    protected List<String> labor_ids;
 }

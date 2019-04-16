@@ -33,7 +33,8 @@ public class ChatController {
     @SendTo("/topic/all")
     public Map<String, String> post(@Payload Map<String, String> message) {
 
-        SimpleUser repoUser = userRepository.findBy_id((String) message.values().toArray()[1]);
+        SimpleUser repoUser = userRepository.findById((String) message.values().toArray()[1]).orElse(null);
+        assert repoUser != null;
         String name = repoUser.getName();
         message.put(message.keySet().iterator().next(), name);
 

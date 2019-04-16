@@ -12,20 +12,13 @@ import java.util.List;
 public class Student {
 
     @Id
-    private String _id;
+    private String id;
     private String neptun;
 
     private List<String> exams_ids;
     private String gyak_id;
 
     public Student() {
-    }
-
-
-    public Student(String _id, String neptun, String gyak_id) {
-        this._id = _id;
-        this.neptun = neptun;
-        this.gyak_id = gyak_id;
     }
 
 
