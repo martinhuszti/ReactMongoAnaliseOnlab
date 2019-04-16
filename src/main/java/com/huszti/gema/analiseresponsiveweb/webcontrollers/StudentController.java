@@ -33,7 +33,7 @@ public class StudentController {
     @PostMapping("/getstudentgyak")
     public Labor getStudentgyak(@RequestBody String neptuns) {
         System.out.println(studentRepository.findByNeptun(neptuns));
-        String getID= studentRepository.findByNeptun(neptuns).getId();
+        String getID= studentRepository.findByNeptun(neptuns).getGyak_id();
         Labor stdntlab= laborRepository.findById(getID).orElse(null);
         System.out.println(stdntlab);
         return stdntlab;
