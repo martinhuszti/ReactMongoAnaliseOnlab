@@ -42,7 +42,7 @@ public class TeacherController {
     public ArrayList getSelfStudent(@RequestBody String teacherId) {
         Teacher teacher=teacherRepository.findById(teacherId).orElse(null);
         if(teacher==null){
-            System.out.println("null volt ID alapján atalálat");
+            System.out.println("null volt ID alapján atatatalálat");
             return null;
         }
 

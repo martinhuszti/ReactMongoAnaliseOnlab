@@ -13,6 +13,7 @@ import AddReq from '../UserMenu/8_add_requirments';
 import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
 import ListStudent from '../UserMenu/5_students'
+import NewTest from '../UserMenu/11_newTest'
 import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import {Alert} from 'reactstrap';
 import './css/news.css';
@@ -62,6 +63,10 @@ class LoggedIn extends Component {
         {
             path: "/LoggedIn/addLab",
             main: () => <AddLab/>
+        },
+        {
+            path: "/LoggedIn/newTest",
+            main: () => <NewTest/>
         },
     ];
 
@@ -241,6 +246,10 @@ const emptyAdmin = [
     {
         link: "/LoggedIn/addLab",
         text: 'Új gyakorlat'
+    },
+    {
+        link: "/LoggedIn/newTest",
+        text: 'Új számokérés'
     }
 ];
 const emptyTeacher = [

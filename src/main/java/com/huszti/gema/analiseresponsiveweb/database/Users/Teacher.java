@@ -11,10 +11,10 @@ import java.util.List;
 public class Teacher {
 
     @Id
-    protected String id;
-    protected String name;
-    protected String neptun;
-    protected List<String> labor_ids;
+    private String id;
+    private String name;
+    private String neptun;
+    private List<String> labor_ids;
 
     Teacher(){
 
