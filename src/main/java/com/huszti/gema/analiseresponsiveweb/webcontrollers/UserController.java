@@ -104,9 +104,16 @@ public class UserController {
         return userRepository.findAll();
 
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @PostMapping("/getrole")
     public String getrole(@RequestBody String user) {
+
+        return userRepository.findById(user).orElse(null).getRole();
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/getrolemenu")
+    public String getrolemenu(@RequestBody String user) {
+
 
         System.out.println(user);
         String temprole=userRepository.findById(user).orElse(null).getRole();
