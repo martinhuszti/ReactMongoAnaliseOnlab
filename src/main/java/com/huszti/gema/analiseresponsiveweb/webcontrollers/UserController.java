@@ -82,6 +82,8 @@ public class UserController {
 
     }
 
+
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/changePassword", produces = "application/json")
     ResponseEntity changePassword(@RequestBody passObj obj) {

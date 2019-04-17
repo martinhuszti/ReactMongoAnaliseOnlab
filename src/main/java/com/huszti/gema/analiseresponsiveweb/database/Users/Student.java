@@ -15,8 +15,9 @@ public class Student {
     private String id;
     private String neptun;
 
-    private List<String> exams_ids;
-    private String gyak_id;
+    private List<String> examsids;
+
+    private String gyakid;
 
     public Student() {
     }

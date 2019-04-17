@@ -11,7 +11,6 @@ class Class extends Component {
     emptyItem = {
         title: '',
         text: ''
-
     };
 
     constructor(props) {
@@ -29,7 +28,6 @@ class Class extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.refreshPage = this.refreshPage.bind(this);
 
     }
 
@@ -83,21 +81,13 @@ class Class extends Component {
         console.log("feltöltés befejeződött")
     }
 
-    async refreshPage(event) {
-        event.preventDefault();
-        await fetch(`/getnews`)
-            .then(result => result.json())
-            .then(items => this.setState({ items }));
-
-        console.log("betöltés befejeeződött")
-    }
 
     componentDidMount() {
 
         fetch(`/getnews`)
             .then(result => result.json())
             .then(items => {
-                this.setState({ items })
+                this.setState({ items });
             
         console.log(this.state.items);
             }

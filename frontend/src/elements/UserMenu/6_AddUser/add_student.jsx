@@ -17,7 +17,7 @@ class ExtraStudent extends Component {
     };
     createdStudent={
         neptun:"",
-        gyak_id:"",
+        gyakid:"",
     };
 
 
@@ -49,11 +49,11 @@ class ExtraStudent extends Component {
 
     selectGyak(gyak) {
         let createdUser = {...this.state.createdUser};
-        createdUser.gyak_id = gyak.id;
+        createdUser.gyakid = gyak.id;
         this.setState({
             createdStudent:{
                 neptun:createdUser.neptun,
-                gyak_id:gyak.id,
+                gyakid:gyak.id,
             }});
         console.log(gyak.id);
         return gyak;

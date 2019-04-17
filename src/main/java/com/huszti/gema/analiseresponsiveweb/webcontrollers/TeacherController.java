@@ -34,6 +34,7 @@ public class TeacherController {
 
         laborRepository.findAllById(teacher.getLabor_ids())
                 .forEach(e -> e.setTeacher_id(teacher.getId()));
+
         return teacher;
     }
 
