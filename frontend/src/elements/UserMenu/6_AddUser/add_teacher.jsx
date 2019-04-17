@@ -117,7 +117,7 @@ class ExtraTeacher extends Component {
                         name="students_ids"
                         id="students_ids"
 
-                        placeholder={"Neptun"}
+                        placeholder={"Gyakorlat"}
                         isMulti
                         cacheOptions
                         defaultOptions

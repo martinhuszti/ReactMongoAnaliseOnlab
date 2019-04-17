@@ -12,6 +12,7 @@ import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
 import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
+import ListStudent from '../UserMenu/5_students'
 import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import {Alert} from 'reactstrap';
 import './css/news.css';
@@ -40,7 +41,7 @@ class LoggedIn extends Component {
         },
         {
             path: "/LoggedIn/students",
-            main: () => <Chat/>
+            main: () => <ListStudent/>
         },
         {
             path: "/LoggedIn/newPublication",

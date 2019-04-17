@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 @RestController
 public class TeacherController {
 
@@ -35,5 +37,17 @@ public class TeacherController {
         return teacher;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/getselfstudent")
+    public ArrayList getSelfStudent(@RequestBody String teacherId) {
+        Teacher teacher=teacherRepository.findById(teacherId).orElse(null);
+        if(teacher==null){
+            System.out.println("null volt ID alapján atalálat");
+            return null;
+        }
+
+        ArrayList students=new ArrayList();
+        return students;
+    }
 
 }

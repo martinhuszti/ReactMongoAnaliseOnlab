@@ -1,0 +1,27 @@
+.student_element{
+    display: flex;
+    flex-direction: row;
+    max-width: 600px;
+    border-bottom: 2px solid #1D155D;
+    
+}
+.student_spec>*{
+  min-width: 70px;
+  text-align: center;
+}
+.student_list{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.student_spec{
+      flex: 1;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    border-bottom: 1px solid #1D155D;
+}
+.student_neptun{
+width: 100px;
+}
