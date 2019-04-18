@@ -124,6 +124,7 @@ class LoggedIn_Data extends Component {
                         <span>Idő:</span>
                         <span>{this.state.gyak.time}</span>
                     </li>
+
                 </ul>
             </div>
 

@@ -6,15 +6,14 @@ import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoDatabase;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class StudentController {
+
+
 
 
     private final StudentRepository studentRepository;
@@ -48,25 +47,9 @@ public class StudentController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getAllStudent")
     public List<Student> getStudentsByGyakid(@RequestParam String id) {
-        MongoClient mongoClient = new MongoClient();
-        MongoDatabase db = mongoClient.getDatabase("analise");
-        ArrayList<String> cols = new ArrayList<>();
-        db.listCollectionNames().map(cols::add);
-        cols.forEach(c -> {
-            System.out.println(c);
-            db.getCollection(c).drop();
-        });
-
-        System.out.println("droppedall");
-
-        //System.out.println(teacher.getLabor_ids());
-        //assert teacher != null;
-        //Iterable<Labor> labors = laborRepository.findAllById(teacher.getLabor_ids());
-
-        //return studentRepository.findAllByGyakid(teacher.getLabor_ids().get(0));
-        return null;
-
-
+            return null;
     }
+
+
 
 }

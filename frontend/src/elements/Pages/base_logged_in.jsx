@@ -21,7 +21,7 @@ import './css/loggedin.css';
 
 
 class LoggedIn extends Component {
-    
+
     routes = [
         {
             path: "/LoggedIn/data",
@@ -82,6 +82,10 @@ class LoggedIn extends Component {
 
         if (sessionStorage.getItem("newLogin") === "true") {
             this.state.visible = true;
+            window.setTimeout(()=>{
+                this.setState({visible:false})
+            },2000);
+            console.log("új felhasználó")
             sessionStorage.setItem("newLogin", false);
         }
 
@@ -119,31 +123,29 @@ class LoggedIn extends Component {
                 sessionStorage.setItem("loggedin", loclogged);
             }
             this.setState({isLoggedIn: "true"})
-            window.setTimeout(()=>{
-                this.setState({visible:false})
-            },2000)
         }
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
             return <Redirect to="/LoginForm"/>
         }
     }
-componentDidMount(){
-    const loginid=sessionStorage.getItem("id")
-    console.log(loginid)
-    fetch(`/getrolemenu`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: loginid
-    }).then(res => {
-        return res.json()
 
-    }).then(json => {
-        this.setState({ items: json });
-console.log(this.state.role);
-console.log(json);
-    })
-}
+    componentDidMount() {
+        const loginid = sessionStorage.getItem("id")
+        console.log(loginid)
+        fetch(`/getrolemenu`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: loginid
+        }).then(res => {
+            return res.json()
+
+        }).then(json => {
+            this.setState({items: json});
+            console.log(this.state.role);
+            console.log(json);
+        })
+    }
 
 
     render() {
