@@ -71,7 +71,7 @@ class ExtraStudent extends Component {
         this.setState({visible: true});
         window.setTimeout(()=>{
             this.setState({visible:false})
-        },2000)
+        },2000);
         console.log("új felhasználó")
     }
     async addgyak() {

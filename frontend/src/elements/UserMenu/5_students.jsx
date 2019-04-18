@@ -18,14 +18,12 @@ class ListStudents extends Component {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
 
         fetch(`/getAllStudent?id=${encodedValue}`)
-            .then(result => result.json())
-            .then(items => {
-                    this.setState({ items });
-
-                    console.log(this.state.items);
-                }
-
-            );
+            // .then(result => result.json())
+            // .then(items => {
+            //        console.log(items)
+            //     }
+            //
+            // );
 
         console.log("betöltés befejeeződött")
     }

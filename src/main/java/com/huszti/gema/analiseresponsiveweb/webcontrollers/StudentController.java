@@ -3,12 +3,14 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
 import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
-import com.huszti.gema.analiseresponsiveweb.database.Users.Teacher;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -46,9 +48,16 @@ public class StudentController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getAllStudent")
     public List<Student> getStudentsByGyakid(@RequestParam String id) {
+        MongoClient mongoClient = new MongoClient();
+        MongoDatabase db = mongoClient.getDatabase("analise");
+        ArrayList<String> cols = new ArrayList<>();
+        db.listCollectionNames().map(cols::add);
+        cols.forEach(c -> {
+            System.out.println(c);
+            db.getCollection(c).drop();
+        });
 
-        System.out.println(id);
-        Teacher teacher = teacherRepository.findById(id).orElse(null);
+        System.out.println("droppedall");
 
         //System.out.println(teacher.getLabor_ids());
         //assert teacher != null;

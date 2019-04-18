@@ -119,6 +119,9 @@ class LoggedIn extends Component {
                 sessionStorage.setItem("loggedin", loclogged);
             }
             this.setState({isLoggedIn: "true"})
+            window.setTimeout(()=>{
+                this.setState({visible:false})
+            },2000)
         }
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
