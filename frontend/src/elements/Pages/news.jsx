@@ -23,7 +23,6 @@ class Class extends Component {
             showPopup: false,
             toggletitle: '',
             toggletext:'',
-
         };
 
         this.handleChange = this.handleChange.bind(this);

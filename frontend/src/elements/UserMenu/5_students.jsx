@@ -9,35 +9,42 @@ class ListStudents extends Component {
     }
 
     emptyStudent = {
-        id:'',
+        id: '',
         neptun: '',
-        examsids: ''
+        examsids: '',
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            studentsList: [],
+        }
+    }
+
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
 
         fetch(`/getAllStudent?id=${encodedValue}`)
-            // .then(result => result.json())
-            // .then(items => {
-            //        console.log(items)
-            //     }
-            //
-            // );
+            .then(response => response.json())
+            .then(studentsList =>
+                this.setState({studentsList}));
+
 
         console.log("betöltés befejeeződött")
     }
 
-    constructor(props) {
-        super(props);
-
-    }
 
     render() {
         return (
             <div>
 
-
+                <h1>Student List</h1>
+                <ul>
+                    {this.state.studentsList.map(student => {
+                        return <li key={student.id}>{student.neptun}</li>
+                    })}
+                </ul>
 
                 {/*<div className="student_element">*/}
                 {/*    <span className="student_neptun">*/}
