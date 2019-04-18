@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
+import React, { Component } from 'react';
+import { Alert, Form, FormGroup, Input, Label } from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import './css/extra_person.css'
 import AsyncSelect from "react-select/lib/Async";
@@ -8,18 +8,33 @@ import AsyncSelect from "react-select/lib/Async";
 
 class ExtraTeacher extends Component {
 
-    emptyTeacher = {
+    createdTeacher = {
         name: '',
         neptun: '',
         labor_ids: [],
     };
+    createdUser = {
+        name: '',
+        neptun: '',
+        email: '',
+        password: "default",
+        role: "teacher",
+
+    };
+    all = {
+        name: '',
+        neptun: '',
+        email: '',
+        password: "default",
+        role: "teacher",
+        labor_ids: [],
+    }
 
     constructor(props) {
         super(props);
 
         this.state = {
-            item: this.emptyTeacher,
-            crazy: false,
+            all: this.all,
             value: [],
             visible: false,
         };
@@ -33,51 +48,84 @@ class ExtraTeacher extends Component {
 
     handleSelectChange(value) {
         console.log('You have selected: ', value);
-        this.setState({value});
+        this.setState({ value });
     }
 
     handleChange(event) {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = {...this.state.item};
-        item[name] = value;
-        this.setState({item});
+        console.log(event.target.value)
+        let all = { ...this.state.all };
+        all[name] = value;
+        this.setState({ all });
     }
 
-    async handleSubmit(event) {
-        event.preventDefault();
-        const {item} = this.state;
-
-        console.log(item);
-
-         await fetch('/addteacher', {
+    async adduser(event) {
+        let tempuser = {
+            name: this.state.all.name,
+            neptun: this.state.all.neptun,
+            email: this.state.all.email,
+            password: "default",
+            role: "teacher",
+        }
+        console.log("júzer2");
+        console.log(tempuser)
+        await fetch('/adduser', {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(item)
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tempuser)
+        });
+
+        alert("Sikeres regisztáció!");
+        console.log("új felhasználó")
+    }
+
+    async addteacher(event) {
+        console.log("tanár");
+
+        let tampteacher = {
+            name: this.state.all.name,
+            neptun: this.state.all.neptun,
+            labor_ids: this.state.all.labor_ids,
+        }
+        console.log("tanár2");
+        console.log(tampteacher)
+        await fetch('/addteacher', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(tampteacher)
         });
 
         console.log("feltöltés befejeződött")
-        this.setState({visible: true});
-        window.setTimeout(()=>{
-            this.setState({visible:false})
-        },2000)
+        this.setState({ visible: true });
+        window.setTimeout(() => {
+            this.setState({ visible: false })
+        }, 2000)
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        this.addteacher(event);
+        this.adduser(event);
     }
 
 
+
+
     closeAlert() {
-        this.setState({visible: false});
+        this.setState({ visible: false });
     }
 
     render() {
 
-        const {item} = this.state;
+        const { all } = this.state;
 
         const getStudents = (inputValue, callback) => {
 
             fetch(`/getLabs`, {
                 method: "GET",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 //body: JSON.stringify(item)
 
             }).then(response => response.json())
@@ -87,9 +135,6 @@ class ExtraTeacher extends Component {
                 })
         };
 
-
-
-
         return (
             <div>
 
@@ -97,14 +142,20 @@ class ExtraTeacher extends Component {
                     <FormGroup>
                         <Label for="head">Név:</Label>
                         <Input className="extra_info" type="text" name="name" id="name"
-                               value={item.name || ''} onChange={this.handleChange}
+                            value={all.name || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
-                               value={item.neptun || ''} onChange={this.handleChange}
+                            value={all.neptun || ''} onChange={this.handleChange}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="head">E-mail:</Label>
+                        <Input className="extra_info" type="text" name="email" id="email"
+                            value={all.email || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -121,7 +172,7 @@ class ExtraTeacher extends Component {
                         isMulti
                         cacheOptions
                         defaultOptions
-                        onChange={users => item.labor_ids = users.map(u => u.id)}
+                        onChange={users => all.labor_ids = users.map(u => u.id)}
                         loadOptions={getStudents}
                         getOptionLabel={option => option.title}
                         getOptionValue={option => option.id}

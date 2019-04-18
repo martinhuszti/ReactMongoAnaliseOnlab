@@ -23,7 +23,7 @@ class ExtraAdmin extends Component {
 
         this.state = {
             createdUser: this.createdUser,
-            createdAdmin:this.createdAdmin,
+            createdAdmin: this.createdAdmin,
             items: [],
             redirect: false,
         };

@@ -15,11 +15,14 @@ private ArrayList<Respond> roleRespond;
             System.out.println("belemész");
             adminRespond();
         }
-        if(role.equals("teacher")){
+       else if(role.equals("teacher")){
             teacherRespond();
         }
-        if(role.equals("student")){
+        else if(role.equals("student")){
             studentRespond();
+        }
+        else{
+            noRespond();
         }
 
     }
@@ -51,6 +54,10 @@ private ArrayList<Respond> roleRespond;
     private void studentRespond(){
         roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
         roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
+        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
+        roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
+    }
+    private void noRespond(){
         roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
         roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
     }
