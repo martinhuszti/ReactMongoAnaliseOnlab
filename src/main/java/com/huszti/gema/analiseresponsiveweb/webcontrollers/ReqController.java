@@ -1,18 +1,16 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 
-import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.database.Requirements;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 @RestController
@@ -20,10 +18,7 @@ public class ReqController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/uploadreq")
-    public Requirements updateRequirements(@RequestBody Requirements requirements) throws FileNotFoundException, UnsupportedEncodingException {
-
-        Requirements newreq=new Requirements();
-        newreq=requirements;
+    public Requirements updateRequirements(@RequestBody Requirements newreq) throws FileNotFoundException, UnsupportedEncodingException {
 
         PrintWriter writer = new PrintWriter("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt", "UTF-8");
         writer.println(newreq.getPresence());
@@ -33,14 +28,18 @@ public class ReqController {
         writer.println(newreq.getPoints());
         writer.close();
 
-
-        return requirements;
+        return newreq;
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getreq")
-    public List<String> getNews() throws FileNotFoundException {
+    public List<String> getReq() throws FileNotFoundException, UnsupportedEncodingException {
 
         File file = new File("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt");
+        if(!file.exists()) {
+
+            PrintWriter writer = new PrintWriter(file, "UTF-8");
+        }
         Scanner sc = new Scanner(file);
         ArrayList<String> tempread = new ArrayList<>();
 

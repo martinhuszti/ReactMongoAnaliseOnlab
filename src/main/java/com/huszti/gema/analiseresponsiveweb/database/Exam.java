@@ -6,14 +6,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Data
-@Document(collection = "exams")
+@Document(collection = "examstable")
 public class Exam {
 
     @Id
-    private String _id;
+    private String id;
     private String name;
+
     private float score;
     private float mark;
+
 
     public Exam() {
     }

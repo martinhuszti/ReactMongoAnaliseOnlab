@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import {BrowserRouter as Router, Link, Redirect, Route} from 'react-router-dom';
+import Col from 'react-bootstrap/Col'
+import {BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import Requirements from './Pages/requirements';
 import LoginForm from './Pages/loginForm';
@@ -11,6 +10,7 @@ import Excercises from './Pages/excercises'
 import News from './Pages/news';
 import MenuIcon from '@material-ui/icons/Menu';
 import './menu.css';
+import PageNotFound from './pageNotFound'
 
 const Home = () => (
     <News/>
@@ -68,26 +68,26 @@ class Header extends Component {
                     <nav className="header">
                         <div className="container-fluid">
                             <ul id="largemenu" className="row">
-                                <li className="col menuitem padding_menu">
+                                <Col className=" menuitem padding_menu">
                                     <Link to="/News">Hírek</Link>
-                                </li>
-                                <li className="col menuitem padding_menu">
+                                </Col>
+                                <Col className=" menuitem padding_menu">
                                     <Link to="/Exams">Számonkérés</Link>
-                                </li>
-                                <li className="col menuitem padding_menu">
+                                </Col>
+                                <Col className=" menuitem padding_menu">
                                     <Link to="/Informations">Információ</Link>
-                                </li>
-                                <li className="col menuitem padding_menu">
+                                </Col>
+                                <Col className=" menuitem padding_menu">
                                     <Link to="/Excercises">Feladatok</Link>
-                                </li>
-                                <li className="col menuitem padding_menu">
+                                </Col>
+                                <Col className=" menuitem padding_menu">
                                     <Link to="/Requirements"> Követelmény</Link>
-                                </li>
-                                <li id="loginitem" className="col menuitem">
+                                </Col>
+                                <Col id="loginitem" className=" menuitem">
 
                                     <Link id="login" to="/LoggedIn" className="padding_menu login_button">Profil</Link>
 
-                                </li>
+                                </Col>
                             </ul>
                         </div>
                         <div className="header_flex">
@@ -112,7 +112,7 @@ class Header extends Component {
                             </li>
                         </div>
                     </nav>
-
+                    <Switch>
                     <Route path="/Exams" component={Home}/>
                     <Route path="/News" component={Home}/>
                     <Route exact path="/" render={() => (
@@ -125,7 +125,8 @@ class Header extends Component {
 
                     <Route path="/Requirements" component={Requirements}/>
                     <Route path="/LoginForm" component={LoginForm}/>
-
+                    <Route component={PageNotFound} />
+                    </Switch>
                     )} />
                 </div>
             </Router>);

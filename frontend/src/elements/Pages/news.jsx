@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/news.css';
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Login from './loginForm.jsx';
 import Popup from "./popup"
 
@@ -11,7 +11,6 @@ class Class extends Component {
     emptyItem = {
         title: '',
         text: ''
-
     };
 
     constructor(props) {
@@ -24,12 +23,10 @@ class Class extends Component {
             showPopup: false,
             toggletitle: '',
             toggletext:'',
-
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.refreshPage = this.refreshPage.bind(this);
 
     }
 
@@ -83,20 +80,18 @@ class Class extends Component {
         console.log("feltöltés befejeződött")
     }
 
-    async refreshPage(event) {
-        event.preventDefault();
-        await fetch(`/getnews`)
-            .then(result => result.json())
-            .then(items => this.setState({ items }));
-
-        console.log("betöltés befejeeződött")
-    }
 
     componentDidMount() {
 
         fetch(`/getnews`)
             .then(result => result.json())
-            .then(items => this.setState({ items }));
+            .then(items => {
+                this.setState({ items });
+            
+        console.log(this.state.items);
+            }
+                
+                );
 
         console.log("betöltés befejeeződött")
     }
@@ -120,7 +115,7 @@ class Class extends Component {
                                     <p onClick={this.toggleupPopup.bind(this, item)} value={item} className="news_text news_pointer">{item.title}</p>
                                 </div>
 
-                                <div className="news news_body"> {item.text}</div>
+                                <div className="news news_body"> {item.text.substring(0,200)} . . .</div>
                             </li>)}
 
                             {this.state.showPopup ?

@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+
+import {withRouter} from "react-router";
 import LoggedIn_Data from '../UserMenu/1_data';
 import LoggedIn_Result from '../UserMenu/2_results';
 import Change_Pass from '../UserMenu/3_change_pass';
@@ -8,92 +10,92 @@ import Chat from '../UserMenu/4_chat';
 import NewsPublication from '../UserMenu/7_news_publication';
 import AddStudent from '../UserMenu/6_add_person';
 import AddReq from '../UserMenu/8_add_requirments';
-import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
-import { UncontrolledAlert } from 'reactstrap';
+import DeletePublication from '../UserMenu/9_deleteNews';
+import AddLab from '../UserMenu/10_new_labor'
+import ListStudent from '../UserMenu/5_students'
+import NewTest from '../UserMenu/11_newTest'
+import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
+import {Alert} from 'reactstrap';
 import './css/news.css';
 import './css/loggedin.css';
 
 
-
 class LoggedIn extends Component {
-    emptyItem = [
-        {
-            link: "/data",
-            text: 'Adatok'
-        },
-        {
-            link: "/result",
-            text: 'Eredmények'
-        },
-        {
-            link: "/change_pass",
-            text: 'Jelszó változtatás'
-        },
-        {
-            link: "/controller",
-            text: 'Chat'
-        },
-        {
-            link: "/students",
-            text: 'Diákok'
-        },
-        {
-            link: "/addPerson",
-            text: 'Új felhasználó'
-        },
-        {
-            link: "/newPublication",
-            text: 'Új hír közzététele'
-        },
-        {
-            link: "/addReq",
-            text: 'Követelmények'
-        }
-    ];
+
     routes = [
         {
-            path: "/data",
+            path: "/LoggedIn/data",
             exact: true,
-            main: () => <LoggedIn_Data />
+            main: () => <LoggedIn_Data/>
         },
         {
-            path: "/result",
-            main: () => <LoggedIn_Result />
+            path: "/LoggedIn/result",
+            main: () => <LoggedIn_Result/>
         },
         {
-            path: "/change_pass",
-            main: () => <Change_Pass />
+            path: "/LoggedIn/change_pass",
+            main: () => <Change_Pass/>
         },
         {
-            path: "/controller",
-            main: () => <Chat />
+            path: "/LoggedIn/controller",
+            main: () => <Chat/>
         },
         {
-            path: "/students",
-            main: () => <Chat />
+            path: "/LoggedIn/students",
+            main: () => <ListStudent/>
         },
         {
-            path: "/newPublication",
-            main: () => <NewsPublication />
+            path: "/LoggedIn/newPublication",
+            main: () => <NewsPublication/>
         },
         {
-            path: "/addPerson",
-            main: () => <AddStudent />
+            path: "/LoggedIn/deletePublication",
+            main: () => <DeletePublication/>
         },
         {
-            path: "/addReq",
-            main: () => <AddReq />
+            path: "/LoggedIn/addPerson",
+            main: () => <AddStudent/>
+        },
+        {
+            path: "/LoggedIn/addReq",
+            main: () => <AddReq/>
+        },
+        {
+            path: "/LoggedIn/addLab",
+            main: () => <AddLab/>
+        },
+        {
+            path: "/LoggedIn/newTest",
+            main: () => <NewTest/>
         },
     ];
 
     constructor(props) {
         super(props);
         this.state = {
-            items: this.emptyItem,
+            items: emptyStudent,
             redirect: false,
             isLoggedIn: '',
+            visible: false,
         };
 
+
+        if (sessionStorage.getItem("newLogin") === "true") {
+            this.state.visible = true;
+            window.setTimeout(()=>{
+                this.setState({visible:false})
+            },2000);
+            console.log("új felhasználó")
+            sessionStorage.setItem("newLogin", false);
+        }
+
+        this.closeAlert = this.closeAlert.bind(this);
+
+    }
+
+
+    closeAlert() {
+        this.setState({visible: false});
     }
 
     logout() {
@@ -101,12 +103,13 @@ class LoggedIn extends Component {
         sessionStorage.removeItem("loggedin");
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
+        sessionStorage.removeItem("newLogin")
 
         this.props.history.push("/")
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
 
@@ -119,26 +122,44 @@ class LoggedIn extends Component {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
             }
-            this.setState({ isLoggedIn: "true" })
+            this.setState({isLoggedIn: "true"})
         }
+        if (this.state.isLoggedIn === "false") {
+            console.log(this.state.isLoggedIn);
+            return <Redirect to="/LoginForm"/>
+        }
+    }
+
+    componentDidMount() {
+        const loginid = sessionStorage.getItem("id")
+        console.log(loginid)
+        fetch(`/getrolemenu`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: loginid
+        }).then(res => {
+            return res.json()
+
+        }).then(json => {
+            this.setState({items: json});
+            console.log(this.state.role);
+            console.log(json);
+        })
     }
 
 
     render() {
 
-        if (this.state.isLoggedIn === "false") {
-            console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm" />
-        }
+        console.log(this.state.isLoggedIn);
 
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
-                    <div id="placeholder_header" />
+                    <div id="placeholder_header"/>
 
-                    <UncontrolledAlert id="loggedin_alertbox" color="primary" >
+                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} id="loggedin_alertbox" color="primary">
                         Sikeresen bejelentkeztél! Üdv az oldalon!
-                        </UncontrolledAlert>
+                    </Alert>
 
                     <div className="news news_head">
                         <h1 className="news_text ">Login</h1>
@@ -163,13 +184,13 @@ class LoggedIn extends Component {
                         <div className="content_box">
                             {this.routes.map((route, index) => (
 
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    component={route.main}
-                                />
-                            )
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.main}
+                                    />
+                                )
                             )}
 
                         </div>
@@ -182,4 +203,23 @@ class LoggedIn extends Component {
 }
 
 
-export default LoggedIn;
+export default withRouter(LoggedIn);
+
+const emptyStudent = [
+    {
+        link: "/LoggedIn/data",
+        text: 'Adatok'
+    },
+    {
+        link: "/LoggedIn/result",
+        text: 'Eredmények'
+    },
+    {
+        link: "/LoggedIn/change_pass",
+        text: 'Jelszó változtatás'
+    },
+    {
+        link: "/LoggedIn/controller",
+        text: 'Chat'
+    }
+];

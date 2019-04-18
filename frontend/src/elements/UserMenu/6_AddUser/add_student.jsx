@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, FormGroup, Input, Label} from 'reactstrap';
+import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
 import Button from 'react-bootstrap/Button';
 import AsyncSelect from 'react-select/lib/Async';
 import './css/extra_person.css'
@@ -12,8 +12,12 @@ class ExtraStudent extends Component {
         email: "",
         password: "default",
         role: "student",
-        gyakvez_id: "",
+        
 
+    };
+    createdStudent={
+        neptun:"",
+        gyakid:"",
     };
 
 
@@ -22,7 +26,9 @@ class ExtraStudent extends Component {
 
         this.state = {
             createdUser: this.createdUser,
+            createdStudent: this.createdStudent,
             redirect: false,
+            visible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -41,16 +47,19 @@ class ExtraStudent extends Component {
         this.setState({createdUser});
     }
 
-    selectGyak(gyakvez) {
+    selectGyak(gyak) {
         let createdUser = {...this.state.createdUser};
-        createdUser.gyakvez_id = gyakvez._id;
-        this.setState({createdUser});
-        return gyakvez;
+        createdUser.gyakid = gyak.id;
+        this.setState({
+            createdStudent:{
+                neptun:createdUser.neptun,
+                gyakid:gyak.id,
+            }});
+        console.log(gyak.id);
+        return gyak;
     }
 
-
-    async handleSubmit(event) {
-        event.preventDefault();
+    async adduser() {
         const {createdUser} = this.state;
 
         await fetch('/adduser', {
@@ -59,16 +68,40 @@ class ExtraStudent extends Component {
             body: JSON.stringify(createdUser)
         });
 
-        alert("Sikeres regisztáció!");
-        console.log("feltöltés befejeződött")
+        this.setState({visible: true});
+        window.setTimeout(()=>{
+            this.setState({visible:false})
+        },2000);
+        console.log("új felhasználó")
+    }
+    async addgyak() {
+        
+        const {createdStudent} = this.state;
+        await fetch('/addstudent', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(createdStudent)
+        });
+
+        console.log("új diák")
     }
 
+
+     handleSubmit(ev) {
+        ev.preventDefault()
+       this.adduser();
+       this.addgyak();
+    }
+
+    closeAlert() {
+        this.setState({visible: false});
+    }
 
     render() {
 
         const getgyak = (inputValue, callback) => {
 
-            fetch(`/getUsers`, {
+            fetch(`/getLabs`, {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
@@ -100,13 +133,6 @@ class ExtraStudent extends Component {
                         />
                     </FormGroup>
 
-                    {/*<FormGroup>*/}
-                    {/*<Label for="head">Gyakorlat vezető: //(Itt majd kiválasztással kellene) </Label>*/}
-                    {/*<Input className="extra_info" type="text" name="gyakvez_name" id="gyakvez_name"*/}
-                    {/*value={createdUser.text || ''} onChange={this.handleChange}*/}
-                    {/*/>*/}
-                    {/*</FormGroup>*/}
-
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
@@ -116,12 +142,14 @@ class ExtraStudent extends Component {
 
                     <FormGroup>
 
+                        <p>Gyakorlat:</p>
                         <AsyncSelect
+                            placeholder={"Név"}
                             className="extra_info"
                             defaultOptions
                             loadOptions={getgyak}
-                            getOptionLabel={option => option.neptun}
-                            getOptionValue={option => option._id}
+                            getOptionLabel={option => option.title}
+                            getOptionValue={option => option.id}
                             onChange={this.selectGyak}
                         />
 
@@ -137,6 +165,10 @@ class ExtraStudent extends Component {
                     </label>
                     <input className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
                            onChange={(event) => this.uploadFile(event)}/>
+
+                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} color="success">
+                        Sikeresen felveted a diákot!
+                    </Alert>
                 </Form>
 
             </div>

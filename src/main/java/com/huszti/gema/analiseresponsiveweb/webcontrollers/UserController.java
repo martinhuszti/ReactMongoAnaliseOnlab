@@ -1,7 +1,10 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
+import com.google.gson.Gson;
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -59,10 +63,10 @@ public class UserController {
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
 
-            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.get_id() +" id");
+            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() +" id");
 
             HashMap<String, String> json = new HashMap<>();
-            json.put("id",repoUser.get_id());
+            json.put("id",repoUser.getId());
             System.out.println(json);
 
             return new ResponseEntity<>(json,HttpStatus.OK);
@@ -72,11 +76,13 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getDetails")
+    @GetMapping("/getDetails")
     public SimpleUser getDetails(@RequestParam String id) {
         return userRepository.findById(id).orElse(null);
 
     }
+
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping(value = "/changePassword", produces = "application/json")
@@ -93,10 +99,30 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @RequestMapping("/getUsers")
+    @GetMapping("/getUsers")
     public List<SimpleUser> getUsers() {
         return userRepository.findAll();
 
+    }
+
+    @PostMapping("/getrole")
+    public String getrole(@RequestBody String user) {
+
+        return userRepository.findById(user).orElse(null).getRole();
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/getrolemenu")
+    public String getrolemenu(@RequestBody String user) {
+
+
+        System.out.println(user);
+        String temprole=userRepository.findById(user).orElse(null).getRole();
+
+        ArrayList<Respond> temprespond=new RoleRespond(temprole).getRoleRespond();
+
+        Gson gson = new Gson();
+
+        return gson.toJson(temprespond);
     }
 
 }
