@@ -55,6 +55,12 @@ class RegistrationForm extends Component {
             this.handleSubmit(e);
         }
     }
+    componentWillMount(){
+        let login= sessionStorage.getItem("loggedin");
+       let loginid= sessionStorage.getItem("id");
+       if(loginid!==null && login==="true")
+       this.props.history.push('/LoggedIn');
+    }
 
     alertboxshow() {
         this.setState({visible: true});

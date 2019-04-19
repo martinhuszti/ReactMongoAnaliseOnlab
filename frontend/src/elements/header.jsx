@@ -85,7 +85,7 @@ class Header extends Component {
                                 </Col>
                                 <Col id="loginitem" className=" menuitem">
 
-                                    <Link id="login" to="/LoggedIn" className="padding_menu login_button">Profil</Link>
+                                    <Link id="login" to="/LoginForm" className="padding_menu login_button">Profil</Link>
 
                                 </Col>
                             </ul>
@@ -107,7 +107,7 @@ class Header extends Component {
                             <div className="header_flex_placeholder"/>
                             <li id="loginitem" className="col menuitem">
 
-                                <Link id="login" to="/LoggedIn" className="padding_menu login_button">Profil</Link>
+                                <Link id="login" to="/LoginForm" className="padding_menu login_button">Profil</Link>
 
                             </li>
                         </div>

@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import './css/data.css';
-import { BrowserRouter as Redirect} from "react-router-dom";
+import { BrowserRouter as Redirect } from "react-router-dom";
 
 class LoggedIn_Data extends Component {
     userDetails = {
-        _id: null,
+
         neptun: null,
         name: null,
-        password: null,
         email: null,
-        role: null,
         last_login: null,
         registration_date: null,
+        gyak:[this.userLabor],
 
 
     };
@@ -24,9 +23,9 @@ class LoggedIn_Data extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: this.userDetails,
+            item: '',
             isLoggedIn: '',
-            gyak: this.userLabor,
+            gyak: [],
         };
 
     }
@@ -40,11 +39,19 @@ class LoggedIn_Data extends Component {
 
         }).then(response => response.json())
             .then(response => {
+                console.log(response);
+                console.log("datarespond")
                 this.setState({ item: response });
-                console.log(this.userDetails);
-                if (this.state.item.role === "student") {
-                    this.fetchstudentgyak();
-                }
+                this.setState({gyak:response.gyak})
+                console.log(this.state.gyak);
+                setTimeout(function(){
+                    console.log("kisliba")
+                    console.log(this.state.item);
+                    
+                console.log(this.state.gyak);
+                }.bind(this), 2000);
+              
+
             });
         console.log("yes");
     };
@@ -61,6 +68,7 @@ class LoggedIn_Data extends Component {
 
     fetchstudentgyak() {
         console.log(this.state.item.neptun)
+        console.log("this.state.item.neptun")
         fetch(`/getstudentgyak`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -70,10 +78,7 @@ class LoggedIn_Data extends Component {
 
         }).then(json => {
             this.setState({ gyak: json });
-            console.log("csibék közt");
-            console.log(this.state.gyak);
-            console.log(this.state.gyak.title);
-            console.log("csibe")
+           
         })
 
     }
@@ -101,29 +106,32 @@ class LoggedIn_Data extends Component {
                         <span>{this.state.item.email}</span>
                     </li>
                     <li className="data_font">
-                        <span>E-Role:</span>
-                        <span>{this.state.item.role}</span>
-                    </li>
-                    <li className="data_font">
                         <span>Utoljára bejelentkezve:</span>
                         <span>{this.state.item.last_login}</span>
                     </li>
-                    <li className="data_font">
+                    <li className="data_font ">
                         <span>Regisztráció dátuma:</span>
                         <span>{this.state.item.registration_date}</span>
                     </li>
-                    <li className="data_font">
+
+{this.state.gyak.map(item => <li key={item.id}>
+    <li className="data_font data_top">
                         <span>Csoport:</span>
-                        <span>{this.state.gyak.title}</span>
+                        <span>{item.title}</span>
                     </li>
                     <li className="data_font">
                         <span>Hely:</span>
-                        <span>{this.state.gyak.place}</span>
+                        <span>{item.place}</span>
                     </li>
                     <li className="data_font">
                         <span>Idő:</span>
-                        <span>{this.state.gyak.time}</span>
+                        <span>{item.time}</span>
                     </li>
+</li>)}
+
+
+
+                    
 
                 </ul>
             </div>
