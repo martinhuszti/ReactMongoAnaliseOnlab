@@ -25,3 +25,7 @@
 .student_neptun{
 width: 100px;
 }
+
+.delete-button{
+    float: right;
+}
