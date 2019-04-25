@@ -1,28 +1,36 @@
 import React, {Component} from 'react';
 import './css/list_student.css';
-import Select from 'react-select';
-import Button from 'react-bootstrap/Button';
+import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import Select from "react-select";
 
+const optionsTest = [
+    {value: 'ZH', label: 'Zárthelyi dolgozat'},
+    {value: 'VIZSGA', label: 'Vizsga'},
+    {value: 'POTZH', label: 'Pót zárthelyi dolgozat'}
+];
 
 class ListStudents extends Component {
 
+
     emptyLabor = {
         studentids: ''
-    };
-
-    emptyStudent = {
-        id: '',
-        neptun: '',
-        examsids: '',
     };
 
     constructor(props) {
         super(props);
         this.state = {
             studentsList: [],
-        }
+            newExamModalopen: false,
+        };
+        this.toggleExamModal = this.toggleExamModal.bind(this)
+
     }
 
+    toggleExamModal() {
+        this.setState(prevState => ({
+            newExamModalopen: !prevState.newExamModalopen
+        }));
+    }
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
@@ -38,21 +46,76 @@ class ListStudents extends Component {
 
 
     render() {
+        const { studentsList } = this.state;
+        const { newExamModalopen } = this.state;
+
+
         return (
             <div>
 
-                <h1>Diákok (Fejlesztés alatt)
-                    <Button variant={'danger'} color="danger" className="delete-button">Diák Törlése</Button>
-                    <Button variant={'warning'} color="warning" className="delete-button">Jegy módosítása</Button>
+                {/*uj zh beírása*/}
+                <Modal isOpen={newExamModalopen} className="newExamModal" toggle={this.toggleExamModal}>
+                    <ModalHeader toggle={this.toggleExamModal}>Új jegy bírása</ModalHeader>
+                    <ModalBody>
 
-                    <Button variant={'success'} color="success" className="delete-button">Új jegy beírása</Button>
+                        <form onSubmit={this.handleSubmit}>
+
+                            <h5>Diák</h5>
+                            <Select
+                                className="select-neptun"
+                                getOptionLabel={option => option.neptun}
+                                getOptionValue={option => option.id}
+                                onChange={this.handleChange}
+                                options={studentsList}
+                                placeholder="Neptun"
+                            />
+
+                            <br/>
+
+                            <h5>Számonkérés</h5>
+                            <Select
+                                className="addP_select"
+                                options={optionsTest}
+                                placeholder="Típusa"
+                            />
+
+                            <div className="container">
+                                <div className="row">
+
+                                    <div className="col-6">
+                                        <h5>Pontszám</h5>
+                                        <input type="number"/>
+                                    </div>
+
+                                    <div className="col-6">
+                                        <h5>Jegy</h5>
+                                        <input type="number"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="success" onClick={this.toggleExamModal}>Felvétel</Button>{' '}
+                        <Button color="danger" onClick={this.toggleExamModal}>Mégsem</Button>
+                    </ModalFooter>
+                </Modal>
+
+                <h1>Diákok (Fejlesztés alatt)
+                    <Button color="danger" className="delete-button">Diák Törlése</Button>
+                    <Button color="warning" className="delete-button">Jegy módosítása</Button>
+
+                    <Button color="success" className="delete-button"
+                            onClick={this.toggleExamModal}>Új jegy beírása</Button>
                 </h1>
                 <ul>
-                    {this.state.studentsList.map(student => {
+                    {studentsList.map(student => {
                         return <li key={student.id}>
 
                             {student.neptun}:
-
 
 
                             {/*<Select className="student"*/}
