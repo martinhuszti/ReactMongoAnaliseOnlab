@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './css/list_student.css';
-import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import {Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import Select from "react-select";
 
 const optionsTest = [
@@ -16,13 +16,26 @@ class ListStudents extends Component {
         studentids: ''
     };
 
+    emptyExam = {
+        studentId: '',
+        type: '',
+        score: '',
+        martk: '',
+
+    };
+
     constructor(props) {
         super(props);
         this.state = {
             studentsList: [],
+            emptyExam: this.emptyExam,
             newExamModalopen: false,
         };
-        this.toggleExamModal = this.toggleExamModal.bind(this)
+
+        //bindings
+        this.toggleExamModal = this.toggleExamModal.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
     }
 
@@ -44,10 +57,19 @@ class ListStudents extends Component {
         console.log("betöltés befejeeződött")
     }
 
+    handleChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+
+    }
+
+    handleSubmit(e) {
+        // TODO
+    }
 
     render() {
-        const { studentsList } = this.state;
-        const { newExamModalopen } = this.state;
+        const {studentsList} = this.state;
+        const {newExamModalopen} = this.state;
+        const {emptyExam} = this.state;
 
 
         return (
@@ -65,33 +87,38 @@ class ListStudents extends Component {
                                 className="select-neptun"
                                 getOptionLabel={option => option.neptun}
                                 getOptionValue={option => option.id}
-                                onChange={this.handleChange}
                                 options={studentsList}
                                 placeholder="Neptun"
+                                onChange={opt => emptyExam.studentId = opt.id }
                             />
 
                             <br/>
 
                             <h5>Számonkérés</h5>
                             <Select
-                                className="addP_select"
+                                className="newExamType"
                                 options={optionsTest}
                                 placeholder="Típusa"
                             />
 
+                            <br/>
+
                             <div className="container">
                                 <div className="row">
 
-                                    <div className="col-6">
-                                        <h5>Pontszám</h5>
-                                        <input type="number"/>
-                                    </div>
+                                    <FormGroup className="col-6">
+                                        <Label for="pontszam">Pontszám</Label>
+                                        <Input type="number" name="pontszam" id="pontszam"
+                                               placeholder="" onChange={this.handleChange}/>
+                                    </FormGroup>
 
-                                    <div className="col-6">
-                                        <h5>Jegy</h5>
-                                        <input type="number"/>
-                                    </div>
+                                    <FormGroup className="col-6">
+                                        <Label for="mark">Jegy</Label>
+                                        <Input type="number" name="mark" id="mark" placeholder=""
+                                               onChange={this.handleChange}/>
+                                    </FormGroup>
                                 </div>
+
                             </div>
 
 
@@ -99,7 +126,7 @@ class ListStudents extends Component {
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" onClick={this.toggleExamModal}>Felvétel</Button>{' '}
+                        <Button color="success" tpye="submit" onClick={this.toggleExamModal}>Felvétel</Button>{' '}
                         <Button color="danger" onClick={this.toggleExamModal}>Mégsem</Button>
                     </ModalFooter>
                 </Modal>

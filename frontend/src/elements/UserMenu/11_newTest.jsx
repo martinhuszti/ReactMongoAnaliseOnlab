@@ -67,7 +67,7 @@ class NewTest extends Component {
             item: {
                 type: selectedOption.value,
             }
-        })
+        });
         console.log(this.state.item.type)
     };
 
