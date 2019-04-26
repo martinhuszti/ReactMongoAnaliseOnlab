@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './css/list_student.css';
-import {Button, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import Select from "react-select";
 
 const optionsTest = [
@@ -12,15 +12,11 @@ const optionsTest = [
 class ListStudents extends Component {
 
 
-    emptyLabor = {
-        studentids: ''
-    };
-
     emptyExam = {
-        studentId: '',
+        name: '',
         type: '',
         score: '',
-        martk: '',
+        mark: '',
 
     };
 
@@ -30,11 +26,12 @@ class ListStudents extends Component {
             studentsList: [],
             emptyExam: this.emptyExam,
             newExamModalopen: false,
+            studentId: '',
         };
 
         //bindings
-        this.toggleExamModal = this.toggleExamModal.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.toggleExamModal = this.toggleExamModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
@@ -53,24 +50,32 @@ class ListStudents extends Component {
             .then(studentsList =>
                 this.setState({studentsList}));
 
-
-        console.log("betöltés befejeeződött")
     }
 
     handleChange(e) {
-        this.setState({[e.target.name]: e.target.value});
-
+        const {emptyExam}= this.state;
+        emptyExam[e.target.name] = e.target.value;
+        this.setState(emptyExam)
     }
 
-    handleSubmit(e) {
-        // TODO
+    handleSubmit(event) {
+        event.preventDefault();
+        const {studentId} = this.state;
+        const {emptyExam} = this.state;
+
+        fetch(`/addNewExam?studentId=${studentId}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(emptyExam)
+        });
+
+        this.toggleExamModal();
     }
 
     render() {
         const {studentsList} = this.state;
         const {newExamModalopen} = this.state;
         const {emptyExam} = this.state;
-
 
         return (
             <div>
@@ -80,7 +85,11 @@ class ListStudents extends Component {
                     <ModalHeader toggle={this.toggleExamModal}>Új jegy bírása</ModalHeader>
                     <ModalBody>
 
-                        <form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit}>
+                            <FormGroup>
+                                <Input className="newsP_title" type="text" name="name" id="name" value={emptyExam.name || ''}
+                                       placeholder="Számonkérés neve" onChange={this.handleChange}/>
+                            </FormGroup>
 
                             <h5>Diák</h5>
                             <Select
@@ -89,7 +98,7 @@ class ListStudents extends Component {
                                 getOptionValue={option => option.id}
                                 options={studentsList}
                                 placeholder="Neptun"
-                                onChange={opt => emptyExam.studentId = opt.id }
+                                onChange={opt => this.setState({studentId: opt.id,})}
                             />
 
                             <br/>
@@ -99,6 +108,7 @@ class ListStudents extends Component {
                                 className="newExamType"
                                 options={optionsTest}
                                 placeholder="Típusa"
+                                onChange={opt => emptyExam.type = opt.value}
                             />
 
                             <br/>
@@ -108,13 +118,13 @@ class ListStudents extends Component {
 
                                     <FormGroup className="col-6">
                                         <Label for="pontszam">Pontszám</Label>
-                                        <Input type="number" name="pontszam" id="pontszam"
+                                        <Input type="number" name="score" id="pontszam" value={emptyExam.score || ''}
                                                placeholder="" onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="col-6">
                                         <Label for="mark">Jegy</Label>
-                                        <Input type="number" name="mark" id="mark" placeholder=""
+                                        <Input type="number" name="mark" id="mark" placeholder="" value={emptyExam.mark || ''}
                                                onChange={this.handleChange}/>
                                     </FormGroup>
                                 </div>
@@ -122,11 +132,11 @@ class ListStudents extends Component {
                             </div>
 
 
-                        </form>
+                        </Form>
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" tpye="submit" onClick={this.toggleExamModal}>Felvétel</Button>{' '}
+                        <Button color="success" tpye="submit" onClick={this.handleSubmit}>Felvétel</Button>{' '}
                         <Button color="danger" onClick={this.toggleExamModal}>Mégsem</Button>
                     </ModalFooter>
                 </Modal>
