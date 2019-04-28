@@ -1,9 +1,15 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Exam;
+import com.huszti.gema.analiseresponsiveweb.database.Test;
+import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
 import com.huszti.gema.analiseresponsiveweb.repository.ExamRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
+import com.huszti.gema.analiseresponsiveweb.repository.TestRepository;
+import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.TestRespond;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +23,14 @@ public class ExamController {
 
     private final ExamRepository examRepository;
     private final StudentRepository studentRepository;
+    private final TestRepository testRepository;
+    private final UserRepository userRepository;
 
-    public ExamController(StudentRepository studentRepository, ExamRepository examRepository) {
-        this.studentRepository = studentRepository;
+    public ExamController(ExamRepository examRepository, StudentRepository studentRepository, TestRepository testRepository, UserRepository userRepository) {
         this.examRepository = examRepository;
+        this.studentRepository = studentRepository;
+        this.testRepository = testRepository;
+        this.userRepository = userRepository;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -43,4 +53,31 @@ public class ExamController {
         return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
 
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/addtest")
+    public ResponseEntity addNewTest(@RequestBody Test test){
+        SimpleUser user=userRepository.findById(test.getCreator()).orElse(null);
+        if(user == null)
+            ResponseEntity.badRequest().body("Nincs engedély v1!");
+        if(user.getRole().equals("admin")){
+            System.out.println(test);
+            testRepository.save(test);
+            return ResponseEntity.ok("Sikeresen elmentve.");
+        }
+        return ResponseEntity.badRequest().body("Nincs engedély v2!");
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getalltest")
+    public ArrayList<TestRespond> getAllTest(){
+
+        List<Test> getAllTest=testRepository.findAll();
+        ArrayList<TestRespond> testResponds=new ArrayList<TestRespond>();
+        for(Test item :getAllTest){
+            testResponds.add(new TestRespond(item.getTitle(),item.getType(), item.getId()));
+        }
+System.out.println(testResponds);
+        return testResponds;
+    }
+
 }

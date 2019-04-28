@@ -10,7 +10,7 @@ class LoggedIn_Data extends Component {
         email: null,
         last_login: null,
         registration_date: null,
-        gyak:[this.userLabor],
+        gyak: [this.userLabor],
 
 
     };
@@ -42,15 +42,15 @@ class LoggedIn_Data extends Component {
                 console.log(response);
                 console.log("datarespond")
                 this.setState({ item: response });
-                this.setState({gyak:response.gyak})
+                this.setState({ gyak: response.gyak })
                 console.log(this.state.gyak);
-                setTimeout(function(){
+                setTimeout(function () {
                     console.log("kisliba")
                     console.log(this.state.item);
-                    
-                console.log(this.state.gyak);
+
+                    console.log(this.state.gyak);
                 }.bind(this), 2000);
-              
+
 
             });
         console.log("yes");
@@ -78,7 +78,7 @@ class LoggedIn_Data extends Component {
 
         }).then(json => {
             this.setState({ gyak: json });
-           
+
         })
 
     }
@@ -114,24 +114,24 @@ class LoggedIn_Data extends Component {
                         <span>{this.state.item.registration_date}</span>
                     </li>
 
-{this.state.gyak.map(item => <li key={item.id}>
-    <li className="data_font data_top">
-                        <span>Csoport:</span>
-                        <span>{item.title}</span>
-                    </li>
-                    <li className="data_font">
-                        <span>Hely:</span>
-                        <span>{item.place}</span>
-                    </li>
-                    <li className="data_font">
-                        <span>Idő:</span>
-                        <span>{item.time}</span>
-                    </li>
-</li>)}
+                    {this.state.gyak.map(item => <li key={item.id}>
+                        <li className="data_font data_top">
+                            <span>Csoport:</span>
+                            <span>{item.title}</span>
+                        </li>
+                        <li className="data_font">
+                            <span>Hely:</span>
+                            <span>{item.place}</span>
+                        </li>
+                        <li className="data_font">
+                            <span>Idő:</span>
+                            <span>{item.time}</span>
+                        </li>
+                    </li>)}
 
 
 
-                    
+
 
                 </ul>
             </div>

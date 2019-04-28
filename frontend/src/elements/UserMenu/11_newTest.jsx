@@ -14,13 +14,10 @@ const optionsTest = [
 
 class NewTest extends Component {
 
-
-
-
     emptyTest = {
         title: '',
-        type: '',
         time: '',
+        creator:'',
 
     };
 
@@ -29,9 +26,10 @@ class NewTest extends Component {
 
         this.state = {
             item: this.emptyTest,
+            examType: "",
             items: [],
             options: optionsTest,
-            selectedOption:"ZH",
+            selectedOption: "ZH",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,6 +40,8 @@ class NewTest extends Component {
     handleChange(event) {
         const target = event.target;
         const value = target.value;
+        console.log(value);
+        console.log("value");
         const name = target.name;
         let item = { ...this.state.item };
         item[name] = value;
@@ -50,12 +50,19 @@ class NewTest extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        var exam = {
+            title: this.state.item.title,
+            type: this.state.examType,
+            time: this.state.item.time,
+            creator: sessionStorage.getItem("id")
+
+        }
+        console.log(exam)
 
         await fetch('/addtest', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(item)
+            body: JSON.stringify(exam)
         });
 
         console.log("feltöltés befejeződött")
@@ -64,11 +71,9 @@ class NewTest extends Component {
     optionChange = (selectedOption) => {
 
         this.setState({
-            item: {
-                type: selectedOption.value,
-            }
+            examType: selectedOption.value,
         });
-        console.log(this.state.item.type)
+        console.log(this.state.examType)
     };
 
 

@@ -1,6 +1,5 @@
 .data_margin {
     margin: 0;
-
 }
 
 .data_list {
@@ -13,6 +12,7 @@
     margin-right: 20px;
     margin-bottom: 10px;
 }
-.data_top{
+
+.data_top {
     margin-top: 20px;
 }

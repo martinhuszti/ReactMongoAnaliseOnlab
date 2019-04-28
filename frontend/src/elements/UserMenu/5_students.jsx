@@ -14,7 +14,8 @@ class ListStudents extends Component {
 
     emptyExam = {
         name: '',
-        type: '',
+        examID: '',
+        studentId:'',
         score: '',
         mark: '',
 
@@ -27,6 +28,7 @@ class ListStudents extends Component {
             emptyExam: this.emptyExam,
             newExamModalopen: false,
             studentId: '',
+            examList:[],
         };
 
         //bindings
@@ -37,6 +39,7 @@ class ListStudents extends Component {
     }
 
     toggleExamModal() {
+       
         this.setState(prevState => ({
             newExamModalopen: !prevState.newExamModalopen
         }));
@@ -44,7 +47,18 @@ class ListStudents extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-
+        fetch(`/getalltest`)
+        .then(response => response.json())
+        .then(examList =>
+            this.setState({examList}));
+            setTimeout(
+                function() {
+                    console.log(this.state.examList);
+                    console.log("this.state.examList");
+                }
+                .bind(this),
+                3000
+            );
         fetch(`/getAllStudent?id=${encodedValue}`)
             .then(response => response.json())
             .then(studentsList =>
@@ -63,11 +77,13 @@ class ListStudents extends Component {
         const {studentId} = this.state;
         const {emptyExam} = this.state;
 
-        fetch(`/addNewExam?studentId=${studentId}`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(emptyExam)
-        });
+
+        console.log(this.state.emptyExam)
+       // fetch(`/addNewExam?studentId=${studentId}`, {
+       //     method: "POST",
+       //     headers: {"Content-Type": "application/json"},
+       //     body: JSON.stringify(emptyExam)
+       // });
 
         this.toggleExamModal();
     }
@@ -76,6 +92,7 @@ class ListStudents extends Component {
         const {studentsList} = this.state;
         const {newExamModalopen} = this.state;
         const {emptyExam} = this.state;
+        const {examList} = this.state;
 
         return (
             <div>
@@ -90,6 +107,20 @@ class ListStudents extends Component {
                                 <Input className="newsP_title" type="text" name="name" id="name" value={emptyExam.name || ''}
                                        placeholder="Számonkérés neve" onChange={this.handleChange}/>
                             </FormGroup>
+
+                            <h5>Számonkérés</h5>
+                            <Select
+                                className="select-zh"
+                                getOptionLabel={option => option.title}
+                                getOptionValue={option => option.id}
+                                options={examList}
+                                placeholder="Számonkérés"
+                                onChange={opt => this.setState({
+                                    emptyExam:{
+                                        examID: opt.id
+                                    }
+                                })}
+                            />
 
                             <h5>Diák</h5>
                             <Select

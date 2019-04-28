@@ -27,7 +27,7 @@ public class FileController {
             System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(), file.getSize());
             //creating a new file in some local directory
             Path path = Paths.get("./src/main/java/com/huszti/gema/analiseresponsiveweb/resource/");
-            File fileToSave = new File(path + "/requirements.pdf");
+            File fileToSave = new File(path + "/req_short.txt");
             File newFile = new File(fileToSave.getCanonicalPath());
             System.out.println(fileToSave.getPath());
             System.out.println(fileToSave.getAbsolutePath());
@@ -58,10 +58,10 @@ public class FileController {
     public ResponseEntity<Resource> download() throws IOException {
         System.out.println("asdkezd");
 
-        File file = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\requirements.pdf");
+        File file = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\req_short.txt");
 
         HttpHeaders header = new HttpHeaders();
-        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=requirements.pdf");
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=req_short.txt");
         header.add("Cache-Control", "no-cache, no-store, must-revalidate");
         header.add("Pragma", "no-cache");
         header.add("Expires", "0");
