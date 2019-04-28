@@ -55,7 +55,6 @@
 }
 
 #loggedin_placeholder_news {
-
     max-width: 1366px;
     padding: 0 16px;
     margin: 0 auto;
@@ -67,27 +66,102 @@
     border-width: 2px;
 }
 
+#loggedin_menuicon {
+    color: white;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.loggedin_slidemenu{
+
+}
+
+@media (min-width: 750px) {
+    #loggedin_menuicon {
+        display: none;
+    }
+    .loggedin_slidemenu{
+        display: none;
+    }
+}
+
 @media (max-width: 750px) {
+    .loggedin_disapier{
+        display: none;
+    }
     .box_flex {
         display: none;
     }
-
     .loggedin_news {
         border-style: solid;
         border-width: 0;
     }
-
     .flex_container {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         height: 80%;
     }
-
     #loggedin_placeholder_news {
-
         max-width: 1366px;
         padding: 0 0;
         margin: 0 0;
     }
+}
+.menu_items_text_two{
+    margin: 30px 30px 30px 30px;
+    padding-top: 10px;
+}
+
+.menu_items_two{
+    color: white;
+    vertical-align: middle;
+}
+
+.bm-item {
+    display: inline-block;
+    /* Our sidebar item styling */
+    text-decoration: none;
+    margin-bottom: 10px;
+    color: #d1d1d1;
+    transition: color 0.2s;
+}
+
+
+.bm-burger-bars {
+    background: #373a47;
+}
+
+/* Position and sizing of clickable cross button */
+
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+/* Color/shape of close button cross */
+
+.bm-cross {
+    background: #bdc3c7;
+}
+
+/* General sidebar styles */
+
+.bm-menu {
+    background: #1D155D;
+  padding-top: 15px;
+    font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+
+.bm-morph-shape {
+    fill: #1D155D;
+}
+
+/* Wrapper for item list */
+
+/* Styling of overlay */
+
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
 }

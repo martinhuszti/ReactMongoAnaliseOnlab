@@ -92,6 +92,7 @@ class LoggedIn_Data extends Component {
 
         return (
             <div className="data_margin">
+              
                 <ul className="data_list">
                     <li className="data_font">
                         <span>Név:</span>
