@@ -3,12 +3,6 @@ import './css/list_student.css';
 import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import Select from "react-select";
 
-const optionsTest = [
-    {value: 'ZH', label: 'Zárthelyi dolgozat'},
-    {value: 'VIZSGA', label: 'Vizsga'},
-    {value: 'POTZH', label: 'Pót zárthelyi dolgozat'}
-];
-
 class ListStudents extends Component {
 
 
@@ -48,6 +42,8 @@ class ListStudents extends Component {
             .then(response => response.json())
             .then(examList =>
                 this.setState({examList}));
+
+
         setTimeout(
             function () {
                 console.log(this.state.examList);
@@ -56,6 +52,8 @@ class ListStudents extends Component {
                 .bind(this),
             3000
         );
+
+
         fetch(`/getAllStudent?id=${encodedValue}`)
             .then(response => response.json())
             .then(studentsList =>

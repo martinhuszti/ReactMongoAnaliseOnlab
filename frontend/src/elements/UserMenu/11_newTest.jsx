@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
-
+import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
 
 
 const optionsTest = [
-    { value: 'ZH', label: 'Zárthelyi dolgozat' },
-    { value: 'VIZSGA', label: 'Vizsga' },
-    { value: 'POTZH', label: 'Pót zárthelyi dolgozat' }
+    {value: 'ZH', label: 'Zárthelyi dolgozat'},
+    {value: 'VIZSGA', label: 'Vizsga'},
+    {value: 'POTZH', label: 'Pót zárthelyi dolgozat'}
 ];
 
 class NewTest extends Component {
@@ -17,7 +16,7 @@ class NewTest extends Component {
     emptyTest = {
         title: '',
         time: '',
-        creator:'',
+        creator: '',
 
     };
 
@@ -30,6 +29,8 @@ class NewTest extends Component {
             items: [],
             options: optionsTest,
             selectedOption: "ZH",
+            btnDisabled: false,
+            alertVisible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -43,30 +44,50 @@ class NewTest extends Component {
         console.log(value);
         console.log("value");
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item });
+        this.setState({item});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
+
+        this.toggleBtn();
+
         var exam = {
             title: this.state.item.title,
             type: this.state.examType,
             time: this.state.item.time,
             creator: sessionStorage.getItem("id")
 
-        }
-        console.log(exam)
+        };
+        console.log("Exam added: " + exam);
+
 
         await fetch('/addtest', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(exam)
         });
 
-        console.log("feltöltés befejeződött")
+        window.setTimeout(()=>{
+            this.toggleBtn();
+
+        },2000);
+
+        console.log("feltöltés befejeződött");
+
+
+
+
     }
+
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
     optionChange = (selectedOption) => {
 
@@ -80,14 +101,16 @@ class NewTest extends Component {
     render() {
 
 
-        const { item } = this.state;
+        const {item} = this.state;
+        const {btnDisabled} = this.state;
+
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Számonkérés neve:</Label>
                         <Input className="newsP_title" type="text" name="title" id="title"
-                            value={item.title || ''} onChange={this.handleChange}
+                               value={item.title || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -102,15 +125,22 @@ class NewTest extends Component {
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
                         <Input className="newsP_title" type="text" name="time" id="time"
-                            value={item.time || ''} onChange={this.handleChange}
+                               value={item.time || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
+                        <Button disabled={btnDisabled} variant={'success'} color="primary"
+                                type="submit">Feltöltés</Button>
                     </FormGroup>
 
                 </Form>
+
+                <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
+                    Sikeresen felveted a diákot!
+                </Alert>
+
+
             </div>
         );
     }
