@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/exams")
 public class ExamController {
 
 
@@ -31,8 +32,7 @@ public class ExamController {
         this.userRepository = userRepository;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addNewExam")
+    @PostMapping //addNewExam
     public ResponseEntity addNewExam(@RequestBody Exam exam, @RequestParam String studentId, @RequestParam String examType) {
 
         Test test = testRepository.findById(examType).orElseThrow(() -> new RuntimeException("Nem található test!"));
@@ -64,8 +64,7 @@ public class ExamController {
 
         }
 
-        @CrossOrigin(origins = "http://localhost:3000")
-        @PostMapping("/addtest")
+        @PostMapping("/tests")
         public ResponseEntity addNewTest (@RequestBody Test test){
             SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
             if (user == null)
@@ -78,8 +77,7 @@ public class ExamController {
             return ResponseEntity.badRequest().body("Nincs engedély v2!");
         }
 
-        @CrossOrigin(origins = "http://localhost:3000")
-        @GetMapping("/getalltest")
+        @GetMapping("/tests")
         public ArrayList<TestRespond> getAllTest () {
 
             List<Test> getAllTest = testRepository.findAll();

@@ -64,7 +64,7 @@ class NewTest extends Component {
         console.log("Exam added: " + exam);
 
 
-        await fetch('/addtest', {
+        await fetch('/api/exams/tests', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(exam)
@@ -137,7 +137,7 @@ class NewTest extends Component {
                 </Form>
 
                 <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
-                    Sikeresen felveted a diákot!
+                    Sikeresen felveted a számonkérést!
                 </Alert>
 
 

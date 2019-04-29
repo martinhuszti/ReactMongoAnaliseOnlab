@@ -35,7 +35,7 @@ class Delete_Publication extends Component {
         }
 
         console.log(this.state.items);
-    }
+    };
 
     componentDidMount() {
 

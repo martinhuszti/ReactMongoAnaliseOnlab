@@ -38,7 +38,10 @@ class ListStudents extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/getalltest`)
+        fetch(`/api/exams/tests`,{
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+        } )
             .then(response => response.json())
             .then(examList =>
                 this.setState({ examList }));
@@ -75,7 +78,7 @@ class ListStudents extends Component {
 
 
         console.log(this.state.emptyExam);
-        fetch(`/addNewExam?studentId=${studentId}&examType=${examType}`, {
+        fetch(`/api/exams/?studentId=${studentId}&examType=${examType}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(emptyExam)
@@ -158,9 +161,6 @@ class ListStudents extends Component {
                 </Modal>
 
                 <h1 className="students_title">Diákok
-                    <Button color="danger" className="delete-button">Diák Törlése</Button>
-                    <Button color="warning" className="delete-button">Jegy módosítása</Button>
-
                     <Button color="success" className="delete-button"
                         onClick={this.toggleExamModal}>Új jegy beírása</Button>
                 </h1>

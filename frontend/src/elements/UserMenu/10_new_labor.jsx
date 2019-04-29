@@ -37,7 +37,7 @@ class new_Labor extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/addlab', {
+        await fetch('/api/labors', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)

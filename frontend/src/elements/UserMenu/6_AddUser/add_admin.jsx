@@ -62,13 +62,13 @@ class ExtraAdmin extends Component {
     async addadmin(event) {
 
         const { createdAdmin } = this.state;
-        await fetch('/addadmin', {
+        await fetch('/api/admins', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createdAdmin)
         });
 
-        console.log("új diák")
+        console.log("új adj8h")
     }
 
 

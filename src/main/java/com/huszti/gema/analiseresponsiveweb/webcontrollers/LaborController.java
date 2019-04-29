@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/labors")
 public class LaborController {
 
 
@@ -19,17 +20,15 @@ public class LaborController {
         this.laborRepository = laborRepository;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addlab")
+    @PostMapping
     public Labor addlab(@RequestBody Labor labor) {
 
         laborRepository.save(labor);
         return  labor;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getLabs")
-    public List<Labor> getUsers() {
+    @GetMapping
+    public List<Labor> getlabors() {
         return laborRepository.findAll();
 
     }

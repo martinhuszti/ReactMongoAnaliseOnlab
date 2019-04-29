@@ -4,11 +4,6 @@ import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +12,7 @@ import java.util.List;
 //push it to the limit
 
 @RestController
+@RequestMapping()
 public class NewsController {
 
     private final NewsRepository newsRepository;
@@ -26,7 +22,6 @@ public class NewsController {
         this.newsRepository = newsRepository;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getnews")
     public List<News> getNews() {
 
@@ -49,16 +44,13 @@ public class NewsController {
 
 
     }
-    @CrossOrigin(origins = "http://localhost:3000")
+
     @GetMapping("/getallnews")
     public List<News> getallNews() {
-
         return newsRepository.findAll();
-
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addnews")
     public News addNews(@RequestBody News news) {
         newsRepository.save(news);
