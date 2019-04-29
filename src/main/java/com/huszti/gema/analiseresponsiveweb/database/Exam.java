@@ -11,7 +11,7 @@ public class Exam {
 
     @Id
     private String id;
-    private String name;
+
     private String type;
 
     private float score;

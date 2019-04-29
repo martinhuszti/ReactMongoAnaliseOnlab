@@ -13,7 +13,6 @@ import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -100,40 +99,47 @@ public class UserController {
         backrespond.setLast_login(tempuser.getLast_login());
         backrespond.setRegistration_date(tempuser.getRegistration_date());
 
-        if (tempuser.getRole().equals("student")) {
-            System.out.println(studentRepository.findByNeptun(tempuser.getNeptun()));
-            String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
-            Labor templab = laborRepository.findById(getID).orElse(null);
+        switch (tempuser.getRole()) {
+            case "student": {
+                System.out.println(studentRepository.findByNeptun(tempuser.getNeptun()));
+                String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
+                Labor templab = laborRepository.findById(getID).orElse(null);
 
-            LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
+                LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
 
-            backrespond.addGyakList(tempRespondLab);
-            System.out.println(getID);
-            System.out.println(templab);
-            System.out.println("GETIDstudent");
-        } else if (tempuser.getRole().equals("teacher")) {
-            List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
-            Iterable<Labor> asd = laborRepository.findAllById(getID);
-            List<LaborRespond> tempLabors = new ArrayList<>();
-            for (Labor ids : asd) {
-                System.out.println("gyakid");
-                LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
-                tempLabors.add(tempRespondLab);
-                System.out.println(tempRespondLab);
+                backrespond.addGyakList(tempRespondLab);
+                System.out.println(getID);
+                System.out.println(templab);
+                System.out.println("GETIDstudent");
+                break;
             }
-            backrespond.addAllGyakList(tempLabors);
-            System.out.println(backrespond.getGyak().get(0));
-            System.out.println("Eddig eljött");
-        } else if (tempuser.getRole().equals("admin")) {
-            Iterable<Labor> asd = laborRepository.findAll();
-            List<LaborRespond> tempLabors = new ArrayList<>();
-            for (Labor ids : asd) {
-                System.out.println("adminid");
-                LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
-                tempLabors.add(tempRespondLab);
-                System.out.println(tempRespondLab);
+            case "teacher": {
+                List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
+                Iterable<Labor> asd = laborRepository.findAllById(getID);
+                List<LaborRespond> tempLabors = new ArrayList<>();
+                for (Labor ids : asd) {
+                    System.out.println("gyakid");
+                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
+                    tempLabors.add(tempRespondLab);
+                    System.out.println(tempRespondLab);
+                }
+                backrespond.addAllGyakList(tempLabors);
+                System.out.println(backrespond.getGyak().get(0));
+                System.out.println("Eddig eljött");
+                break;
             }
-            backrespond.addAllGyakList(tempLabors);
+            case "admin": {
+                Iterable<Labor> asd = laborRepository.findAll();
+                List<LaborRespond> tempLabors = new ArrayList<>();
+                for (Labor ids : asd) {
+                    System.out.println("adminid");
+                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
+                    tempLabors.add(tempRespondLab);
+                    System.out.println(tempRespondLab);
+                }
+                backrespond.addAllGyakList(tempLabors);
+                break;
+            }
         }
 
         return backrespond;

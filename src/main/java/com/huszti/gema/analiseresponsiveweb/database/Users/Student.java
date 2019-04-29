@@ -1,10 +1,13 @@
 package com.huszti.gema.analiseresponsiveweb.database.Users;
 
+import com.huszti.gema.analiseresponsiveweb.database.Exam;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 @Data
@@ -13,13 +16,18 @@ public class Student {
 
     @Id
     private String id;
+
+    @Indexed
     private String neptun;
 
-    private List<String> examsids;
+    @DBRef
+    private ArrayList<Exam> exams;
 
     private String gyakid;
 
-    public Student() {
+
+    Student(){
+        exams = new ArrayList<>();
     }
 
 

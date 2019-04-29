@@ -9,8 +9,6 @@ import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TestRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.TestRespond;
-import org.apache.catalina.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,49 +33,62 @@ public class ExamController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addNewExam")
-    public ResponseEntity addNewExam(@RequestBody Exam exam, @RequestParam String studentId) {
+    public ResponseEntity addNewExam(@RequestBody Exam exam, @RequestParam String studentId, @RequestParam String examType) {
+
+        Test test = testRepository.findById(examType).orElseThrow(() -> new RuntimeException("Nem található test!"));
+
+        //Megkeres Student
         Student student = studentRepository.findById(studentId).orElse(null);
         if (student == null) {
             return ResponseEntity.badRequest().body("Nincs ilyen Neptun!");
         }
+        exam.setType(test.getTitle());
 
+        //Megkeres Exam
         Exam savedExam = examRepository.save(exam);
 
-        if (student.getExamsids() == null) {
-            student.setExamsids(new ArrayList<>());
+        //Hozzáad Studenthez Exam
+        if (student.getExams() == null) {
+            student.setExams(new ArrayList<>());
         }
-        student.getExamsids().add(savedExam.getId());
+        student.getExams().add(savedExam);
         studentRepository.save(student);
 
-        System.out.println("New Exam: " + savedExam.toString());
-        return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
+        //Hozzáad ExamTypeCol-hoz Exam
+        test.getExams().add(exam);
+        testRepository.save(test);
 
-    }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addtest")
-    public ResponseEntity addNewTest(@RequestBody Test test){
-        SimpleUser user=userRepository.findById(test.getCreator()).orElse(null);
-        if(user == null)
-            ResponseEntity.badRequest().body("Nincs engedély v1!");
-        if(user.getRole().equals("admin")){
-            System.out.println(test);
-            testRepository.save(test);
-            return ResponseEntity.ok("Sikeresen elmentve.");
+            System.out.println("New Exam: " + savedExam.toString());
+            return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
+
         }
-        return ResponseEntity.badRequest().body("Nincs engedély v2!");
-    }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getalltest")
-    public ArrayList<TestRespond> getAllTest(){
 
-        List<Test> getAllTest=testRepository.findAll();
-        ArrayList<TestRespond> testResponds=new ArrayList<TestRespond>();
-        for(Test item :getAllTest){
-            testResponds.add(new TestRespond(item.getTitle(),item.getType(), item.getId()));
+        @CrossOrigin(origins = "http://localhost:3000")
+        @PostMapping("/addtest")
+        public ResponseEntity addNewTest (@RequestBody Test test){
+            SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
+            if (user == null)
+                ResponseEntity.badRequest().body("Nincs engedély v1!");
+            if (user.getRole().equals("admin")) {
+                System.out.println(test);
+                testRepository.save(test);
+                return ResponseEntity.ok("Sikeresen elmentve.");
+            }
+            return ResponseEntity.badRequest().body("Nincs engedély v2!");
         }
-System.out.println(testResponds);
-        return testResponds;
-    }
 
-}
+        @CrossOrigin(origins = "http://localhost:3000")
+        @GetMapping("/getalltest")
+        public ArrayList<TestRespond> getAllTest () {
+
+            List<Test> getAllTest = testRepository.findAll();
+            ArrayList<TestRespond> testResponds = new ArrayList<TestRespond>();
+            for (Test item : getAllTest) {
+                testResponds.add(new TestRespond(item.getTitle(), item.getType(), item.getId()));
+            }
+            System.out.println(testResponds);
+            return testResponds;
+        }
+
+    }

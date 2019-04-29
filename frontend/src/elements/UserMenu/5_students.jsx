@@ -13,9 +13,6 @@ class ListStudents extends Component {
 
 
     emptyExam = {
-        name: '',
-        examID: '',
-        studentId:'',
         score: '',
         mark: '',
 
@@ -28,7 +25,7 @@ class ListStudents extends Component {
             emptyExam: this.emptyExam,
             newExamModalopen: false,
             studentId: '',
-            examList:[],
+            examType: '',
         };
 
         //bindings
@@ -39,7 +36,7 @@ class ListStudents extends Component {
     }
 
     toggleExamModal() {
-       
+
         this.setState(prevState => ({
             newExamModalopen: !prevState.newExamModalopen
         }));
@@ -48,17 +45,17 @@ class ListStudents extends Component {
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/getalltest`)
-        .then(response => response.json())
-        .then(examList =>
-            this.setState({examList}));
-            setTimeout(
-                function() {
-                    console.log(this.state.examList);
-                    console.log("this.state.examList");
-                }
+            .then(response => response.json())
+            .then(examList =>
+                this.setState({examList}));
+        setTimeout(
+            function () {
+                console.log(this.state.examList);
+                console.log("this.state.examList");
+            }
                 .bind(this),
-                3000
-            );
+            3000
+        );
         fetch(`/getAllStudent?id=${encodedValue}`)
             .then(response => response.json())
             .then(studentsList =>
@@ -67,7 +64,7 @@ class ListStudents extends Component {
     }
 
     handleChange(e) {
-        const {emptyExam}= this.state;
+        const {emptyExam} = this.state;
         emptyExam[e.target.name] = e.target.value;
         this.setState(emptyExam)
     }
@@ -76,14 +73,15 @@ class ListStudents extends Component {
         event.preventDefault();
         const {studentId} = this.state;
         const {emptyExam} = this.state;
+        const {examType} = this.state;
 
 
-        console.log(this.state.emptyExam)
-       // fetch(`/addNewExam?studentId=${studentId}`, {
-       //     method: "POST",
-       //     headers: {"Content-Type": "application/json"},
-       //     body: JSON.stringify(emptyExam)
-       // });
+        console.log(this.state.emptyExam);
+        fetch(`/addNewExam?studentId=${studentId}&examType=${examType}`, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(emptyExam)
+        });
 
         this.toggleExamModal();
     }
@@ -103,10 +101,6 @@ class ListStudents extends Component {
                     <ModalBody>
 
                         <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Input className="newsP_title" type="text" name="name" id="name" value={emptyExam.name || ''}
-                                       placeholder="Számonkérés neve" onChange={this.handleChange}/>
-                            </FormGroup>
 
                             <h5>Számonkérés</h5>
                             <Select
@@ -116,11 +110,10 @@ class ListStudents extends Component {
                                 options={examList}
                                 placeholder="Számonkérés"
                                 onChange={opt => this.setState({
-                                    emptyExam:{
-                                        examID: opt.id
-                                    }
+                                    examType: opt.id
                                 })}
                             />
+                            <br/>
 
                             <h5>Diák</h5>
                             <Select
@@ -134,28 +127,21 @@ class ListStudents extends Component {
 
                             <br/>
 
-                            <h5>Számonkérés</h5>
-                            <Select
-                                className="newExamType"
-                                options={optionsTest}
-                                placeholder="Típusa"
-                                onChange={opt => emptyExam.type = opt.value}
-                            />
-
                             <br/>
 
                             <div className="container">
                                 <div className="row">
 
                                     <FormGroup className="col-6">
-                                        <Label for="pontszam">Pontszám</Label>
+                                        <Label for="pontszam"><h5>Pontszám</h5></Label>
                                         <Input type="number" name="score" id="pontszam" value={emptyExam.score || ''}
                                                placeholder="" onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="col-6">
-                                        <Label for="mark">Jegy</Label>
-                                        <Input type="number" name="mark" id="mark" placeholder="" value={emptyExam.mark || ''}
+                                        <Label for="mark"><h5>Jegy</h5></Label>
+                                        <Input type="number" name="mark" id="mark" placeholder=""
+                                               value={emptyExam.mark || ''}
                                                onChange={this.handleChange}/>
                                     </FormGroup>
                                 </div>
@@ -180,176 +166,179 @@ class ListStudents extends Component {
                             onClick={this.toggleExamModal}>Új jegy beírása</Button>
                 </h1>
                 <ul>
-                    {studentsList.map(student => {
-                        return <li key={student.id}>
+                    {studentsList.map(student =>
+                        <li key={student.id}>
 
                             {student.neptun}:
 
-
-                            {/*<Select className="student"*/}
-                            {/*placeholder="Típus"*/}
-                            {/*/>*/}
+                            {student.exams.map(exam =>
+                                <li key={exam.id}>{exam.type} {exam.score} {exam.mark}</li>)
+                            }
 
                         </li>
-                    })}
+                    )}
                 </ul>
 
-                <div className="student_element">
-                    <span className="student_neptun">
-                        NEPTUNA:
+               {/* < div
+                    className="student_element">
+                            < span
+                                className="student_neptun">
+                            NEPTUNA
+                    :
                     </span>
                     <div className="student_list">
                         <div className="student_spec">
-                        <span>
-                            ZH1
-                        </span>
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                            89 pont
-                        </span>
+                    89 pont
+                    </span>
                             <span>
-                            4
-                        </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
-                        <span>
-                            ZH1
-                        </span>
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                            89 pont
-                        </span>
+                    89 pont
+                    </span>
                             <span>
-                            4
-                        </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
-                        <span>
-                            ZH1
-                        </span>
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                            89 pont
-                        </span>
+                    89 pont
+                    </span>
                             <span>
-                            4
-                        </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
-                        <span>
-                            ZH1
-                        </span>
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                            89 pont
-                        </span>
+                    89 pont
+                    </span>
                             <span>
-                            4
-                        </span>
+                    4
+                    </span>
                         </div>
                     </div>
                 </div>
                 <div className="student_element">
-                        <span className="student_neptun">
-                            NEPTUNA:
-                        </span>
+                    <span className="student_neptun">
+                    NEPTUNA:
+                    </span>
                     <div className="student_list">
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                     </div>
                 </div>
                 <div className="student_element">
-                        <span className="student_neptun">
-                            NEPTUNA:
-                        </span>
+                    <span className="student_neptun">
+                    NEPTUNA:
+                    </span>
                     <div className="student_list">
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    89 pont
+                    </span>
                             <span>
-                                89 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                         <div className="student_spec">
+                    <span>
+                    ZH1
+                    </span>
                             <span>
-                                ZH1
-                            </span>
+                    189 pont
+                    </span>
                             <span>
-                                189 pont
-                            </span>
-                            <span>
-                                4
-                            </span>
+                    4
+                    </span>
                         </div>
                     </div>
-                </div>
+                </div>*/}
 
             </div>
-        );
+        )
+            ;
     }
 }
 
