@@ -28,6 +28,8 @@
 
 .box_1 {
     max-height: 50px;
+    display: flex;
+    flex-direction: row;
 }
 
 .box_flex {
@@ -42,6 +44,7 @@
 .logout_color {
     background-color: #2767ce;
     height: 50px;
+    cursor: pointer;
 }
 
 .content_box {
@@ -107,9 +110,17 @@
     }
 }
 .menu_items_text_two{
-    margin: 30px 30px 30px 30px;
-    padding-top: 10px;
+    margin: auto;
+    padding-top: 0px;
     scrollbar-width: 0;
+    
+    vertical-align: middle;
+}
+.menu_icons>*{
+    
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-top: 15px;
 }
 
 .menu_items_two{

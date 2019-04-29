@@ -21,7 +21,15 @@ import './css/loggedin.css';
 import { slide as Menu } from 'react-burger-menu'
 
 import MenuIcon from '@material-ui/icons/Menu';
-import Rowing from '@material-ui/icons';
+import AccountBox from '@material-ui/icons/AccountBox';
+import ChatIcon from '@material-ui/icons/Chat';
+import AddIcon from '@material-ui/icons/Add';
+import AddCommentIcon from '@material-ui/icons/AddComment';
+import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PersonIcon from '@material-ui/icons/Person';
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 class LoggedIn extends Component {
@@ -99,17 +107,44 @@ class LoggedIn extends Component {
         this.menuClick = this.menuClick.bind(this);
 
         this.handleStateChange = this.handleStateChange.bind(this);
+        this.motiveBind = this.motiveBind.bind(this);
 
     }
+
+    motiveBind(item) {
+        if (item === 1)
+            return <AccountBox />
+        if (item === 2)
+            return <RemoveRedEyeIcon />
+        if (item === 3)
+            return <ChatIcon />
+        if (item === 4)
+            return <PersonIcon />
+        if (item === 5)
+            return <AddCommentIcon />
+        if (item === 6)
+            return <PersonAddIcon />
+        if (item === 7)
+            return <AddCommentOutlinedIcon />
+        if (item === 8)
+            return <DeleteIcon />
+        if (item === 9)
+            return <AddIcon />
+        if (item === 10)
+            return <AddIcon />
+        if (item === 11)
+            return <AddIcon />
+    }
+
     menuClick() {
         this.setState({
             menuToggle: !this.state.menuToggle
         })
     }
-   
-    handleStateChange (state) {
-        this.setState({menuToggle: state.isOpen})  
-      }
+
+    handleStateChange(state) {
+        this.setState({ menuToggle: state.isOpen })
+    }
 
     closeAlert() {
         this.setState({ visible: false });
@@ -168,16 +203,17 @@ class LoggedIn extends Component {
     render() {
 
         console.log(this.state.isLoggedIn);
-       
+
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
-                
+
                     <div id="placeholder_header" />
-                    <Menu width={'200px'} customBurgerIcon={false} isOpen={this.state.menuToggle} onStateChange={(state) => this.handleStateChange(state) } className="loggedin_slidemenu">
+                    <Menu width={'250px'} customBurgerIcon={false} isOpen={this.state.menuToggle} onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
                             {this.state.items.map(items =>
                                 <Link to={items.link} onClick={this.menuClick} className=" menu_items_two box_1">
+                                    <div className="menu_icons">{this.motiveBind(items.motiv)}</div>
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}
@@ -191,7 +227,7 @@ class LoggedIn extends Component {
                             </div>
                         </div>
 
-                        </Menu>
+                    </Menu>
                     <Alert isOpen={this.state.visible} toggle={this.closeAlert} id="loggedin_alertbox" color="primary">
                         Sikeresen bejelentkeztél! Üdv az oldalon!
                     </Alert>
@@ -199,7 +235,7 @@ class LoggedIn extends Component {
 
                     <div id="menu_header" className="news news_head">
 
-                        
+
                         <h1 className="news_text "><MenuIcon onClick={this.menuClick} id="loggedin_menuicon" />Login</h1>
                     </div>
 
@@ -251,18 +287,22 @@ export default withRouter(LoggedIn);
 const emptyStudent = [
     {
         link: "/LoggedIn/data",
-        text: 'Adatok'
+        text: 'Adatok',
+        motiv: 1,
     },
     {
         link: "/LoggedIn/result",
-        text: 'Eredmények'
+        text: 'Eredmények',
+        motiv: 11,
     },
     {
         link: "/LoggedIn/change_pass",
-        text: 'Jelszó változtatás'
+        text: 'Jelszó változtatás',
+        motiv: 2,
     },
     {
         link: "/LoggedIn/controller",
-        text: 'Chat'
+        text: 'Chat',
+        motiv: 3,
     }
 ];
