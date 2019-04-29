@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './css/list_student.css';
-import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import Select from "react-select";
 
 class ListStudents extends Component {
@@ -41,7 +41,7 @@ class ListStudents extends Component {
         fetch(`/getalltest`)
             .then(response => response.json())
             .then(examList =>
-                this.setState({examList}));
+                this.setState({ examList }));
 
 
         setTimeout(
@@ -57,38 +57,39 @@ class ListStudents extends Component {
         fetch(`/getAllStudent?id=${encodedValue}`)
             .then(response => response.json())
             .then(studentsList =>
-                this.setState({studentsList}));
+                this.setState({ studentsList }));
 
     }
 
     handleChange(e) {
-        const {emptyExam} = this.state;
+        const { emptyExam } = this.state;
         emptyExam[e.target.name] = e.target.value;
         this.setState(emptyExam)
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        const {studentId} = this.state;
-        const {emptyExam} = this.state;
-        const {examType} = this.state;
+        const { studentId } = this.state;
+        const { emptyExam } = this.state;
+        const { examType } = this.state;
 
 
         console.log(this.state.emptyExam);
         fetch(`/addNewExam?studentId=${studentId}&examType=${examType}`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(emptyExam)
         });
+       
 
         this.toggleExamModal();
     }
 
     render() {
-        const {studentsList} = this.state;
-        const {newExamModalopen} = this.state;
-        const {emptyExam} = this.state;
-        const {examList} = this.state;
+        const { studentsList } = this.state;
+        const { newExamModalopen } = this.state;
+        const { emptyExam } = this.state;
+        const { examList } = this.state;
 
         return (
             <div>
@@ -111,7 +112,7 @@ class ListStudents extends Component {
                                     examType: opt.id
                                 })}
                             />
-                            <br/>
+                            <br />
 
                             <h5>Diák</h5>
                             <Select
@@ -120,12 +121,12 @@ class ListStudents extends Component {
                                 getOptionValue={option => option.id}
                                 options={studentsList}
                                 placeholder="Neptun"
-                                onChange={opt => this.setState({studentId: opt.id,})}
+                                onChange={opt => this.setState({ studentId: opt.id, })}
                             />
 
-                            <br/>
+                            <br />
 
-                            <br/>
+                            <br />
 
                             <div className="container">
                                 <div className="row">
@@ -133,14 +134,14 @@ class ListStudents extends Component {
                                     <FormGroup className="col-6">
                                         <Label for="pontszam"><h5>Pontszám</h5></Label>
                                         <Input type="number" name="score" id="pontszam" value={emptyExam.score || ''}
-                                               placeholder="" onChange={this.handleChange}/>
+                                            placeholder="" onChange={this.handleChange} />
                                     </FormGroup>
 
                                     <FormGroup className="col-6">
                                         <Label for="mark"><h5>Jegy</h5></Label>
                                         <Input type="number" name="mark" id="mark" placeholder=""
-                                               value={emptyExam.mark || ''}
-                                               onChange={this.handleChange}/>
+                                            value={emptyExam.mark || ''}
+                                            onChange={this.handleChange} />
                                     </FormGroup>
                                 </div>
 
@@ -156,187 +157,43 @@ class ListStudents extends Component {
                     </ModalFooter>
                 </Modal>
 
-                <h1>Diákok (Fejlesztés alatt)
+                <h1 className="students_title">Diákok
                     <Button color="danger" className="delete-button">Diák Törlése</Button>
                     <Button color="warning" className="delete-button">Jegy módosítása</Button>
 
                     <Button color="success" className="delete-button"
-                            onClick={this.toggleExamModal}>Új jegy beírása</Button>
+                        onClick={this.toggleExamModal}>Új jegy beírása</Button>
                 </h1>
-                <ul>
+                
+
                     {studentsList.map(student =>
-                        <li key={student.id}>
+                        <li className="student_element" key={student.id}>
+                            < span className="student_neptun">
+                                {student.neptun}:
+                            </span>
 
-                            {student.neptun}:
+                            <div className="student_list">
 
-                            {student.exams.map(exam =>
-                                <li key={exam.id}>{exam.type} {exam.score} {exam.mark}</li>)
-                            }
-
+                                {student.exams.map(exam =>
+                                    <div className="student_spec" key={exam.id}>
+                                        <span>
+                                            {exam.type}
+                                        </span>
+                                        <span>{exam.score} pont</span>
+                                        <span>
+                                            {exam.mark}
+                                        </span>  </div>)
+                                }
+                            </div>
                         </li>
                     )}
-                </ul>
+                
 
-               {/* < div
-                    className="student_element">
-                            < span
-                                className="student_neptun">
-                            NEPTUNA
-                    :
-                    </span>
-                    <div className="student_list">
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                    </div>
-                </div>
-                <div className="student_element">
-                    <span className="student_neptun">
-                    NEPTUNA:
-                    </span>
-                    <div className="student_list">
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                    </div>
-                </div>
-                <div className="student_element">
-                    <span className="student_neptun">
-                    NEPTUNA:
-                    </span>
-                    <div className="student_list">
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    89 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                        <div className="student_spec">
-                    <span>
-                    ZH1
-                    </span>
-                            <span>
-                    189 pont
-                    </span>
-                            <span>
-                    4
-                    </span>
-                        </div>
-                    </div>
-                </div>*/}
+           
 
             </div>
         )
-            ;
+
     }
 }
 

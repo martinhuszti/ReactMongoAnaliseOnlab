@@ -23,6 +23,7 @@
 .flex_column {
     display: flex;
     flex-direction: column;
+    scrollbar-width: 0;
 }
 
 .box_1 {
@@ -71,9 +72,7 @@
     margin-right: 20px;
     cursor: pointer;
 }
-.loggedin_slidemenu{
 
-}
 
 @media (min-width: 750px) {
     #loggedin_menuicon {
@@ -110,11 +109,14 @@
 .menu_items_text_two{
     margin: 30px 30px 30px 30px;
     padding-top: 10px;
+    scrollbar-width: 0;
 }
 
 .menu_items_two{
     color: white;
     vertical-align: middle;
+    text-align: left;
+    scrollbar-width: 0;
 }
 
 .bm-item {
@@ -124,6 +126,10 @@
     margin-bottom: 10px;
     color: #d1d1d1;
     transition: color 0.2s;
+    scrollbar-width: 0;
+}
+.bm-item-list{
+    scrollbar-width: 0;
 }
 
 
@@ -142,6 +148,8 @@
 
 .bm-cross {
     background: #bdc3c7;
+}.bm-cross-button {
+    margin-right: 20px;
 }
 
 /* General sidebar styles */
@@ -150,6 +158,7 @@
     background: #1D155D;
   padding-top: 15px;
     font-size: 1.15em;
+    scrollbar-width: 0;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -163,5 +172,6 @@
 /* Styling of overlay */
 
 .bm-overlay {
+    scrollbar-width: 0;
     background: rgba(0, 0, 0, 0.3);
 }

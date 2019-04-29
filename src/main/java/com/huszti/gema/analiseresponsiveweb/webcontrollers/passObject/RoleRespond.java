@@ -11,24 +11,25 @@ private ArrayList<Respond> roleRespond;
     public RoleRespond(String role) {
         roleRespond =new ArrayList<>();
         System.out.println(role +" bent");
-        if(role.equals("admin")){
-            System.out.println("belemész");
-            adminRespond();
-        }
-       else if(role.equals("teacher")){
-            teacherRespond();
-        }
-        else if(role.equals("student")){
-            studentRespond();
-        }
-        else{
-            noRespond();
+        switch (role) {
+            case "admin":
+                System.out.println("belemész");
+                adminRespond();
+                break;
+            case "teacher":
+                teacherRespond();
+                break;
+            case "student":
+                studentRespond();
+                break;
+            default:
+                noRespond();
+                break;
         }
 
     }
     private void adminRespond(){
         roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
-        roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
         roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
         roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
         roleRespond.add(new Respond("/LoggedIn/students","Diákok"));
@@ -42,7 +43,6 @@ private ArrayList<Respond> roleRespond;
 
     private void teacherRespond(){
         roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
-        roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
         roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
         roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
         roleRespond.add(new Respond("/LoggedIn/students","Diákok"));

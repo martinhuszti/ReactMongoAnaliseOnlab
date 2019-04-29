@@ -21,6 +21,7 @@ import './css/loggedin.css';
 import { slide as Menu } from 'react-burger-menu'
 
 import MenuIcon from '@material-ui/icons/Menu';
+import Rowing from '@material-ui/icons';
 
 
 class LoggedIn extends Component {
@@ -176,7 +177,7 @@ class LoggedIn extends Component {
                     <Menu width={'200px'} customBurgerIcon={false} isOpen={this.state.menuToggle} onStateChange={(state) => this.handleStateChange(state) } className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
                             {this.state.items.map(items =>
-                                <Link to={items.link} className=" menu_items_two box_1">
+                                <Link to={items.link} onClick={this.menuClick} className=" menu_items_two box_1">
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}

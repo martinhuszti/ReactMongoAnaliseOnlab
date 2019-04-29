@@ -22,10 +22,17 @@
     justify-content:space-between;
     border-bottom: 1px solid #1D155D;
 }
+.student_spec:last-child{
+    
+    border-bottom: none;
+}
 .student_neptun{
 width: 100px;
 }
 
 .delete-button{
     float: right;
+}
+.students_title{
+    margin-bottom: 20px;
 }
