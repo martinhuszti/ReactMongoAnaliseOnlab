@@ -38,12 +38,13 @@ public class StudentController {
         studentRepository.save(user);
         return user;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/changestudent")
+
+    @PatchMapping("/gyak")
     public void updateGyakStudent(@RequestBody UpdateStudentRespond user) {
         System.out.println(user);
         Student student=studentRepository.findById(user.getId()).orElse(null);
         System.out.println(student);
+        assert student != null;
         student.setGyakid(user.getGyak());
         System.out.println(student);
         studentRepository.save(student);
