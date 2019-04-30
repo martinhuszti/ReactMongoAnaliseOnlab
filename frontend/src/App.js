@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 import Header from './elements/header.jsx';
@@ -11,16 +11,16 @@ class App extends Component {
 
     componentDidMount() {
 
-        document.title = "Login Page";
+        document.title = "Analízis";
     }
 
 
     render() {
         return (
             <div className="App">
-                <Header/>
+                <Header />
 
-                <Footer/>
+                <Footer />
             </div>
         );
     }

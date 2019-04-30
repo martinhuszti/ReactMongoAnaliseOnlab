@@ -34,7 +34,7 @@ class Addrequirements extends Component {
         const {item} = this.state;
 
         console.log(item);
-        await fetch('/uploadreq', {
+        await fetch('/api/requirements', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
@@ -44,7 +44,7 @@ class Addrequirements extends Component {
 
     
     componentWillMount() {
-        fetch(`/getreq`)
+        fetch(`/api/requirements`)
             .then(result => result.json())
             .then(items => {
                 console.log(items);
@@ -150,10 +150,10 @@ class Addrequirements extends Component {
                 <div className="addreq_adddoc">
                     <div className="addreq_file_lookup">
                         <div className="addreq_line_text">
-                            <label htmlFor="file-upload" class="addreq_file_upload">
+                            <label htmlFor="file-upload" className="addreq_file_upload">
                                 Tallózás...</label>
 
-                            <input class="extra-input" id="file-upload" type="file" accept=".doc,.docx, .pdf"
+                            <input className="extra-input" id="file-upload" type="file" accept=".doc,.docx, .pdf"
                                    onChange={this.handleUploadFile}/>
                         </div>
 

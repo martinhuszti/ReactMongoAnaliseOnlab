@@ -50,6 +50,29 @@ public class StudentController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/getStudentResult")
+    public ResponseEntity<Student> getStudentResult(@RequestParam String id){
+        System.out.println(id +"Ez az id");
+SimpleUser user=userRepository.findById(id).orElse(null);
+
+        System.out.println(user);
+        if(user==null){
+            System.out.println("Nincs ilyen diák");
+            return  ResponseEntity.noContent().header("Nincs ilyen diák").build();
+        }
+        Student student=studentRepository.findByNeptun(user.getNeptun());
+        System.out.println("Ez a diák: " + student);
+        if(student==null){
+            System.out.println("Nincs ilyen");
+            return  ResponseEntity.noContent().header("Nincs ilyen").build();
+        }
+        System.out.println(student);
+        System.out.println("student adat");
+        return  ResponseEntity.ok(student);
+
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getAllStudent")
     public ResponseEntity<List<Student>> getStudentsByGyakid(@RequestParam String id) {
         SimpleUser user = userRepository.findById(id).orElse(null);

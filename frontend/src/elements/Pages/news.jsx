@@ -37,17 +37,17 @@ class Class extends Component {
             return <Redirect to='/LoginForm' />
         }
     };
-    toggleupPopup = (item, ev) => {
+    toggleupPopup = (item) => {
         
         this.setState({
             toggletitle: item.title,
             toggletext: item.text
-        })
-        console.log(this.state.toggletitle)
-        console.log("asdasdasdasd")
+        });
+        console.log(this.state.toggletitle);
+        console.log("asdasdasdasd");
 
         this.togglePopup();
-    }
+    };
 
 
 
@@ -71,7 +71,7 @@ class Class extends Component {
         event.preventDefault();
         const { item } = this.state;
 
-        await fetch('/addnews', {
+        await fetch('/api/news', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
@@ -83,7 +83,7 @@ class Class extends Component {
 
     componentDidMount() {
 
-        fetch(`/getnews`)
+        fetch(`/api/news/top5`)
             .then(result => result.json())
             .then(items => {
                 this.setState({ items });
@@ -100,6 +100,9 @@ class Class extends Component {
 
     render() {
 
+        const {items} = this.state;
+        const {showPopup} = this.state;
+
         return (
             <div>
                 {this.renderRedirect()}
@@ -110,15 +113,15 @@ class Class extends Component {
                         <div id="placeholder_header" />
                         <div id="width_class">
 
-                            {this.state.items.map(item => <li key={item.id}>
+                            {items.map(item => <li key={item.id}>
                                 <div className="news news_head">
-                                    <p onClick={this.toggleupPopup.bind(this, item)} value={item} className="news_text news_pointer">{item.title}</p>
+                                    <p onClick={this.toggleupPopup.bind(this, item)} className="news_text news_pointer">{item.title}</p>
                                 </div>
 
                                 <div className="news news_body"> {item.text.substring(0,200)} . . .</div>
                             </li>)}
 
-                            {this.state.showPopup ?
+                            {showPopup ?
                                 <Popup
                                 title= {this.state.toggletitle}
                                 text= {this.state.toggletext}

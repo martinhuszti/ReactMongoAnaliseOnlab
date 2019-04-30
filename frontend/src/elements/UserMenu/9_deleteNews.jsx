@@ -18,29 +18,31 @@ class Delete_Publication extends Component {
     }
    
 
-    deleteNewsClick = (item, ev) => {
+    deleteNewsClick = (item) => {
 
-        fetch('/deletenews', {
-            method: "POST",
+        fetch('/api/news', {
+            method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
         });
-        console.log("törlés")
+        console.log("törlés");
 
         var array = [...this.state.items];
-        var index = array.indexOf(item)
+        var index = array.indexOf(item);
         if (index !== -1) {
             array.splice(index, 1);
             this.setState({ items: array });
         }
 
         console.log(this.state.items);
-    }
+    };
 
     componentDidMount() {
 
 
-        fetch(`/getallnews`)
+        fetch(`/api/news`,{
+            method:"GET"
+        })
             .then(result => result.json())
             .then(items => this.setState({ items }));
 
@@ -49,14 +51,15 @@ class Delete_Publication extends Component {
 
     render() {
 
+        const {items} =this.state;
 
         return (
             <div>
 
-                {this.state.items.map(item => <li id="dnews_first" key={item.id}>
+                {items.map(item => <li id="dnews_first" key={item.id}>
                     <div className="news dnews_head dnews_flex">
                         <p className="news_text dnews_flexiable">{item.title}</p>
-                        <Clear className='dnews_clear' value={item} onClick={this.deleteNewsClick.bind(this, item)}></Clear>
+                        <Clear className='dnews_clear' value={item} onClick={this.deleteNewsClick.bind(this, item)}/>
                     </div>
                     
                        

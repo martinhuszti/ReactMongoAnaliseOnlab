@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import './css/extra_person.css'
 
 class ExtraAdmin extends Component {
@@ -62,13 +61,13 @@ class ExtraAdmin extends Component {
     async addadmin(event) {
 
         const { createdAdmin } = this.state;
-        await fetch('/addadmin', {
+        await fetch('/api/admins', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createdAdmin)
         });
 
-        console.log("új diák")
+        console.log("új adj8h")
     }
 
 

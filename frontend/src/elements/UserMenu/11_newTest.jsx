@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 
 import Select from 'react-select';
-import Button from 'react-bootstrap/Button';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
-
+import { Button, Alert, Form, FormGroup, Input, Label } from 'reactstrap';
 
 
 const optionsTest = [
@@ -14,13 +12,10 @@ const optionsTest = [
 
 class NewTest extends Component {
 
-
-
-
     emptyTest = {
         title: '',
-        type: '',
         time: '',
+        creator: '',
 
     };
 
@@ -29,9 +24,12 @@ class NewTest extends Component {
 
         this.state = {
             item: this.emptyTest,
+            examType: "",
             items: [],
             options: optionsTest,
-            selectedOption:"ZH",
+            selectedOption: "ZH",
+            btnDisabled: false,
+            alertVisible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,6 +40,8 @@ class NewTest extends Component {
     handleChange(event) {
         const target = event.target;
         const value = target.value;
+        console.log(value);
+        console.log("value");
         const name = target.name;
         let item = { ...this.state.item };
         item[name] = value;
@@ -50,25 +50,50 @@ class NewTest extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
 
-        await fetch('/addtest', {
+        this.toggleBtn();
+
+        var exam = {
+            title: this.state.item.title,
+            type: this.state.examType,
+            time: this.state.item.time,
+            creator: sessionStorage.getItem("id")
+
+        };
+        console.log("Exam added: " + exam);
+
+
+        await fetch('/api/exams/tests', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(item)
+            body: JSON.stringify(exam)
         });
 
-        console.log("feltöltés befejeződött")
+        window.setTimeout(() => {
+            this.toggleBtn();
+
+        }, 2000);
+
+        console.log("feltöltés befejeződött");
+
+
+
+
     }
+
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
     optionChange = (selectedOption) => {
 
         this.setState({
-            item: {
-                type: selectedOption.value,
-            }
-        })
-        console.log(this.state.item.type)
+            examType: selectedOption.value,
+        });
+        console.log(this.state.examType)
     };
 
 
@@ -76,6 +101,8 @@ class NewTest extends Component {
 
 
         const { item } = this.state;
+        const { btnDisabled } = this.state;
+
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
@@ -102,10 +129,17 @@ class NewTest extends Component {
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Feltöltés</Button>
+                        <Button disabled={btnDisabled} variant={'success'} color="primary"
+                            type="submit">Feltöltés</Button>
                     </FormGroup>
 
                 </Form>
+
+                <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
+                    Sikeresen felveted a számonkérést!
+                </Alert>
+
+
             </div>
         );
     }

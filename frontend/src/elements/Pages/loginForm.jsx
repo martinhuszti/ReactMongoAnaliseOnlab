@@ -1,7 +1,7 @@
 import './css/news.css';
 import './css/loginForm.css'
 import React, {Component} from 'react';
-import Button from 'react-bootstrap/Button';
+import {Button} from 'reactstrap';
 import {withRouter} from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import {any} from "prop-types";
@@ -54,6 +54,12 @@ class RegistrationForm extends Component {
             console.log('Nem nyomtam enter');
             this.handleSubmit(e);
         }
+    }
+    componentWillMount(){
+        let login= sessionStorage.getItem("loggedin");
+       let loginid= sessionStorage.getItem("id");
+       if(loginid!==null && login==="true")
+       this.props.history.push('/LoggedIn');
     }
 
     alertboxshow() {

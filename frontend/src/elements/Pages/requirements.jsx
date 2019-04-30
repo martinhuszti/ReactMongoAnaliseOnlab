@@ -21,7 +21,7 @@ class Requirements extends Component {
 
     }
     componentWillMount() {
-        fetch(`/getreq`)
+        fetch(`/api/requirements`)
             .then(result => result.json())
             .then(items => {
                 console.log(items);
@@ -55,6 +55,7 @@ class Requirements extends Component {
 
     render() {
 
+        const {items} = this.state;
 
         return (
             <div id="placeholder_news">
@@ -69,26 +70,26 @@ class Requirements extends Component {
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Jelenlét:</span>
-                                    <p>{this.state.items[0]}</p>
+                                    <p>{items[0]}</p>
                                 </li>
                                 <li>
                                     <span>Aláírás:</span>
-                                    <p>{this.state.items[1]}</p>
+                                    <p>{items[1]}</p>
                                 </li>
                                 <li>
                                     <span>Vizsga:</span>
-                                    <p>{this.state.items[2]}
+                                    <p>{items[2]}
                                     </p>
                                 </li>
                             </ul>
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Számonkérések:</span>
-                                    <p>{this.state.items[3]}</p>
+                                    <p>{items[3]}</p>
                                 </li>
                                 <li>
                                     <span>Pontszámítás:</span>
-                                    <p>{this.state.items[4]}
+                                    <p>{items[4]}
                                     </p>
                                 </li>
                             </ul>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Form, FormGroup, Input, Label } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
+import { Button, Alert, Form, FormGroup, Input, Label } from 'reactstrap';
 import './css/extra_person.css'
 import AsyncSelect from "react-select/lib/Async";
 
@@ -123,7 +122,7 @@ class ExtraTeacher extends Component {
 
         const getStudents = (inputValue, callback) => {
 
-            fetch(`/getLabs`, {
+            fetch(`/api/labors`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 //body: JSON.stringify(item)

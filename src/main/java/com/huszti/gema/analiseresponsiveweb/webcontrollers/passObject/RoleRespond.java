@@ -11,54 +11,54 @@ private ArrayList<Respond> roleRespond;
     public RoleRespond(String role) {
         roleRespond =new ArrayList<>();
         System.out.println(role +" bent");
-        if(role.equals("admin")){
-            System.out.println("belemész");
-            adminRespond();
-        }
-       else if(role.equals("teacher")){
-            teacherRespond();
-        }
-        else if(role.equals("student")){
-            studentRespond();
-        }
-        else{
-            noRespond();
+        switch (role) {
+            case "admin":
+                System.out.println("belemész");
+                adminRespond();
+                break;
+            case "teacher":
+                teacherRespond();
+                break;
+            case "student":
+                studentRespond();
+                break;
+            default:
+                noRespond();
+                break;
         }
 
     }
     private void adminRespond(){
-        roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
-        roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
-        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
-        roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
-        roleRespond.add(new Respond("/LoggedIn/students","Diákok"));
-        roleRespond.add(new Respond("/LoggedIn/newPublication","Új hír közzététele"));
-        roleRespond.add(new Respond("/LoggedIn/addPerson","Új felhasználó"));
-        roleRespond.add(new Respond("/LoggedIn/addReq","Követelmények"));
-        roleRespond.add(new Respond("/LoggedIn/deletePublication","Hír törlése"));
-        roleRespond.add(new Respond("/LoggedIn/addLab","Új gyakorlat"));
-        roleRespond.add(new Respond("/LoggedIn/newTest","Új számonkérés"));
+        roleRespond.add(new Respond("/LoggedIn/data","Adatok",1));
+        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás",2));
+        roleRespond.add(new Respond("/LoggedIn/controller","Chat",3));
+        roleRespond.add(new Respond("/LoggedIn/students","Diákok",4));
+        roleRespond.add(new Respond("/LoggedIn/newPublication","Új hír közzététele",5));
+        roleRespond.add(new Respond("/LoggedIn/addPerson","Új felhasználó",6));
+        roleRespond.add(new Respond("/LoggedIn/addReq","Követelmények",7));
+        roleRespond.add(new Respond("/LoggedIn/deletePublication","Hír törlése",8));
+        roleRespond.add(new Respond("/LoggedIn/addLab","Új gyakorlat",9));
+        roleRespond.add(new Respond("/LoggedIn/newTest","Új számonkérés",10));
     }
 
     private void teacherRespond(){
-        roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
-        roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
-        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
-        roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
-        roleRespond.add(new Respond("/LoggedIn/students","Diákok"));
-        roleRespond.add(new Respond("/LoggedIn/newPublication","Új hír közzététele"));
-        roleRespond.add(new Respond("/LoggedIn/addPerson","Új felhasználó"));
-        roleRespond.add(new Respond("/LoggedIn/addReq","Követelmények"));
-        roleRespond.add(new Respond("/LoggedIn/deletePublication","Hír törlése"));
+        roleRespond.add(new Respond("/LoggedIn/data","Adatok",1));
+        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás",2));
+        roleRespond.add(new Respond("/LoggedIn/controller","Chat",3));
+        roleRespond.add(new Respond("/LoggedIn/students","Diákok",4));
+        roleRespond.add(new Respond("/LoggedIn/newPublication","Új hír közzététele",5));
+        roleRespond.add(new Respond("/LoggedIn/addPerson","Új felhasználó",6));
+        roleRespond.add(new Respond("/LoggedIn/addReq","Követelmények",7));
+        roleRespond.add(new Respond("/LoggedIn/deletePublication","Hír törlése",8));
     }
     private void studentRespond(){
-        roleRespond.add(new Respond("/LoggedIn/data","Adatok"));
-        roleRespond.add(new Respond("/LoggedIn/result","Eredmények"));
-        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
-        roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
+        roleRespond.add(new Respond("/LoggedIn/data","Adatok",1));
+        roleRespond.add(new Respond("/LoggedIn/result","Eredmények",11));
+        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás",2));
+        roleRespond.add(new Respond("/LoggedIn/controller","Chat",3));
     }
     private void noRespond(){
-        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás"));
-        roleRespond.add(new Respond("/LoggedIn/controller","Chat"));
+        roleRespond.add(new Respond("/LoggedIn/change_pass","Jelszó változtatás",2));
+        roleRespond.add(new Respond("/LoggedIn/controller","Chat",3));
     }
 }

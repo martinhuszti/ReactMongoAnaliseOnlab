@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/change_pass.css';
-import Button from 'react-bootstrap/Button';
+import {Button} from 'reactstrap';
 import Eye from '@material-ui/icons/Visibility';
 import EyeSlash from '@material-ui/icons/VisibilityOff';
 

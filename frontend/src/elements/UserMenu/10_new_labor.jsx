@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './css/news_publication.css';
-import Button from 'react-bootstrap/Button';
-import {Form, FormGroup, Input, Label} from 'reactstrap';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 
 class new_Labor extends Component {
     emptyLab = {
         title: '',
         place: '',
-        time:'',
+        time: '',
 
     };
 
@@ -28,18 +27,18 @@ class new_Labor extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = {...this.state.item};
+        let item = { ...this.state.item };
         item[name] = value;
-        this.setState({item});
+        this.setState({ item });
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const {item} = this.state;
+        const { item } = this.state;
 
-        await fetch('/addlab', {
+        await fetch('/api/labors', {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
         });
 
@@ -47,27 +46,27 @@ class new_Labor extends Component {
     }
 
     render() {
-        const {item} = this.state;
+        const { item } = this.state;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Gyakorlat neve:</Label>
                         <Input className="newsP_title" type="text" name="title" id="title"
-                               value={item.title || ''} onChange={this.handleChange}
+                            value={item.title || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Hely:</Label>
                         <Input className="newsP_title" type="text" name="place" id="place"
-                               value={item.place || ''} onChange={this.handleChange}
+                            value={item.place || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
                         <Input className="newsP_title" type="text" name="time" id="time"
-                               value={item.time || ''} onChange={this.handleChange}
+                            value={item.time || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 

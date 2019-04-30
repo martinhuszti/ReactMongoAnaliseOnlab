@@ -1,8 +1,14 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.google.gson.Gson;
+import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
+import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
+import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
+import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.DataRespond;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.LaborRespond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
 import lombok.Data;
@@ -31,13 +37,18 @@ class passObj {
 @RestController
 public class UserController {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
+    private StudentRepository studentRepository;
+    private LaborRepository laborRepository;
+    private TeacherRepository teacherRepository;
 
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(TeacherRepository teacherRepository, UserRepository userRepository, StudentRepository studentRepository, LaborRepository laborRepository) {
         this.userRepository = userRepository;
-
+        this.studentRepository = studentRepository;
+        this.laborRepository = laborRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -63,13 +74,13 @@ public class UserController {
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
 
-            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() +" id");
+            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() + " id");
 
             HashMap<String, String> json = new HashMap<>();
-            json.put("id",repoUser.getId());
+            json.put("id", repoUser.getId());
             System.out.println(json);
 
-            return new ResponseEntity<>(json,HttpStatus.OK);
+            return new ResponseEntity<>(json, HttpStatus.OK);
 
         }
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("valami hiba történt");
@@ -77,11 +88,63 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/getDetails")
-    public SimpleUser getDetails(@RequestParam String id) {
-        return userRepository.findById(id).orElse(null);
+    public DataRespond getDetails(@RequestParam String id) {
+
+
+        SimpleUser tempuser = userRepository.findById(id).orElse(null);
+        DataRespond backrespond = new DataRespond();
+        backrespond.setName(tempuser.getName());
+        backrespond.setNeptun(tempuser.getNeptun());
+        backrespond.setEmail(tempuser.getEmail());
+        backrespond.setLast_login(tempuser.getLast_login());
+        backrespond.setRegistration_date(tempuser.getRegistration_date());
+
+        switch (tempuser.getRole()) {
+            case "student": {
+                System.out.println(studentRepository.findByNeptun(tempuser.getNeptun()));
+                String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
+                Labor templab = laborRepository.findById(getID).orElse(null);
+
+                LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
+
+                backrespond.addGyakList(tempRespondLab);
+                System.out.println(getID);
+                System.out.println(templab);
+                System.out.println("GETIDstudent");
+                break;
+            }
+            case "teacher": {
+                List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
+                Iterable<Labor> asd = laborRepository.findAllById(getID);
+                List<LaborRespond> tempLabors = new ArrayList<>();
+                for (Labor ids : asd) {
+                    System.out.println("gyakid");
+                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
+                    tempLabors.add(tempRespondLab);
+                    System.out.println(tempRespondLab);
+                }
+                backrespond.addAllGyakList(tempLabors);
+                System.out.println(backrespond.getGyak().get(0));
+                System.out.println("Eddig eljött");
+                break;
+            }
+            case "admin": {
+                Iterable<Labor> asd = laborRepository.findAll();
+                List<LaborRespond> tempLabors = new ArrayList<>();
+                for (Labor ids : asd) {
+                    System.out.println("adminid");
+                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
+                    tempLabors.add(tempRespondLab);
+                    System.out.println(tempRespondLab);
+                }
+                backrespond.addAllGyakList(tempLabors);
+                break;
+            }
+        }
+
+        return backrespond;
 
     }
-
 
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -110,15 +173,16 @@ public class UserController {
 
         return userRepository.findById(user).orElse(null).getRole();
     }
+
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/getrolemenu")
     public String getrolemenu(@RequestBody String user) {
 
 
         System.out.println(user);
-        String temprole=userRepository.findById(user).orElse(null).getRole();
+        String temprole = userRepository.findById(user).orElse(null).getRole();
 
-        ArrayList<Respond> temprespond=new RoleRespond(temprole).getRoleRespond();
+        ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();
 
         Gson gson = new Gson();
 

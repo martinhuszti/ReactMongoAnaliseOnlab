@@ -9,12 +9,14 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 
 @RestController
+@RequestMapping("/api/admins")
 public class AdminController {
 
     private final Environment env;
@@ -27,15 +29,14 @@ public class AdminController {
         this.env = env;
         this.userRepository = userRepository;
     }
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addadmin")
-    public Admin addAdmin(@RequestBody Admin admin) {
+
+    @PostMapping
+    public ResponseEntity addAdmin(@RequestBody Admin admin) {
         adminRepository.save(admin);
-        return admin;
+        return ResponseEntity.ok(admin);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/restoreDefault")
+    @PostMapping("/restoreDefault")
     public List<Student> getStudentsByGyakid() {
 
         MongoClientURI uri = new MongoClientURI(Objects.requireNonNull(env.getProperty("spring.data.mongodb.uri")));
