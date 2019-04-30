@@ -4,23 +4,21 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 import com.huszti.gema.analiseresponsiveweb.database.Requirements;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 @RestController
+@RequestMapping("/api/requirements")
 public class ReqController {
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/uploadreq")
-    public Requirements updateRequirements(@RequestBody Requirements newreq) throws FileNotFoundException, UnsupportedEncodingException {
+    @PostMapping
+    public Requirements updateRequirements(@RequestBody Requirements newreq) throws IOException {
 
-        PrintWriter writer = new PrintWriter("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt", StandardCharsets.UTF_8);
         writer.println(newreq.getPresence());
         writer.println(newreq.getSignature());
         writer.println(newreq.getExam());
@@ -31,14 +29,13 @@ public class ReqController {
         return newreq;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getreq")
-    public List<String> getReq() throws FileNotFoundException, UnsupportedEncodingException {
+    @GetMapping
+    public List<String> getReq() throws IOException {
 
-        File file = new File("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt");
+        File file = new File("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/ort.txt");
         if(!file.exists()) {
 
-            PrintWriter writer = new PrintWriter(file, "UTF-8");
+            PrintWriter writer = new PrintWriter(file, StandardCharsets.UTF_8);
         }
         Scanner sc = new Scanner(file);
         ArrayList<String> tempread = new ArrayList<>();

@@ -21,14 +21,14 @@ public class LaborController {
     }
 
     @PostMapping
-    public Labor addlab(@RequestBody Labor labor) {
+    public Labor addNewLab(@RequestBody Labor labor) {
 
         laborRepository.save(labor);
         return  labor;
     }
 
     @GetMapping
-    public List<Labor> getlabors() {
+    public List<Labor> getAllLabs() {
         return laborRepository.findAll();
 
     }

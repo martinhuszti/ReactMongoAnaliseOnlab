@@ -35,7 +35,7 @@ class News_Publication extends Component {
         event.preventDefault();
         const { item } = this.state;
 
-        await fetch('/addnews', {
+        await fetch('/api/news', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)
@@ -58,7 +58,7 @@ class News_Publication extends Component {
 
                     <FormGroup>
                         <Label for="head">Hír szövege</Label>
-                        <textarea className="newsP_textarea" type="text" name="text" id="text"
+                        <textarea className="newsP_textarea" itemType="text" name="text" id="text"
                             value={item.text || ''} onChange={this.handleChange}
                         />
                     </FormGroup>

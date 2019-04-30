@@ -12,7 +12,7 @@ import java.util.List;
 //push it to the limit
 
 @RestController
-@RequestMapping()
+@RequestMapping("/api/news")
 public class NewsController {
 
     private final NewsRepository newsRepository;
@@ -22,10 +22,9 @@ public class NewsController {
         this.newsRepository = newsRepository;
     }
 
-    @GetMapping("/getnews")
-    public List<News> getNews() {
-
-        ArrayList<News> tempnews = new ArrayList(newsRepository.findAll());
+    @GetMapping("/top5")
+    public List<News> getTop5News() {
+        List<News> tempnews = newsRepository.findAll();
 
         int size = tempnews.size();
         if(size<=6){
@@ -45,21 +44,20 @@ public class NewsController {
 
     }
 
-    @GetMapping("/getallnews")
+    @GetMapping
     public List<News> getallNews() {
         return newsRepository.findAll();
     }
 
 
-    @PostMapping("/addnews")
+    @PostMapping
     public News addNews(@RequestBody News news) {
         newsRepository.save(news);
 
         return news;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/deletenews")
+    @DeleteMapping
     public String deleteNews(@RequestBody News news){
 
         System.out.println(news);
