@@ -26,7 +26,7 @@ public class Test {
 
 
     public Test() {
-        creationTime= LocalDate.now();
+        creationTime = LocalDate.now();
         exams = new ArrayList<>();
     }
 

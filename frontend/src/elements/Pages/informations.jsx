@@ -15,7 +15,7 @@ class Infomations extends Component {
 
 
                     <div className="news news_head">
-                        <p className="news_text" >Információ</p>
+                        <p className="news_text">Információ</p>
                     </div>
                     <div className="news news_body"> asdasdasd</div>
                 </div>

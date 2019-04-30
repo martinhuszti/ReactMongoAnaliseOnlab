@@ -10,7 +10,10 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Objects;
@@ -53,7 +56,6 @@ public class AdminController {
         Admin admin = new Admin();
         admin.setNeptun(adminuser.getNeptun());
         adminRepository.save(admin);
-
 
 
         System.out.println("droppedall");

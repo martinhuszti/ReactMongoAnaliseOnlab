@@ -59,34 +59,35 @@ public class ExamController {
         testRepository.save(test);
 
 
-            System.out.println("New Exam: " + savedExam.toString());
-            return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
-
-        }
-
-        @PostMapping("/tests")
-        public ResponseEntity addNewTest (@RequestBody Test test){
-            SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
-            if (user == null)
-                ResponseEntity.badRequest().body("Nincs engedély v1!");
-            if (user.getRole().equals("admin")) {
-                System.out.println(test);
-                testRepository.save(test);
-                return ResponseEntity.ok("Sikeresen elmentve.");
-            }
-            return ResponseEntity.badRequest().body("Nincs engedély v2!");
-        }
-
-        @GetMapping("/tests")
-        public ArrayList<TestRespond> getAllTest () {
-
-            List<Test> getAllTest = testRepository.findAll();
-            ArrayList<TestRespond> testResponds = new ArrayList<TestRespond>();
-            for (Test item : getAllTest) {
-                testResponds.add(new TestRespond(item.getTitle(), item.getType(), item.getId()));
-            }
-            System.out.println(testResponds);
-            return testResponds;
-        }
+        System.out.println("New Exam: " + savedExam.toString());
+        return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
 
     }
+
+    @PostMapping("/tests")
+    public ResponseEntity addNewTest(@RequestBody Test test) {
+        SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
+        if (user == null)
+            ResponseEntity.badRequest().body("Nincs engedély v1!");
+        assert user != null;
+        if (user.getRole().equals("admin")) {
+            System.out.println(test);
+            testRepository.save(test);
+            return ResponseEntity.ok("Sikeresen elmentve.");
+        }
+        return ResponseEntity.badRequest().body("Nincs engedély v2!");
+    }
+
+    @GetMapping("/tests")
+    public ArrayList<TestRespond> getAllTest() {
+
+        List<Test> getAllTest = testRepository.findAll();
+        ArrayList<TestRespond> testResponds = new ArrayList<>();
+        for (Test item : getAllTest) {
+            testResponds.add(new TestRespond(item.getTitle(), item.getType(), item.getId()));
+        }
+        System.out.println(testResponds);
+        return testResponds;
+    }
+
+}

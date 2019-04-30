@@ -24,7 +24,7 @@ public class LaborController {
     public Labor addNewLab(@RequestBody Labor labor) {
 
         laborRepository.save(labor);
-        return  labor;
+        return labor;
     }
 
     @GetMapping

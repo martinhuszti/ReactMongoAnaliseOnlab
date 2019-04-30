@@ -17,11 +17,11 @@ class Addrequirements extends Component {
         super(props);
         console.log("ASDASDASD");
         this.fileService = new FileService();
-      
+
         this.state = {
             item: this.emptyReq,
             items: [],
-            data:[],
+            data: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +42,7 @@ class Addrequirements extends Component {
         console.log("feltöltés befejeződött")
     }
 
-    
+
     componentWillMount() {
         fetch(`/api/requirements`)
             .then(result => result.json())
@@ -106,7 +106,8 @@ class Addrequirements extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Jelenlét</Label>
-                        <Input className="newsP_title" type="text" name="presence" id="presence" defaultValue={this.state.items.presence}
+                        <Input className="newsP_title" type="text" name="presence" id="presence"
+                               defaultValue={this.state.items.presence}
                                value={item.presence || ''} onChange={this.handleChange}
                         />
                     </FormGroup>

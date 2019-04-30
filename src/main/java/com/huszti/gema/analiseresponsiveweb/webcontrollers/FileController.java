@@ -32,8 +32,7 @@ public class FileController {
             System.out.println(fileToSave.getPath());
             System.out.println(fileToSave.getAbsolutePath());
             System.out.println(fileToSave.getCanonicalPath());
-            if (fileToSave.createNewFile())
-            {
+            if (fileToSave.createNewFile()) {
                 System.out.println("File is created!");
             } else {
                 System.out.println("File already exists.");
