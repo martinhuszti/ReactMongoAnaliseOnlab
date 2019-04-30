@@ -42,7 +42,6 @@ public class ReqController {
 
         while (sc.hasNextLine())
             tempread.add(sc.nextLine());
-        System.out.println(tempread.get(2));
         return tempread;
 
     }

@@ -4,14 +4,12 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 import com.huszti.gema.analiseresponsiveweb.database.Users.Teacher;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/api/teachers")
 public class TeacherController {
 
     private final TeacherRepository teacherRepository;
@@ -23,14 +21,12 @@ public class TeacherController {
     }
 
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addteacher")
+    @PostMapping
     public Teacher addTeacher(@RequestBody Teacher teacher) {
         teacherRepository.save(teacher);
 
         System.out.println("Teacher added: ID: " + teacher.getId() + " NAME: " + teacher.getName() + " NEPTUN: " +
                 teacher.getNeptun() + " LBORIDs: " + teacher.getLabor_ids());
-
 
         laborRepository.findAllById(teacher.getLabor_ids())
                 .forEach(e -> e.setTeacher_id(teacher.getId()));
@@ -38,17 +34,6 @@ public class TeacherController {
         return teacher;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/getselfstudent")
-    public ArrayList getSelfStudent(@RequestBody String teacherId) {
-        Teacher teacher=teacherRepository.findById(teacherId).orElse(null);
-        if(teacher==null){
-            System.out.println("null volt ID alapján atatatalálat");
-            return null;
-        }
 
-        ArrayList students=new ArrayList();
-        return students;
-    }
 
 }

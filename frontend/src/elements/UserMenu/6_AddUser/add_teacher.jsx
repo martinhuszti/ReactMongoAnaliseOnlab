@@ -27,7 +27,7 @@ class ExtraTeacher extends Component {
         password: "default",
         role: "teacher",
         labor_ids: [],
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -54,22 +54,22 @@ class ExtraTeacher extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log(event.target.value)
+        console.log(event.target.value);
         let all = { ...this.state.all };
         all[name] = value;
         this.setState({ all });
     }
 
-    async adduser(event) {
+    async adduser() {
         let tempuser = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
             email: this.state.all.email,
             password: "default",
             role: "teacher",
-        }
+        };
         console.log("júzer2");
-        console.log(tempuser)
+        console.log(tempuser);
         await fetch('/adduser', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -80,23 +80,23 @@ class ExtraTeacher extends Component {
         console.log("új felhasználó")
     }
 
-    async addteacher(event) {
+    async addteacher() {
         console.log("tanár");
 
         let tampteacher = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
             labor_ids: this.state.all.labor_ids,
-        }
+        };
         console.log("tanár2");
-        console.log(tampteacher)
-        await fetch('/addteacher', {
+        console.log(tampteacher);
+        await fetch('/api/teachers', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tampteacher)
         });
 
-        console.log("feltöltés befejeződött")
+        console.log("feltöltés befejeződött");
         this.setState({ visible: true });
         window.setTimeout(() => {
             this.setState({ visible: false })
