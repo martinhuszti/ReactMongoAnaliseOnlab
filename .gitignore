@@ -24,3 +24,9 @@
 /.nb-gradle/
 /build/
 /src/main/resources/application.properties
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
