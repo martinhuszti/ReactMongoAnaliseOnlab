@@ -9,6 +9,7 @@ import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
+import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.UpdateStudentRespond;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,17 @@ public class StudentController {
     public Student addStudent(@RequestBody Student user) {
         studentRepository.save(user);
         return user;
+    }
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/changestudent")
+    public void updateGyakStudent(@RequestBody UpdateStudentRespond user) {
+        System.out.println(user);
+        Student student=studentRepository.findById(user.getId()).orElse(null);
+        System.out.println(student);
+        student.setGyakid(user.getGyak());
+        System.out.println(student);
+        studentRepository.save(student);
+
     }
 
     @PostMapping("/getstudentgyak")

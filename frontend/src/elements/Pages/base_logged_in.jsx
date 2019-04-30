@@ -14,8 +14,11 @@ import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
 import ListStudent from '../UserMenu/5_students'
 import NewTest from '../UserMenu/11_newTest'
-import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
-import {Alert} from 'reactstrap';
+
+import ChangeLab from '../UserMenu/12_change_labor'
+import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
+import { Alert } from 'reactstrap';
+
 import './css/news.css';
 import './css/loggedin.css';
 import {slide as Menu} from 'react-burger-menu'
@@ -31,55 +34,62 @@ import PersonIcon from '@material-ui/icons/Person';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DashBoardIcon from '@material-ui/icons/Poll';
+import SwitchCameraIcon from '@material-ui/icons/SwitchCamera';
 
 
 class LoggedIn extends Component {
 
     routes = [
         {
-            path: "/LoggedIn/data",
+            path: "/loggedin/data",
             exact: true,
             main: () => <LoggedIn_Data/>
         },
         {
-            path: "/LoggedIn/result",
-            main: () => <LoggedIn_Result/>
+
+            path: "/loggedin/result",
+            main: () => <LoggedIn_Result />
         },
         {
-            path: "/LoggedIn/change_pass",
-            main: () => <Change_Pass/>
+            path: "/loggedin/changepass",
+            main: () => <Change_Pass />
         },
         {
-            path: "/LoggedIn/controller",
-            main: () => <Chat/>
+            path: "/loggedin/controller",
+            main: () => <Chat />
         },
         {
-            path: "/LoggedIn/students",
-            main: () => <ListStudent/>
+            path: "/loggedin/students",
+            main: () => <ListStudent />
         },
         {
-            path: "/LoggedIn/newPublication",
-            main: () => <NewsPublication/>
+            path: "/loggedin/newpublication",
+            main: () => <NewsPublication />
         },
         {
-            path: "/LoggedIn/deletePublication",
-            main: () => <DeletePublication/>
+            path: "/loggedin/deletepublication",
+            main: () => <DeletePublication />
         },
         {
-            path: "/LoggedIn/addPerson",
-            main: () => <AddStudent/>
+            path: "/loggedin/addperson",
+            main: () => <AddStudent />
         },
         {
-            path: "/LoggedIn/addReq",
-            main: () => <AddReq/>
+            path: "/loggedin/addreq",
+            main: () => <AddReq />
         },
         {
-            path: "/LoggedIn/addLab",
-            main: () => <AddLab/>
+            path: "/loggedin/addlab",
+            main: () => <AddLab />
         },
         {
-            path: "/LoggedIn/newTest",
-            main: () => <NewTest/>
+            path: "/loggedin/newtest",
+            main: () => <NewTest />
+
+        },
+        {
+            path: "/loggedin/changelab",
+            main: () => <ChangeLab />
         },
     ];
 
@@ -134,7 +144,10 @@ class LoggedIn extends Component {
         if (item === 10)
             return <AddIcon/>;
         if (item === 11)
-            return <DashBoardIcon/>
+            return <DashBoardIcon />
+        if (item === 12)
+            return <SwitchCameraIcon />
+
     }
 
     menuClick() {
@@ -248,7 +261,9 @@ class LoggedIn extends Component {
                         <div className="menu_items flex_column loggedin_disapier">
                             {items.map(items =>
                                 <Link to={items.link} className="menu_items box_1">
+
                                     <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
+
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}
@@ -290,22 +305,12 @@ export default withRouter(LoggedIn);
 
 const emptyStudent = [
     {
-        link: "/LoggedIn/data",
+        link: "/loggedin/data",
         text: 'Adatok',
         motiv: 1,
     },
     {
-        link: "/LoggedIn/result",
-        text: 'Eredmények',
-        motiv: 11,
-    },
-    {
-        link: "/LoggedIn/change_pass",
-        text: 'Jelszó változtatás',
-        motiv: 2,
-    },
-    {
-        link: "/LoggedIn/controller",
+        link: "/loggedin/controller",
         text: 'Chat',
         motiv: 3,
     }
