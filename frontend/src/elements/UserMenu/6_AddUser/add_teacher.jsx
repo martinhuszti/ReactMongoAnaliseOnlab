@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Form, FormGroup, Input, Label } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
+import { Button, Alert, Form, FormGroup, Input, Label } from 'reactstrap';
 import './css/extra_person.css'
 import AsyncSelect from "react-select/lib/Async";
 

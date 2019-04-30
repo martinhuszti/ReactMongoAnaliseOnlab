@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import Col from 'react-bootstrap/Col'
-import {BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import Requirements from './Pages/requirements';
 import LoginForm from './Pages/loginForm';
 import LoggedIn from './Pages/base_logged_in';
@@ -13,7 +12,7 @@ import './menu.css';
 import PageNotFound from './pageNotFound'
 
 const Home = () => (
-    <News/>
+    <News />
 );
 
 class Header extends Component {
@@ -55,7 +54,7 @@ class Header extends Component {
             }
 
 
-            this.setState({logged: 'LoggedIn'})
+            this.setState({ logged: 'LoggedIn' })
         }
 
     };
@@ -93,18 +92,18 @@ class Header extends Component {
                         <div className="header_flex">
                             <Dropdown className="header_drpdwn" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                                 <DropdownToggle className="header_background" caret>
-                                    <MenuIcon/>
+                                    <MenuIcon />
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem><Link to="/News">Hírek</Link></DropdownItem>
-                                    <DropdownItem divider/>
+                                    <DropdownItem divider />
                                     <DropdownItem><Link to="/Exams">Számonkérés</Link></DropdownItem>
                                     <DropdownItem><Link to="/Informations">Információ</Link></DropdownItem>
                                     <DropdownItem><Link to="/Excercises">Feladatok</Link></DropdownItem>
                                     <DropdownItem><Link to="/Requirements"> Követelmény</Link></DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
-                            <div className="header_flex_placeholder"/>
+                            <div className="header_flex_placeholder" />
                             <li id="loginitem" className="col menuitem">
 
                                 <Link id="login" to="/LoginForm" className="padding_menu login_button">Profil</Link>
@@ -113,19 +112,19 @@ class Header extends Component {
                         </div>
                     </nav>
                     <Switch>
-                    <Route path="/Exams" component={Home}/>
-                    <Route path="/News" component={Home}/>
-                    <Route exact path="/" render={() => (
-                        <Redirect to="/News"/>
-                    )}/>
+                        <Route path="/Exams" component={Home} />
+                        <Route path="/News" component={Home} />
+                        <Route exact path="/" render={() => (
+                            <Redirect to="/News" />
+                        )} />
 
-                    <Route path="/Informations" component={Informations}/>
-                    <Route path="/LoggedIn" component={LoggedIn}/>
-                    <Route path="/Excercises" component={Excercises}/>
+                        <Route path="/Informations" component={Informations} />
+                        <Route path="/LoggedIn" component={LoggedIn} />
+                        <Route path="/Excercises" component={Excercises} />
 
-                    <Route path="/Requirements" component={Requirements}/>
-                    <Route path="/LoginForm" component={LoginForm}/>
-                    <Route component={PageNotFound} />
+                        <Route path="/Requirements" component={Requirements} />
+                        <Route path="/LoginForm" component={LoginForm} />
+                        <Route component={PageNotFound} />
                     </Switch>
                     )} />
                 </div>

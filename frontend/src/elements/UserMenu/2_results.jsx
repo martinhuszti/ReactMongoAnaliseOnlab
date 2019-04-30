@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/result.css';
-import Button from 'react-bootstrap/Button';
+import {Button} from 'reactstrap';
 
 class LoggedIn_Result extends Component {
 
@@ -15,10 +15,10 @@ class LoggedIn_Result extends Component {
         super(props);
         this.state = {
 
-            record:[this.emptyExam],
+            record: [this.emptyExam],
 
         };
-        this.refreshMark=this.refreshMark.bind(this);
+        this.refreshMark = this.refreshMark.bind(this);
     }
 
 
@@ -27,7 +27,7 @@ class LoggedIn_Result extends Component {
         fetch(`/getStudentResult?id=${encodedValue}`)
             .then(response => response.json())
             .then(emptyExam => {
-                this.setState({ record:emptyExam.exams })
+                this.setState({ record: emptyExam.exams })
 
             }
             );
@@ -43,12 +43,12 @@ class LoggedIn_Result extends Component {
 
     }
 
-    refreshMark(){
+    refreshMark() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/getStudentResult?id=${encodedValue}`)
             .then(response => response.json())
             .then(emptyExam => {
-                this.setState({ record:emptyExam.exams })
+                this.setState({ record: emptyExam.exams })
 
             }
             );
@@ -115,7 +115,7 @@ class LoggedIn_Result extends Component {
                     <div>
 
                         <span className="result_endmark">Végső jegy:</span>
-                        <span className="result_endmark result_number">{this.state.record[this.state.record.length-1].mark}</span>
+                        <span className="result_endmark result_number">{this.state.record[this.state.record.length - 1].mark}</span>
                     </div>
                     <div className="result_autobox">
                         <div className="result_halfbox" />

@@ -1,7 +1,7 @@
 import './css/news.css';
 import './css/loginForm.css'
 import React, {Component} from 'react';
-import Button from 'react-bootstrap/Button';
+import {Button} from 'reactstrap';
 import {withRouter} from 'react-router-dom';
 import {Alert} from 'reactstrap';
 import {any} from "prop-types";

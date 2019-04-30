@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
-import Button from 'react-bootstrap/Button';
+import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import './css/extra_person.css'
 
 class ExtraAdmin extends Component {

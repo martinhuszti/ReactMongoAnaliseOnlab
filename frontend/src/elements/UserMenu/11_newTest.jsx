@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import Select from 'react-select';
-import Button from 'react-bootstrap/Button';
-import {Alert, Form, FormGroup, Input, Label} from 'reactstrap';
+import { Button, Alert, Form, FormGroup, Input, Label } from 'reactstrap';
 
 
 const optionsTest = [
-    {value: 'ZH', label: 'Zárthelyi dolgozat'},
-    {value: 'VIZSGA', label: 'Vizsga'},
-    {value: 'POTZH', label: 'Pót zárthelyi dolgozat'}
+    { value: 'ZH', label: 'Zárthelyi dolgozat' },
+    { value: 'VIZSGA', label: 'Vizsga' },
+    { value: 'POTZH', label: 'Pót zárthelyi dolgozat' }
 ];
 
 class NewTest extends Component {
@@ -44,9 +43,9 @@ class NewTest extends Component {
         console.log(value);
         console.log("value");
         const name = target.name;
-        let item = {...this.state.item};
+        let item = { ...this.state.item };
         item[name] = value;
-        this.setState({item});
+        this.setState({ item });
     }
 
     async handleSubmit(event) {
@@ -66,14 +65,14 @@ class NewTest extends Component {
 
         await fetch('/api/exams/tests', {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(exam)
         });
 
-        window.setTimeout(()=>{
+        window.setTimeout(() => {
             this.toggleBtn();
 
-        },2000);
+        }, 2000);
 
         console.log("feltöltés befejeződött");
 
@@ -101,8 +100,8 @@ class NewTest extends Component {
     render() {
 
 
-        const {item} = this.state;
-        const {btnDisabled} = this.state;
+        const { item } = this.state;
+        const { btnDisabled } = this.state;
 
         return (
             <div>
@@ -110,7 +109,7 @@ class NewTest extends Component {
                     <FormGroup>
                         <Label for="head">Számonkérés neve:</Label>
                         <Input className="newsP_title" type="text" name="title" id="title"
-                               value={item.title || ''} onChange={this.handleChange}
+                            value={item.title || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -125,13 +124,13 @@ class NewTest extends Component {
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
                         <Input className="newsP_title" type="text" name="time" id="time"
-                               value={item.time || ''} onChange={this.handleChange}
+                            value={item.time || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
                         <Button disabled={btnDisabled} variant={'success'} color="primary"
-                                type="submit">Feltöltés</Button>
+                            type="submit">Feltöltés</Button>
                     </FormGroup>
 
                 </Form>
