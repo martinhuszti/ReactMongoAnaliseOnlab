@@ -47,8 +47,8 @@ public class StudentController {
         return stdntlab;
     }
 
-    @GetMapping("/getStudentResult")
-    public ResponseEntity<Student> getStudentResult(@RequestParam String id) {
+    @GetMapping("/getById")
+    public ResponseEntity<Student> getStudent(@RequestParam String id) {
         System.out.println(id + "Ez az id");
         SimpleUser user = userRepository.findById(id).orElse(null);
 

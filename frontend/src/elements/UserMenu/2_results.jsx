@@ -24,10 +24,10 @@ class LoggedIn_Result extends Component {
 
     componentWillMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/students/Result?id=${encodedValue}`)
+        fetch(`/api/students/getById/?id=${encodedValue}`)
             .then(response => response.json())
-            .then(emptyExam => {
-                this.setState({ record: emptyExam.exams })
+            .then(student => {
+                this.setState({ record: student.exams })
 
             }
             );
@@ -45,7 +45,7 @@ class LoggedIn_Result extends Component {
 
     refreshMark() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/students/Result?id=${encodedValue}`)
+        fetch(`/api/students/getById/?id=${encodedValue}`)
             .then(response => response.json())
             .then(emptyExam => {
                 this.setState({ record: emptyExam.exams })
@@ -57,7 +57,7 @@ class LoggedIn_Result extends Component {
 
 
     render() {
-        const { emptyExam } = this.state;
+        const { record } = this.state;
         return (
             <div>
                 <div className="result_margin">
@@ -69,7 +69,7 @@ class LoggedIn_Result extends Component {
                             <span>Pont</span>
                             <span>Jegy</span>
                         </li>
-                        {this.state.record.map(exam =>
+                        {record.map(exam =>
                             <li className="result_font" key={exam.id}>
                                 <span>
                                     {exam.type}
@@ -115,7 +115,7 @@ class LoggedIn_Result extends Component {
                     <div>
 
                         <span className="result_endmark">Végső jegy:</span>
-                        <span className="result_endmark result_number">{this.state.record[this.state.record.length - 1].mark}</span>
+                        <span className="result_endmark result_number">{record[record.length - 1].mark}</span>
                     </div>
                     <div className="result_autobox">
                         <div className="result_halfbox" />

@@ -93,32 +93,35 @@ class LoggedIn_Data extends Component {
         }
 
 
+        const {item} = this.state;
+        const {gyak} = this.state;
+
         return (
             <div className="data_margin">
               
                 <ul className="data_list">
                     <li className="data_font">
                         <span>Név:</span>
-                        <span>{this.state.item.name}</span>
+                        <span>{item.name}</span>
                     </li>
                     <li className="data_font">
                         <span>Neptun:</span>
-                        <span>{this.state.item.neptun}</span>
+                        <span>{item.neptun}</span>
                     </li>
                     <li className="data_font">
                         <span>E-mail:</span>
-                        <span>{this.state.item.email}</span>
+                        <span>{item.email}</span>
                     </li>
                     <li className="data_font">
                         <span>Utoljára bejelentkezve:</span>
-                        <span>{this.state.item.last_login}</span>
+                        <span>{item.last_login}</span>
                     </li>
                     <li className="data_font ">
                         <span>Regisztráció dátuma:</span>
-                        <span>{this.state.item.registration_date}</span>
+                        <span>{item.registration_date}</span>
                     </li>
 
-                    {this.state.gyak.map(item => <li key={item.id}>
+                    {gyak.map(item => <li key={item.id}>
                         <li className="data_font data_top">
                             <span>Csoport:</span>
                             <span>{item.title}</span>

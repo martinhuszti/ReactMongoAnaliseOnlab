@@ -57,7 +57,7 @@ class ListStudents extends Component {
         );
 
 
-        fetch(`/api/students/?myGyakId=${encodedValue}`,{
+        fetch(`/api/students?myGyakId=${encodedValue}`,{
             method:"GET"
         })
             .then(response => response.json())
@@ -80,7 +80,7 @@ class ListStudents extends Component {
 
 
         console.log(this.state.emptyExam);
-        fetch(`/api/exams/?studentId=${studentId}&examType=${examType}`, {
+        fetch(`/api/exams?studentId=${studentId}&examType=${examType}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(emptyExam)
