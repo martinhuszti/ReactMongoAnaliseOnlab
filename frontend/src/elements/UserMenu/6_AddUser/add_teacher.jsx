@@ -70,7 +70,7 @@ class ExtraTeacher extends Component {
         };
         console.log("júzer2");
         console.log(tempuser);
-        await fetch('/adduser', {
+        await fetch('/api/users', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(tempuser)

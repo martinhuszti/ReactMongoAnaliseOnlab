@@ -100,7 +100,7 @@ class LoggedIn extends Component {
             window.setTimeout(() => {
                 this.setState({ visible: false })
             }, 2000);
-            console.log("új felhasználó")
+            console.log("új felhasználó");
             sessionStorage.setItem("newLogin", false);
         }
 
@@ -108,31 +108,31 @@ class LoggedIn extends Component {
         this.menuClick = this.menuClick.bind(this);
 
         this.handleStateChange = this.handleStateChange.bind(this);
-        this.motiveBind = this.motiveBind.bind(this);
+        LoggedIn.motiveBind = LoggedIn.motiveBind.bind(this);
 
     }
 
-    motiveBind(item) {
+    static motiveBind(item) {
         if (item === 1)
-            return <AccountBox />
+            return <AccountBox />;
         if (item === 2)
-            return <RemoveRedEyeIcon />
+            return <RemoveRedEyeIcon />;
         if (item === 3)
-            return <ChatIcon />
+            return <ChatIcon />;
         if (item === 4)
-            return <PersonIcon />
+            return <PersonIcon />;
         if (item === 5)
-            return <AddCommentIcon />
+            return <AddCommentIcon />;
         if (item === 6)
-            return <PersonAddIcon />
+            return <PersonAddIcon />;
         if (item === 7)
-            return <AddCommentOutlinedIcon />
+            return <AddCommentOutlinedIcon />;
         if (item === 8)
-            return <DeleteIcon />
+            return <DeleteIcon />;
         if (item === 9)
-            return <AddIcon />
+            return <AddIcon />;
         if (item === 10)
-            return <AddIcon />
+            return <AddIcon />;
         if (item === 11)
             return <DashBoardIcon />
     }
@@ -156,7 +156,7 @@ class LoggedIn extends Component {
         sessionStorage.removeItem("loggedin");
         localStorage.removeItem("id");
         localStorage.removeItem("loggedin");
-        sessionStorage.removeItem("newLogin")
+        sessionStorage.removeItem("newLogin");
 
         this.props.history.push("/")
 
@@ -184,9 +184,9 @@ class LoggedIn extends Component {
     }
 
     componentDidMount() {
-        const loginid = sessionStorage.getItem("id")
-        console.log(loginid)
-        fetch(`/getrolemenu`, {
+        const loginid = sessionStorage.getItem("id");
+        console.log(loginid);
+        fetch(`/api/users/role/menu`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: loginid
@@ -204,6 +204,7 @@ class LoggedIn extends Component {
     render() {
 
         console.log(this.state.isLoggedIn);
+        const {items} = this.state;
 
         return (
             <Router>
@@ -212,9 +213,9 @@ class LoggedIn extends Component {
                     <div id="placeholder_header" />
                     <Menu width={'250px'} customBurgerIcon={false} isOpen={this.state.menuToggle} onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
-                            {this.state.items.map(items =>
+                            {items.map(items =>
                                 <Link to={items.link} onClick={this.menuClick} className=" menu_items_two box_1">
-                                    <div className="menu_icons">{this.motiveBind(items.motiv)}</div>
+                                    <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}
@@ -243,9 +244,9 @@ class LoggedIn extends Component {
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column loggedin_disapier">
-                            {this.state.items.map(items =>
+                            {items.map(items =>
                                 <Link to={items.link} className="menu_items box_1">
-                                 <div className="menu_icons">{this.motiveBind(items.motiv)}</div>
+                                 <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}

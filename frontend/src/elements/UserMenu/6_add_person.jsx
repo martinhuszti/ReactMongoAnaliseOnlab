@@ -31,18 +31,17 @@ class AddStudent extends Component {
 
     }
     componentDidMount(){
-        const loginid=sessionStorage.getItem("id")
-        console.log(loginid)
-        fetch(`/getrole`, {
-            method: "POST",
+        const loginid=sessionStorage.getItem("id");
+        const userId = encodeURIComponent(loginid);
+        fetch(`/api/users/role?userId=${userId}`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
-            body: loginid
         }).then(res => {
             return res.text()
     
         }).then(json => {
             if(json==="admin"){
-                this.setState({options:optionsAdmin})
+                this.setState({options:optionsAdmin});
                 console.log("admin vagyok")
             }
             if(json==="teacher"){

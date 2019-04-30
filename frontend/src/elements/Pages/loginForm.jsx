@@ -73,7 +73,7 @@ class RegistrationForm extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/loginUser', {
+        await fetch('/api/users/login', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)

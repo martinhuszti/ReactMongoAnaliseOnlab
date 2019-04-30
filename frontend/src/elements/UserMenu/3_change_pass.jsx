@@ -33,7 +33,7 @@ class Change_Pass extends Component {
         event.preventDefault();
 
         const { passwObj } = this.state;
-        console.log(JSON.stringify(passwObj))
+        console.log(JSON.stringify(passwObj));
 
         const matches = passwObj.newPassword === passwObj.cPassword;
         if (matches === false) {
@@ -41,7 +41,7 @@ class Change_Pass extends Component {
         } else {
 
             passwObj.id = sessionStorage.getItem("id");
-            await fetch('/changePassword', {
+            await fetch('/api/users/password', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(passwObj)

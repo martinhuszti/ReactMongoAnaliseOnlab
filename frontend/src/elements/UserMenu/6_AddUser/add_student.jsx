@@ -62,7 +62,7 @@ class ExtraStudent extends Component {
     async adduser() {
         const { createdUser } = this.state;
 
-        await fetch('/adduser', {
+        await fetch('/api/users', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createdUser)
@@ -88,7 +88,7 @@ class ExtraStudent extends Component {
 
 
     handleSubmit(ev) {
-        ev.preventDefault()
+        ev.preventDefault();
         this.adduser();
         this.addgyak();
     }

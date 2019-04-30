@@ -15,7 +15,7 @@ class ExtraAdmin extends Component {
     };
     createdAdmin = {
         neptun: "",
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -46,10 +46,10 @@ class ExtraAdmin extends Component {
         })
     }
 
-    async adduser(event) {
+    async adduser() {
         const { createdUser } = this.state;
 
-        await fetch('/adduser', {
+        await fetch('/api/users', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(createdUser)
@@ -58,7 +58,7 @@ class ExtraAdmin extends Component {
         alert("Sikeres regisztáció!");
         console.log("új felhasználó")
     }
-    async addadmin(event) {
+    async addadmin() {
 
         const { createdAdmin } = this.state;
         await fetch('/api/admins', {
@@ -77,9 +77,9 @@ class ExtraAdmin extends Component {
             createdAdmin: {
                 neptun: this.state.createdUser.neptun,
             }
-        })
-        console.log(this.state.createdUser)
-        console.log(this.state.createdAdmin)
+        });
+        console.log(this.state.createdUser);
+        console.log(this.state.createdAdmin);
 
         this.adduser(event);
         this.addadmin(event);

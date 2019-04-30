@@ -18,9 +18,9 @@ class Delete_Publication extends Component {
     }
    
 
-    deleteNewsClick = (item) => {
+   async deleteNewsClick (item) {
 
-        fetch('/api/news', {
+         await fetch('/api/news', {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(item)

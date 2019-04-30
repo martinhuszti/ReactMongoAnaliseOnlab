@@ -35,7 +35,7 @@ class LoggedIn_Data extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/getDetails?id=${encodedValue}`, {
+        fetch(`/api/users/details?userId=${encodedValue}`, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
             //body: JSON.stringify(item)
