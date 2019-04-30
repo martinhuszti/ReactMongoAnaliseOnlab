@@ -24,7 +24,7 @@ class LoggedIn_Result extends Component {
 
     componentWillMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/getStudentResult?id=${encodedValue}`)
+        fetch(`/api/students/Result?id=${encodedValue}`)
             .then(response => response.json())
             .then(emptyExam => {
                 this.setState({ record: emptyExam.exams })
@@ -45,7 +45,7 @@ class LoggedIn_Result extends Component {
 
     refreshMark() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/getStudentResult?id=${encodedValue}`)
+        fetch(`/api/students/Result?id=${encodedValue}`)
             .then(response => response.json())
             .then(emptyExam => {
                 this.setState({ record: emptyExam.exams })

@@ -57,7 +57,9 @@ class ListStudents extends Component {
         );
 
 
-        fetch(`/getAllStudent?id=${encodedValue}`)
+        fetch(`/api/students/?myGyakId=${encodedValue}`,{
+            method:"GET"
+        })
             .then(response => response.json())
             .then(studentsList =>
                 this.setState({ studentsList }));

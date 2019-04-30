@@ -3,6 +3,14 @@ import './css/data.css';
 import { BrowserRouter as Redirect } from "react-router-dom";
 
 class LoggedIn_Data extends Component {
+
+
+    userLabor = {
+        title: null,
+        place: null,
+        time: null,
+    };
+
     userDetails = {
 
         neptun: null,
@@ -14,11 +22,6 @@ class LoggedIn_Data extends Component {
 
 
     };
-    userLabor = {
-        title: null,
-        place: null,
-        time: null,
-    }
 
     constructor(props) {
         super(props);
@@ -40,12 +43,12 @@ class LoggedIn_Data extends Component {
         }).then(response => response.json())
             .then(response => {
                 console.log(response);
-                console.log("datarespond")
+                console.log("datarespond");
                 this.setState({ item: response });
-                this.setState({ gyak: response.gyak })
+                this.setState({ gyak: response.gyak });
                 console.log(this.state.gyak);
                 setTimeout(function () {
-                    console.log("kisliba")
+                    console.log("kisliba");
                     console.log(this.state.item);
 
                     console.log(this.state.gyak);
@@ -67,10 +70,10 @@ class LoggedIn_Data extends Component {
     }
 
     fetchstudentgyak() {
-        console.log(this.state.item.neptun)
-        console.log("this.state.item.neptun")
-        fetch(`/getstudentgyak`, {
-            method: "POST",
+        console.log(this.state.item.neptun);
+        console.log("this.state.item.neptun");
+        fetch(`/api/students/gyak`, {
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: this.state.item.neptun
         }).then(res => {
