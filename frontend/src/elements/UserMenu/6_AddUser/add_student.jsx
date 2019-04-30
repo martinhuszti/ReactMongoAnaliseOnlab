@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Alert, Form, FormGroup, Input, Label } from 'reactstrap';
+import React, {Component} from 'react';
+import {Alert, Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import AsyncSelect from 'react-select/lib/Async';
 import './css/extra_person.css'
 
@@ -41,13 +41,13 @@ class ExtraStudent extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let createdUser = { ...this.state.createdUser };
+        let createdUser = {...this.state.createdUser};
         createdUser[name] = value;
-        this.setState({ createdUser });
+        this.setState({createdUser});
     }
 
     selectGyak(gyak) {
-        let createdUser = { ...this.state.createdUser };
+        let createdUser = {...this.state.createdUser};
         createdUser.gyakid = gyak.id;
         this.setState({
             createdStudent: {
@@ -60,26 +60,27 @@ class ExtraStudent extends Component {
     }
 
     async adduser() {
-        const { createdUser } = this.state;
+        const {createdUser} = this.state;
 
-        await fetch('/adduser', {
+        await fetch('/api/users', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdUser)
         });
 
-        this.setState({ visible: true });
+        this.setState({visible: true});
         window.setTimeout(() => {
-            this.setState({ visible: false })
+            this.setState({visible: false})
         }, 2000);
         console.log("új felhasználó")
     }
+
     async addgyak() {
 
-        const { createdStudent } = this.state;
-        await fetch('/addstudent', {
+        const {createdStudent} = this.state;
+        await fetch('/api/student', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdStudent)
         });
 
@@ -88,13 +89,13 @@ class ExtraStudent extends Component {
 
 
     handleSubmit(ev) {
-        ev.preventDefault()
+        ev.preventDefault();
         this.adduser();
         this.addgyak();
     }
 
     closeAlert() {
-        this.setState({ visible: false });
+        this.setState({visible: false});
     }
 
     render() {
@@ -103,7 +104,7 @@ class ExtraStudent extends Component {
 
             fetch(`/api/labors`, {
                 method: "GET",
-                headers: { "Content-Type": "application/json" },
+                headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
 
             }).then(response => response.json())
@@ -114,7 +115,7 @@ class ExtraStudent extends Component {
         };
 
 
-        const { createdUser } = this.state;
+        const {createdUser} = this.state;
 
         return (
             <div>
@@ -122,21 +123,21 @@ class ExtraStudent extends Component {
                     <FormGroup>
                         <Label for="head">Diák neve:</Label>
                         <Input className="extra_info" type="text" name="name" id="name"
-                            value={createdUser.name || ''} onChange={this.handleChange}
+                               value={createdUser.name || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
                         <Input className="extra_info" type="text" name="email" id="email"
-                            value={createdUser.email || ''} onChange={this.handleChange}
+                               value={createdUser.email || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
-                            value={createdUser.neptun || ''} onChange={this.handleChange}
+                               value={createdUser.neptun || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -164,7 +165,7 @@ class ExtraStudent extends Component {
                         Tallózás...
                     </label>
                     <input className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
-                        onChange={(event) => this.uploadFile(event)} />
+                           onChange={(event) => this.uploadFile(event)}/>
 
                     <Alert isOpen={this.state.visible} toggle={this.closeAlert} color="success">
                         Sikeresen felveted a diákot!

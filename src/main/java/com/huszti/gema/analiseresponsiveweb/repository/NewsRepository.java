@@ -6,6 +6,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface NewsRepository extends MongoRepository<News, String> {
 
-
-    public void deleteById(String title);
 }

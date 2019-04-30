@@ -1,16 +1,19 @@
-.dnews_clear{
+.dnews_clear {
     color: #f2f2f2;
     cursor: pointer;
 }
-.dnews_flex{
+
+.dnews_flex {
     display: flex;
     flex-direction: row;
 
 }
-.dnews_flexiable{
-    flex:1;
+
+.dnews_flexiable {
+    flex: 1;
 }
-.dnews_head{
+
+.dnews_head {
     background-color: #1D155D;
     padding: 10px;
     width: 100%;

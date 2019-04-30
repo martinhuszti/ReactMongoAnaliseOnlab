@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 @Data
 public class RoleRespond {
-private ArrayList<Respond> roleRespond;
+    private ArrayList<Respond> roleRespond;
 
     public RoleRespond(String role) {
-        roleRespond =new ArrayList<>();
-        System.out.println(role +" bent");
+        roleRespond = new ArrayList<>();
+        System.out.println(role + " bent");
         switch (role) {
             case "admin":
                 System.out.println("belemész");
@@ -28,6 +28,7 @@ private ArrayList<Respond> roleRespond;
         }
 
     }
+
     private void adminRespond(){
         roleRespond.add(new Respond("/loggedin/data","Adatok",1));
         roleRespond.add(new Respond("/loggedin/changepass","Jelszó változtatás",2));
@@ -61,5 +62,6 @@ private ArrayList<Respond> roleRespond;
     private void noRespond(){
         roleRespond.add(new Respond("/loggedin/changepass","Jelszó változtatás",2));
         roleRespond.add(new Respond("/loggedin/controller","Chat",3));
+
     }
 }
