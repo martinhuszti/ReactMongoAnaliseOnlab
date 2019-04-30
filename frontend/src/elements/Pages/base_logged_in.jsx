@@ -32,6 +32,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DashBoardIcon from '@material-ui/icons/Poll';
+import SwitchCameraIcon from '@material-ui/icons/SwitchCamera';
 
 
 class LoggedIn extends Component {
@@ -140,6 +141,8 @@ class LoggedIn extends Component {
             return <AddIcon />
         if (item === 11)
             return <DashBoardIcon />
+        if (item === 12)
+            return <SwitchCameraIcon />
     }
 
     menuClick() {
@@ -250,7 +253,7 @@ class LoggedIn extends Component {
                         <div className="menu_items flex_column loggedin_disapier">
                             {this.state.items.map(items =>
                                 <Link to={items.link} className="menu_items box_1">
-                                 <div className="menu_icons">{this.motiveBind(items.motiv)}</div>
+                                    <div className="menu_icons">{this.motiveBind(items.motiv)}</div>
                                     <p className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}
