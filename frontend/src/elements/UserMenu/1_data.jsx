@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './css/data.css';
-import { BrowserRouter as Redirect } from "react-router-dom";
+import {BrowserRouter as Redirect} from "react-router-dom";
 
 class LoggedIn_Data extends Component {
+
+
+    userLabor = {
+        title: null,
+        place: null,
+        time: null,
+    };
+
     userDetails = {
 
         neptun: null,
@@ -14,11 +22,6 @@ class LoggedIn_Data extends Component {
 
 
     };
-    userLabor = {
-        title: null,
-        place: null,
-        time: null,
-    }
 
     constructor(props) {
         super(props);
@@ -32,20 +35,20 @@ class LoggedIn_Data extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/getDetails?id=${encodedValue}`, {
+        fetch(`/api/users/details?userId=${encodedValue}`, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
         }).then(response => response.json())
             .then(response => {
                 console.log(response);
-                console.log("datarespond")
-                this.setState({ item: response });
-                this.setState({ gyak: response.gyak })
+                console.log("datarespond");
+                this.setState({item: response});
+                this.setState({gyak: response.gyak});
                 console.log(this.state.gyak);
                 setTimeout(function () {
-                    console.log("kisliba")
+                    console.log("kisliba");
                     console.log(this.state.item);
 
                     console.log(this.state.gyak);
@@ -67,17 +70,17 @@ class LoggedIn_Data extends Component {
     }
 
     fetchstudentgyak() {
-        console.log(this.state.item.neptun)
-        console.log("this.state.item.neptun")
-        fetch(`/getstudentgyak`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+        console.log(this.state.item.neptun);
+        console.log("this.state.item.neptun");
+        fetch(`/api/students/gyak`, {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
             body: this.state.item.neptun
         }).then(res => {
             return res.json()
 
         }).then(json => {
-            this.setState({ gyak: json });
+            this.setState({gyak: json});
 
         })
 
@@ -86,36 +89,39 @@ class LoggedIn_Data extends Component {
     render() {
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm" />
+            return <Redirect to="/LoginForm"/>
         }
 
 
+        const {item} = this.state;
+        const {gyak} = this.state;
+
         return (
             <div className="data_margin">
-              
+
                 <ul className="data_list">
                     <li className="data_font">
                         <span>Név:</span>
-                        <span>{this.state.item.name}</span>
+                        <span>{item.name}</span>
                     </li>
                     <li className="data_font">
                         <span>Neptun:</span>
-                        <span>{this.state.item.neptun}</span>
+                        <span>{item.neptun}</span>
                     </li>
                     <li className="data_font">
                         <span>E-mail:</span>
-                        <span>{this.state.item.email}</span>
+                        <span>{item.email}</span>
                     </li>
                     <li className="data_font">
                         <span>Utoljára bejelentkezve:</span>
-                        <span>{this.state.item.last_login}</span>
+                        <span>{item.last_login}</span>
                     </li>
                     <li className="data_font ">
                         <span>Regisztráció dátuma:</span>
-                        <span>{this.state.item.registration_date}</span>
+                        <span>{item.registration_date}</span>
                     </li>
 
-                    {this.state.gyak.map(item => <li key={item.id}>
+                    {gyak.map(item => <li key={item.id}>
                         <li className="data_font data_top">
                             <span>Csoport:</span>
                             <span>{item.title}</span>
@@ -129,9 +135,6 @@ class LoggedIn_Data extends Component {
                             <span>{item.time}</span>
                         </li>
                     </li>)}
-
-
-
 
 
                 </ul>

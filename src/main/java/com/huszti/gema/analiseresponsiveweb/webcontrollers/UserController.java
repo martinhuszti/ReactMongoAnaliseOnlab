@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 //push it to the limit
 
@@ -35,6 +36,7 @@ class passObj {
 }
 
 @RestController
+@RequestMapping("/api/users")
 public class UserController {
 
     private UserRepository userRepository;
@@ -51,15 +53,13 @@ public class UserController {
         this.teacherRepository = teacherRepository;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/adduser")
+    @PostMapping
     public SimpleUser addUser(@RequestBody SimpleUser user) {
         userRepository.save(user);
         return user;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping(value = "/loginUser", produces = "application/json")
+    @PostMapping("/login")
     public ResponseEntity loginUser(@RequestBody SimpleUser user) {
 
         SimpleUser repoUser = userRepository.findByNeptun(user.getNeptun());
@@ -86,13 +86,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("valami hiba történt");
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getDetails")
-    public DataRespond getDetails(@RequestParam String id) {
+    @GetMapping("/details")
+    public DataRespond getDetails(@RequestParam String userId) {
 
 
-        SimpleUser tempuser = userRepository.findById(id).orElse(null);
+        SimpleUser tempuser = userRepository.findById(userId).orElse(null);
         DataRespond backrespond = new DataRespond();
+        assert tempuser != null;
         backrespond.setName(tempuser.getName());
         backrespond.setNeptun(tempuser.getNeptun());
         backrespond.setEmail(tempuser.getEmail());
@@ -105,6 +105,7 @@ public class UserController {
                 String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
                 Labor templab = laborRepository.findById(getID).orElse(null);
 
+                assert templab != null;
                 LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
 
                 backrespond.addGyakList(tempRespondLab);
@@ -146,9 +147,7 @@ public class UserController {
 
     }
 
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping(value = "/changePassword", produces = "application/json")
+    @PostMapping("/password")
     ResponseEntity changePassword(@RequestBody passObj obj) {
         SimpleUser us = userRepository.findById(obj.id).orElse(null);
         if (us == null)
@@ -161,26 +160,24 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getUsers")
+  /*  @GetMapping("/getUsers")
     public List<SimpleUser> getUsers() {
         return userRepository.findAll();
 
+    }*/
+
+    @GetMapping("/role")
+    public String getrole(@RequestParam String userId) {
+
+        return Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
     }
 
-    @PostMapping("/getrole")
-    public String getrole(@RequestBody String user) {
-
-        return userRepository.findById(user).orElse(null).getRole();
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/getrolemenu")
+    @PostMapping("/role/menu")
     public String getrolemenu(@RequestBody String user) {
 
 
         System.out.println(user);
-        String temprole = userRepository.findById(user).orElse(null).getRole();
+        String temprole = Objects.requireNonNull(userRepository.findById(user).orElse(null)).getRole();
 
         ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();
 

@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/news.css';
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import React, {Component} from 'react';
+import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Login from './loginForm.jsx';
 import Popup from "./popup"
 
@@ -22,7 +22,7 @@ class Class extends Component {
             redirect: false,
             showPopup: false,
             toggletitle: '',
-            toggletext:'',
+            toggletext: '',
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,11 +34,11 @@ class Class extends Component {
         const logged = sessionStorage.getItem("loggedin");
 
         if (logged !== "true") {
-            return <Redirect to='/LoginForm' />
+            return <Redirect to='/LoginForm'/>
         }
     };
     toggleupPopup = (item) => {
-        
+
         this.setState({
             toggletitle: item.title,
             toggletext: item.text
@@ -48,7 +48,6 @@ class Class extends Component {
 
         this.togglePopup();
     };
-
 
 
     togglePopup() {
@@ -62,18 +61,18 @@ class Class extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item });
+        this.setState({item});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        const {item} = this.state;
 
         await fetch('/api/news', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
 
@@ -86,53 +85,53 @@ class Class extends Component {
         fetch(`/api/news/top5`)
             .then(result => result.json())
             .then(items => {
-                this.setState({ items });
-            
-        console.log(this.state.items);
-            }
-                
-                );
+                    this.setState({items});
+
+                    console.log(this.state.items);
+                }
+            );
 
         console.log("betöltés befejeeződött")
     }
-
 
 
     render() {
 
         const {items} = this.state;
         const {showPopup} = this.state;
+        const {renderRedirect} = this;
 
         return (
             <div>
-                {this.renderRedirect()}
+                {renderRedirect()}
                 <Router>
 
                     <div id="placeholder_news">
 
-                        <div id="placeholder_header" />
+                        <div id="placeholder_header"/>
                         <div id="width_class">
 
                             {items.map(item => <li key={item.id}>
                                 <div className="news news_head">
-                                    <p onClick={this.toggleupPopup.bind(this, item)} className="news_text news_pointer">{item.title}</p>
+                                    <p onClick={this.toggleupPopup.bind(this, item)}
+                                       className="news_text news_pointer">{item.title}</p>
                                 </div>
 
-                                <div className="news news_body"> {item.text.substring(0,200)} . . .</div>
+                                <div className="news news_body"> {item.text.substring(0, 200)} . . .</div>
                             </li>)}
 
                             {showPopup ?
                                 <Popup
-                                title= {this.state.toggletitle}
-                                text= {this.state.toggletext}
-                                    closePopup={this.togglePopup.bind(this)} />
+                                    title={this.state.toggletitle}
+                                    text={this.state.toggletext}
+                                    closePopup={this.togglePopup.bind(this)}/>
                                 : null
                             }
 
                         </div>
                         <Switch>
 
-                            <Route path="/login" component={Login} />
+                            <Route path="/login" component={Login}/>
                         </Switch>
                     </div>
                 </Router>

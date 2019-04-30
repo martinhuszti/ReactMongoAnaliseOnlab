@@ -1,10 +1,8 @@
 import './css/news.css';
 import './css/loginForm.css'
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
+import {Alert, Button} from 'reactstrap';
 import {withRouter} from 'react-router-dom';
-import {Alert} from 'reactstrap';
-import {any} from "prop-types";
 
 
 class RegistrationForm extends Component {
@@ -55,11 +53,12 @@ class RegistrationForm extends Component {
             this.handleSubmit(e);
         }
     }
-    componentWillMount(){
-        let login= sessionStorage.getItem("loggedin");
-       let loginid= sessionStorage.getItem("id");
-       if(loginid!==null && login==="true")
-       this.props.history.push('/LoggedIn');
+
+    componentWillMount() {
+        let login = sessionStorage.getItem("loggedin");
+        let loginid = sessionStorage.getItem("id");
+        if (loginid !== null && login === "true")
+            this.props.history.push('/LoggedIn');
     }
 
     alertboxshow() {
@@ -74,20 +73,20 @@ class RegistrationForm extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/loginUser', {
+        await fetch('/api/users/login', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
-        }).then(response => {
-                if (response.ok) {
-                    return response.json()
-                } else {
-                    this.alertboxshow();
-                    throw new Error("Sikertelen bejelentkezés");
+        })
+            .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        this.alertboxshow();
+                        throw new Error("Hiba");
+                    }
                 }
-            }
-        ).catch(any)
-
+            )
             .then(json => {
 
                 console.log(json);
@@ -103,6 +102,8 @@ class RegistrationForm extends Component {
 
                 this.props.history.push('/LoggedIn');
 
+            })
+            .catch(() => {
             })
 
     }

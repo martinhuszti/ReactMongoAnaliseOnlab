@@ -15,18 +15,19 @@ class Requirements extends Component {
         this.state = {
             dwnloadlnk: '',
             files: '',
-            items:[]
+            items: []
         };
         this.downloadRandomImage = this.downloadRandomImage.bind(this);
 
     }
+
     componentWillMount() {
         fetch(`/api/requirements`)
             .then(result => result.json())
             .then(items => {
                 console.log(items);
-                this.setState({ items});
-                
+                this.setState({items});
+
             });
     }
 

@@ -21,7 +21,6 @@ public class SimpleUser {
     protected LocalDate last_login;
 
 
-
     public SimpleUser() {
         registration_date = LocalDate.now();
         password = "default"; // password = neptun lehetne (de hogy fut le?)

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/students")
 public class StudentController {
 
 
@@ -31,15 +32,12 @@ public class StudentController {
         this.userRepository = userRepository;
     }
 
-
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/addstudent")
+    @PostMapping
     public Student addStudent(@RequestBody Student user) {
         studentRepository.save(user);
         return user;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/getstudentgyak")
     public Labor getStudentgyak(@RequestBody String neptuns) {
         System.out.println(studentRepository.findByNeptun(neptuns));
@@ -49,33 +47,32 @@ public class StudentController {
         return stdntlab;
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getStudentResult")
-    public ResponseEntity<Student> getStudentResult(@RequestParam String id){
-        System.out.println(id +"Ez az id");
-SimpleUser user=userRepository.findById(id).orElse(null);
+    @GetMapping("/getById")
+    public ResponseEntity<Student> getStudent(@RequestParam String id) {
+        System.out.println(id + "Ez az id");
+        SimpleUser user = userRepository.findById(id).orElse(null);
 
         System.out.println(user);
-        if(user==null){
+        if (user == null) {
             System.out.println("Nincs ilyen diák");
-            return  ResponseEntity.noContent().header("Nincs ilyen diák").build();
+            return ResponseEntity.noContent().header("Nincs ilyen diák").build();
         }
-        Student student=studentRepository.findByNeptun(user.getNeptun());
+        Student student = studentRepository.findByNeptun(user.getNeptun());
         System.out.println("Ez a diák: " + student);
-        if(student==null){
+        if (student == null) {
             System.out.println("Nincs ilyen");
-            return  ResponseEntity.noContent().header("Nincs ilyen").build();
+            return ResponseEntity.noContent().header("Nincs ilyen").build();
         }
         System.out.println(student);
         System.out.println("student adat");
-        return  ResponseEntity.ok(student);
+        return ResponseEntity.ok(student);
 
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/getAllStudent")
-    public ResponseEntity<List<Student>> getStudentsByGyakid(@RequestParam String id) {
-        SimpleUser user = userRepository.findById(id).orElse(null);
+    @GetMapping
+    public ResponseEntity<List<Student>> getAllStudentByUserGyakId(@RequestParam String myGyakId) {
+        System.out.println(myGyakId);
+        SimpleUser user = userRepository.findById(myGyakId).orElse(null);
 
         assert user != null;
         if (user.getRole().equals("admin")) {
@@ -84,7 +81,7 @@ SimpleUser user=userRepository.findById(id).orElse(null);
 
 
         if (user.getRole().equals("teacher")) {
-            String neptun =user.getNeptun();
+            String neptun = user.getNeptun();
 
 
             Teacher teacher = teacherRepository.findByNeptun(neptun);

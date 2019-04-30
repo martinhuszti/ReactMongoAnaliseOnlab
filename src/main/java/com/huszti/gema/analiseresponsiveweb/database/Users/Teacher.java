@@ -16,7 +16,7 @@ public class Teacher {
     private String neptun;
     private List<String> labor_ids;
 
-    Teacher(){
+    Teacher() {
 
     }
 }

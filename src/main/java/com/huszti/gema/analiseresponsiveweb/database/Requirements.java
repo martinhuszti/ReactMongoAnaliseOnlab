@@ -17,10 +17,9 @@ public class Requirements {
     private LocalDate modification_date;
 
 
-
     public Requirements() {
 
         this.modification_date = LocalDate.now();
     }
 
-   }
+}

@@ -26,7 +26,7 @@ public class Student {
     private String gyakid;
 
 
-    Student(){
+    Student() {
         exams = new ArrayList<>();
     }
 
