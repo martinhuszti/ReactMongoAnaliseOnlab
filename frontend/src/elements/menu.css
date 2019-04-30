@@ -144,27 +144,30 @@ li {
     list-style-type: none;
 }
 
-.pg_not_found>span:first-child{
+.pg_not_found > span:first-child {
     font-size: 270px;
     font-weight: bold;
 }
-.pg_not_found>span{
+
+.pg_not_found > span {
     font-size: 18px;
     display: block;
 }
+
 @media ( max-width: 950px ) {
-    .pg_not_found>span:first-child {
+    .pg_not_found > span:first-child {
         font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (30)));
     }
 
 }
 
 @media ( max-width: 350px ) {
-    .pg_not_found>span:first-child {
+    .pg_not_found > span:first-child {
         font-size: 28px;
     }
 
 }
-.pg_not_bottom{
+
+.pg_not_bottom {
     margin-bottom: 10px;
 }

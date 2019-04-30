@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './css/data.css';
-import { BrowserRouter as Redirect } from "react-router-dom";
+import {BrowserRouter as Redirect} from "react-router-dom";
 
 class LoggedIn_Data extends Component {
 
@@ -37,15 +37,15 @@ class LoggedIn_Data extends Component {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/api/users/details?userId=${encodedValue}`, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
         }).then(response => response.json())
             .then(response => {
                 console.log(response);
                 console.log("datarespond");
-                this.setState({ item: response });
-                this.setState({ gyak: response.gyak });
+                this.setState({item: response});
+                this.setState({gyak: response.gyak});
                 console.log(this.state.gyak);
                 setTimeout(function () {
                     console.log("kisliba");
@@ -74,13 +74,13 @@ class LoggedIn_Data extends Component {
         console.log("this.state.item.neptun");
         fetch(`/api/students/gyak`, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: this.state.item.neptun
         }).then(res => {
             return res.json()
 
         }).then(json => {
-            this.setState({ gyak: json });
+            this.setState({gyak: json});
 
         })
 
@@ -89,7 +89,7 @@ class LoggedIn_Data extends Component {
     render() {
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm" />
+            return <Redirect to="/LoginForm"/>
         }
 
 
@@ -98,7 +98,7 @@ class LoggedIn_Data extends Component {
 
         return (
             <div className="data_margin">
-              
+
                 <ul className="data_list">
                     <li className="data_font">
                         <span>Név:</span>
@@ -135,9 +135,6 @@ class LoggedIn_Data extends Component {
                             <span>{item.time}</span>
                         </li>
                     </li>)}
-
-
-
 
 
                 </ul>

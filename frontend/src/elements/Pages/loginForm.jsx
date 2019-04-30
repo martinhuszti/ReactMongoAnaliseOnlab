@@ -103,7 +103,8 @@ class RegistrationForm extends Component {
                 this.props.history.push('/LoggedIn');
 
             })
-            .catch(() => {})
+            .catch(() => {
+            })
 
     }
 

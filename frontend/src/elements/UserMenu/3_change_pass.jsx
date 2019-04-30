@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './css/change_pass.css';
 import {Button} from 'reactstrap';
 import Eye from '@material-ui/icons/Visibility';
@@ -32,7 +32,7 @@ class Change_Pass extends Component {
     async handleSubmit(event) {
         event.preventDefault();
 
-        const { passwObj } = this.state;
+        const {passwObj} = this.state;
         console.log(JSON.stringify(passwObj));
 
         const matches = passwObj.newPassword === passwObj.cPassword;
@@ -43,7 +43,7 @@ class Change_Pass extends Component {
             passwObj.id = sessionStorage.getItem("id");
             await fetch('/api/users/password', {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(passwObj)
             }).then((resp) => {
                 return resp.text()
@@ -58,36 +58,36 @@ class Change_Pass extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let passwObj = { ...this.state.passwObj };
+        let passwObj = {...this.state.passwObj};
         passwObj[name] = value;
-        this.setState({ passwObj });
+        this.setState({passwObj});
     }
 
 
     showPass() {
 
-        this.setState({ color: !this.state.color });
+        this.setState({color: !this.state.color});
     }
 
     render() {
-        let btn_class = this.state.color ? <EyeSlash /> : <Eye />;
+        let btn_class = this.state.color ? <EyeSlash/> : <Eye/>;
         let pass_style = this.state.color ? "password" : "text";
 
-        const { passwObj } = this.state;
+        const {passwObj} = this.state;
 
         return (
             <div>
                 <ul className="pass_list">
                     <li>
                         <span>Régi jelszó:</span>
-                        <i className="fa fa-eye" />
+                        <i className="fa fa-eye"/>
                         <input className="pass_newpass"
-                            type="password"
-                            name="oldPassword"
-                            id='oldPassword'
+                               type="password"
+                               name="oldPassword"
+                               id='oldPassword'
 
-                            value={passwObj.oldPassword || ''}
-                            onChange={this.handleChange}
+                               value={passwObj.oldPassword || ''}
+                               onChange={this.handleChange}
 
                         />
 
@@ -97,11 +97,11 @@ class Change_Pass extends Component {
                     <li>
                         <span>Új jelszó: </span>
                         <input className="pass_newpass"
-                            type={pass_style}
-                            id='newPassword'
-                            name="newPassword"
-                            onChange={this.handleChange}
-                            value={passwObj.newPassword || ''}
+                               type={pass_style}
+                               id='newPassword'
+                               name="newPassword"
+                               onChange={this.handleChange}
+                               value={passwObj.newPassword || ''}
                         />
 
                         <div onClick={this.showPass} className='pass_lookup_button'>{btn_class}</div>
@@ -109,24 +109,24 @@ class Change_Pass extends Component {
                     <li>
                         <span>Megerősítés:</span>
                         <input className="pass_newpass"
-                            type="password"
+                               type="password"
 
-                            id='cPassword'
-                            name="cPassword"
-                            onChange={this.handleChange}
-                            value={passwObj.cPassword || ''}
+                               id='cPassword'
+                               name="cPassword"
+                               onChange={this.handleChange}
+                               value={passwObj.cPassword || ''}
                         />
                     </li>
                 </ul>
 
                 <div className="pass_flex_display">
-                    <div className="pass_short_area" />
+                    <div className="pass_short_area"/>
 
                     <Button type={"submit"} className="button_color button_width" onClick={this.handleSubmit}
-                        variant="primary">
+                            variant="primary">
                         <p className="button_width">Jelszó változtatás</p></Button>
 
-                    <div className="pass_long_area" />
+                    <div className="pass_long_area"/>
                 </div>
 
             </div>

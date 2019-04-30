@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 import './css/extra_person.css'
 
 class ExtraAdmin extends Component {
@@ -36,9 +36,9 @@ class ExtraAdmin extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let createdUser = { ...this.state.createdUser };
+        let createdUser = {...this.state.createdUser};
         createdUser[name] = value;
-        this.setState({ createdUser });
+        this.setState({createdUser});
         this.setState({
             createdAdmin: {
                 neptun: this.state.createdUser.neptun,
@@ -47,23 +47,24 @@ class ExtraAdmin extends Component {
     }
 
     async adduser() {
-        const { createdUser } = this.state;
+        const {createdUser} = this.state;
 
         await fetch('/api/users', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdUser)
         });
 
         alert("Sikeres regisztáció!");
         console.log("új felhasználó")
     }
+
     async addadmin() {
 
-        const { createdAdmin } = this.state;
+        const {createdAdmin} = this.state;
         await fetch('/api/admins', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdAdmin)
         });
 
@@ -88,27 +89,27 @@ class ExtraAdmin extends Component {
 
     render() {
 
-        const { createdUser } = this.state;
+        const {createdUser} = this.state;
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Név:</Label>
                         <Input className="extra_info" required type="text" name="name" id="name"
-                            value={createdUser.name || ''} onChange={this.handleChange}
+                               value={createdUser.name || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" required type="text" name="neptun" id="neptun"
-                            value={createdUser.neptun || ''} onChange={this.handleChange}
+                               value={createdUser.neptun || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
                         <Input className="extra_info" required type="text" name="email" id="email"
-                            value={createdUser.email || ''} onChange={this.handleChange}
+                               value={createdUser.email || ''} onChange={this.handleChange}
                         />
                     </FormGroup>
 

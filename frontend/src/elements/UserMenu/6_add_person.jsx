@@ -26,26 +26,27 @@ class AddStudent extends Component {
             items: this.emptyItem,
             redirect: false,
             value: 'a',
-            options:optionsTeacher,
+            options: optionsTeacher,
         };
 
     }
-    componentDidMount(){
-        const loginid=sessionStorage.getItem("id");
+
+    componentDidMount() {
+        const loginid = sessionStorage.getItem("id");
         const userId = encodeURIComponent(loginid);
         fetch(`/api/users/role?userId=${userId}`, {
             method: "GET",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
         }).then(res => {
             return res.text()
-    
+
         }).then(json => {
-            if(json==="admin"){
-                this.setState({options:optionsAdmin});
+            if (json === "admin") {
+                this.setState({options: optionsAdmin});
                 console.log("admin vagyok")
             }
-            if(json==="teacher"){
-                this.setState({options:optionsTeacher})
+            if (json === "teacher") {
+                this.setState({options: optionsTeacher})
             }
         })
     }
@@ -66,6 +67,7 @@ class AddStudent extends Component {
 
     render() {
         const {selectedOption} = this.state;
+        const {item} = this;
 
         return (
 
@@ -77,7 +79,7 @@ class AddStudent extends Component {
                         options={this.state.options}
                         placeholder="Típus"
                 />
-                {this.item}
+                {item}
             </div>
         );
     }

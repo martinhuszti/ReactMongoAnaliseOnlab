@@ -1,38 +1,44 @@
-.student_element{
+.student_element {
     display: flex;
     flex-direction: row;
     max-width: 600px;
     border-bottom: 2px solid #1D155D;
-    
+
 }
-.student_spec>*{
-  min-width: 70px;
-  text-align: center;
+
+.student_spec > * {
+    min-width: 70px;
+    text-align: center;
 }
-.student_list{
+
+.student_list {
     display: flex;
     flex: 1;
     flex-direction: column;
 }
-.student_spec{
-      flex: 1;
-    
+
+.student_spec {
+    flex: 1;
+
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     border-bottom: 1px solid #1D155D;
 }
-.student_spec:last-child{
-    
+
+.student_spec:last-child {
+
     border-bottom: none;
 }
-.student_neptun{
-width: 100px;
+
+.student_neptun {
+    width: 100px;
 }
 
-.delete-button{
+.delete-button {
     float: right;
 }
-.students_title{
+
+.students_title {
     margin-bottom: 20px;
 }

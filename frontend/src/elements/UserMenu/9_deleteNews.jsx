@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Clear from '@material-ui/icons/Clear';
 import "./css/delete_news.css"
 
@@ -9,6 +9,7 @@ class Delete_Publication extends Component {
         text: '',
 
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -16,13 +17,13 @@ class Delete_Publication extends Component {
             items: [],
         };
     }
-   
 
-   async deleteNewsClick (item) {
 
-         await fetch('/api/news', {
+    async deleteNewsClick(item) {
+
+        await fetch('/api/news', {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
         console.log("törlés");
@@ -31,7 +32,7 @@ class Delete_Publication extends Component {
         var index = array.indexOf(item);
         if (index !== -1) {
             array.splice(index, 1);
-            this.setState({ items: array });
+            this.setState({items: array});
         }
 
         console.log(this.state.items);
@@ -40,18 +41,18 @@ class Delete_Publication extends Component {
     componentDidMount() {
 
 
-        fetch(`/api/news`,{
-            method:"GET"
+        fetch(`/api/news`, {
+            method: "GET"
         })
             .then(result => result.json())
-            .then(items => this.setState({ items }));
+            .then(items => this.setState({items}));
 
         console.log("betöltés befejeeződött")
     }
 
     render() {
 
-        const {items} =this.state;
+        const {items} = this.state;
 
         return (
             <div>
@@ -61,9 +62,8 @@ class Delete_Publication extends Component {
                         <p className="news_text dnews_flexiable">{item.title}</p>
                         <Clear className='dnews_clear' value={item} onClick={this.deleteNewsClick.bind(this, item)}/>
                     </div>
-                    
-                       
-                    
+
+
                 </li>)}
             </div>
         )

@@ -4,9 +4,10 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 import com.huszti.gema.analiseresponsiveweb.database.Users.Teacher;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/teachers")
@@ -33,7 +34,6 @@ public class TeacherController {
 
         return teacher;
     }
-
 
 
 }
