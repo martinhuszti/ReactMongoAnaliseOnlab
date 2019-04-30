@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AnaliseResponsiveWebApplication<analise-responsive-web>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.huszti.gema.analiseresponsiveweb.AnaliseResponsiveWebApplication",
+            "projectName": "analise-responsive-web",
+            "args": ""
+        }
+    ]
+}
