@@ -18,7 +18,7 @@ public class ReqController {
     @PostMapping
     public Requirements updateRequirements(@RequestBody Requirements newreq) throws IOException {
 
-        PrintWriter writer = new PrintWriter("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt", StandardCharsets.UTF_8);
+        PrintWriter writer = new PrintWriter("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/req_short.txt");
         writer.println(newreq.getPresence());
         writer.println(newreq.getSignature());
         writer.println(newreq.getExam());
@@ -35,7 +35,7 @@ public class ReqController {
         File file = new File("src/main/java/com/huszti/gema/analiseresponsiveweb/resource/ort.txt");
         if(!file.exists()) {
 
-            PrintWriter writer = new PrintWriter(file, StandardCharsets.UTF_8);
+            PrintWriter writer = new PrintWriter(file);
         }
         Scanner sc = new Scanner(file);
         ArrayList<String> tempread = new ArrayList<>();

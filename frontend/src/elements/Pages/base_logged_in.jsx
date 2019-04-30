@@ -14,6 +14,7 @@ import DeletePublication from '../UserMenu/9_deleteNews';
 import AddLab from '../UserMenu/10_new_labor'
 import ListStudent from '../UserMenu/5_students'
 import NewTest from '../UserMenu/11_newTest'
+import ChangeLab from '../UserMenu/12_change_labor'
 import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { Alert } from 'reactstrap';
 import './css/news.css';
@@ -37,49 +38,53 @@ class LoggedIn extends Component {
 
     routes = [
         {
-            path: "/LoggedIn/data",
+            path: "/loggedin/data",
             exact: true,
             main: () => <LoggedIn_Data />
         },
         {
-            path: "/LoggedIn/result",
+            path: "/loggedin/result",
             main: () => <LoggedIn_Result />
         },
         {
-            path: "/LoggedIn/change_pass",
+            path: "/loggedin/changepass",
             main: () => <Change_Pass />
         },
         {
-            path: "/LoggedIn/controller",
+            path: "/loggedin/controller",
             main: () => <Chat />
         },
         {
-            path: "/LoggedIn/students",
+            path: "/loggedin/students",
             main: () => <ListStudent />
         },
         {
-            path: "/LoggedIn/newPublication",
+            path: "/loggedin/newpublication",
             main: () => <NewsPublication />
         },
         {
-            path: "/LoggedIn/deletePublication",
+            path: "/loggedin/deletepublication",
             main: () => <DeletePublication />
         },
         {
-            path: "/LoggedIn/addPerson",
+            path: "/loggedin/addperson",
             main: () => <AddStudent />
         },
         {
-            path: "/LoggedIn/addReq",
+            path: "/loggedin/addreq",
             main: () => <AddReq />
         },
         {
-            path: "/LoggedIn/addLab",
+            path: "/loggedin/addlab",
             main: () => <AddLab />
         },
         {
-            path: "/LoggedIn/newTest",
+            path: "/loggedin/newtest",
             main: () => <NewTest />
+        },
+        {
+            path: "/loggedin/changelab",
+            main: () => <ChangeLab />
         },
     ];
 
@@ -288,22 +293,12 @@ export default withRouter(LoggedIn);
 
 const emptyStudent = [
     {
-        link: "/LoggedIn/data",
+        link: "/loggedin/data",
         text: 'Adatok',
         motiv: 1,
     },
     {
-        link: "/LoggedIn/result",
-        text: 'Eredmények',
-        motiv: 11,
-    },
-    {
-        link: "/LoggedIn/change_pass",
-        text: 'Jelszó változtatás',
-        motiv: 2,
-    },
-    {
-        link: "/LoggedIn/controller",
+        link: "/loggedin/controller",
         text: 'Chat',
         motiv: 3,
     }
