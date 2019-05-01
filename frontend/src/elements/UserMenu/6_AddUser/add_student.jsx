@@ -78,7 +78,7 @@ class ExtraStudent extends Component {
     async addgyak() {
 
         const {createdStudent} = this.state;
-        await fetch('/api/student', {
+        await fetch('/api/students', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdStudent)
