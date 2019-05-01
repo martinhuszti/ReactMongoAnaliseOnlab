@@ -2,13 +2,17 @@ package com.huszti.gema.analiseresponsiveweb.database;
 
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
 @Data
+@Document
 public class Requirements {
 
-
+    @Id
+    private String id;
     private String presence;
     private String signature;
     private String exam;

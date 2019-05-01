@@ -3,6 +3,7 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -43,8 +44,9 @@ public class NewsController {
     }
 
     @GetMapping
-    public List<News> getallNews() {
-        return newsRepository.findAll();
+    public ResponseEntity getallNews() {
+
+        return ResponseEntity.ok(newsRepository.findAll());
     }
 
 

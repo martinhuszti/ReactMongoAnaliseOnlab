@@ -9,11 +9,10 @@ import java.util.List;
 @Data
 @Document
 public class Practice {
+
     @Id
     private String id;
     private String time;
-
-
     private List<String> student_ids;
 
 }

@@ -35,7 +35,7 @@ class Addrequirements extends Component {
 
         console.log(item);
         await fetch('/api/requirements', {
-            method: "POST",
+            method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
@@ -44,18 +44,14 @@ class Addrequirements extends Component {
 
 
     componentWillMount() {
-        fetch(`/api/requirements`)
+        fetch(`/api/requirements`, {
+            method: "GET"
+        })
             .then(result => result.json())
-            .then(items => {
-                console.log(items);
+            .then(requirment => {
+                console.log(requirment);
                 this.setState({
-                    item: {
-                        presence: items[0],
-                        signature: items[1],
-                        exam: items[2],
-                        tests: items[3],
-                        points: items[4],
-                    }
+                    item: requirment
                 });
                 console.log('itemelőtt');
                 console.log(this.state.item);

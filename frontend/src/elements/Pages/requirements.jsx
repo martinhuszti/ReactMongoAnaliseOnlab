@@ -56,7 +56,7 @@ class Requirements extends Component {
 
     render() {
 
-        const {items} = this.state;
+        const {items: req} = this.state;
 
         return (
             <div id="placeholder_news">
@@ -71,26 +71,26 @@ class Requirements extends Component {
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Jelenlét:</span>
-                                    <p>{items[0]}</p>
+                                    <p>{req.presence}</p>
                                 </li>
                                 <li>
                                     <span>Aláírás:</span>
-                                    <p>{items[1]}</p>
+                                    <p>{req.signature}</p>
                                 </li>
                                 <li>
                                     <span>Vizsga:</span>
-                                    <p>{items[2]}
+                                    <p>{req.exam}
                                     </p>
                                 </li>
                             </ul>
                             <ul className="req_itemtext">
                                 <li>
                                     <span>Számonkérések:</span>
-                                    <p>{items[3]}</p>
+                                    <p>{req.tests}</p>
                                 </li>
                                 <li>
                                     <span>Pontszámítás:</span>
-                                    <p>{items[4]}
+                                    <p>{req.points}
                                     </p>
                                 </li>
                             </ul>
