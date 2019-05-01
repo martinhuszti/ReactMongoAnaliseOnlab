@@ -12,6 +12,7 @@ import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.LaborRespo
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
 import lombok.Data;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-class passObj {
+class passwordObject {
     String id;
     String oldPassword;
     String newPassword;
 
-    passObj() {
+    passwordObject() {
     }
 }
 
@@ -52,9 +53,10 @@ public class UserController {
     }
 
     @PostMapping
-    public SimpleUser addUser(@RequestBody SimpleUser user) {
+    public ResponseEntity addUser(@RequestBody SimpleUser user) {
         userRepository.save(user);
-        return user;
+        System.out.println("Új user hozzáadva: " + user);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
@@ -146,7 +148,7 @@ public class UserController {
     }
 
     @PostMapping("/password")
-    ResponseEntity changePassword(@RequestBody passObj obj) {
+    public ResponseEntity changePassword(@RequestBody passwordObject obj) {
         SimpleUser us = userRepository.findById(obj.id).orElse(null);
         if (us == null)
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Nincs ilyen id");
@@ -155,18 +157,20 @@ public class UserController {
                     .body("Nem egyezik a régi jelszó, és amúgy meg egy teapot vagyok");
         us.setPassword(obj.newPassword);
         userRepository.save(us);
+        System.out.println("Passoword changed: *****");
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");
     }
 
 
     @GetMapping("/role")
-    public String getrole(@RequestParam String userId) {
-
-        return Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
+    public ResponseEntity getrole(@RequestParam String userId) {
+        var role = Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
+        System.out.println("Role lekérdezve: " + role);
+        return ResponseEntity.ok(role);
     }
 
     @PostMapping("/role/menu")
-    public String getrolemenu(@RequestBody String user) {
+    public ResponseEntity getrolemenu(@RequestBody String user) {
 
 
         System.out.println(user);
@@ -175,8 +179,8 @@ public class UserController {
         ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();
 
         Gson gson = new Gson();
-
-        return gson.toJson(temprespond);
+        System.out.println("Rolemenu lekérdezve: " + temprespond);
+        return ResponseEntity.ok(gson.toJson(temprespond));
     }
 
 }
