@@ -40,7 +40,7 @@ public class ExamController {
         //Megkeres Student
         Student student = studentRepository.findById(studentId).orElse(null);
         if (student == null) {
-            return ResponseEntity.badRequest().body("Nincs ilyen Neptun!");
+            return ResponseEntity.badRequest().body("Nincs ilyen neptunkodú diák!");
         }
         exam.setType(test.getTitle());
 
@@ -59,7 +59,8 @@ public class ExamController {
         testRepository.save(test);
 
 
-        System.out.println("New Exam: " + savedExam.toString());
+        System.out.println("Új exam felvéve: " + savedExam);
+
         return ResponseEntity.ok("Sikeresen elmentve.\nExam id: " + savedExam.getId());
 
     }
@@ -67,27 +68,29 @@ public class ExamController {
     @PostMapping("/tests")
     public ResponseEntity addNewTest(@RequestBody Test test) {
         SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
-        if (user == null)
-            ResponseEntity.badRequest().body("Nincs engedély v1!");
+        if (user == null) {
+            System.out.println("User nem található aki létrehozza");
+            ResponseEntity.badRequest().body("User nem található aki létrehozza");
+        }
         assert user != null;
         if (user.getRole().equals("admin")) {
-            System.out.println(test);
             testRepository.save(test);
-            return ResponseEntity.ok("Sikeresen elmentve.");
+            System.out.println("Új teszt elmentve." + test);
+            return ResponseEntity.ok("Sikeresen elmentve az új teszt: " + test);
         }
-        return ResponseEntity.badRequest().body("Nincs engedély v2!");
+        return ResponseEntity.badRequest().body("Nincs engedélye létrehozni új testet!");
     }
 
     @GetMapping("/tests")
-    public ArrayList<TestRespond> getAllTest() {
+    public ResponseEntity getAllTest() {
 
         List<Test> getAllTest = testRepository.findAll();
         ArrayList<TestRespond> testResponds = new ArrayList<>();
         for (Test item : getAllTest) {
             testResponds.add(new TestRespond(item.getTitle(), item.getType(), item.getId()));
         }
-        System.out.println(testResponds);
-        return testResponds;
+        System.out.println("Összes teszt lekérdezve: " + testResponds);
+        return ResponseEntity.ok(testResponds);
     }
 
 }

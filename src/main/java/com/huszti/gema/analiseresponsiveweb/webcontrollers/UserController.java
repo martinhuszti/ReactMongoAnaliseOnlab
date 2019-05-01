@@ -12,6 +12,7 @@ import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.LaborRespo
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
 import lombok.Data;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
-class passObj {
+class passwordObject {
     String id;
     String oldPassword;
     String newPassword;
 
-    passObj() {
+    passwordObject() {
     }
 }
 
@@ -52,9 +53,10 @@ public class UserController {
     }
 
     @PostMapping
-    public SimpleUser addUser(@RequestBody SimpleUser user) {
+    public ResponseEntity addUser(@RequestBody SimpleUser user) {
         userRepository.save(user);
-        return user;
+        System.out.println("Új user hozzáadva: " + user);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
@@ -72,11 +74,10 @@ public class UserController {
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
 
-            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() + " id");
+            System.out.println("Felhasnzáló bejelentkezett: " + repoUser);
 
             HashMap<String, String> json = new HashMap<>();
             json.put("id", repoUser.getId());
-            System.out.println(json);
 
             return new ResponseEntity<>(json, HttpStatus.OK);
 
@@ -99,7 +100,6 @@ public class UserController {
 
         switch (tempuser.getRole()) {
             case "student": {
-                System.out.println(studentRepository.findByNeptun(tempuser.getNeptun()));
                 String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
                 Labor templab = laborRepository.findById(getID).orElse(null);
 
@@ -107,9 +107,6 @@ public class UserController {
                 LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
 
                 backrespond.addGyakList(tempRespondLab);
-                System.out.println(getID);
-                System.out.println(templab);
-                System.out.println("GETIDstudent");
                 break;
             }
             case "teacher": {
@@ -117,24 +114,19 @@ public class UserController {
                 Iterable<Labor> asd = laborRepository.findAllById(getID);
                 List<LaborRespond> tempLabors = new ArrayList<>();
                 for (Labor ids : asd) {
-                    System.out.println("gyakid");
                     LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
                     tempLabors.add(tempRespondLab);
-                    System.out.println(tempRespondLab);
                 }
                 backrespond.addAllGyakList(tempLabors);
-                System.out.println(backrespond.getGyak().get(0));
-                System.out.println("Eddig eljött");
+
                 break;
             }
             case "admin": {
                 Iterable<Labor> asd = laborRepository.findAll();
                 List<LaborRespond> tempLabors = new ArrayList<>();
                 for (Labor ids : asd) {
-                    System.out.println("adminid");
                     LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
                     tempLabors.add(tempRespondLab);
-                    System.out.println(tempRespondLab);
                 }
                 backrespond.addAllGyakList(tempLabors);
                 break;
@@ -146,7 +138,7 @@ public class UserController {
     }
 
     @PostMapping("/password")
-    ResponseEntity changePassword(@RequestBody passObj obj) {
+    public ResponseEntity changePassword(@RequestBody passwordObject obj) {
         SimpleUser us = userRepository.findById(obj.id).orElse(null);
         if (us == null)
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Nincs ilyen id");
@@ -155,28 +147,26 @@ public class UserController {
                     .body("Nem egyezik a régi jelszó, és amúgy meg egy teapot vagyok");
         us.setPassword(obj.newPassword);
         userRepository.save(us);
+        System.out.println("Passoword changed: *****");
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");
     }
 
 
     @GetMapping("/role")
-    public String getrole(@RequestParam String userId) {
-
-        return Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
+    public ResponseEntity getrole(@RequestParam String userId) {
+        var role = Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
+        System.out.println("Role lekérdezve: " + role);
+        return ResponseEntity.ok(role);
     }
 
     @PostMapping("/role/menu")
-    public String getrolemenu(@RequestBody String user) {
-
-
-        System.out.println(user);
+    public ResponseEntity getrolemenu(@RequestBody String user) {
         String temprole = Objects.requireNonNull(userRepository.findById(user).orElse(null)).getRole();
-
         ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();
-
         Gson gson = new Gson();
-
-        return gson.toJson(temprespond);
+        var resp = gson.toJson(temprespond);
+        System.out.println("Rolemenu lekérdezve");
+        return ResponseEntity.ok(resp);
     }
 
 }

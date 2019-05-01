@@ -2,7 +2,6 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Users.Admin;
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
-import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
 import com.huszti.gema.analiseresponsiveweb.repository.AdminRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import com.mongodb.MongoClient;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -36,17 +34,19 @@ public class AdminController {
     @PostMapping
     public ResponseEntity addAdmin(@RequestBody Admin admin) {
         adminRepository.save(admin);
+        System.out.println("New admin added: " + admin);
         return ResponseEntity.ok(admin);
     }
 
     @PostMapping("/restoreDefault")
-    public List<Student> getStudentsByGyakid() {
+    public ResponseEntity getStudentsByGyakid() {
 
         MongoClientURI uri = new MongoClientURI(Objects.requireNonNull(env.getProperty("spring.data.mongodb.uri")));
 
         MongoClient mongoClient = new MongoClient(uri);
         MongoDatabase db = mongoClient.getDatabase("analise");
-        db.drop();
+        db.drop(); //adatbázis törlése
+
         SimpleUser adminuser = new SimpleUser();
         adminuser.setNeptun("admin");
         adminuser.setPassword("admin");
@@ -56,16 +56,10 @@ public class AdminController {
         Admin admin = new Admin();
         admin.setNeptun(adminuser.getNeptun());
         adminRepository.save(admin);
+        System.out.println("Adatbázis visszaállítva default állapotra");
 
 
-        System.out.println("droppedall");
-
-        //System.out.println(teacher.getLabor_ids());
-        //assert teacher != null;
-        //Iterable<Labor> labors = laborRepository.findAllById(teacher.getLabor_ids());
-
-        //return studentRepository.findAllByGyakid(teacher.getLabor_ids().get(0));
-        return null;
+        return ResponseEntity.ok("Adatbázis visszaállítva default állapotra.");
 
 
     }
