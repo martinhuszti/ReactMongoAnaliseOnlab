@@ -34,35 +34,33 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student addStudent(@RequestBody Student user) {
+    public ResponseEntity addStudent(@RequestBody Student user) {
         studentRepository.save(user);
-        return user;
+        System.out.println("Új student hozzáadva: " + user);
+        return ResponseEntity.ok(user);
     }
 
     @PatchMapping("/gyak")
-    public void updateGyakStudent(@RequestBody UpdateStudentRespond user) {
-        System.out.println(user);
-        Student student=studentRepository.findById(user.getId()).orElse(null);
-        System.out.println(student);
+    public ResponseEntity updateGyakStudent(@RequestBody UpdateStudentRespond user) {
+        Student student = studentRepository.findById(user.getId()).orElse(null);
         assert student != null;
         student.setGyakid(user.getGyak());
-        System.out.println(student);
+        System.out.println("Gyak megváltoztatva: " + user);
         studentRepository.save(student);
+        return ResponseEntity.ok(student);
 
     }
 
     @PostMapping("/getstudentgyak")
-    public Labor getStudentgyak(@RequestBody String neptuns) {
-        System.out.println(studentRepository.findByNeptun(neptuns));
+    public ResponseEntity getStudentgyak(@RequestBody String neptuns) {
         String getID = studentRepository.findByNeptun(neptuns).getGyakid();
         Labor stdntlab = laborRepository.findById(getID).orElse(null);
-        System.out.println(stdntlab);
-        return stdntlab;
+        System.out.println("Student lab lekérdezve:" + stdntlab);
+        return ResponseEntity.ok(stdntlab);
     }
 
     @GetMapping("/getById")
     public ResponseEntity<Student> getStudent(@RequestParam String id) {
-        System.out.println(id + "Ez az id");
         SimpleUser user = userRepository.findById(id).orElse(null);
 
         System.out.println(user);
@@ -71,40 +69,29 @@ public class StudentController {
             return ResponseEntity.noContent().header("Nincs ilyen diák").build();
         }
         Student student = studentRepository.findByNeptun(user.getNeptun());
-        System.out.println("Ez a diák: " + student);
         if (student == null) {
-            System.out.println("Nincs ilyen");
+            System.out.println("Nincs ilyen diák");
             return ResponseEntity.noContent().header("Nincs ilyen").build();
         }
-        System.out.println(student);
-        System.out.println("student adat");
+        System.out.println("Student lekérdezve és megtalálva: " + student);
         return ResponseEntity.ok(student);
 
     }
 
     @GetMapping
     public ResponseEntity<List<Student>> getAllStudentByUserGyakId(@RequestParam String myGyakId) {
-        System.out.println(myGyakId);
         SimpleUser user = userRepository.findById(myGyakId).orElse(null);
-
         assert user != null;
         if (user.getRole().equals("admin")) {
             return ResponseEntity.ok(studentRepository.findAll());
         }
-
-
         if (user.getRole().equals("teacher")) {
             String neptun = user.getNeptun();
-
-
             Teacher teacher = teacherRepository.findByNeptun(neptun);
-
             assert teacher != null;
             ArrayList<Student> allstudents = new ArrayList<>();
-
             teacher.getLabor_ids().forEach(labid -> allstudents.addAll(studentRepository.findAllByGyakid(labid)));
-            //System.out.println(teacher.getLabor_ids());
-
+            System.out.println("Összes student visszaadva GyakId alapján");
             return ResponseEntity.ok(allstudents);
         }
 
