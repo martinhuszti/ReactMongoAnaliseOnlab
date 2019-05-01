@@ -24,6 +24,7 @@ public class RequirementsController {
     public ResponseEntity updateRequirements(@RequestBody Requirements requirements) {
         requirementsRepository.deleteAll();
         requirementsRepository.save(requirements);
+        System.out.println("Requirments frissítve: " + requirements);
         return ResponseEntity.ok(requirements);
     }
 
@@ -34,6 +35,7 @@ public class RequirementsController {
             requirementsRepository.save(new Requirements());
             reqList = requirementsRepository.findAll();
         }
+        System.out.println("Requirments lekérve: " + reqList);
 
         return ResponseEntity.ok(reqList.get(0));
 
