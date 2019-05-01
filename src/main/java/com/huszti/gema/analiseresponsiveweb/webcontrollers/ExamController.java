@@ -76,8 +76,8 @@ public class ExamController {
         if (user.getRole().equals("admin")) {
             System.out.println(test);
             testRepository.save(test);
-            System.out.println("Új teszt elmentve." + testRepository);
-            return ResponseEntity.ok("Sikeresen elmentve az új teszt.\nId: " + testRepository);
+            System.out.println("Új teszt elmentve." + test);
+            return ResponseEntity.ok("Sikeresen elmentve az új teszt: " + test);
         }
         return ResponseEntity.badRequest().body("Nincs engedélye létrehozni új testet!");
     }
