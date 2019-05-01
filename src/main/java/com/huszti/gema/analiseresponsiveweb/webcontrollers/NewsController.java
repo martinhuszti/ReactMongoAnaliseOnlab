@@ -2,6 +2,7 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,21 +24,20 @@ public class NewsController {
     }
 
     @GetMapping("/top5")
-    public List<News> getTop5News() {
+    public ResponseEntity getTop5News() {
         List<News> tempnews = newsRepository.findAll();
 
         int size = tempnews.size();
         if (size <= 6) {
 
             Collections.reverse(tempnews);
-            System.out.println(tempnews);
-            return tempnews;
+            System.out.println("5 hír lekérve: " + tempnews);
+            return ResponseEntity.ok(tempnews);
         } else {
             List<News> list = tempnews.subList(size - 5, size);
-
             Collections.reverse(list);
-            System.out.println(list);
-            return list;
+            System.out.println("5 hír lekérve:" + list);
+            return ResponseEntity.ok(list);
         }
 
 
@@ -45,24 +45,24 @@ public class NewsController {
 
     @GetMapping
     public ResponseEntity getallNews() {
-
-        return ResponseEntity.ok(newsRepository.findAll());
+        var news = newsRepository.findAll();
+        System.out.println("Összes hír lekérdezve: " + news);
+        return ResponseEntity.ok(news);
     }
 
 
     @PostMapping
-    public News addNews(@RequestBody News news) {
+    public ResponseEntity addNews(@RequestBody News news) {
         newsRepository.save(news);
-
-        return news;
+        System.out.println("Új hír hozzáadva: " + news);
+        return ResponseEntity.ok(news);
     }
 
     @DeleteMapping
-    public String deleteNews(@RequestBody News news) {
-
-        System.out.println(news);
+    public ResponseEntity deleteNews(@RequestBody News news) {
+        System.out.println("Hir kirötölve: " + news);
         newsRepository.deleteById(news.getId());
-        return "Történt valami";
+        return ResponseEntity.ok("Hír kitörölve: " + news);
     }
 
 
