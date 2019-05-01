@@ -63,7 +63,6 @@ public class StudentController {
     public ResponseEntity<Student> getStudent(@RequestParam String id) {
         SimpleUser user = userRepository.findById(id).orElse(null);
 
-        System.out.println(user);
         if (user == null) {
             System.out.println("Nincs ilyen diák");
             return ResponseEntity.noContent().header("Nincs ilyen diák").build();

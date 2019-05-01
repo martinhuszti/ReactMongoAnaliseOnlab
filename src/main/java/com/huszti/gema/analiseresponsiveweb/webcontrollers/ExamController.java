@@ -74,7 +74,6 @@ public class ExamController {
         }
         assert user != null;
         if (user.getRole().equals("admin")) {
-            System.out.println(test);
             testRepository.save(test);
             System.out.println("Új teszt elmentve." + test);
             return ResponseEntity.ok("Sikeresen elmentve az új teszt: " + test);

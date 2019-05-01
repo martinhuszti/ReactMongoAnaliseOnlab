@@ -74,11 +74,10 @@ public class UserController {
             repoUser.setLast_login(LocalDate.now());
             userRepository.save(repoUser);
 
-            System.out.println(repoUser.getNeptun() + " logged in with " + repoUser.getId() + " id");
+            System.out.println("Felhasnzáló bejelentkezett: " + repoUser);
 
             HashMap<String, String> json = new HashMap<>();
             json.put("id", repoUser.getId());
-            System.out.println(json);
 
             return new ResponseEntity<>(json, HttpStatus.OK);
 
@@ -101,7 +100,6 @@ public class UserController {
 
         switch (tempuser.getRole()) {
             case "student": {
-                System.out.println(studentRepository.findByNeptun(tempuser.getNeptun()));
                 String getID = studentRepository.findByNeptun(tempuser.getNeptun()).getGyakid();
                 Labor templab = laborRepository.findById(getID).orElse(null);
 
@@ -109,9 +107,6 @@ public class UserController {
                 LaborRespond tempRespondLab = new LaborRespond(templab.getTitle(), templab.getPlace(), templab.getTime());
 
                 backrespond.addGyakList(tempRespondLab);
-                System.out.println(getID);
-                System.out.println(templab);
-                System.out.println("GETIDstudent");
                 break;
             }
             case "teacher": {
@@ -119,24 +114,19 @@ public class UserController {
                 Iterable<Labor> asd = laborRepository.findAllById(getID);
                 List<LaborRespond> tempLabors = new ArrayList<>();
                 for (Labor ids : asd) {
-                    System.out.println("gyakid");
                     LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
                     tempLabors.add(tempRespondLab);
-                    System.out.println(tempRespondLab);
                 }
                 backrespond.addAllGyakList(tempLabors);
-                System.out.println(backrespond.getGyak().get(0));
-                System.out.println("Eddig eljött");
+
                 break;
             }
             case "admin": {
                 Iterable<Labor> asd = laborRepository.findAll();
                 List<LaborRespond> tempLabors = new ArrayList<>();
                 for (Labor ids : asd) {
-                    System.out.println("adminid");
                     LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
                     tempLabors.add(tempRespondLab);
-                    System.out.println(tempRespondLab);
                 }
                 backrespond.addAllGyakList(tempLabors);
                 break;
@@ -171,16 +161,12 @@ public class UserController {
 
     @PostMapping("/role/menu")
     public ResponseEntity getrolemenu(@RequestBody String user) {
-
-
-        System.out.println(user);
         String temprole = Objects.requireNonNull(userRepository.findById(user).orElse(null)).getRole();
-
         ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();
-
         Gson gson = new Gson();
-        System.out.println("Rolemenu lekérdezve: " + temprespond);
-        return ResponseEntity.ok(gson.toJson(temprespond));
+        var resp = gson.toJson(temprespond);
+        System.out.println("Rolemenu lekérdezve");
+        return ResponseEntity.ok(resp);
     }
 
 }

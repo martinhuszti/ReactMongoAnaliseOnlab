@@ -10,10 +10,8 @@ public class RoleRespond {
 
     public RoleRespond(String role) {
         roleRespond = new ArrayList<>();
-        System.out.println(role + " bent");
         switch (role) {
             case "admin":
-                System.out.println("belemész");
                 adminRespond();
                 break;
             case "teacher":

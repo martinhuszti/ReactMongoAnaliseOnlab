@@ -55,7 +55,6 @@ public class FileController {
 
     @RequestMapping(path = "/dwnload", method = RequestMethod.GET)
     public ResponseEntity<Resource> download() throws IOException {
-        System.out.println("asdkezd");
 
         File file = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\req_short.txt");
 
