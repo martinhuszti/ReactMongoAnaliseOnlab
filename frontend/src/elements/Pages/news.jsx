@@ -5,7 +5,6 @@ import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom
 import Login from './loginForm.jsx';
 import Popup from "./popup"
 
-
 class Class extends Component {
 
     emptyItem = {
@@ -82,8 +81,17 @@ class Class extends Component {
 
     componentDidMount() {
 
-        fetch(`/api/news/top5`)
-            .then(result => result.json())
+        fetch(`/api/news/top5`, {
+            method: "GET",
+        })
+
+            .then(result => {
+                if (result.ok)
+                    result.json();
+                else throw new Error("Backend nem elérhető")
+            })
+            .catch(() => {alert("Backend nem elérhető!")})
+
             .then(items => {
                     this.setState({items});
 
@@ -103,6 +111,7 @@ class Class extends Component {
 
         return (
             <div>
+
                 {renderRedirect()}
                 <Router>
 

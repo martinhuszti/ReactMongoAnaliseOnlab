@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-//push it to the limit
-
 @Data
 class passObj {
     String id;
@@ -160,11 +158,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");
     }
 
-  /*  @GetMapping("/getUsers")
-    public List<SimpleUser> getUsers() {
-        return userRepository.findAll();
-
-    }*/
 
     @GetMapping("/role")
     public String getrole(@RequestParam String userId) {
