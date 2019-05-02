@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, {Component} from 'react';
 
 import {withRouter} from "react-router";
-import LoggedIn_Data from '../UserMenu/1_data';
-import LoggedIn_Result from '../UserMenu/2_results';
-import Change_Pass from '../UserMenu/3_change_pass';
+import LoggedInData from '../UserMenu/1_data';
+import LoggedInResult from '../UserMenu/2_results';
+import ChangePass from '../UserMenu/3_change_pass';
 import Chat from '../UserMenu/4_chat';
 import NewsPublication from '../UserMenu/7_news_publication';
 import AddStudent from '../UserMenu/6_add_person';
@@ -43,16 +43,16 @@ class LoggedIn extends Component {
         {
             path: "/loggedin/data",
             exact: true,
-            main: () => <LoggedIn_Data/>
+            main: () => <LoggedInData/>
         },
         {
 
             path: "/loggedin/result",
-            main: () => <LoggedIn_Result />
+            main: () => <LoggedInResult />
         },
         {
             path: "/loggedin/changepass",
-            main: () => <Change_Pass />
+            main: () => <ChangePass />
         },
         {
             path: "/loggedin/controller",
@@ -144,9 +144,9 @@ class LoggedIn extends Component {
         if (item === 10)
             return <AddIcon/>;
         if (item === 11)
-            return <DashBoardIcon />
+            return <DashBoardIcon />;
         if (item === 12)
-            return <SwitchCameraIcon />
+            return <SwitchCameraIcon />;
 
     }
 
