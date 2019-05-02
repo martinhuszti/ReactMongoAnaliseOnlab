@@ -2,9 +2,10 @@ language: java
 jdk: oraclejdk8
 services:
   - docker
-script: mvn install
 deploy:
   provider: script
-  script: bash docker_push
+  script:
+  - bash docker_push
+  - mvn install
   on:
     branch: master
