@@ -7,6 +7,6 @@ after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - export TAG=latest
   - export IMAGE_NAME=martinhuszti/analisebme
-  - docker build -t $IMAGE_NAME:$COMMIT .
-  - docker tag $IMAGE_NAME:$COMMIT $IMAGE_NAME:$TAG
+  - docker build -t $IMAGE_NAME .
+  - docker tag $IMAGE_NAME $IMAGE_NAME:$TAG
   - docker push $IMAGE_NAME
