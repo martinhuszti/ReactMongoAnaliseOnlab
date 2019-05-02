@@ -98,7 +98,7 @@ class Requirements extends Component {
                         <ul>
                             <Button className="button_color" onClick={this.downloadRandomImage}>Teljes követelmény
                                 letöltése</Button>
-                            <a id="dwonload" href={this.state.dwnloadlnk} download={this.state.files}/>
+
                         </ul>
 
                     </div>
