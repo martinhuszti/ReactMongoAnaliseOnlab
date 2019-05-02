@@ -7,5 +7,3 @@ deploy:
   script:
   - bash docker_push
   - mvn install
-  on:
-    branch: master
