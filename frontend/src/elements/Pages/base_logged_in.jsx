@@ -16,7 +16,7 @@ import ListStudent from '../UserMenu/5_students'
 import NewTest from '../UserMenu/11_newTest'
 
 import ChangeLab from '../UserMenu/12_change_labor'
-import { BrowserRouter as Router, Link, Redirect, Route } from "react-router-dom";
+import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { Alert } from 'reactstrap';
 
 import './css/news.css';

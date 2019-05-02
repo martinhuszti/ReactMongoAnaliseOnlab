@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
+import {HashRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
 import {Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
 import Requirements from './Pages/requirements';
 import LoginForm from './Pages/loginForm';
