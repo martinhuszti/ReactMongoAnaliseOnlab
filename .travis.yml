@@ -14,3 +14,4 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API_KEY
   app: analisebme
+  skip_cleanup: true
