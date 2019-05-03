@@ -17,7 +17,7 @@ import NewTest from '../UserMenu/11_newTest'
 
 import ChangeLab from '../UserMenu/12_change_labor'
 import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
- import { Alert } from 'reactstrap';
+import { Alert } from 'reactstrap';
 
 import './css/news.css';
 import './css/loggedin.css';
