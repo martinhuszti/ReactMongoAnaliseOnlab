@@ -9,6 +9,9 @@ import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TestRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.TestRespond;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/exams")
+@Api(description = "Számonkérésekre vonatkozó modellekhez kapcsolódó api hívások")
 public class ExamController {
 
 
@@ -33,6 +37,8 @@ public class ExamController {
     }
 
     @PostMapping //addNewExam
+    @ApiOperation("Egy új vizsga felvétele egy diákhoz. ResponseEntityvel tér vissza")
+    @ApiParam("Body: Vizsgát vár. Header: Diák és Számonkérés Id-t vár")
     public ResponseEntity addNewExam(@RequestBody Exam exam, @RequestParam String studentId, @RequestParam String examType) {
 
         Test test = testRepository.findById(examType).orElseThrow(() -> new RuntimeException("Nem található test!"));
@@ -66,6 +72,8 @@ public class ExamController {
     }
 
     @PostMapping("/tests")
+    @ApiOperation("Új vizsga felvétele. ResponseEntityvel tér vissza")
+    @ApiParam("Body: Test típusú Vizsgát vár.")
     public ResponseEntity addNewTest(@RequestBody Test test) {
         SimpleUser user = userRepository.findById(test.getCreator()).orElse(null);
         if (user == null) {
@@ -82,6 +90,7 @@ public class ExamController {
     }
 
     @GetMapping("/tests")
+    @ApiOperation("Vissza adja az össze létező számonkérést. ResponseEntityvel tér vissza")
     public ResponseEntity getAllTest() {
 
         List<Test> getAllTest = testRepository.findAll();

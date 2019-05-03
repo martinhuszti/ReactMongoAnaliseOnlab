@@ -7,6 +7,9 @@ import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoDatabase;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +21,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/admins")
+@Api(description = "Admin modellhez kapcsolódó api hívások")
 public class AdminController {
 
     private final Environment env;
@@ -32,6 +36,8 @@ public class AdminController {
     }
 
     @PostMapping
+    @ApiOperation("Admin hozzáadása. Response Entityvel tér vissza.")
+    @ApiParam("Admin modellt vár")
     public ResponseEntity addAdmin(@RequestBody Admin admin) {
         adminRepository.save(admin);
         System.out.println("New admin added: " + admin);
@@ -39,6 +45,7 @@ public class AdminController {
     }
 
     @PostMapping("/restoreDefault")
+    @ApiOperation("Nullázza az adatbázist, majd felvesz egy admin jogosultságú felhasználót")
     public ResponseEntity getStudentsByGyakid() {
 
         MongoClientURI uri = new MongoClientURI(Objects.requireNonNull(env.getProperty("spring.data.mongodb.uri")));

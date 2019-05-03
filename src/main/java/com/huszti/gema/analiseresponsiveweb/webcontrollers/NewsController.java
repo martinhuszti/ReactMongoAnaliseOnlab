@@ -2,6 +2,8 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.News;
 import com.huszti.gema.analiseresponsiveweb.repository.NewsRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/news")
+@Api(description = "Hírek kezeléséért felelős controller")
 public class NewsController {
 
     private final NewsRepository newsRepository;
@@ -44,6 +47,7 @@ public class NewsController {
     }
 
     @GetMapping
+    @ApiOperation("Összes hírt vissza adja")
     public ResponseEntity getallNews() {
         var news = newsRepository.findAll();
         System.out.println("Összes hír lekérdezve: " + news);
@@ -52,6 +56,7 @@ public class NewsController {
 
 
     @PostMapping
+    @ApiOperation("Új hírt ad hozzá")
     public ResponseEntity addNews(@RequestBody News news) {
         newsRepository.save(news);
         System.out.println("Új hír hozzáadva: " + news);
@@ -59,6 +64,7 @@ public class NewsController {
     }
 
     @DeleteMapping
+    @ApiOperation("Adott hírt töröl Id alapján. News modellt vár")
     public ResponseEntity deleteNews(@RequestBody News news) {
         System.out.println("Hir kirötölve: " + news);
         newsRepository.deleteById(news.getId());

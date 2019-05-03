@@ -3,6 +3,8 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/labors")
+@Api(description = "Gyakorlat modellhez kapcsolódó api hívások")
 public class LaborController {
 
 
@@ -25,6 +28,7 @@ public class LaborController {
     }
 
     @PostMapping
+    @ApiOperation("Új labor hozzáadása")
     public ResponseEntity addNewLab(@RequestBody Labor labor) {
         laborRepository.save(labor);
         System.out.println("Új labor hozzáadva: " + labor);
@@ -32,6 +36,7 @@ public class LaborController {
     }
 
     @GetMapping
+    @ApiOperation("Összes labor lekérése. ResponseEntityvel tér vissza")
     public ResponseEntity getAllLabs() {
         var labors = laborRepository.findAll();
         System.out.println("Laborok lekérdezve: " + labors);

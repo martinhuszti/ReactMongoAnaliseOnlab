@@ -1,5 +1,8 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +22,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
+@Api(description = "File kezeléshez tartozó controller")
 public class FileController {
 
     @RequestMapping(path = "/files", method = RequestMethod.POST)
+    @ApiOperation("Fájl feltöltést kezel. ResponseEntityvel tér vissza")
+    @ApiParam("file-t vár")
     public ResponseEntity handleFileUpload(@RequestParam("file") MultipartFile file) {
         try {
             System.out.printf("File name=%s, size=%s\n", file.getOriginalFilename(), file.getSize());
@@ -54,6 +60,7 @@ public class FileController {
     }
 
     @RequestMapping(path = "/dwnload", method = RequestMethod.GET)
+    @ApiOperation("Letöltést kezeli. ResponseEntityvel tér vissza")
     public ResponseEntity<Resource> download() throws IOException {
 
         File file = new File("C:\\analise\\src\\main\\java\\com\\huszti\\gema\\analiseresponsiveweb\\res\\req_short.txt");
