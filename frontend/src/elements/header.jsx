@@ -6,6 +6,7 @@ import LoginForm from './Pages/loginForm';
 import LoggedIn from './Pages/base_logged_in';
 import Informations from './Pages/informations'
 import Excercises from './Pages/excercises'
+import Exams from './Pages/exams'
 import News from './Pages/news';
 import MenuIcon from '@material-ui/icons/Menu';
 import './menu.css';
@@ -112,7 +113,7 @@ class Header extends Component {
                         </div>
                     </nav>
                     <Switch>
-                        <Route path="/Exams" component={Home}/>
+                        <Route path="/Exams" component={Exams}/>
                         <Route path="/News" component={Home}/>
                         <Route exact path="/" render={() => (
                             <Redirect to="/News"/>

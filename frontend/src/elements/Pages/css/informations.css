@@ -1,0 +1,11 @@
+.info_gyak{
+    font-weight: bold;
+    font-size: 20px;
+}
+.info_flex{
+    display: flex;
+    flex-direction: row;
+}
+.info_flex>*{
+    flex: 1;
+}
