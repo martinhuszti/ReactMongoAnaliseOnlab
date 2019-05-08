@@ -1,8 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import {withRouter} from "react-router";
+import { withRouter } from "react-router";
 import LoggedInData from '../UserMenu/1_data';
 import LoggedInResult from '../UserMenu/2_results';
 import ChangePass from '../UserMenu/3_change_pass';
@@ -21,7 +21,7 @@ import { Alert } from 'reactstrap';
 
 import './css/news.css';
 import './css/loggedin.css';
-import {slide as Menu} from 'react-burger-menu'
+import { slide as Menu } from 'react-burger-menu'
 
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountBox from '@material-ui/icons/AccountBox';
@@ -43,7 +43,7 @@ class LoggedIn extends Component {
         {
             path: "/loggedin/data",
             exact: true,
-            main: () => <LoggedInData/>
+            main: () => <LoggedInData />
         },
         {
 
@@ -102,13 +102,14 @@ class LoggedIn extends Component {
             visible: false,
             menuToggle: false,
             menuToggleSelf: '',
+            headertext: "Login",
         };
 
 
         if (sessionStorage.getItem("newLogin") === "true") {
             this.state.visible = true;
             window.setTimeout(() => {
-                this.setState({visible: false})
+                this.setState({ visible: false })
             }, 2000);
             console.log("új felhasználó");
             sessionStorage.setItem("newLogin", false);
@@ -118,31 +119,32 @@ class LoggedIn extends Component {
         this.menuClick = this.menuClick.bind(this);
 
         this.handleStateChange = this.handleStateChange.bind(this);
+        this.headerchange = this.headerchange.bind(this);
         LoggedIn.motiveBind = LoggedIn.motiveBind.bind(this);
 
     }
 
     static motiveBind(item) {
         if (item === 1)
-            return <AccountBox/>;
+            return <AccountBox />;
         if (item === 2)
-            return <RemoveRedEyeIcon/>;
+            return <RemoveRedEyeIcon />;
         if (item === 3)
-            return <ChatIcon/>;
+            return <ChatIcon />;
         if (item === 4)
-            return <PersonIcon/>;
+            return <PersonIcon />;
         if (item === 5)
-            return <AddCommentIcon/>;
+            return <AddCommentIcon />;
         if (item === 6)
-            return <PersonAddIcon/>;
+            return <PersonAddIcon />;
         if (item === 7)
-            return <AddCommentOutlinedIcon/>;
+            return <AddCommentOutlinedIcon />;
         if (item === 8)
-            return <DeleteIcon/>;
+            return <DeleteIcon />;
         if (item === 9)
-            return <AddIcon/>;
+            return <AddIcon />;
         if (item === 10)
-            return <AddIcon/>;
+            return <AddIcon />;
         if (item === 11)
             return <DashBoardIcon />;
         if (item === 12)
@@ -157,11 +159,14 @@ class LoggedIn extends Component {
     }
 
     handleStateChange(state) {
-        this.setState({menuToggle: state.isOpen})
+        this.setState({ menuToggle: state.isOpen })
     }
 
     closeAlert() {
-        this.setState({visible: false});
+        this.setState({ visible: false });
+    }
+    headerchange=(headerstring) =>{
+        this.setState({ headertext: headerstring })
     }
 
     logout() {
@@ -188,11 +193,11 @@ class LoggedIn extends Component {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
             }
-            this.setState({isLoggedIn: "true"})
+            this.setState({ isLoggedIn: "true" })
         }
         if (this.state.isLoggedIn === "false") {
             console.log(this.state.isLoggedIn);
-            return <Redirect to="/LoginForm"/>
+            return <Redirect to="/LoginForm" />
         }
     }
 
@@ -201,13 +206,13 @@ class LoggedIn extends Component {
         console.log(loginid);
         fetch(`/api/users/role/menu`, {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            headers: { "Content-Type": "application/json" },
             body: loginid
         }).then(res => {
             return res.json()
 
         }).then(json => {
-            this.setState({items: json});
+            this.setState({ items: json });
             console.log(this.state.role);
             console.log(json);
         })
@@ -217,16 +222,17 @@ class LoggedIn extends Component {
     render() {
 
         console.log(this.state.isLoggedIn);
-        const {items} = this.state;
-        const {routes} = this;
+        const { items } = this.state;
+        const { headertext } = this.state;
+        const { routes } = this;
 
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
 
-                    <div id="placeholder_header"/>
+                    <div id="placeholder_header" />
                     <Menu width={'250px'} customBurgerIcon={false} isOpen={this.state.menuToggle}
-                          onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
+                        onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
                             {items.map(items =>
                                 <Link to={items.link} onClick={this.menuClick} className=" menu_items_two box_1">
@@ -253,18 +259,18 @@ class LoggedIn extends Component {
                     <div id="menu_header" className="news news_head">
 
 
-                        <h1 className="news_text "><MenuIcon onClick={this.menuClick} id="loggedin_menuicon"/>Login</h1>
+                        <h1 className="news_text "><MenuIcon onClick={this.menuClick} id="loggedin_menuicon" />{headertext}</h1>
                     </div>
 
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column loggedin_disapier">
                             {items.map(items =>
-                                <Link to={items.link} className="menu_items box_1">
+                                <Link to={items.link} className="menu_items box_1 ">
 
                                     <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
 
-                                    <p className="menu_items_text">{items.text}</p>
+                                    <p onClick={this.headerchange.bind(this,items.text)} className="menu_items_text">{items.text}</p>
                                 </Link>
                             )}
 
@@ -280,13 +286,14 @@ class LoggedIn extends Component {
                         <div className="content_box">
                             {routes.map((route, index) => (
 
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        component={route.main}
-                                    />
-                                )
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    exact={route.exact}
+                                    component={route.main}
+                                    
+                                />
+                            )
                             )}
 
                         </div>
@@ -308,10 +315,12 @@ const emptyStudent = [
         link: "/loggedin/data",
         text: 'Adatok',
         motiv: 1,
+
     },
     {
         link: "/loggedin/controller",
         text: 'Chat',
         motiv: 3,
+    
     }
 ];
