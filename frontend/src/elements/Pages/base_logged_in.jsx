@@ -165,7 +165,7 @@ class LoggedIn extends Component {
     closeAlert() {
         this.setState({ visible: false });
     }
-    headerchange=(headerstring) =>{
+    headerchange = (headerstring) => {
         this.setState({ headertext: headerstring })
     }
 
@@ -213,8 +213,20 @@ class LoggedIn extends Component {
 
         }).then(json => {
             this.setState({ items: json });
-            console.log(this.state.role);
-            console.log(json);
+            var obj = [];
+            var i;
+            for (i = 0; i <= json.length; i++) {
+                var newmenu = {
+                    item: json[i],
+                    clicked: false
+                }
+                console.log(newmenu)
+                obj.push(newmenu)
+                console.log(obj)
+            }
+            console.log("obj")
+            console.log(obj)
+            this.setState({ items: this.obj });
         })
     }
 
@@ -234,10 +246,10 @@ class LoggedIn extends Component {
                     <Menu width={'250px'} customBurgerIcon={false} isOpen={this.state.menuToggle}
                         onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
-                            {items.map(items =>
-                                <Link to={items.link} onClick={this.menuClick} className=" menu_items_two box_1">
-                                    <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
-                                    <p className="menu_items_text">{items.text}</p>
+                            {items.map(kacsa =>
+                                <Link to={kacsa.item.link} onClick={this.menuClick} className=" menu_items_two box_1">
+                                    <div className="menu_icons">{LoggedIn.motiveBind(kacsa.item.motiv)}</div>
+                                    <p className="menu_items_text">{kacsa.item.text}</p>
                                 </Link>
                             )}
 
@@ -266,11 +278,11 @@ class LoggedIn extends Component {
 
                         <div className="menu_items flex_column loggedin_disapier">
                             {items.map(items =>
-                                <Link to={items.link} className="menu_items box_1 ">
+                                <Link to={items.item.link} className="menu_items box_1 ">
 
-                                    <div className="menu_icons">{LoggedIn.motiveBind(items.motiv)}</div>
+                                    <div className="menu_icons">{LoggedIn.motiveBind(items.item.motiv)}</div>
 
-                                    <p onClick={this.headerchange.bind(this,items.text)} className="menu_items_text">{items.text}</p>
+                                    <p onClick={this.headerchange.bind(this, items.item.text)} className="menu_items_text">{items.item.text}</p>
                                 </Link>
                             )}
 
@@ -291,7 +303,7 @@ class LoggedIn extends Component {
                                     path={route.path}
                                     exact={route.exact}
                                     component={route.main}
-                                    
+
                                 />
                             )
                             )}
@@ -311,16 +323,21 @@ class LoggedIn extends Component {
 export default withRouter(LoggedIn);
 
 const emptyStudent = [
+    
     {
+    clicked: false,
+    item: {
         link: "/loggedin/data",
         text: 'Adatok',
         motiv: 1,
-
+        }
     },
     {
+    clicked: false,
+    item: {
         link: "/loggedin/controller",
         text: 'Chat',
         motiv: 3,
-    
+        }
     }
-];
+]
