@@ -4,6 +4,9 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 import com.huszti.gema.analiseresponsiveweb.database.Users.Teacher;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/teachers")
+@Api(description = "Tanárhoz kapcsolódó api hívások")
 public class TeacherController {
 
     private final TeacherRepository teacherRepository;
@@ -24,6 +28,8 @@ public class TeacherController {
 
 
     @PostMapping
+    @ApiOperation("Tanár hozzáadása. ResponseEntityt ad vissza")
+    @ApiParam("Teacher-t vár")
     public ResponseEntity addTeacher(@RequestBody Teacher teacher) {
         teacherRepository.save(teacher);
         laborRepository.findAllById(teacher.getLabor_ids())

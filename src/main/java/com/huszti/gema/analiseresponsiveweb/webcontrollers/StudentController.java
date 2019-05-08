@@ -10,6 +10,9 @@ import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.UserRepository;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.UpdateStudentRespond;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/students")
+@Api(description = "Diákhoz kapcsolódó api hívások")
 public class StudentController {
 
 
@@ -34,6 +38,8 @@ public class StudentController {
     }
 
     @PostMapping
+    @ApiOperation("Új diákot vesz fel")
+    @ApiParam("Student-et vár")
     public ResponseEntity addStudent(@RequestBody Student user) {
         studentRepository.save(user);
         System.out.println("Új student hozzáadva: " + user);
@@ -41,6 +47,8 @@ public class StudentController {
     }
 
     @PatchMapping("/gyak")
+    @ApiOperation("Diákhoz tartozó gyakorlatot updatel. ResponseEntity-vel tér vissza")
+    @ApiParam("UpdateStudentRespond-ot vár")
     public ResponseEntity updateGyakStudent(@RequestBody UpdateStudentRespond user) {
         Student student = studentRepository.findById(user.getId()).orElse(null);
         assert student != null;
@@ -52,6 +60,8 @@ public class StudentController {
     }
 
     @PostMapping("/getstudentgyak")
+    @ApiOperation("A user Neptunja alapján visszaadja a hozzátartozó gyakorlatot. ResponseEntity-vel tér vissza")
+    @ApiParam("String-et vár")
     public ResponseEntity getStudentgyak(@RequestBody String neptuns) {
         String getID = studentRepository.findByNeptun(neptuns).getGyakid();
         Labor stdntlab = laborRepository.findById(getID).orElse(null);
@@ -60,6 +70,8 @@ public class StudentController {
     }
 
     @GetMapping("/getById")
+    @ApiOperation("A user Id-ja alapján visszaadja a hozzátartozó diák modellt. ResponseEntity-vel tér vissza")
+    @ApiParam("String-et vár")
     public ResponseEntity<Student> getStudent(@RequestParam String id) {
         SimpleUser user = userRepository.findById(id).orElse(null);
 
@@ -78,6 +90,8 @@ public class StudentController {
     }
 
     @GetMapping
+    @ApiOperation("A user Id-ja alapján visszaadja a hozzátartozó diákok listáját. ResponseEntity-vel tér vissza")
+    @ApiParam("String-et vár")
     public ResponseEntity<List<Student>> getAllStudentByUserGyakId(@RequestParam String myGyakId) {
         SimpleUser user = userRepository.findById(myGyakId).orElse(null);
         assert user != null;

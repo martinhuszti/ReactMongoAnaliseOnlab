@@ -11,6 +11,9 @@ import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.DataRespon
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.LaborRespond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.Respond;
 import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.RoleRespond;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.Data;
 import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Data
+@Api(description = "Jelszó változtatás modellje")
 class passwordObject {
     String id;
     String oldPassword;
@@ -36,6 +40,7 @@ class passwordObject {
 
 @RestController
 @RequestMapping("/api/users")
+@Api(description = "User-ekhez kapcsolódó api hívások")
 public class UserController {
 
     private UserRepository userRepository;
@@ -53,6 +58,8 @@ public class UserController {
     }
 
     @PostMapping
+    @ApiOperation("User hozzáadása")
+    @ApiParam("SimpleUser-t vár")
     public ResponseEntity addUser(@RequestBody SimpleUser user) {
         userRepository.save(user);
         System.out.println("Új user hozzáadva: " + user);
@@ -60,6 +67,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
+    @ApiOperation("Bejelentkezésért felelős POST")
+    @ApiParam("SimpleUser-t vár")
     public ResponseEntity loginUser(@RequestBody SimpleUser user) {
 
         SimpleUser repoUser = userRepository.findByNeptun(user.getNeptun());
@@ -86,6 +95,8 @@ public class UserController {
     }
 
     @GetMapping("/details")
+    @ApiOperation("User adatait adja vissza")
+    @ApiParam("UserId-t vár")
     public DataRespond getDetails(@RequestParam String userId) {
 
 
@@ -138,6 +149,8 @@ public class UserController {
     }
 
     @PostMapping("/password")
+    @ApiOperation("User jelszó változtatás.")
+    @ApiParam("passwordObject-t vár")
     public ResponseEntity changePassword(@RequestBody passwordObject obj) {
         SimpleUser us = userRepository.findById(obj.id).orElse(null);
         if (us == null)
@@ -153,6 +166,8 @@ public class UserController {
 
 
     @GetMapping("/role")
+    @ApiOperation("User fokozatát adjva vissza ResponseEntity-vel")
+    @ApiParam("UserId-t vár")
     public ResponseEntity getrole(@RequestParam String userId) {
         var role = Objects.requireNonNull(userRepository.findById(userId).orElse(null)).getRole();
         System.out.println("Role lekérdezve: " + role);
@@ -160,6 +175,8 @@ public class UserController {
     }
 
     @PostMapping("/role/menu")
+    @ApiOperation("User fokozatához tartozó menüt adja. ResponseEntityt ad vissza")
+    @ApiParam("UserId-t vár")
     public ResponseEntity getrolemenu(@RequestBody String user) {
         String temprole = Objects.requireNonNull(userRepository.findById(user).orElse(null)).getRole();
         ArrayList<Respond> temprespond = new RoleRespond(temprole).getRoleRespond();

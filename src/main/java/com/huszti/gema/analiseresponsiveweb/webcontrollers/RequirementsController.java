@@ -3,6 +3,9 @@ package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.huszti.gema.analiseresponsiveweb.database.Requirements;
 import com.huszti.gema.analiseresponsiveweb.repository.RequirementsRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.var;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/requirements")
+@Api(description = "Követelményekhez kapcsolódó api hívások")
 public class RequirementsController {
 
     private final
@@ -21,6 +25,8 @@ public class RequirementsController {
 
 
     @PutMapping
+    @ApiOperation("Követelmények frissírtése. ResponseEntityt ad vissza")
+    @ApiParam("Requirements-et vár")
     public ResponseEntity updateRequirements(@RequestBody Requirements requirements) {
         requirementsRepository.deleteAll();
         requirementsRepository.save(requirements);
@@ -29,6 +35,7 @@ public class RequirementsController {
     }
 
     @GetMapping
+    @ApiOperation("Követelmények visszaadása. ResponseEntityt ad vissza, amiben benne van")
     public ResponseEntity getRequirments() {
         var reqList = requirementsRepository.findAll();
         if (reqList.isEmpty()) {
