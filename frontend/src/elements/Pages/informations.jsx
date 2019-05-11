@@ -16,7 +16,7 @@ class Infomations extends Component {
 
 
 componentWillMount(){
-    document.title="Információ"
+    document.title="Információ";
         fetch(`/api/labors`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},

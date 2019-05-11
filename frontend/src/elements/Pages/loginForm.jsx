@@ -55,7 +55,7 @@ class RegistrationForm extends Component {
     }
 
     componentWillMount() {
-        document.title="Analízis"
+        document.title="Analízis";
         let login = sessionStorage.getItem("loggedin");
         let loginid = sessionStorage.getItem("id");
         if (loginid !== null && login === "true")
