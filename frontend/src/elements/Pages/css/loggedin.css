@@ -26,11 +26,6 @@
     scrollbar-width: 0;
 }
 
-.box_1 {
-    max-height: 50px;
-    display: flex;
-    flex-direction: row;
-}
 
 .box_flex {
     flex: 1;
@@ -195,4 +190,25 @@
 .bm-overlay {
     scrollbar-width: 0;
     background: rgba(0, 0, 0, 0.3);
+}
+
+.logged_in_colorone{
+    background-color: rgb(1, 221, 67);
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    vertical-align: middle;
+}
+.logged_in_colortwo{
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    background-color: #1D155D;
+    color: white;
+    vertical-align: middle;
+}
+.logged_in_colortwo:hover {
+    background-color: #5671eb;
+    color: white;
 }
