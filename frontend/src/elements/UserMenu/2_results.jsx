@@ -5,21 +5,17 @@ import { Button } from 'reactstrap';
 class LoggedIn_Result extends Component {
 
     emptyExam = [{
-        score: '0',
+        score: 0,
         mark: 0,
-        type: '0',
-    },
-    {
-        score: '0',
-        mark: 1,
-        type: '0',
+        type: 0,
     },
     ]
 
     constructor(props) {
         super(props);
         this.state = {
-            mark: 0,
+            gotData:false,
+            originalmark:1,
             record: this.emptyExam,
 
         };
@@ -28,11 +24,14 @@ class LoggedIn_Result extends Component {
 
 
     componentWillMount() {
+        document.title = "Profil";
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/api/students/getById/?id=${encodedValue}`)
             .then(response => response.json())
             .then(student => {
-                this.setState({ record: student.exams })
+                this.setState({ record: student.exams,
+                gotData:true
+                })
 
             }
             );
@@ -48,8 +47,8 @@ class LoggedIn_Result extends Component {
             .then(emptyExam => {
                 this.setState({
                     record: emptyExam.exams,
-                    mark: 3
-                })
+                   
+                }); 
                 
 
             }
@@ -59,7 +58,7 @@ class LoggedIn_Result extends Component {
 
     render() {
         const { record } = this.state;
-        const { mark } = this.state;
+        const { originalmark } = this.state;
         return (
             <div>
                 <div className="result_margin">
@@ -71,7 +70,7 @@ class LoggedIn_Result extends Component {
                             <span>Pont</span>
                             <span>Jegy</span>
                         </li>
-                        {record.map(exam =>
+                       {record.map(exam => record.length>0 ?
                             <li className="result_font" key={exam.id}>
                                 <span>
                                     {exam.type}
@@ -79,7 +78,7 @@ class LoggedIn_Result extends Component {
                                 <span>{exam.score} pont</span>
                                 <span>
                                     {exam.mark}
-                                </span></li>)
+                                </span></li>: <div>Nincs eredmény</div>)
                         }
                     </ul>
 
@@ -117,7 +116,7 @@ class LoggedIn_Result extends Component {
                     <div>
 
                         <span className="result_endmark">Végső jegy:</span>
-                        <span className="result_endmark result_number">{mark}</span>
+                        <span className="result_endmark result_number">{record.length>0 ? record[record.length-1].mark : originalmark}</span>
                     </div>
                     <div className="result_autobox">
                         <div className="result_halfbox" />

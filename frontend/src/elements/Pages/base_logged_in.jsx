@@ -185,6 +185,7 @@ class LoggedIn extends Component {
     }
 
     componentWillMount() {
+        document.title="Profil"
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
 

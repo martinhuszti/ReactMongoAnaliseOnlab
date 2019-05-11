@@ -26,8 +26,6 @@
     scrollbar-width: 0;
 }
 
-.box_1 {
-}
 
 .box_flex {
     flex: 1;
@@ -195,7 +193,7 @@
 }
 
 .logged_in_colorone{
-    background-color: rgb(93, 21, 65);
+    background-color: rgb(1, 221, 67);
     max-height: 50px;
     display: flex;
     flex-direction: row;

@@ -22,6 +22,7 @@ class Requirements extends Component {
     }
 
     componentWillMount() {
+        document.title="Követelmény"
         fetch(`/api/requirements`)
             .then(result => result.json())
             .then(items => {
