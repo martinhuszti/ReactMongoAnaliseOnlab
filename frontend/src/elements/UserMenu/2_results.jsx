@@ -70,7 +70,7 @@ class LoggedIn_Result extends Component {
                             <span>Pont</span>
                             <span>Jegy</span>
                         </li>
-                       {record.map(exam => (record.length>0) ?
+                       {record.map((exam) => (record.length>0) ?
                             <li className="result_font" key={exam.id}>
                                 <span>
                                     {exam.type}
