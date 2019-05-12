@@ -18,10 +18,4 @@ public class Admin {
     @ApiModelProperty(notes = "Neptun kód. Azonosításra szolgáll")
     @NotBlank
     protected String neptun;
-
-
-    public Admin() {
-    }
-
-
 }

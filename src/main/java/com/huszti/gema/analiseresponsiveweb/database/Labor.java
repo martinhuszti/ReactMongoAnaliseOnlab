@@ -1,4 +1,4 @@
-package com.huszti.gema.analiseresponsiveweb.database.Class;
+package com.huszti.gema.analiseresponsiveweb.database;
 
 
 import io.swagger.annotations.ApiModel;
@@ -25,8 +25,5 @@ public class Labor {
 
     private List<String> student_ids;
     private String teacher_id;
-
-    public Labor() {
-    }
 
 }

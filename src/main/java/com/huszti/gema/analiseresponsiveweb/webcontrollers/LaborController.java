@@ -1,7 +1,7 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 
-import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
+import com.huszti.gema.analiseresponsiveweb.database.Labor;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

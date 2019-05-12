@@ -1,7 +1,7 @@
 package com.huszti.gema.analiseresponsiveweb.webcontrollers;
 
 import com.google.gson.Gson;
-import com.huszti.gema.analiseresponsiveweb.database.Class.Labor;
+import com.huszti.gema.analiseresponsiveweb.database.Labor;
 import com.huszti.gema.analiseresponsiveweb.database.Users.SimpleUser;
 import com.huszti.gema.analiseresponsiveweb.repository.LaborRepository;
 import com.huszti.gema.analiseresponsiveweb.repository.StudentRepository;

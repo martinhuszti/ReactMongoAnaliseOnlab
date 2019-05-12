@@ -30,7 +30,6 @@ class LoggedInData extends Component {
 
     componentWillMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
-
         if (sesslogged !== "true") {
             this.setState({
                 isLoggedIn: "true"

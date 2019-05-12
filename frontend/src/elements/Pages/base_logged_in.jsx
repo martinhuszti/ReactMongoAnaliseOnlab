@@ -33,6 +33,20 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import DashBoardIcon from "@material-ui/icons/Poll";
 import SwitchCameraIcon from "@material-ui/icons/SwitchCamera";
 
+const emptyStudent = [{
+    link: "/loggedin/data",
+    text: "Adatok",
+    motiv: 1,
+    clicked: false,
+},
+    {
+        link: "/loggedin/controller",
+        text: "Chat",
+        motiv: 3,
+        clicked: false,
+    }
+
+];
 
 class LoggedIn extends Component {
 
@@ -89,6 +103,7 @@ class LoggedIn extends Component {
             main: () => <ChangeLab/>
         },
     ];
+
 
     constructor(props) {
         super(props);
@@ -323,20 +338,4 @@ class LoggedIn extends Component {
     }
 }
 
-
 export default withRouter(LoggedIn);
-
-const emptyStudent = [{
-    link: "/loggedin/data",
-    text: "Adatok",
-    motiv: 1,
-    clicked: false,
-},
-    {
-        link: "/loggedin/controller",
-        text: "Chat",
-        motiv: 3,
-        clicked: false,
-    }
-
-];

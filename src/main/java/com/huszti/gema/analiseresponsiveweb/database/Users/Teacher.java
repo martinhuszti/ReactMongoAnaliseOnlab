@@ -28,7 +28,4 @@ public class Teacher {
     @ApiModelProperty(notes = "Tanárhoz tartozó gyakorlatok")
     private List<String> labor_ids;
 
-    Teacher() {
-
-    }
 }
