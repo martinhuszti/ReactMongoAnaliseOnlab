@@ -1,10 +1,6 @@
 import axios from "axios";
 
 class Service {
-
-    constructor() {
-    }
-
     getRestClient() {
         if (!this.serviceInstance) {
             this.serviceInstance = axios.create({

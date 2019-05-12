@@ -5,4 +5,5 @@ export class FileService {
         //returns Promise object
         return service.getRestClient().post("/files", data);
     }
+
 }
