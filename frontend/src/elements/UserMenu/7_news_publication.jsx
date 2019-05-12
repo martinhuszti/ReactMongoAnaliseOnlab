@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./css/news_publication.css";
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 
-class News_Publication extends Component {
+class NewsPublication extends Component {
     emptyItem = {
         title: "",
         text: ""
@@ -72,4 +72,4 @@ class News_Publication extends Component {
     }
 }
 
-export default News_Publication;
+export default NewsPublication;

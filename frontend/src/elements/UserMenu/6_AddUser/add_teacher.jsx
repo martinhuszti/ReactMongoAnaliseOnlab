@@ -9,7 +9,7 @@ class ExtraTeacher extends Component {
     createdTeacher = {
         name: "",
         neptun: "",
-        labor_ids: [],
+        laborIds: [],
     };
     createdUser = {
         name: "",
@@ -80,7 +80,7 @@ class ExtraTeacher extends Component {
         let tampteacher = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
-            labor_ids: this.state.all.laborIds,
+            laborIds: this.state.all.laborIds,
         };
         await fetch("/api/teachers", {
             method: "POST",
