@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import AsyncSelect from "react-select/lib/Async";
-import "./css/extra_person.css"
+import "./css/extra_person.css";
 
 class ExtraStudent extends Component {
 
@@ -11,14 +11,12 @@ class ExtraStudent extends Component {
         email: "",
         password: "default",
         role: "student",
-
-
     };
+
     createdStudent = {
         neptun: "",
         gyakid: "",
     };
-
 
     constructor(props) {
         super(props);
@@ -70,7 +68,7 @@ class ExtraStudent extends Component {
 
         this.setState({visible: true});
         window.setTimeout(() => {
-            this.setState({visible: false})
+            this.setState({visible: false});
         }, 2000);
 
     }
@@ -84,7 +82,7 @@ class ExtraStudent extends Component {
             body: JSON.stringify(createdStudent)
         });
 
-        console.log("új diák")
+        console.log("új diák");
     }
 
 
@@ -111,9 +109,8 @@ class ExtraStudent extends Component {
                 .then((response) => {
                     console.log(response);
                     callback(response);
-                })
+                });
         };
-
 
         const {createdUser} = this.state;
 
@@ -149,8 +146,8 @@ class ExtraStudent extends Component {
                             className="extra_info"
                             defaultOptions
                             loadOptions={getgyak}
-                            getOptionLabel={option => option.title}
-                            getOptionValue={option => option.id}
+                            getOptionLabel={(option) => option.title}
+                            getOptionValue={(option) => option.id}
                             onChange={this.selectGyak}
                         />
 
