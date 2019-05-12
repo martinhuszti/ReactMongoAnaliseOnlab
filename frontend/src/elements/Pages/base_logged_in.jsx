@@ -189,23 +189,28 @@ class LoggedIn extends Component {
         document.title = "Profil";
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
-
+     
         if (sesslogged !== "true" && loclogged !== "true") {
             this.setState({
                 isLoggedIn: "false"
-            })
+            });
 
         } else {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
+               
             }
-            this.setState({ isLoggedIn: "true" });
+            this.setState({ isLoggedIn: "true" }, this.callbackLogin());
         }
+    }
+    callbackLogin() {
+
         if (this.state.isLoggedIn === "false") {
 
             return <Redirect to="/LoginForm" />
         }
     }
+
 
     componentDidMount() {
         const loginid = sessionStorage.getItem("id");

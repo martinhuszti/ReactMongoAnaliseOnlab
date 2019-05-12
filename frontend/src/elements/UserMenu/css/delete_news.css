@@ -6,16 +6,35 @@
 .dnews_flex {
     display: flex;
     flex-direction: row;
+    margin-top: 15px;
+    cursor: pointer;
+}
 
+.dnews_flex:first {
+    margin-top: 0;
+}
+
+#dnews_first>.dnews_flex:first{
+    margin-top: 0;
+}
+#dnews_first:first-child{
+    margin-top: 0;
 }
 
 .dnews_flexiable {
     flex: 1;
 }
-
 .dnews_head {
     background-color: #1D155D;
     padding: 10px;
     width: 100%;
-    margin-bottom: 15px
+}
+
+.dnews_show {
+    display: inline-block;
+    width: 100%
+}
+
+.dnews_hide {
+    display: none;
 }
