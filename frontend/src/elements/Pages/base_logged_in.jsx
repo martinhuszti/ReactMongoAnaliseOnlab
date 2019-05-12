@@ -3,38 +3,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 
 import { withRouter } from "react-router";
-import LoggedInData from '../UserMenu/1_data';
-import LoggedInResult from '../UserMenu/2_results';
-import ChangePass from '../UserMenu/3_change_pass';
-import Chat from '../UserMenu/4_chat';
-import NewsPublication from '../UserMenu/7_news_publication';
-import AddStudent from '../UserMenu/6_add_person';
-import AddReq from '../UserMenu/8_add_requirments';
-import DeletePublication from '../UserMenu/9_deleteNews';
-import AddLab from '../UserMenu/10_new_labor'
-import ListStudent from '../UserMenu/5_students'
-import NewTest from '../UserMenu/11_newTest'
-
-import ChangeLab from '../UserMenu/12_change_labor'
+import LoggedInData from "../UserMenu/1_data";
+import LoggedInResult from "../UserMenu/2_results";
+import ChangePass from "../UserMenu/3_change_pass";
+import Chat from "../UserMenu/4_chat";
+import NewsPublication from "../UserMenu/7_news_publication";
+import AddStudent from "../UserMenu/6_add_person";
+import AddReq from "../UserMenu/8_add_requirments";
+import DeletePublication from "../UserMenu/9_deleteNews";
+import AddLab from "../UserMenu/10_new_labor"
+import ListStudent from "../UserMenu/5_students"
+import NewTest from "../UserMenu/11_newTest"
+import ChangeLab from "../UserMenu/12_change_labor"
 import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
-import { Alert } from 'reactstrap';
-
-import './css/news.css';
-import './css/loggedin.css';
-import { slide as Menu } from 'react-burger-menu'
-
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountBox from '@material-ui/icons/AccountBox';
-import ChatIcon from '@material-ui/icons/Chat';
-import AddIcon from '@material-ui/icons/Add';
-import AddCommentIcon from '@material-ui/icons/AddComment';
-import AddCommentOutlinedIcon from '@material-ui/icons/AddCommentOutlined';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import PersonIcon from '@material-ui/icons/Person';
-import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye';
-import DeleteIcon from '@material-ui/icons/Delete';
-import DashBoardIcon from '@material-ui/icons/Poll';
-import SwitchCameraIcon from '@material-ui/icons/SwitchCamera';
+import { Alert } from "reactstrap";
+import "./css/news.css";
+import "./css/loggedin.css";
+import { slide as Menu } from "react-burger-menu"
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountBox from "@material-ui/icons/AccountBox";
+import ChatIcon from "@material-ui/icons/Chat";
+import AddIcon from "@material-ui/icons/Add";
+import AddCommentIcon from "@material-ui/icons/AddComment";
+import AddCommentOutlinedIcon from "@material-ui/icons/AddCommentOutlined";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import PersonIcon from "@material-ui/icons/Person";
+import RemoveRedEyeIcon from "@material-ui/icons/RemoveRedEye";
+import DeleteIcon from "@material-ui/icons/Delete";
+import DashBoardIcon from "@material-ui/icons/Poll";
+import SwitchCameraIcon from "@material-ui/icons/SwitchCamera";
 
 
 class LoggedIn extends Component {
@@ -103,8 +100,8 @@ class LoggedIn extends Component {
             menuToggle: false,
             menuToggleSelf: '',
             headertext: "Login",
-            clickedMenu:"",
-        };
+            clickedMenu: "",
+        }
 
 
         if (sessionStorage.getItem("newLogin") === "true") {
@@ -112,7 +109,7 @@ class LoggedIn extends Component {
             window.setTimeout(() => {
                 this.setState({ visible: false })
             }, 2000);
-          
+
             sessionStorage.setItem("newLogin", false);
         }
 
@@ -126,30 +123,34 @@ class LoggedIn extends Component {
     }
 
     static motiveBind(item) {
-        if (item === 1)
-            return <AccountBox />;
-        if (item === 2)
-            return <RemoveRedEyeIcon />;
-        if (item === 3)
-            return <ChatIcon />;
-        if (item === 4)
-            return <PersonIcon />;
-        if (item === 5)
-            return <AddCommentIcon />;
-        if (item === 6)
-            return <PersonAddIcon />;
-        if (item === 7)
-            return <AddCommentOutlinedIcon />;
-        if (item === 8)
-            return <DeleteIcon />;
-        if (item === 9)
-            return <AddIcon />;
-        if (item === 10)
-            return <AddIcon />;
-        if (item === 11)
-            return <DashBoardIcon />;
-        if (item === 12)
-            return <SwitchCameraIcon />;
+        switch (item) {
+            case 1:
+                return <AccountBox />;
+            case 2:
+                return <RemoveRedEyeIcon />;
+            case 3:
+                return <ChatIcon />;
+            case 4:
+                return <PersonIcon />;
+            case 5:
+                return <AddCommentIcon />;
+            case 6:
+                return <PersonAddIcon />;
+            case 7:
+                return <AddCommentOutlinedIcon />;
+            case 8:
+                return <DeleteIcon />;
+            case 9:
+                return <AddIcon />;
+            case 10:
+                return <AddIcon />;
+            case 11:
+                return <DashBoardIcon />;
+            case 12:
+                return <SwitchCameraIcon />;
+            default:
+                return <AccountBox />;
+        }
 
     }
 
@@ -166,11 +167,11 @@ class LoggedIn extends Component {
     closeAlert() {
         this.setState({ visible: false });
     }
-     headerchange = (headerstring) => {
+    headerchange = (headerstring) => {
         this.setState({ headertext: headerstring.text })
-        this.state.items.forEach(function(element) { element.clicked = false; });
-        headerstring.clicked=true;
-       
+        this.state.items.forEach(function (element) { element.clicked = false; });
+        headerstring.clicked = true;
+
     }
 
     logout() {
@@ -185,7 +186,7 @@ class LoggedIn extends Component {
     }
 
     componentWillMount() {
-        document.title="Profil";
+        document.title = "Profil";
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
 
@@ -201,14 +202,14 @@ class LoggedIn extends Component {
             this.setState({ isLoggedIn: "true" })
         }
         if (this.state.isLoggedIn === "false") {
-          
+
             return <Redirect to="/LoginForm" />
         }
     }
 
     componentDidMount() {
         const loginid = sessionStorage.getItem("id");
-       
+
         fetch(`/api/users/role/menu`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -217,9 +218,9 @@ class LoggedIn extends Component {
             return res.json()
 
         }).then(json => {
-      
-            json.forEach(function(element) { element.clicked = false; });
-           
+
+            json.forEach(function (element) { element.clicked = false; });
+
             this.setState({ items: json });
         })
     }
@@ -227,7 +228,7 @@ class LoggedIn extends Component {
 
     render() {
 
-       
+
         const { items } = this.state;
         const { headertext } = this.state;
         const { routes } = this;
@@ -270,7 +271,7 @@ class LoggedIn extends Component {
 
                         <div className="menu_items flex_column loggedin_disapier">
                             {items.map(item =>
-                                <Link onClick={this.headerchange.bind(this, item)}  to={item.link} className={item.clicked ? "logged_in_colorone":"logged_in_colortwo"} >
+                                <Link onClick={this.headerchange.bind(this, item)} to={item.link} className={item.clicked ? "logged_in_colorone" : "logged_in_colortwo"} >
 
                                     <div className="menu_icons">{LoggedIn.motiveBind(item.motiv)}</div>
                                     <p className="menu_items_text">{item.text}</p>
@@ -313,16 +314,16 @@ class LoggedIn extends Component {
 export default withRouter(LoggedIn);
 
 const emptyStudent = [{
-        link: "/loggedin/data",
-        text: 'Adatok',
-        motiv: 1,
-        clicked: false,
-    },
-    {
-        link: "/loggedin/controller",
-        text: 'Chat',
-        motiv: 3,
-        clicked: false,
-    }
+    link: "/loggedin/data",
+    text: 'Adatok',
+    motiv: 1,
+    clicked: false,
+},
+{
+    link: "/loggedin/controller",
+    text: 'Chat',
+    motiv: 3,
+    clicked: false,
+}
 
 ]

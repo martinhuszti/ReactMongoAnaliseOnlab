@@ -1,8 +1,8 @@
-import './css/news.css';
-import './css/loginForm.css'
-import React, {Component} from 'react';
-import {Alert, Button} from 'reactstrap';
-import {withRouter} from 'react-router-dom';
+import "./css/news.css";
+import "./css/loginForm.css"
+import React, {Component} from "react";
+import {Alert, Button} from "reactstrap";
+import {withRouter} from "react-router-dom";
 
 
 class RegistrationForm extends Component {
@@ -40,16 +40,16 @@ class RegistrationForm extends Component {
     }
 
     handleCheck() {
-        console.log('NemCsekked');
+      
         this.setState({checklook: !this.state.checklook});
-        console.log(this.state.checklook);
+      
     }
 
     handleKeyPress(e) {
 
-        console.log('Nem nyomtam semmit');
+       
         if (e.key === 'Enter') {
-            console.log('Nem nyomtam enter');
+          
             this.handleSubmit(e);
         }
     }
@@ -90,7 +90,7 @@ class RegistrationForm extends Component {
             )
             .then(json => {
 
-                console.log(json);
+              
 
                 if (this.state.checklook === true) {
                     localStorage.setItem("loggedin", "true");
@@ -105,7 +105,7 @@ class RegistrationForm extends Component {
 
             })
             .catch(() => {
-            })
+            });
 
     }
 

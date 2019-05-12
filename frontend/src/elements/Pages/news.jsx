@@ -1,15 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/news.css';
-import React, {Component} from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/news.css";
+import React, {Component} from "react";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
-import Login from './loginForm.jsx';
+import Login from "./loginForm.jsx";
 import Popup from "./popup"
 
 class Class extends Component {
 
     emptyItem = {
-        title: '',
-        text: ''
+        title: "",
+        text: ""
     };
 
     constructor(props) {
@@ -20,8 +20,8 @@ class Class extends Component {
             items: [],
             redirect: false,
             showPopup: false,
-            toggletitle: '',
-            toggletext: '',
+            toggletitle: "",
+            toggletext: "",
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,7 @@ class Class extends Component {
         const logged = sessionStorage.getItem("loggedin");
 
         if (logged !== "true") {
-            return <Redirect to='/LoginForm'/>
+            return <Redirect to="/LoginForm"/>
         }
     };
     toggleupPopup = (item) => {
@@ -69,7 +69,7 @@ class Class extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/news', {
+        await fetch("/api/news", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
@@ -85,7 +85,7 @@ class Class extends Component {
             method: "GET",
         })
 
-            .then(result => {
+            .then((result) => {
                 if (result.ok)
                     return result.json();
                 else throw new Error("Backend nem elérhető")
@@ -95,7 +95,7 @@ class Class extends Component {
             .then(items => {
                     this.setState({items});
 
-                    console.log(this.state.items);
+                  
                 }
             );
 
@@ -145,7 +145,7 @@ class Class extends Component {
                     </div>
                 </Router>
             </div>
-        )
+        );
     }
 
 

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import './css/change_labor.css';
-import {Button, Form, FormGroup, Label} from 'reactstrap';
+import React, {Component} from "react";
+import "./css/change_labor.css";
+import {Button, Form, FormGroup, Label} from "reactstrap";
 import Select from "react-select";
 
 
@@ -36,8 +36,8 @@ class ChangeLab extends Component {
     componentWillMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/api/students?myGyakId=${encodedValue}`)
-            .then(response => response.json())
-            .then(studentsList =>
+            .then((response) => response.json())
+            .then((studentsList) =>
                 this.setState({studentsList}));
 
 
@@ -46,8 +46,8 @@ class ChangeLab extends Component {
             headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
-        }).then(response => response.json())
-            .then(labors => {
+        }).then((response) => response.json())
+            .then((labors) => {
                 console.log(labors);
                 this.setState({labors})
             });
@@ -88,7 +88,7 @@ class ChangeLab extends Component {
 
                     </FormGroup>
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Változtatás</Button>
+                        <Button variant={"success"} color="primary" type="submit">Változtatás</Button>
 
                     </FormGroup>
                 </Form>

@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
-import {Alert, Button, Form, FormGroup, Input, Label} from 'reactstrap';
-import './css/extra_person.css'
+import React, {Component} from "react";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
+import "./css/extra_person.css"
 import AsyncSelect from "react-select/lib/Async";
 
 
 class ExtraTeacher extends Component {
 
     createdTeacher = {
-        name: '',
-        neptun: '',
+        name: "",
+        neptun: "",
         labor_ids: [],
     };
     createdUser = {
-        name: '',
-        neptun: '',
-        email: '',
+        name: "",
+        neptun: "",
+        email: "",
         password: "default",
         role: "teacher",
 
     };
     all = {
-        name: '',
-        neptun: '',
-        email: '',
+        name: "",
+        neptun: "",
+        email: "",
         password: "default",
         role: "teacher",
         labor_ids: [],
@@ -45,7 +45,7 @@ class ExtraTeacher extends Component {
     }
 
     handleSelectChange(value) {
-        console.log('You have selected: ', value);
+       
         this.setState({value});
     }
 
@@ -53,7 +53,7 @@ class ExtraTeacher extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        console.log(event.target.value);
+       
         let all = {...this.state.all};
         all[name] = value;
         this.setState({all});
@@ -67,15 +67,14 @@ class ExtraTeacher extends Component {
             password: "default",
             role: "teacher",
         };
-        console.log("júzer2");
-        console.log(tempuser);
-        await fetch('/api/users', {
+       
+        await fetch("/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tempuser)
         });
 
-        alert("Sikeres regisztáció!");
+      
         console.log("új felhasználó")
     }
 
@@ -89,7 +88,7 @@ class ExtraTeacher extends Component {
         };
         console.log("tanár2");
         console.log(tampteacher);
-        await fetch('/api/teachers', {
+        await fetch("/api/teachers", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tampteacher)
@@ -124,8 +123,8 @@ class ExtraTeacher extends Component {
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
 
-            }).then(response => response.json())
-                .then(response => {
+            }).then((response) => response.json())
+                .then((response) => {
                     console.log(response);
                     callback(response);
                 })
@@ -138,20 +137,20 @@ class ExtraTeacher extends Component {
                     <FormGroup>
                         <Label for="head">Név:</Label>
                         <Input className="extra_info" type="text" name="name" id="name"
-                               value={all.name || ''} onChange={this.handleChange}
+                               value={all.name || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
-                               value={all.neptun || ''} onChange={this.handleChange}
+                               value={all.neptun || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
                         <Input className="extra_info" type="text" name="email" id="email"
-                               value={all.email || ''} onChange={this.handleChange}
+                               value={all.email || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -176,7 +175,7 @@ class ExtraTeacher extends Component {
                     />
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Regisztrálás</Button>
+                        <Button variant={"success"} color="primary" type="submit">Regisztrálás</Button>
 
                     </FormGroup>
 

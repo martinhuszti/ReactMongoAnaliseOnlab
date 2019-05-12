@@ -1,5 +1,5 @@
-import './css/informations.css';
-import React, { Component } from 'react';
+import "./css/informations.css";
+import React, { Component } from "react";
 
 class Infomations extends Component {
 
@@ -22,8 +22,8 @@ class Infomations extends Component {
             headers: { "Content-Type": "application/json" },
 
 
-        }).then(response => response.json())
-            .then(gyak => this.setState({ gyak }))
+        }).then((response) => response.json())
+            .then((gyak) => this.setState({ gyak }));
     }
 
 
@@ -44,7 +44,7 @@ class Infomations extends Component {
                         <div>
                             <span className="info_gyak">Gyakorlatok:</span>
                             
-                            {gyak.map(item => <ul key={item.id}>
+                            {gyak.map((item) => <ul key={item.id}>
                                 <li className="data_font data_top">
                                     <span>Csoport:</span>
                                     <span>{item.title}</span>

@@ -1,5 +1,5 @@
-import './css/excercises.css';
-import React, {Component} from 'react';
+import "./css/excercises.css";
+import React, {Component} from "react";
 
 class Exams extends Component {
 

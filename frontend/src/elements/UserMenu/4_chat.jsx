@@ -3,13 +3,13 @@ import React from "react";
 import SockJsClient from "react-stomp";
 import Fetch from "json-fetch";
 import {TalkBox} from "react-talk";
-import './css/chat_box.css'
+import "./css/chat_box.css"
 
 class Chat extends React.Component {
     constructor(props) {
         super(props);
         // randomUserId is used to emulate a unique user id for this demo usage
-        this.randomUserName = '';
+        this.randomUserName = "";
         this.randomUserId = sessionStorage.getItem("id");
         this.state = {
             clientConnected: false,
@@ -53,10 +53,10 @@ class Chat extends React.Component {
                     this.clientRef = client
                 }}
                               onConnect={() => {
-                                  this.setState({clientConnected: true})
+                                  this.setState({clientConnected: true});
                               }}
                               onDisconnect={() => {
-                                  this.setState({clientConnected: false})
+                                  this.setState({clientConnected: false});
                               }}
                               debug={false}/>
             </div>

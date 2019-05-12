@@ -1,11 +1,11 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/news.css';
-import React, {Component} from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./css/news.css";
+import React, {Component} from "react";
 
-import {Button} from 'reactstrap';
-import './css/requirements.css';
+import {Button} from "reactstrap";
+import "./css/requirements.css";
 
-const PlaceString = 'Követelmények';
+const PlaceString = "Követelmények";
 
 class Requirements extends Component {
 
@@ -13,8 +13,8 @@ class Requirements extends Component {
         super(props);
 
         this.state = {
-            dwnloadlnk: '',
-            files: '',
+            dwnloadlnk: "",
+            files: "",
             items: []
         };
         this.downloadRandomImage = this.downloadRandomImage.bind(this);
@@ -24,8 +24,8 @@ class Requirements extends Component {
     componentWillMount() {
         document.title="Követelmény";
         fetch(`/api/requirements`)
-            .then(result => result.json())
-            .then(items => {
+            .then((result) => result.json())
+            .then((items) => {
                 console.log(items);
                 this.setState({items});
 
@@ -36,7 +36,7 @@ class Requirements extends Component {
         console.log("Feltlölt kezd");
         await fetch(`/dwnload`)
             .then(response => {
-                const filename = response.headers.get('Content-Disposition').split('filename=')[1];
+                const filename = response.headers.get("Content-Disposition").split("filename=")[1];
                 this.setState({
                     files: filename,
                 });
@@ -105,7 +105,7 @@ class Requirements extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
 

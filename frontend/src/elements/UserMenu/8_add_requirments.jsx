@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
-import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
-import './css/add_req.css'
-import {FileService} from './8_AddRequirements/FileService.jsx';
+import React, {Component} from "react";
+import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import "./css/add_req.css"
+import {FileService} from "./8_AddRequirements/FileService.jsx";
 
 class Addrequirements extends Component {
     emptyReq = {
-        presence: '',
-        signature: '',
-        exam: '',
-        tests: '',
-        points: '',
+        presence: "",
+        signature: "",
+        exam: "",
+        tests: "",
+        points: "",
 
     };
 
     constructor(props) {
         super(props);
-        console.log("ASDASDASD");
+       
         this.fileService = new FileService();
 
         this.state = {
@@ -34,12 +34,12 @@ class Addrequirements extends Component {
         const {item} = this.state;
 
         console.log(item);
-        await fetch('/api/requirements', {
+        await fetch("/api/requirements", {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-        console.log("feltöltés befejeződött")
+        console.log("feltöltés befejeződött");
     }
 
 
@@ -47,22 +47,19 @@ class Addrequirements extends Component {
         fetch(`/api/requirements`, {
             method: "GET"
         })
-            .then(result => result.json())
-            .then(requirment => {
-                console.log(requirment);
+            .then((result) => result.json())
+            .then((requirment) => {
+                
                 this.setState({
                     item: requirment
                 });
-                console.log('itemelőtt');
-                console.log(this.state.item);
-                console.log('itemután');
+                
             });
-        console.log(this.state.item.presence);
-        console.log("betöltés befejeeződött")
+        
     }
 
     handleChange(event) {
-        console.log(this.state.item.presence);
+        
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -76,15 +73,15 @@ class Addrequirements extends Component {
         //using File API to get chosen file
         let file = event.target.files[0];
         console.log("Uploading file", event.target.files[0]);
-        data.append('file', event.target.files[0]);
-        data.append('name', 'my_file');
-        data.append('description', 'this file is uploaded by young padawan');
+        data.append("file", event.target.files[0]);
+        data.append("name", "my_file");
+        data.append("description", "this file is uploaded by young padawan");
 
         //calling async Promise and handling response or error situation
         FileService.uploadFileToServer(data).then(() => {
             console.log("File " + file.name + " is uploaded");
         }).catch(function (error) {
-            console.log(error);
+           
             if (error.response) {
                 //HTTP error happened
                 console.log("Upload error. HTTP error/status code=", error.response.status);
@@ -104,40 +101,40 @@ class Addrequirements extends Component {
                         <Label for="head">Jelenlét</Label>
                         <Input className="newsP_title" type="text" name="presence" id="presence"
                                defaultValue={this.state.items.presence}
-                               value={item.presence || ''} onChange={this.handleChange}
+                               value={item.presence || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Aláírás</Label>
                         <Input className="newsP_title" type="text" name="signature" id="signature"
-                               value={item.signature || ''} onChange={this.handleChange}
+                               value={item.signature || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Vizsga</Label>
                         <Input className="newsP_title" type="text" name="exam" id="exam"
-                               value={item.exam || ''} onChange={this.handleChange}
+                               value={item.exam || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Számonkérések</Label>
                         <Input className="newsP_title" type="text" name="tests" id="tests"
-                               value={item.tests || ''} onChange={this.handleChange}
+                               value={item.tests || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Pontszámítás</Label>
                         <Input className="newsP_title" type="text" name="points" id="points"
-                               value={item.points || ''} onChange={this.handleChange}
+                               value={item.points || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Változtatás</Button>
+                        <Button variant={"success"} color="primary" type="submit">Változtatás</Button>
                         <span
                             className="addreq_extra_text">*Csak lényeges, rövid infók kerüljenek a szövegdobozba</span>
                     </FormGroup>

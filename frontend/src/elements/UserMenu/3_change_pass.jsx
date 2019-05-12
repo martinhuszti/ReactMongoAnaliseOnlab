@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import './css/change_pass.css';
-import {Button} from 'reactstrap';
-import Eye from '@material-ui/icons/Visibility';
-import EyeSlash from '@material-ui/icons/VisibilityOff';
+import React, {Component} from "react";
+import "./css/change_pass.css";
+import {Button} from "reactstrap";
+import Eye from "@material-ui/icons/Visibility";
+import EyeSlash from "@material-ui/icons/VisibilityOff";
 
 class Change_Pass extends Component {
 
@@ -33,7 +33,7 @@ class Change_Pass extends Component {
         event.preventDefault();
 
         const {passwObj} = this.state;
-        console.log(JSON.stringify(passwObj));
+        
 
         const matches = passwObj.newPassword === passwObj.cPassword;
         if (matches === false) {
@@ -41,14 +41,14 @@ class Change_Pass extends Component {
         } else {
 
             passwObj.id = sessionStorage.getItem("id");
-            await fetch('/api/users/password', {
+            await fetch("/api/users/password", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(passwObj)
             }).then((resp) => {
                 return resp.text()
             }).then((text) => {
-                console.log(text)
+                console.log(text);
             })
 
         }
@@ -70,8 +70,8 @@ class Change_Pass extends Component {
     }
 
     render() {
-        let btn_class = this.state.color ? <EyeSlash/> : <Eye/>;
-        let pass_style = this.state.color ? "password" : "text";
+        let btnClass = this.state.color ? <EyeSlash/> : <Eye/>;
+        let passStyle = this.state.color ? "password" : "text";
 
         const {passwObj} = this.state;
 
@@ -84,9 +84,9 @@ class Change_Pass extends Component {
                         <input className="pass_newpass"
                                type="password"
                                name="oldPassword"
-                               id='oldPassword'
+                               id="oldPassword"
 
-                               value={passwObj.oldPassword || ''}
+                               value={passwObj.oldPassword || ""}
                                onChange={this.handleChange}
 
                         />
@@ -97,24 +97,24 @@ class Change_Pass extends Component {
                     <li>
                         <span>Új jelszó: </span>
                         <input className="pass_newpass"
-                               type={pass_style}
-                               id='newPassword'
+                               type={passStyle}
+                               id="newPassword"
                                name="newPassword"
                                onChange={this.handleChange}
-                               value={passwObj.newPassword || ''}
+                               value={passwObj.newPassword || ""}
                         />
 
-                        <div onClick={this.showPass} className='pass_lookup_button'>{btn_class}</div>
+                        <div onClick={this.showPass} className="pass_lookup_button">{btnClass}</div>
                     </li>
                     <li>
                         <span>Megerősítés:</span>
                         <input className="pass_newpass"
                                type="password"
 
-                               id='cPassword'
+                               id="cPassword"
                                name="cPassword"
                                onChange={this.handleChange}
-                               value={passwObj.cPassword || ''}
+                               value={passwObj.cPassword || ""}
                         />
                     </li>
                 </ul>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './css/result.css';
 import { Button } from 'reactstrap';
 
-class LoggedIn_Result extends Component {
+class LoggedInResult extends Component {
 
     emptyExam = [{
         score: 0,
@@ -28,7 +28,7 @@ class LoggedIn_Result extends Component {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/api/students/getById/?id=${encodedValue}`)
             .then(response => response.json())
-            .then(student => {
+            .then((student) => {
                 this.setState({ record: student.exams,
                 gotData:true
                 });
@@ -43,7 +43,7 @@ class LoggedIn_Result extends Component {
     refreshMark() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
         fetch(`/api/students/getById/?id=${encodedValue}`)
-            .then(response => response.json())
+            .then((response) => response.json())
             .then(emptyExam => {
                 this.setState({
                     record: emptyExam.exams,
@@ -133,4 +133,4 @@ class LoggedIn_Result extends Component {
     }
 }
 
-export default LoggedIn_Result;
+export default LoggedInResult;
