@@ -23,14 +23,10 @@ class LoggedInData extends Component {
 
         }).then(response => response.json())
             .then(response => {
-
                 this.setState({item: response});
                 this.setState({gyak: response.gyak});
-
-
             });
-
-    };
+    }
 
     componentWillMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
