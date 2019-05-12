@@ -121,6 +121,7 @@ public class UserController {
                 List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
                 Iterable<Labor> asd = laborRepository.findAllById(getID);
                 setBackRespond(backrespond, asd);
+                break;
             }
             case "admin": {
                 Iterable<Labor> asd = laborRepository.findAll();
