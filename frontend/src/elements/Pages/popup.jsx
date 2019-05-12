@@ -7,7 +7,7 @@ class Popup extends Component {
 
     componentWillMount() {
         document.addEventListener("click", this.handleClick, false);
-       
+
     }
 
     componentWillUnmount() {
@@ -16,7 +16,7 @@ class Popup extends Component {
 
     handleClick = (e) => {
         if (this.node.contains(e.target)) {
-           
+
             return;
         }
 

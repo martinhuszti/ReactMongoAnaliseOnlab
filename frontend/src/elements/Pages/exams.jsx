@@ -3,7 +3,7 @@ import React, {Component} from "react";
 
 class Exams extends Component {
 
-    componentWillMount(){
+    componentWillMount() {
         document.title = "Számonkérés";
     }
 

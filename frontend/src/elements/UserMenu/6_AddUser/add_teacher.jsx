@@ -9,7 +9,7 @@ class ExtraTeacher extends Component {
     createdTeacher = {
         name: "",
         neptun: "",
-        labor_ids: [],
+        laborIds: [],
     };
     createdUser = {
         name: "",
@@ -25,7 +25,7 @@ class ExtraTeacher extends Component {
         email: "",
         password: "default",
         role: "teacher",
-        labor_ids: [],
+        laborIds: [],
     };
 
     constructor(props) {
@@ -45,7 +45,7 @@ class ExtraTeacher extends Component {
     }
 
     handleSelectChange(value) {
-       
+
         this.setState({value});
     }
 
@@ -53,7 +53,7 @@ class ExtraTeacher extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-       
+
         let all = {...this.state.all};
         all[name] = value;
         this.setState({all});
@@ -67,34 +67,27 @@ class ExtraTeacher extends Component {
             password: "default",
             role: "teacher",
         };
-       
+
         await fetch("/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tempuser)
         });
-
-      
-        console.log("új felhasználó")
     }
 
     async addteacher() {
-        console.log("tanár");
 
         let tampteacher = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
-            labor_ids: this.state.all.labor_ids,
+            laborIds: this.state.all.laborIds,
         };
-        console.log("tanár2");
-        console.log(tampteacher);
         await fetch("/api/teachers", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tampteacher)
         });
 
-        console.log("feltöltés befejeződött");
         this.setState({visible: true});
         window.setTimeout(() => {
             this.setState({visible: false})
@@ -118,14 +111,13 @@ class ExtraTeacher extends Component {
 
         const getStudents = (inputValue, callback) => {
 
-            fetch(`/api/labors`, {
+            fetch("/api/labors", {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
 
             }).then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
                     callback(response);
                 })
         };
@@ -167,7 +159,7 @@ class ExtraTeacher extends Component {
                         isMulti
                         cacheOptions
                         defaultOptions
-                        onChange={users => all.labor_ids = users.map(u => u.id)}
+                        onChange={users => all.laborIds = users.map(u => u.id)}
                         loadOptions={getStudents}
                         getOptionLabel={option => option.title}
                         getOptionValue={option => option.id}

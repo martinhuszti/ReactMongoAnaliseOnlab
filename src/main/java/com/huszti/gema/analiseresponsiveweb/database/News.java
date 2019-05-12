@@ -13,17 +13,14 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(description = "Hírek modell")
 public class News {
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
     @NotBlank
-    @ApiModelProperty(notes ="Hír címe")
+    @ApiModelProperty(notes = "Hír címe")
     private String title;
 
-    @ApiModelProperty(notes ="Hír szövege")
+    @ApiModelProperty(notes = "Hír szövege")
     private String text;
-
-    public News() {
-    }
 
 }

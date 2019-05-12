@@ -30,7 +30,7 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         /*
          * The list of destination prefixes provided in this are based on what
          * broker is getting used. In this case we will use in-memory broker
-         * which doesn't have any such requirements. For the purpose of
+         * which doesn"t have any such requirements. For the purpose of
          * maintaining convention the "/topic" and the "/queue" prefixes are
          * chosen. The convention dictates usage of "/topic" destination for
          * pub-sub model targeting many subscribers and the "/queue" destination

@@ -1,33 +1,14 @@
-import React, {Component} from 'react';
-import './css/data.css';
+import React, {Component} from "react";
+import "./css/data.css";
 import {BrowserRouter as Redirect} from "react-router-dom";
 
-class LoggedIn_Data extends Component {
-
-
-    userLabor = {
-        title: null,
-        place: null,
-        time: null,
-    };
-
-    userDetails = {
-
-        neptun: null,
-        name: null,
-        email: null,
-        last_login: null,
-        registration_date: null,
-        gyak: [this.userLabor],
-
-
-    };
+class LoggedInData extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            item: '',
-            isLoggedIn: '',
+            item: "",
+            isLoggedIn: "",
             gyak: [],
         };
 
@@ -35,26 +16,20 @@ class LoggedIn_Data extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/users/details?userId=${encodedValue}`, {
+        fetch("/api/users/details?userId=" + encodedValue, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
         }).then(response => response.json())
             .then(response => {
-                
                 this.setState({item: response});
                 this.setState({gyak: response.gyak});
-                
-
-
             });
-       
-    };
+    }
 
     componentWillMount() {
         const sesslogged = sessionStorage.getItem("loggedin");
-
         if (sesslogged !== "true") {
             this.setState({
                 isLoggedIn: "true"
@@ -62,25 +37,9 @@ class LoggedIn_Data extends Component {
         }
     }
 
-    fetchstudentgyak() {
-        
-        fetch(`/api/students/gyak`, {
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            body: this.state.item.neptun
-        }).then((res) => {
-            return res.json()
-
-        }).then((json) => {
-            this.setState({gyak: json});
-
-        })
-
-    }
-
     render() {
         if (this.state.isLoggedIn === "false") {
-            
+
             return <Redirect to="/LoginForm"/>
         }
 
@@ -137,4 +96,4 @@ class LoggedIn_Data extends Component {
     }
 }
 
-export default LoggedIn_Data;
+export default LoggedInData;
