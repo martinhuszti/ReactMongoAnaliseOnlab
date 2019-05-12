@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./css/news_publication.css";
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
 
-class new_Labor extends Component {
+class newLabor extends Component {
     emptyLab = {
         title: "",
         place: "",
@@ -80,4 +80,4 @@ class new_Labor extends Component {
     }
 }
 
-export default new_Labor;
+export default newLabor;

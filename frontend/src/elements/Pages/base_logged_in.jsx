@@ -13,7 +13,7 @@ import AddReq from "../UserMenu/8_add_requirments";
 import DeletePublication from "../UserMenu/9_deleteNews";
 import AddLab from "../UserMenu/10_new_labor";
 import ListStudent from "../UserMenu/5_students";
-import NewTest from "../UserMenu/11_newTest";
+import NewTest from "../UserMenu/11_new_test";
 import ChangeLab from "../UserMenu/12_change_labor";
 import {HashRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import {Alert} from "reactstrap";

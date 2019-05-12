@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import "./css/add_person.css";
 import Select from "react-select";
-import ExtraAdmin from "./6_AddUser/add_admin"
+import ExtraAdmin from "./6_AddUser/add_admin";
 import ExtraTeacher from "./6_AddUser/add_teacher";
 import ExtraStudent from "./6_AddUser/add_student";
 
@@ -40,12 +40,12 @@ class AddStudent extends Component {
         }).then(res => {
             return res.text()
 
-        }).then(json => {
+        }).then((json) => {
             if (json === "admin") {
                 this.setState({options: optionsAdmin});
                 console.log("admin vagyok");
             }
-            if (json === "teacher") {
+            if ((json) === "teacher") {
                 this.setState({options: optionsTeacher});
             }
         })

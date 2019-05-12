@@ -91,7 +91,7 @@ class Class extends Component {
                 else throw new Error("Backend nem elérhető");
             })
             .catch(() => {
-                alert("Backend nem elérhető!")
+                alert("Backend nem elérhető!");
             })
 
             .then(items => {

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import './css/data.css';
+import React, {Component} from "react";
+import "./css/data.css";
 import {BrowserRouter as Redirect} from "react-router-dom";
 
 class LoggedIn_Data extends Component {
@@ -7,8 +7,8 @@ class LoggedIn_Data extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: '',
-            isLoggedIn: '',
+            item: "",
+            isLoggedIn: "",
             gyak: [],
         };
 

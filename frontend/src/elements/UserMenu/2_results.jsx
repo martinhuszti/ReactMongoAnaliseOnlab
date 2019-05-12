@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import './css/result.css';
-import {Button} from 'reactstrap';
+import React, {Component} from "react";
+import "./css/result.css";
+import {Button} from "reactstrap";
 
 class LoggedInResult extends Component {
 

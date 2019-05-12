@@ -46,7 +46,7 @@ class Change_Pass extends Component {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(passwObj)
             }).then((resp) => {
-                return resp.text()
+                return resp.text();
             }).then((text) => {
                 console.log(text);
             })

@@ -59,8 +59,9 @@ class RegistrationForm extends Component {
         document.title = "Analízis";
         let login = sessionStorage.getItem("loggedin");
         let loginid = sessionStorage.getItem("id");
-        if (loginid !== null && login === "true")
+        if (loginid !== null && login === "true") {
             this.props.history.push("/LoggedIn");
+        }
     }
 
 
@@ -104,9 +105,7 @@ class RegistrationForm extends Component {
                     }
                 }
             )
-            .then(json => {
-
-
+            .then((json) => {
                 if (this.state.checklook === true) {
                     localStorage.setItem("loggedin", "true");
                     localStorage.setItem("id", json.id);
