@@ -34,7 +34,7 @@ class AddStudent extends Component {
     componentDidMount() {
         const loginid = sessionStorage.getItem("id");
         const userId = encodeURIComponent(loginid);
-        fetch(`/api/users/role?userId=${userId}`, {
+        fetch("/api/users/role?userId=" + userId, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         }).then(res => {

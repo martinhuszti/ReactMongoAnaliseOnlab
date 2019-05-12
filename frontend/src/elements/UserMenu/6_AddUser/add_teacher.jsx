@@ -118,7 +118,7 @@ class ExtraTeacher extends Component {
 
         const getStudents = (inputValue, callback) => {
 
-            fetch(`/api/labors`, {
+            fetch("/api/labors", {
                 method: "GET",
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)

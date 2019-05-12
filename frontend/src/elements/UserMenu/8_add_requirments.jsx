@@ -44,7 +44,7 @@ class Addrequirements extends Component {
 
 
     componentWillMount() {
-        fetch(`/api/requirements`, {
+        fetch("/api/requirements", {
             method: "GET"
         })
             .then((result) => result.json())

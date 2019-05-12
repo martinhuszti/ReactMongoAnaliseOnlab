@@ -38,7 +38,7 @@ class ListStudents extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/exams/tests`, {
+        fetch("/api/exams/tests", {
             method: "GET",
             headers: {"Content-Type": "application/json"},
         })
@@ -47,7 +47,7 @@ class ListStudents extends Component {
                 this.setState({examList}));
 
 
-        fetch(`/api/students?myGyakId=${encodedValue}`, {
+        fetch("/api/students?myGyakId=" + encodedValue, {
             method: "GET"
         })
             .then((response) => response.json())
@@ -70,7 +70,7 @@ class ListStudents extends Component {
 
 
         console.log(this.state.emptyExam);
-        fetch(`/api/exams?studentId=${studentId}&examType=${examType}`, {
+        fetch("/api/exams?studentId=" + studentId + "&examType=" + examType, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(emptyExam)

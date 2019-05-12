@@ -23,7 +23,7 @@ class Requirements extends Component {
 
     componentWillMount() {
         document.title = "Követelmény";
-        fetch(`/api/requirements`)
+        fetch("/api/requirements")
             .then((result) => result.json())
             .then((items) => {
                 console.log(items);
@@ -34,7 +34,7 @@ class Requirements extends Component {
 
     async downloadRandomImage() {
         console.log("Feltlölt kezd");
-        await fetch(`/dwnload`)
+        await fetch("/dwnload")
             .then(response => {
                 const filename = response.headers.get("Content-Disposition").split("filename=")[1];
                 this.setState({

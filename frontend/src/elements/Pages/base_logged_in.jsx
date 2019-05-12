@@ -219,7 +219,7 @@ class LoggedIn extends Component {
     componentDidMount() {
         const loginid = sessionStorage.getItem("id");
 
-        fetch(`/api/users/role/menu`, {
+        fetch("/api/users/role/menu", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: loginid

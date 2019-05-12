@@ -4,25 +4,6 @@ import {BrowserRouter as Redirect} from "react-router-dom";
 
 class LoggedIn_Data extends Component {
 
-
-    userLabor = {
-        title: null,
-        place: null,
-        time: null,
-    };
-
-    userDetails = {
-
-        neptun: null,
-        name: null,
-        email: null,
-        last_login: null,
-        registration_date: null,
-        gyak: [this.userLabor],
-
-
-    };
-
     constructor(props) {
         super(props);
         this.state = {
@@ -35,7 +16,7 @@ class LoggedIn_Data extends Component {
 
     componentDidMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/users/details?userId=${encodedValue}`, {
+        fetch("/api/users/details?userId=" + encodedValue, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
@@ -59,22 +40,6 @@ class LoggedIn_Data extends Component {
                 isLoggedIn: "true"
             })
         }
-    }
-
-    fetchstudentgyak() {
-
-        fetch(`/api/students/gyak`, {
-            method: "GET",
-            headers: {"Content-Type": "application/json"},
-            body: this.state.item.neptun
-        }).then((res) => {
-            return res.json()
-
-        }).then((json) => {
-            this.setState({gyak: json});
-
-        })
-
     }
 
     render() {

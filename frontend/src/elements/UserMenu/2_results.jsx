@@ -26,7 +26,7 @@ class LoggedInResult extends Component {
     componentWillMount() {
         document.title = "Profil";
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/students/getById/?id=${encodedValue}`)
+        fetch("/api/students/getById/?id=" + encodedValue)
             .then(response => response.json())
             .then((student) => {
                     this.setState({
@@ -42,7 +42,7 @@ class LoggedInResult extends Component {
 
     refreshMark() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/students/getById/?id=${encodedValue}`)
+        fetch("/api/students/getById/?id=" + encodedValue)
             .then((response) => response.json())
             .then(emptyExam => {
                     this.setState({

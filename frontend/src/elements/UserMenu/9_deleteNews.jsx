@@ -40,7 +40,7 @@ class Delete_Publication extends Component {
     }
 
     componentDidMount() {
-        fetch(`/api/news`, {
+        fetch("/api/news", {
             method: "GET"
         })
             .then((result) => result.json())
