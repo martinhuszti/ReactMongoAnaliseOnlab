@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./css/data.css";
 import {BrowserRouter as Redirect} from "react-router-dom";
 
-class LoggedIn_Data extends Component {
+class LoggedInData extends Component {
 
     constructor(props) {
         super(props);
@@ -101,4 +101,4 @@ class LoggedIn_Data extends Component {
     }
 }
 
-export default LoggedIn_Data;
+export default LoggedInData;

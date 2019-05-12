@@ -37,7 +37,7 @@ class RegistrationForm extends Component {
         const name = target.name;
         let item = {...this.state.item};
         item[name] = value;
-        this.setState({item: item});
+        this.setState({item});
     }
 
     handleCheck() {

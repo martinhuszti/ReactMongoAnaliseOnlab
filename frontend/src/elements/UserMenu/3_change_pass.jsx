@@ -4,7 +4,7 @@ import {Button} from "reactstrap";
 import Eye from "@material-ui/icons/Visibility";
 import EyeSlash from "@material-ui/icons/VisibilityOff";
 
-class Change_Pass extends Component {
+class ChangePassword extends Component {
 
     passwObj = {
         "id": "",
@@ -136,4 +136,4 @@ class Change_Pass extends Component {
     }
 }
 
-export default Change_Pass;
+export default ChangePassword;

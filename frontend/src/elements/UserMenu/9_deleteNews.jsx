@@ -3,7 +3,7 @@ import Clear from "@material-ui/icons/Clear";
 import "./css/delete_news.css";
 
 
-class Delete_Publication extends Component {
+class DeletePublication extends Component {
     emptyItem = {
         title: "",
         text: "",
@@ -92,4 +92,4 @@ class Delete_Publication extends Component {
     }
 }
 
-export default Delete_Publication;
+export default DeletePublication;

@@ -86,9 +86,11 @@ class Class extends Component {
         })
 
             .then((result) => {
-                if (result.ok)
+                if (result.ok) {
                     return result.json();
-                else throw new Error("Backend nem elérhető");
+                } else {
+                    throw new Error("Backend nem elérhető");
+                }
             })
             .catch(() => {
                 alert("Backend nem elérhető!");
