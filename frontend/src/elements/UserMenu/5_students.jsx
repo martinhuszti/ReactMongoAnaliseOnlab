@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
-import './css/list_student.css';
-import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
+import React, {Component} from "react";
+import "./css/list_student.css";
+import {Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import Select from "react-select";
 
 class ListStudents extends Component {
 
 
     emptyExam = {
-        score: '',
-        mark: '',
+        score: "",
+        mark:"",
 
     };
 
@@ -18,8 +18,8 @@ class ListStudents extends Component {
             studentsList: [],
             emptyExam: this.emptyExam,
             newExamModalopen: false,
-            studentId: '',
-            examType: '',
+            studentId: "",
+            examType: "",
         };
 
         //bindings
@@ -47,21 +47,11 @@ class ListStudents extends Component {
                 this.setState({examList}));
 
 
-        setTimeout(
-            function () {
-                console.log(this.state.examList);
-                console.log("this.state.examList");
-            }
-                .bind(this),
-            3000
-        );
-
-
         fetch(`/api/students?myGyakId=${encodedValue}`, {
             method: "GET"
         })
-            .then(response => response.json())
-            .then(studentsList =>
+            .then((response) => response.json())
+            .then((studentsList) =>
                 this.setState({studentsList}));
 
     }
@@ -138,14 +128,14 @@ class ListStudents extends Component {
 
                                     <FormGroup className="col-6">
                                         <Label for="pontszam"><h5>Pontszám</h5></Label>
-                                        <Input type="number" name="score" id="pontszam" value={emptyExam.score || ''}
+                                        <Input type="number" name="score" id="pontszam" value={emptyExam.score || ""}
                                                placeholder="" onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="col-6">
                                         <Label for="mark"><h5>Jegy</h5></Label>
                                         <Input type="number" name="mark" id="mark" placeholder=""
-                                               value={emptyExam.mark || ''}
+                                               value={emptyExam.mark || ""}
                                                onChange={this.handleChange}/>
                                     </FormGroup>
                                 </div>
@@ -157,7 +147,7 @@ class ListStudents extends Component {
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" tpye="submit" onClick={this.handleSubmit}>Felvétel</Button>{' '}
+                        <Button color="success" tpye="submit" onClick={this.handleSubmit}>Felvétel</Button>{" "}
                         <Button color="danger" onClick={this.toggleExamModal}>Mégsem</Button>
                     </ModalFooter>
                 </Modal>
@@ -168,7 +158,7 @@ class ListStudents extends Component {
                 </h1>
 
 
-                {studentsList.map(student =>
+                {studentsList.map((student) =>
                     <li className="student_element" key={student.id}>
                             < span className="student_neptun">
                                 {student.neptun}:
@@ -176,7 +166,7 @@ class ListStudents extends Component {
 
                         <div className="student_list">
 
-                            {student.exams.map(exam =>
+                            {student.exams.map((exam) =>
                                 <div className="student_spec" key={exam.id}>
                                         <span>
                                             {exam.type}
@@ -192,7 +182,7 @@ class ListStudents extends Component {
 
 
             </div>
-        )
+        );
 
     }
 }

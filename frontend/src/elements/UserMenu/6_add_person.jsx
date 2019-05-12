@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
-import './css/add_person.css';
-import Select from 'react-select';
-import ExtraAdmin from './6_AddUser/add_admin'
-import ExtraTeacher from './6_AddUser/add_teacher';
-import ExtraStudent from './6_AddUser/add_student';
+import React, {Component} from "react";
+import "./css/add_person.css";
+import Select from "react-select";
+import ExtraAdmin from "./6_AddUser/add_admin"
+import ExtraTeacher from "./6_AddUser/add_teacher";
+import ExtraStudent from "./6_AddUser/add_student";
 
 const optionsAdmin = [
-    {value: 'Student', label: 'Diák'},
-    {value: 'Teacher', label: 'Gyakorlatvezető / Előadó'},
-    {value: 'Admin', label: 'Admin'}
+    {value: "Student", label: "Diák"},
+    {value: "Teacher", label: "Gyakorlatvezető / Előadó"},
+    {value: "Admin", label: "Admin"}
 ];
 const optionsTeacher = [
-    {value: 'Student', label: 'Diák'}
+    {value: "Student", label: "Diák"}
 ];
 
 class AddStudent extends Component {
 
     state = {
-        selectedOption: ' Student'
+        selectedOption: " Student"
     };
 
     constructor(props) {
@@ -25,7 +25,7 @@ class AddStudent extends Component {
         this.state = {
             items: this.emptyItem,
             redirect: false,
-            value: 'a',
+            value: "a",
             options: optionsTeacher,
         };
 
@@ -43,24 +43,24 @@ class AddStudent extends Component {
         }).then(json => {
             if (json === "admin") {
                 this.setState({options: optionsAdmin});
-                console.log("admin vagyok")
+                console.log("admin vagyok");
             }
             if (json === "teacher") {
-                this.setState({options: optionsTeacher})
+                this.setState({options: optionsTeacher});
             }
         })
     }
 
     handleChange = (selectedOption) => {
         this.setState({selectedOption});
-        console.log(selectedOption.value);
-        if (selectedOption.value === 'Admin') {
+        
+        if (selectedOption.value === "Admin") {
             this.item = <ExtraAdmin/>
         }
-        if (selectedOption.value === 'Student') {
+        if (selectedOption.value === "Student") {
             this.item = <ExtraStudent/>
         }
-        if (selectedOption.value === 'Teacher') {
+        if (selectedOption.value === "Teacher") {
             this.item = <ExtraTeacher/>
         }
     };

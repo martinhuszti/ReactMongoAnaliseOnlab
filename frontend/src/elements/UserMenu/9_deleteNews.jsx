@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import Clear from '@material-ui/icons/Clear';
-import "./css/delete_news.css"
+import React, {Component} from "react";
+import Clear from "@material-ui/icons/Clear";
+import "./css/delete_news.css";
 
 
 class Delete_Publication extends Component {
     emptyItem = {
-        title: '',
-        text: '',
+        title: "",
+        text: "",
 
     };
 
@@ -21,7 +21,7 @@ class Delete_Publication extends Component {
 
     async deleteNewsClick(item) {
 
-        await fetch('/api/news', {
+        await fetch("/api/news", {
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
@@ -35,19 +35,14 @@ class Delete_Publication extends Component {
             this.setState({items: array});
         }
 
-        console.log(this.state.items);
-    };
+    }
 
     componentDidMount() {
-
-
         fetch(`/api/news`, {
             method: "GET"
         })
-            .then(result => result.json())
-            .then(items => this.setState({items}));
-
-        console.log("betöltés befejeeződött")
+            .then((result) => result.json())
+            .then((items) => this.setState({items}));
     }
 
     render() {
@@ -60,7 +55,7 @@ class Delete_Publication extends Component {
                 {items.map(item => <li id="dnews_first" key={item.id}>
                     <div className="news dnews_head dnews_flex">
                         <p className="news_text dnews_flexiable">{item.title}</p>
-                        <Clear className='dnews_clear' value={item} onClick={this.deleteNewsClick.bind(this, item)}/>
+                        <Clear className="dnews_clear" value={item} onClick={this.deleteNewsClick.bind(this, item)}/>
                     </div>
 
 

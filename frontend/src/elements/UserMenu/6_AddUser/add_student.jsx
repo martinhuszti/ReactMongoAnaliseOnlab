@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Alert, Button, Form, FormGroup, Input, Label} from 'reactstrap';
-import AsyncSelect from 'react-select/lib/Async';
-import './css/extra_person.css'
+import React, {Component} from "react";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
+import AsyncSelect from "react-select/lib/Async";
+import "./css/extra_person.css"
 
 class ExtraStudent extends Component {
 
@@ -55,14 +55,14 @@ class ExtraStudent extends Component {
                 gyakid: gyak.id,
             }
         });
-        console.log(gyak.id);
+       
         return gyak;
     }
 
     async adduser() {
         const {createdUser} = this.state;
 
-        await fetch('/api/users', {
+        await fetch("/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdUser)
@@ -72,13 +72,13 @@ class ExtraStudent extends Component {
         window.setTimeout(() => {
             this.setState({visible: false})
         }, 2000);
-        console.log("új felhasználó")
+       
     }
 
     async addgyak() {
 
         const {createdStudent} = this.state;
-        await fetch('/api/students', {
+        await fetch("/api/students", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdStudent)
@@ -107,8 +107,8 @@ class ExtraStudent extends Component {
                 headers: {"Content-Type": "application/json"},
                 //body: JSON.stringify(item)
 
-            }).then(response => response.json())
-                .then(response => {
+            }).then((response) => response.json())
+                .then((response) => {
                     console.log(response);
                     callback(response);
                 })
@@ -123,21 +123,21 @@ class ExtraStudent extends Component {
                     <FormGroup>
                         <Label for="head">Diák neve:</Label>
                         <Input className="extra_info" type="text" name="name" id="name"
-                               value={createdUser.name || ''} onChange={this.handleChange}
+                               value={createdUser.name || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
                         <Input className="extra_info" type="text" name="email" id="email"
-                               value={createdUser.email || ''} onChange={this.handleChange}
+                               value={createdUser.email || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" type="text" name="neptun" id="neptun"
-                               value={createdUser.neptun || ''} onChange={this.handleChange}
+                               value={createdUser.neptun || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -157,7 +157,7 @@ class ExtraStudent extends Component {
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Regisztrálás</Button>
+                        <Button variant={"success"} color="primary" type="submit">Regisztrálás</Button>
 
                     </FormGroup>
 

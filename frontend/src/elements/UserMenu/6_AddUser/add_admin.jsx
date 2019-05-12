@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
-import './css/extra_person.css'
+import React, {Component} from "react";
+import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import "./css/extra_person.css"
 
 class ExtraAdmin extends Component {
 
@@ -43,13 +43,13 @@ class ExtraAdmin extends Component {
             createdAdmin: {
                 neptun: this.state.createdUser.neptun,
             }
-        })
+        });
     }
 
     async adduser() {
         const {createdUser} = this.state;
 
-        await fetch('/api/users', {
+        await fetch("/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdUser)
@@ -62,13 +62,13 @@ class ExtraAdmin extends Component {
     async addadmin() {
 
         const {createdAdmin} = this.state;
-        await fetch('/api/admins', {
+        await fetch("/api/admins", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdAdmin)
         });
 
-        console.log("új adj8h")
+      
     }
 
 
@@ -79,8 +79,6 @@ class ExtraAdmin extends Component {
                 neptun: this.state.createdUser.neptun,
             }
         });
-        console.log(this.state.createdUser);
-        console.log(this.state.createdAdmin);
 
         this.adduser(event);
         this.addadmin(event);
@@ -96,25 +94,25 @@ class ExtraAdmin extends Component {
                     <FormGroup>
                         <Label for="head">Név:</Label>
                         <Input className="extra_info" required type="text" name="name" id="name"
-                               value={createdUser.name || ''} onChange={this.handleChange}
+                               value={createdUser.name || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
                         <Input className="extra_info" required type="text" name="neptun" id="neptun"
-                               value={createdUser.neptun || ''} onChange={this.handleChange}
+                               value={createdUser.neptun || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
                         <Input className="extra_info" required type="text" name="email" id="email"
-                               value={createdUser.email || ''} onChange={this.handleChange}
+                               value={createdUser.email || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={'success'} color="primary" type="submit">Regisztrálás</Button>
+                        <Button variant={"success"} color="primary" type="submit">Regisztrálás</Button>
 
                     </FormGroup>
 

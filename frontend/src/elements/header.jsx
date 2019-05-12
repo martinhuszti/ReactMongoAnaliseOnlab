@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import {HashRouter as Router, Link, Redirect, Route, Switch} from 'react-router-dom';
-import {Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from 'reactstrap';
-import Requirements from './Pages/requirements';
-import LoginForm from './Pages/loginForm';
-import LoggedIn from './Pages/base_logged_in';
-import Informations from './Pages/informations'
-import Excercises from './Pages/excercises'
-import Exams from './Pages/exams'
-import News from './Pages/news';
-import MenuIcon from '@material-ui/icons/Menu';
-import './menu.css';
-import PageNotFound from './pageNotFound'
+import React, {Component} from "react";
+import {HashRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
+import {Col, Dropdown, DropdownItem, DropdownMenu, DropdownToggle} from "reactstrap";
+import Requirements from "./Pages/requirements";
+import LoginForm from "./Pages/loginForm";
+import LoggedIn from "./Pages/base_logged_in";
+import Informations from "./Pages/informations"
+import Excercises from "./Pages/excercises"
+import Exams from "./Pages/exams"
+import News from "./Pages/news";
+import MenuIcon from "@material-ui/icons/Menu";
+import "./menu.css";
+import PageNotFound from "./pageNotFound"
 
 const Home = () => (
     <News/>
@@ -22,7 +22,7 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            logged: '',
+            logged: "",
             dropdownOpen: false
 
         };
@@ -45,17 +45,17 @@ class Header extends Component {
         const loclogged = localStorage.getItem("loggedin");
 
         if (sesslogged !== "true" || loclogged !== "true") {
-            console.log("Loginfrom1");
-            this.props.history.push(`/LoginForm`)
+           
+            this.props.history.push(`/LoginForm`);
 
         } else {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", localStorage.getItem("loggedin"));
-                sessionStorage.setItem("id", localStorage.getItem("id"))
+                sessionStorage.setItem("id", localStorage.getItem("id"));
             }
 
 
-            this.setState({logged: 'LoggedIn'})
+            this.setState({logged: "LoggedIn"});
         }
 
     };
@@ -127,7 +127,7 @@ class Header extends Component {
                         <Route path="/LoginForm" component={LoginForm}/>
                         <Route component={PageNotFound}/>
                     </Switch>
-                    )} />
+
                 </div>
             </Router>);
     }

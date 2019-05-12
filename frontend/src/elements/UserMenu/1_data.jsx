@@ -42,21 +42,14 @@ class LoggedIn_Data extends Component {
 
         }).then(response => response.json())
             .then(response => {
-                console.log(response);
-                console.log("datarespond");
+                
                 this.setState({item: response});
                 this.setState({gyak: response.gyak});
-                console.log(this.state.gyak);
-                setTimeout(function () {
-                    console.log("kisliba");
-                    console.log(this.state.item);
-
-                    console.log(this.state.gyak);
-                }.bind(this), 2000);
+                
 
 
             });
-        console.log("yes");
+       
     };
 
     componentWillMount() {
@@ -70,16 +63,15 @@ class LoggedIn_Data extends Component {
     }
 
     fetchstudentgyak() {
-        console.log(this.state.item.neptun);
-        console.log("this.state.item.neptun");
+        
         fetch(`/api/students/gyak`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             body: this.state.item.neptun
-        }).then(res => {
+        }).then((res) => {
             return res.json()
 
-        }).then(json => {
+        }).then((json) => {
             this.setState({gyak: json});
 
         })
@@ -88,7 +80,7 @@ class LoggedIn_Data extends Component {
 
     render() {
         if (this.state.isLoggedIn === "false") {
-            console.log(this.state.isLoggedIn);
+            
             return <Redirect to="/LoginForm"/>
         }
 
@@ -121,7 +113,7 @@ class LoggedIn_Data extends Component {
                         <span>{item.registration_date}</span>
                     </li>
 
-                    {gyak.map(item => <li key={item.id}>
+                    {gyak.map((item) => <li key={item.id}>
                         <li className="data_font data_top">
                             <span>Csoport:</span>
                             <span>{item.title}</span>

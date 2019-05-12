@@ -1,21 +1,21 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 
-import Select from 'react-select';
-import {Alert, Button, Form, FormGroup, Input, Label} from 'reactstrap';
+import Select from "react-select";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 
 
 const optionsTest = [
-    {value: 'ZH', label: 'Zárthelyi dolgozat'},
-    {value: 'VIZSGA', label: 'Vizsga'},
-    {value: 'POTZH', label: 'Pót zárthelyi dolgozat'}
+    {value: "ZH", label: "Zárthelyi dolgozat"},
+    {value: "VIZSGA", label: "Vizsga"},
+    {value: "POTZH", label: "Pót zárthelyi dolgozat"}
 ];
 
 class NewTest extends Component {
 
     emptyTest = {
-        title: '',
-        time: '',
-        creator: '',
+        title: "",
+        time: "",
+        creator: "",
 
     };
 
@@ -40,8 +40,7 @@ class NewTest extends Component {
     handleChange(event) {
         const target = event.target;
         const value = target.value;
-        console.log(value);
-        console.log("value");
+        
         const name = target.name;
         let item = {...this.state.item};
         item[name] = value;
@@ -60,10 +59,10 @@ class NewTest extends Component {
             creator: sessionStorage.getItem("id")
 
         };
-        console.log("Exam added: " + exam);
+       
 
 
-        await fetch('/api/exams/tests', {
+        await fetch("/api/exams/tests", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(exam)
@@ -74,8 +73,7 @@ class NewTest extends Component {
 
         }, 2000);
 
-        console.log("feltöltés befejeződött");
-
+       
 
     }
 
@@ -91,7 +89,7 @@ class NewTest extends Component {
         this.setState({
             examType: selectedOption.value,
         });
-        console.log(this.state.examType)
+       
     };
 
 
@@ -107,7 +105,7 @@ class NewTest extends Component {
                     <FormGroup>
                         <Label for="head">Számonkérés neve:</Label>
                         <Input className="newsP_title" type="text" name="title" id="title"
-                               value={item.title || ''} onChange={this.handleChange}
+                               value={item.title || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
@@ -122,12 +120,12 @@ class NewTest extends Component {
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
                         <Input className="newsP_title" type="text" name="time" id="time"
-                               value={item.time || ''} onChange={this.handleChange}
+                               value={item.time || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button disabled={btnDisabled} variant={'success'} color="primary"
+                        <Button disabled={btnDisabled} variant={"success"} color="primary"
                                 type="submit">Feltöltés</Button>
                     </FormGroup>
 
