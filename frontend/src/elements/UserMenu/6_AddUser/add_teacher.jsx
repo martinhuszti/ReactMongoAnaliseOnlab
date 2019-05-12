@@ -25,7 +25,7 @@ class ExtraTeacher extends Component {
         email: "",
         password: "default",
         role: "teacher",
-        labor_ids: [],
+        laborIds: [],
     };
 
     constructor(props) {

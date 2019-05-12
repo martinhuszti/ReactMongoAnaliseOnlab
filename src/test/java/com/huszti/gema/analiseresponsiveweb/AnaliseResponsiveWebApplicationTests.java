@@ -11,7 +11,7 @@ public class AnaliseResponsiveWebApplicationTests {
 
     @Test
     public void contextLoads() {
-        assert true;
+        assert(true);
     }
 
 }
