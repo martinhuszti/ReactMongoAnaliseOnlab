@@ -29,13 +29,10 @@ import java.util.Objects;
 
 @Data
 @Api(description = "Jelszó változtatás modellje")
-class passwordObject {
-    String id;
-    String oldPassword;
-    String newPassword;
-
-    passwordObject() {
-    }
+class PasswordObject {
+    private String id;
+    private String oldPassword;
+    private String newPassword;
 }
 
 @RestController
@@ -97,7 +94,7 @@ public class UserController {
     @GetMapping("/details")
     @ApiOperation("User adatait adja vissza")
     @ApiParam("UserId-t vár")
-    public DataRespond getDetails(@RequestParam String userId) {
+    public ResponseEntity getDetails(@RequestParam String userId) {
 
 
         SimpleUser tempuser = userRepository.findById(userId).orElse(null);
@@ -123,42 +120,41 @@ public class UserController {
             case "teacher": {
                 List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
                 Iterable<Labor> asd = laborRepository.findAllById(getID);
-                List<LaborRespond> tempLabors = new ArrayList<>();
-                for (Labor ids : asd) {
-                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
-                    tempLabors.add(tempRespondLab);
-                }
-                backrespond.addAllGyakList(tempLabors);
-
-                break;
+                setBackRespond(backrespond, asd);
             }
             case "admin": {
                 Iterable<Labor> asd = laborRepository.findAll();
-                List<LaborRespond> tempLabors = new ArrayList<>();
-                for (Labor ids : asd) {
-                    LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
-                    tempLabors.add(tempRespondLab);
-                }
-                backrespond.addAllGyakList(tempLabors);
+                setBackRespond(backrespond, asd);
                 break;
             }
+            default:
+                return ResponseEntity.badRequest().build();
         }
 
-        return backrespond;
+        return ResponseEntity.ok(backrespond);
 
+    }
+
+    private void setBackRespond(DataRespond backrespond, Iterable<Labor> asd) {
+        List<LaborRespond> tempLabors = new ArrayList<>();
+        for (Labor ids : asd) {
+            LaborRespond tempRespondLab = new LaborRespond(ids.getTitle(), ids.getPlace(), ids.getTime());
+            tempLabors.add(tempRespondLab);
+        }
+        backrespond.addAllGyakList(tempLabors);
     }
 
     @PostMapping("/password")
     @ApiOperation("User jelszó változtatás.")
-    @ApiParam("passwordObject-t vár")
-    public ResponseEntity changePassword(@RequestBody passwordObject obj) {
-        SimpleUser us = userRepository.findById(obj.id).orElse(null);
+    @ApiParam("PasswordObject-t vár")
+    public ResponseEntity changePassword(@RequestBody PasswordObject obj) {
+        SimpleUser us = userRepository.findById(obj.getId()).orElse(null);
         if (us == null)
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Nincs ilyen id");
-        if (!us.getPassword().equals(obj.oldPassword))
+        if (!us.getPassword().equals(obj.getOldPassword()))
             return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT)
                     .body("Nem egyezik a régi jelszó, és amúgy meg egy teapot vagyok");
-        us.setPassword(obj.newPassword);
+        us.setPassword(obj.getNewPassword());
         userRepository.save(us);
         System.out.println("Passoword changed: *****");
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Sikeres valtoztatas");

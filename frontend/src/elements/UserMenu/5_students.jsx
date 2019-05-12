@@ -8,7 +8,7 @@ class ListStudents extends Component {
 
     emptyExam = {
         score: "",
-        mark:"",
+        mark: "",
 
     };
 

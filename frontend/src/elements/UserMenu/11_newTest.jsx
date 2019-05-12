@@ -40,7 +40,7 @@ class NewTest extends Component {
     handleChange(event) {
         const target = event.target;
         const value = target.value;
-        
+
         const name = target.name;
         let item = {...this.state.item};
         item[name] = value;
@@ -59,7 +59,6 @@ class NewTest extends Component {
             creator: sessionStorage.getItem("id")
 
         };
-       
 
 
         await fetch("/api/exams/tests", {
@@ -73,7 +72,6 @@ class NewTest extends Component {
 
         }, 2000);
 
-       
 
     }
 
@@ -89,7 +87,7 @@ class NewTest extends Component {
         this.setState({
             examType: selectedOption.value,
         });
-       
+
     };
 
 

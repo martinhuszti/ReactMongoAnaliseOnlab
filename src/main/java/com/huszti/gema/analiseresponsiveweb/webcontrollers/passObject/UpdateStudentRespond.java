@@ -5,10 +5,8 @@ import lombok.Data;
 
 @Data
 public class UpdateStudentRespond {
-    
+
     private String id;
     private String gyak;
 
-    public UpdateStudentRespond() {
-    }
 }

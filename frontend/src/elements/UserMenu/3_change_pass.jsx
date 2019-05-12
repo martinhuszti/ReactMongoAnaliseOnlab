@@ -33,7 +33,7 @@ class Change_Pass extends Component {
         event.preventDefault();
 
         const {passwObj} = this.state;
-        
+
 
         const matches = passwObj.newPassword === passwObj.cPassword;
         if (matches === false) {

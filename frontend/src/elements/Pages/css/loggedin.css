@@ -192,7 +192,7 @@
     background: rgba(0, 0, 0, 0.3);
 }
 
-.logged_in_colorone{
+.logged_in_colorone {
     background-color: rgb(1, 221, 67);
     max-height: 50px;
     display: flex;
@@ -200,7 +200,8 @@
     color: white;
     vertical-align: middle;
 }
-.logged_in_colortwo{
+
+.logged_in_colortwo {
     max-height: 50px;
     display: flex;
     flex-direction: row;
@@ -208,6 +209,7 @@
     color: white;
     vertical-align: middle;
 }
+
 .logged_in_colortwo:hover {
     background-color: #5671eb;
     color: white;

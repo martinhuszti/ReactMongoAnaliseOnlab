@@ -10,10 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
-import javax.xml.stream.events.EntityReference;
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/labors")
 @Api(description = "Gyakorlat modellhez kapcsolódó api hívások")

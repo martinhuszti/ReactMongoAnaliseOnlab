@@ -1,8 +1,8 @@
 import "./css/news.css";
 import "./css/loginForm.css";
-import React, { Component } from "react";
-import { Alert, Button } from "reactstrap";
-import { withRouter } from "react-router-dom";
+import React, {Component} from "react";
+import {Alert, Button} from "reactstrap";
+import {withRouter} from "react-router-dom";
 
 
 class RegistrationForm extends Component {
@@ -35,14 +35,14 @@ class RegistrationForm extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let item = { ...this.state.item };
+        let item = {...this.state.item};
         item[name] = value;
-        this.setState({ item: item });
+        this.setState({item: item});
     }
 
     handleCheck() {
 
-        this.setState({ checklook: !this.state.checklook });
+        this.setState({checklook: !this.state.checklook});
 
     }
 
@@ -72,48 +72,39 @@ class RegistrationForm extends Component {
         if (loclogged === "true" && locid) {
             sessionStorage.setItem("loggedin", loclogged);
             sessionStorage.setItem("id", locid);
-            this.setState({ isLoggedIn: "true" }, this.props.history.push("/LoggedIn"));
+            this.setState({isLoggedIn: "true"}, this.props.history.push("/LoggedIn"));
         }
 
 
     }
-    callbackLogin() {
-
-        if (this.state.isLoggedIn === "true") {
-
-            ;
-        }
-    }
-
 
     alertboxshow() {
-        this.setState({ visible: true });
+        this.setState({visible: true});
     }
 
     onDismiss() {
-        this.setState({ visible: false });
+        this.setState({visible: false});
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        const { item } = this.state;
+        const {item} = this.state;
 
         await fetch("/api/users/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         })
             .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    this.alertboxshow();
-                    throw new Error("Hiba");
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        this.alertboxshow();
+                        throw new Error("Hiba");
+                    }
                 }
-            }
             )
             .then(json => {
-
 
 
                 if (this.state.checklook === true) {
@@ -134,10 +125,10 @@ class RegistrationForm extends Component {
     }
 
     render() {
-        const { item } = this.state;
+        const {item} = this.state;
         return (
             <div id="login_placeholder">
-                <div id="placeholder_header" />
+                <div id="placeholder_header"/>
                 <div id="login_width">
 
                     <Alert isOpen={this.state.visible} color="danger" toggle={this.onDismiss}>
@@ -153,32 +144,32 @@ class RegistrationForm extends Component {
                                 <label className="center_login">
                                     <div className="helper_text">Neptun kód:</div>
                                     <input className="login_color loginform_text" type="text"
-                                        name="neptun"
-                                        id="neptun"
-                                        value={item.neptun || ""}
-                                        onChange={this.handleChange}
+                                           name="neptun"
+                                           id="neptun"
+                                           value={item.neptun || ""}
+                                           onChange={this.handleChange}
                                     />
 
                                     <div className="helper_text ">Jelszó:</div>
                                     <input className="login_color loginform_pass"
-                                        type="password"
-                                        name="password"
-                                        id="password"
-                                        value={item.password || ""}
-                                        onChange={this.handleChange}
+                                           type="password"
+                                           name="password"
+                                           id="password"
+                                           value={item.password || ""}
+                                           onChange={this.handleChange}
                                     />
                                     <div className="remember_me">
                                         <input type="checkbox" id="remember_me"
-                                            name="_remember_me" onClick={this.handleCheck} />
-                                        <label className="remember_me_text helper_text" >Maradjak bejelentkezve</label>
+                                               name="_remember_me" onClick={this.handleCheck}/>
+                                        <label className="remember_me_text helper_text">Maradjak bejelentkezve</label>
                                     </div>
 
                                 </label>
 
                                 <div className="center_login">
                                     <Button className="button_color button_width" onClick={this.handleSubmit}
-                                        onKeyPress={this.handleKeyPress} type="submit"
-                                        variant="primary">
+                                            onKeyPress={this.handleKeyPress} type="submit"
+                                            variant="primary">
                                         <p className="button_width">Belépés</p></Button>
                                 </div>
                             </form>

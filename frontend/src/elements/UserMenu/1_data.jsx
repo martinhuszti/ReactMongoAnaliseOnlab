@@ -42,14 +42,13 @@ class LoggedIn_Data extends Component {
 
         }).then(response => response.json())
             .then(response => {
-                
+
                 this.setState({item: response});
                 this.setState({gyak: response.gyak});
-                
 
 
             });
-       
+
     };
 
     componentWillMount() {
@@ -63,7 +62,7 @@ class LoggedIn_Data extends Component {
     }
 
     fetchstudentgyak() {
-        
+
         fetch(`/api/students/gyak`, {
             method: "GET",
             headers: {"Content-Type": "application/json"},
@@ -80,7 +79,7 @@ class LoggedIn_Data extends Component {
 
     render() {
         if (this.state.isLoggedIn === "false") {
-            
+
             return <Redirect to="/LoginForm"/>
         }
 

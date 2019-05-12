@@ -68,7 +68,7 @@ class ExtraAdmin extends Component {
             body: JSON.stringify(createdAdmin)
         });
 
-      
+
     }
 
 

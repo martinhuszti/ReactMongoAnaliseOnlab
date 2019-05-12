@@ -55,7 +55,7 @@ class ExtraStudent extends Component {
                 gyakid: gyak.id,
             }
         });
-       
+
         return gyak;
     }
 
@@ -72,7 +72,7 @@ class ExtraStudent extends Component {
         window.setTimeout(() => {
             this.setState({visible: false})
         }, 2000);
-       
+
     }
 
     async addgyak() {

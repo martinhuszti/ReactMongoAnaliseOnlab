@@ -2,7 +2,7 @@ import "./css/excercises.css";
 import React, {Component} from "react";
 
 class Excercises extends Component {
-    componentWillMount(){
+    componentWillMount() {
         document.title = "Feladatok";
     }
 

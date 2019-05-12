@@ -1,7 +1,6 @@
 package com.huszti.gema.analiseresponsiveweb.database.Class;
 
 
-import com.huszti.gema.analiseresponsiveweb.database.Users.Student;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -17,11 +16,11 @@ public class Labor {
 
     @Id
     private String id;
-    @ApiModelProperty(notes ="Gyakorlat nevét határozza")
+    @ApiModelProperty(notes = "Gyakorlat nevét határozza")
     private String title;
-    @ApiModelProperty(notes ="Gyakorlat helyét határozza")
+    @ApiModelProperty(notes = "Gyakorlat helyét határozza")
     private String place;
-    @ApiModelProperty(notes ="Gyakorlat időpontját határozza")
+    @ApiModelProperty(notes = "Gyakorlat időpontját határozza")
     private String time;
 
     private List<String> student_ids;

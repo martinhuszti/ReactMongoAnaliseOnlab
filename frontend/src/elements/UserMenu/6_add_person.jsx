@@ -53,7 +53,7 @@ class AddStudent extends Component {
 
     handleChange = (selectedOption) => {
         this.setState({selectedOption});
-        
+
         if (selectedOption.value === "Admin") {
             this.item = <ExtraAdmin/>
         }

@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 import LoggedInData from "../UserMenu/1_data";
 import LoggedInResult from "../UserMenu/2_results";
 import ChangePass from "../UserMenu/3_change_pass";
@@ -15,11 +15,11 @@ import AddLab from "../UserMenu/10_new_labor";
 import ListStudent from "../UserMenu/5_students";
 import NewTest from "../UserMenu/11_newTest";
 import ChangeLab from "../UserMenu/12_change_labor";
-import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
-import { Alert } from "reactstrap";
+import {HashRouter as Router, Link, Redirect, Route} from "react-router-dom";
+import {Alert} from "reactstrap";
 import "./css/news.css";
 import "./css/loggedin.css";
-import { slide as Menu } from "react-burger-menu";
+import {slide as Menu} from "react-burger-menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountBox from "@material-ui/icons/AccountBox";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -40,53 +40,53 @@ class LoggedIn extends Component {
         {
             path: "/loggedin/data",
             exact: true,
-            main: () => <LoggedInData />
+            main: () => <LoggedInData/>
         },
         {
 
             path: "/loggedin/result",
-            main: () => <LoggedInResult />
+            main: () => <LoggedInResult/>
         },
         {
             path: "/loggedin/changepass",
-            main: () => <ChangePass />
+            main: () => <ChangePass/>
         },
         {
             path: "/loggedin/controller",
-            main: () => <Chat />
+            main: () => <Chat/>
         },
         {
             path: "/loggedin/students",
-            main: () => <ListStudent />
+            main: () => <ListStudent/>
         },
         {
             path: "/loggedin/newpublication",
-            main: () => <NewsPublication />
+            main: () => <NewsPublication/>
         },
         {
             path: "/loggedin/deletepublication",
-            main: () => <DeletePublication />
+            main: () => <DeletePublication/>
         },
         {
             path: "/loggedin/addperson",
-            main: () => <AddStudent />
+            main: () => <AddStudent/>
         },
         {
             path: "/loggedin/addreq",
-            main: () => <AddReq />
+            main: () => <AddReq/>
         },
         {
             path: "/loggedin/addlab",
-            main: () => <AddLab />
+            main: () => <AddLab/>
         },
         {
             path: "/loggedin/newtest",
-            main: () => <NewTest />
+            main: () => <NewTest/>
 
         },
         {
             path: "/loggedin/changelab",
-            main: () => <ChangeLab />
+            main: () => <ChangeLab/>
         },
     ];
 
@@ -107,7 +107,7 @@ class LoggedIn extends Component {
         if (sessionStorage.getItem("newLogin") === "true") {
             this.state.visible = true;
             window.setTimeout(() => {
-                this.setState({ visible: false })
+                this.setState({visible: false})
             }, 2000);
 
             sessionStorage.setItem("newLogin", false);
@@ -125,31 +125,31 @@ class LoggedIn extends Component {
     static motiveBind(item) {
         switch (item) {
             case 1:
-                return <AccountBox />;
+                return <AccountBox/>;
             case 2:
-                return <RemoveRedEyeIcon />;
+                return <RemoveRedEyeIcon/>;
             case 3:
-                return <ChatIcon />;
+                return <ChatIcon/>;
             case 4:
-                return <PersonIcon />;
+                return <PersonIcon/>;
             case 5:
-                return <AddCommentIcon />;
+                return <AddCommentIcon/>;
             case 6:
-                return <PersonAddIcon />;
+                return <PersonAddIcon/>;
             case 7:
-                return <AddCommentOutlinedIcon />;
+                return <AddCommentOutlinedIcon/>;
             case 8:
-                return <DeleteIcon />;
+                return <DeleteIcon/>;
             case 9:
-                return <AddIcon />;
+                return <AddIcon/>;
             case 10:
-                return <AddIcon />;
+                return <AddIcon/>;
             case 11:
-                return <DashBoardIcon />;
+                return <DashBoardIcon/>;
             case 12:
-                return <SwitchCameraIcon />;
+                return <SwitchCameraIcon/>;
             default:
-                return <AccountBox />;
+                return <AccountBox/>;
         }
 
     }
@@ -161,18 +161,21 @@ class LoggedIn extends Component {
     }
 
     handleStateChange(state) {
-        this.setState({ menuToggle: state.isOpen });
+        this.setState({menuToggle: state.isOpen});
     }
 
     closeAlert() {
-        this.setState({ visible: false });
+        this.setState({visible: false});
     }
+
     headerchange = (headerstring) => {
-        this.setState({ headertext: headerstring.text })
-        this.state.items.forEach(function (element) { element.clicked = false; });
+        this.setState({headertext: headerstring.text});
+        this.state.items.forEach(function (element) {
+            element.clicked = false;
+        });
         headerstring.clicked = true;
 
-    }
+    };
 
     logout() {
         sessionStorage.removeItem("id");
@@ -189,7 +192,7 @@ class LoggedIn extends Component {
         document.title = "Profil";
         const sesslogged = sessionStorage.getItem("loggedin");
         const loclogged = localStorage.getItem("loggedin");
-     
+
         if (sesslogged !== "true" && loclogged !== "true") {
             this.setState({
                 isLoggedIn: "false"
@@ -198,16 +201,17 @@ class LoggedIn extends Component {
         } else {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
-               
+
             }
-            this.setState({ isLoggedIn: "true" }, this.callbackLogin());
+            this.setState({isLoggedIn: "true"}, this.callbackLogin());
         }
     }
+
     callbackLogin() {
 
         if (this.state.isLoggedIn === "false") {
 
-            return <Redirect to="/LoginForm" />
+            return <Redirect to="/LoginForm"/>
         }
     }
 
@@ -217,16 +221,18 @@ class LoggedIn extends Component {
 
         fetch(`/api/users/role/menu`, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Content-Type": "application/json"},
             body: loginid
         }).then(res => {
             return res.json()
 
         }).then(json => {
 
-            json.forEach(function (element) { element.clicked = false; });
+            json.forEach(function (element) {
+                element.clicked = false;
+            });
 
-            this.setState({ items: json });
+            this.setState({items: json});
         })
     }
 
@@ -234,17 +240,17 @@ class LoggedIn extends Component {
     render() {
 
 
-        const { items } = this.state;
-        const { headertext } = this.state;
-        const { routes } = this;
+        const {items} = this.state;
+        const {headertext} = this.state;
+        const {routes} = this;
 
         return (
             <Router>
                 <div id="loggedin_placeholder_news">
 
-                    <div id="placeholder_header" />
+                    <div id="placeholder_header"/>
                     <Menu width={"250px"} customBurgerIcon={false} isOpen={this.state.menuToggle}
-                        onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
+                          onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
                             {items.map(item =>
                                 <Link to={item.link} onClick={this.menuClick} className=" menu_items_two box_1">
@@ -269,14 +275,16 @@ class LoggedIn extends Component {
 
 
                     <div id="menu_header" className="news news_head">
-                        <h1 className="news_text "><MenuIcon onClick={this.menuClick} id="loggedin_menuicon" />{headertext}</h1>
+                        <h1 className="news_text "><MenuIcon onClick={this.menuClick}
+                                                             id="loggedin_menuicon"/>{headertext}</h1>
                     </div>
 
                     <div className="loggedin_news news_body news_body_padding flex_container">
 
                         <div className="menu_items flex_column loggedin_disapier">
                             {items.map(item =>
-                                <Link onClick={this.headerchange.bind(this, item)} to={item.link} className={item.clicked ? "logged_in_colorone" : "logged_in_colortwo"} >
+                                <Link onClick={this.headerchange.bind(this, item)} to={item.link}
+                                      className={item.clicked ? "logged_in_colorone" : "logged_in_colortwo"}>
 
                                     <div className="menu_icons">{LoggedIn.motiveBind(item.motiv)}</div>
                                     <p className="menu_items_text">{item.text}</p>
@@ -295,13 +303,13 @@ class LoggedIn extends Component {
                         <div className="content_box">
                             {routes.map((route, index) => (
 
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    exact={route.exact}
-                                    component={route.main}
-                                />
-                            )
+                                    <Route
+                                        key={index}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.main}
+                                    />
+                                )
                             )}
 
                         </div>
@@ -324,11 +332,11 @@ const emptyStudent = [{
     motiv: 1,
     clicked: false,
 },
-{
-    link: "/loggedin/controller",
-    text: "Chat",
-    motiv: 3,
-    clicked: false,
-}
+    {
+        link: "/loggedin/controller",
+        text: "Chat",
+        motiv: 3,
+        clicked: false,
+    }
 
-]
+];

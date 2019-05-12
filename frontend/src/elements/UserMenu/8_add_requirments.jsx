@@ -15,7 +15,7 @@ class Addrequirements extends Component {
 
     constructor(props) {
         super(props);
-       
+
         this.fileService = new FileService();
 
         this.state = {
@@ -49,17 +49,17 @@ class Addrequirements extends Component {
         })
             .then((result) => result.json())
             .then((requirment) => {
-                
+
                 this.setState({
                     item: requirment
                 });
-                
+
             });
-        
+
     }
 
     handleChange(event) {
-        
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -81,7 +81,7 @@ class Addrequirements extends Component {
         FileService.uploadFileToServer(data).then(() => {
             console.log("File " + file.name + " is uploaded");
         }).catch(function (error) {
-           
+
             if (error.response) {
                 //HTTP error happened
                 console.log("Upload error. HTTP error/status code=", error.response.status);

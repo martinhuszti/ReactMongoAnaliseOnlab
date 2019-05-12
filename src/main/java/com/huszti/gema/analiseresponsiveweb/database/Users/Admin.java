@@ -13,9 +13,9 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(description = "Admin modell. Rögzíti kinek van legnagyobb jogosultsága")
 public class Admin {
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     protected String id;
-    @ApiModelProperty(notes ="Neptun kód. Azonosításra szolgáll")
+    @ApiModelProperty(notes = "Neptun kód. Azonosításra szolgáll")
     @NotBlank
     protected String neptun;
 

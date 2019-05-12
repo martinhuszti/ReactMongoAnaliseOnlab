@@ -45,7 +45,7 @@ class ExtraTeacher extends Component {
     }
 
     handleSelectChange(value) {
-       
+
         this.setState({value});
     }
 
@@ -53,7 +53,7 @@ class ExtraTeacher extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-       
+
         let all = {...this.state.all};
         all[name] = value;
         this.setState({all});
@@ -67,14 +67,14 @@ class ExtraTeacher extends Component {
             password: "default",
             role: "teacher",
         };
-       
+
         await fetch("/api/users", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tempuser)
         });
 
-      
+
         console.log("új felhasználó")
     }
 
