@@ -15,9 +15,6 @@ class Addrequirements extends Component {
 
     constructor(props) {
         super(props);
-
-        this.fileService = new FileService();
-
         this.state = {
             item: this.emptyReq,
             items: [],

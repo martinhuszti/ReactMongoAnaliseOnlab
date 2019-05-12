@@ -12,8 +12,8 @@ public class AnaliseResponsiveWebApplication implements CommandLineRunner {
     }
 
     public void run(String... args) {
+        //Run the program
     }
-
 
 }
 

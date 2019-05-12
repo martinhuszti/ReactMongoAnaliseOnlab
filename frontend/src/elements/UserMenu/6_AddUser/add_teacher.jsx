@@ -80,7 +80,7 @@ class ExtraTeacher extends Component {
         let tampteacher = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
-            labor_ids: this.state.all.labor_ids,
+            labor_ids: this.state.all.laborIds,
         };
         await fetch("/api/teachers", {
             method: "POST",
@@ -159,7 +159,7 @@ class ExtraTeacher extends Component {
                         isMulti
                         cacheOptions
                         defaultOptions
-                        onChange={users => all.labor_ids = users.map(u => u.id)}
+                        onChange={users => all.laborIds = users.map(u => u.id)}
                         loadOptions={getStudents}
                         getOptionLabel={option => option.title}
                         getOptionValue={option => option.id}

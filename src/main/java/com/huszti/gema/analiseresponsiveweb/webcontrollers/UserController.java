@@ -128,7 +128,7 @@ public class UserController {
                 break;
             }
             default:
-                return ResponseEntity.badRequest().build();
+                break;
         }
 
         return ResponseEntity.ok(backrespond);
