@@ -68,8 +68,6 @@ class ListStudents extends Component {
         const {emptyExam} = this.state;
         const {examType} = this.state;
 
-
-        console.log(this.state.emptyExam);
         fetch("/api/exams?studentId=" + studentId + "&examType=" + examType, {
             method: "POST",
             headers: {"Content-Type": "application/json"},

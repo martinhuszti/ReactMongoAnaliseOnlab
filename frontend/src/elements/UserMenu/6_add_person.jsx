@@ -43,7 +43,6 @@ class AddStudent extends Component {
         }).then((json) => {
             if (json === "admin") {
                 this.setState({options: optionsAdmin});
-                console.log("admin vagyok");
             }
             if ((json) === "teacher") {
                 this.setState({options: optionsTeacher});

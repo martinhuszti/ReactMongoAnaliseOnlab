@@ -41,7 +41,6 @@ class News_Publication extends Component {
             body: JSON.stringify(item)
         });
 
-        console.log("feltöltés befejeződött");
     }
 
     render() {

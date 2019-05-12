@@ -48,7 +48,6 @@ class ChangeLab extends Component {
 
         }).then((response) => response.json())
             .then((labors) => {
-                console.log(labors);
                 this.setState({labors})
             });
 

@@ -47,8 +47,6 @@ class ChangePassword extends Component {
                 body: JSON.stringify(passwObj)
             }).then((resp) => {
                 return resp.text();
-            }).then((text) => {
-                console.log(text);
             })
 
         }

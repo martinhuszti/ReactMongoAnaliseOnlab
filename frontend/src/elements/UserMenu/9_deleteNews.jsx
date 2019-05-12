@@ -28,7 +28,6 @@ class DeletePublication extends Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-        console.log("törlés");
 
         var array = [...this.state.items];
         var index = array.indexOf(item);

@@ -73,28 +73,21 @@ class ExtraTeacher extends Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tempuser)
         });
-
-
-        console.log("új felhasználó")
     }
 
     async addteacher() {
-        console.log("tanár");
 
         let tampteacher = {
             name: this.state.all.name,
             neptun: this.state.all.neptun,
             labor_ids: this.state.all.labor_ids,
         };
-        console.log("tanár2");
-        console.log(tampteacher);
         await fetch("/api/teachers", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(tampteacher)
         });
 
-        console.log("feltöltés befejeződött");
         this.setState({visible: true});
         window.setTimeout(() => {
             this.setState({visible: false})
@@ -125,7 +118,6 @@ class ExtraTeacher extends Component {
 
             }).then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
                     callback(response);
                 })
         };

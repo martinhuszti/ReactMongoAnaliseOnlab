@@ -81,8 +81,6 @@ class ExtraStudent extends Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(createdStudent)
         });
-
-        console.log("új diák");
     }
 
 
@@ -107,7 +105,6 @@ class ExtraStudent extends Component {
 
             }).then((response) => response.json())
                 .then((response) => {
-                    console.log(response);
                     callback(response);
                 });
         };

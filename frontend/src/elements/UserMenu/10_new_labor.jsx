@@ -42,7 +42,6 @@ class newLabor extends Component {
             body: JSON.stringify(item)
         });
 
-        console.log("feltöltés befejeződött");
     }
 
     render() {
