@@ -3,7 +3,7 @@ import "./css/news.css";
 import React, {Component} from "react";
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Login from "./loginForm.jsx";
-import Popup from "./popup"
+import Popup from "./popup";
 
 class Class extends Component {
 

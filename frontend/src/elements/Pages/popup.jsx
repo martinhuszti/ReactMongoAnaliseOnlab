@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./css/popup.css"
+import "./css/popup.css";
 import Clear from "@material-ui/icons/Clear";
 
 

@@ -1,6 +1,6 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import { withRouter } from "react-router";
 import LoggedInData from "../UserMenu/1_data";
@@ -11,15 +11,15 @@ import NewsPublication from "../UserMenu/7_news_publication";
 import AddStudent from "../UserMenu/6_add_person";
 import AddReq from "../UserMenu/8_add_requirments";
 import DeletePublication from "../UserMenu/9_deleteNews";
-import AddLab from "../UserMenu/10_new_labor"
-import ListStudent from "../UserMenu/5_students"
-import NewTest from "../UserMenu/11_newTest"
-import ChangeLab from "../UserMenu/12_change_labor"
+import AddLab from "../UserMenu/10_new_labor";
+import ListStudent from "../UserMenu/5_students";
+import NewTest from "../UserMenu/11_newTest";
+import ChangeLab from "../UserMenu/12_change_labor";
 import { HashRouter as Router, Link, Redirect, Route } from "react-router-dom";
 import { Alert } from "reactstrap";
 import "./css/news.css";
 import "./css/loggedin.css";
-import { slide as Menu } from "react-burger-menu"
+import { slide as Menu } from "react-burger-menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountBox from "@material-ui/icons/AccountBox";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -95,13 +95,13 @@ class LoggedIn extends Component {
         this.state = {
             items: emptyStudent,
             redirect: false,
-            isLoggedIn: '',
+            isLoggedIn: "",
             visible: false,
             menuToggle: false,
-            menuToggleSelf: '',
+            menuToggleSelf: "",
             headertext: "Login",
             clickedMenu: "",
-        }
+        };
 
 
         if (sessionStorage.getItem("newLogin") === "true") {
@@ -161,7 +161,7 @@ class LoggedIn extends Component {
     }
 
     handleStateChange(state) {
-        this.setState({ menuToggle: state.isOpen })
+        this.setState({ menuToggle: state.isOpen });
     }
 
     closeAlert() {
@@ -199,7 +199,7 @@ class LoggedIn extends Component {
             if (loclogged === "true") {
                 sessionStorage.setItem("loggedin", loclogged);
             }
-            this.setState({ isLoggedIn: "true" })
+            this.setState({ isLoggedIn: "true" });
         }
         if (this.state.isLoggedIn === "false") {
 
@@ -238,7 +238,7 @@ class LoggedIn extends Component {
                 <div id="loggedin_placeholder_news">
 
                     <div id="placeholder_header" />
-                    <Menu width={'250px'} customBurgerIcon={false} isOpen={this.state.menuToggle}
+                    <Menu width={"250px"} customBurgerIcon={false} isOpen={this.state.menuToggle}
                         onStateChange={(state) => this.handleStateChange(state)} className="loggedin_slidemenu">
                         <div className="menu_items_two flex_column">
                             {items.map(item =>
@@ -315,13 +315,13 @@ export default withRouter(LoggedIn);
 
 const emptyStudent = [{
     link: "/loggedin/data",
-    text: 'Adatok',
+    text: "Adatok",
     motiv: 1,
     clicked: false,
 },
 {
     link: "/loggedin/controller",
-    text: 'Chat',
+    text: "Chat",
     motiv: 3,
     clicked: false,
 }

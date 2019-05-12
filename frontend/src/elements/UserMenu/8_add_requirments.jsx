@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button, Form, FormGroup, Input, Label} from "reactstrap";
-import "./css/add_req.css"
+import "./css/add_req.css";
 import {FileService} from "./8_AddRequirements/FileService.jsx";
 
 class Addrequirements extends Component {

@@ -1,5 +1,5 @@
 import "./css/news.css";
-import "./css/loginForm.css"
+import "./css/loginForm.css";
 import React, {Component} from "react";
 import {Alert, Button} from "reactstrap";
 import {withRouter} from "react-router-dom";

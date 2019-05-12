@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import Clear from "@material-ui/icons/Clear";
-import "./css/delete_news.css"
+import "./css/delete_news.css";
 
 
 class Delete_Publication extends Component {
@@ -38,15 +38,11 @@ class Delete_Publication extends Component {
     }
 
     componentDidMount() {
-
-
         fetch(`/api/news`, {
             method: "GET"
         })
             .then((result) => result.json())
             .then((items) => this.setState({items}));
-
-        console.log("betöltés befejeeződött");
     }
 
     render() {

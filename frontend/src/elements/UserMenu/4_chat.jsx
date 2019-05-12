@@ -3,7 +3,7 @@ import React from "react";
 import SockJsClient from "react-stomp";
 import Fetch from "json-fetch";
 import {TalkBox} from "react-talk";
-import "./css/chat_box.css"
+import "./css/chat_box.css";
 
 class Chat extends React.Component {
     constructor(props) {
