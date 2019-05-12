@@ -7,29 +7,29 @@ class Infomations extends Component {
         super(props);
 
         this.state = {
-            gyak:[],
+            gyak: [],
         };
 
-      
+
 
     }
 
 
-componentWillMount(){
-    document.title="Információ";
+    componentWillMount() {
+        document.title = "Információ";
         fetch(`/api/labors`, {
             method: "GET",
-            headers: {"Content-Type": "application/json"},
-          
+            headers: { "Content-Type": "application/json" },
+
 
         }).then(response => response.json())
-            .then(gyak => this.setState({gyak}))
+            .then(gyak => this.setState({ gyak }))
     }
 
 
     render() {
 
-        const {gyak} = this.state;
+        const { gyak } = this.state;
         return (
             <div id="placeholder_news">
 
@@ -43,23 +43,39 @@ componentWillMount(){
                     <div className="news news_body info_flex">
                         <div>
                             <span className="info_gyak">Gyakorlatok:</span>
-                            {gyak.map(item => <li key={item.id}>
-                        <li className="data_font data_top">
-                            <span>Csoport:</span>
-                            <span>{item.title}</span>
-                        </li>
-                        <li className="data_font">
-                            <span>Hely:</span>
-                            <span>{item.place}</span>
-                        </li>
-                        <li className="data_font">
-                            <span>Idő:</span>
-                            <span>{item.time}</span>
-                        </li>
-                    </li>)}
+                            
+                            {gyak.map(item => <ul key={item.id}>
+                                <li className="data_font data_top">
+                                    <span>Csoport:</span>
+                                    <span>{item.title}</span>
+                                </li>
+                                <li className="data_font">
+                                    <span>Hely:</span>
+                                    <span>{item.place}</span>
+                                </li>
+                                <li className="data_font">
+                                    <span>Idő:</span>
+                                    <span>{item.time}</span>
+                                </li>
+                            </ul>)}
+                            
                         </div>
                         <div>
                             <span className="info_gyak">Előadások:</span>
+                            <ul>
+                            <li className="data_font data_top">
+                                <span>Csoport:</span>
+                                <span>A1,A2</span>
+                            </li>
+                            <li className="data_font">
+                                <span>Hely:</span>
+                                <span>Q1</span>
+                            </li>
+                            <li className="data_font">
+                                <span>Idő:</span>
+                                <span>Hétfő 19:10</span>
+                            </li>
+                            </ul>
                         </div>
 
                     </div>

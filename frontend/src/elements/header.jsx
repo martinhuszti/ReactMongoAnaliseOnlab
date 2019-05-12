@@ -127,7 +127,7 @@ class Header extends Component {
                         <Route path="/LoginForm" component={LoginForm}/>
                         <Route component={PageNotFound}/>
                     </Switch>
-                    )} />
+
                 </div>
             </Router>);
     }

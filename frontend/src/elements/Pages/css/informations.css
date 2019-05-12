@@ -9,3 +9,8 @@
 .info_flex>*{
     flex: 1;
 }
+@media (max-width: 750px) {
+    .info_flex {
+        
+    flex-direction: column-reverse;
+    }}
