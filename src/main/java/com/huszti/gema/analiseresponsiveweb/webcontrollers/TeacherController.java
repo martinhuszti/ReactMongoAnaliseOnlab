@@ -7,6 +7,7 @@ import com.huszti.gema.analiseresponsiveweb.repository.TeacherRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.var;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +33,9 @@ public class TeacherController {
     @ApiParam("Teacher-t vár")
     public ResponseEntity addTeacher(@RequestBody Teacher teacher) {
         teacherRepository.save(teacher);
-        laborRepository.findAllById(teacher.getLabor_ids())
-                .forEach(e -> e.setTeacher_id(teacher.getId()));
+        var labors = laborRepository.findAllById(teacher.getLaborIds());
+        if(labors == null) return ResponseEntity.noContent().build();
+        labors.forEach(e -> e.setTeacher_id(teacher.getId()));
         System.out.println("Új teacher hozzáadva: " + teacher);
         return ResponseEntity.ok(teacher);
     }

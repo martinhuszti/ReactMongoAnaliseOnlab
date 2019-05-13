@@ -26,6 +26,6 @@ public class Teacher {
     private String neptun;
 
     @ApiModelProperty(notes = "Tanárhoz tartozó gyakorlatok")
-    private List<String> labor_ids;
+    private List<String> laborIds;
 
 }

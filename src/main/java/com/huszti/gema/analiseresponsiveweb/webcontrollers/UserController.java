@@ -58,6 +58,9 @@ public class UserController {
     @ApiOperation("User hozzáadása")
     @ApiParam("SimpleUser-t vár")
     public ResponseEntity addUser(@RequestBody SimpleUser user) {
+        if (userRepository.findByNeptun(user.getNeptun()) != null) {
+            return ResponseEntity.badRequest().build();
+        }
         userRepository.save(user);
         System.out.println("Új user hozzáadva: " + user);
         return ResponseEntity.ok(user);
@@ -118,7 +121,7 @@ public class UserController {
                 break;
             }
             case "teacher": {
-                List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLabor_ids();
+                List<String> getID = teacherRepository.findByNeptun(tempuser.getNeptun()).getLaborIds();
                 Iterable<Labor> asd = laborRepository.findAllById(getID);
                 setBackRespond(backrespond, asd);
                 break;

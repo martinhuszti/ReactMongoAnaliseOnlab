@@ -104,7 +104,7 @@ public class StudentController {
             Teacher teacher = teacherRepository.findByNeptun(neptun);
             assert teacher != null;
             ArrayList<Student> allstudents = new ArrayList<>();
-            var l = teacher.getLabor_ids();
+            var l = teacher.getLaborIds();
             if (l == null) {
                 return ResponseEntity.noContent().build();
             }
