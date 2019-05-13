@@ -25,7 +25,7 @@ class ChangeLab extends Component {
             gyak: this.state.gyak,
             id: this.state.id
         };
-        fetch(`/api/students/gyak`, {
+        fetch("/api/students/gyak", {
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(updateStudent)
@@ -35,20 +35,19 @@ class ChangeLab extends Component {
 
     componentWillMount() {
         const encodedValue = encodeURIComponent(sessionStorage.getItem("id"));
-        fetch(`/api/students?myGyakId=${encodedValue}`)
+        fetch("/api/students?myGyakId=" + encodedValue)
             .then((response) => response.json())
             .then((studentsList) =>
                 this.setState({studentsList}));
 
 
-        fetch(`/api/labors`, {
+        fetch("/api/labors", {
             method: "GET",
             headers: {"Content-Type": "application/json"},
             //body: JSON.stringify(item)
 
         }).then((response) => response.json())
             .then((labors) => {
-                console.log(labors);
                 this.setState({labors})
             });
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import SockJsClient from "react-stomp";
-import Fetch from "json-fetch";
+import jsonfetch from "json-fetch";
 import {TalkBox} from "react-talk";
 import "./css/chat_box.css";
 
@@ -33,7 +33,7 @@ class Chat extends React.Component {
     };
 
     componentWillMount() {
-        Fetch("/history", {
+        jsonfetch("/history", {
             method: "GET"
         }).then((response) => {
             this.setState({messages: response.body});

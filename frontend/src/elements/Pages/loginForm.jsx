@@ -7,8 +7,8 @@ import {withRouter} from "react-router-dom";
 
 class RegistrationForm extends Component {
     emptyUser = {
-        neptun: '',
-        password: ''
+        neptun: "",
+        password: ""
     };
 
     constructor(props) {
@@ -18,6 +18,7 @@ class RegistrationForm extends Component {
             item: this.emptyUser,
             checklook: false,
             visible: false,
+            isLoggedIn: "",
 
         };
 
@@ -36,30 +37,46 @@ class RegistrationForm extends Component {
         const name = target.name;
         let item = {...this.state.item};
         item[name] = value;
-        this.setState({item: item});
+        this.setState({item});
     }
 
     handleCheck() {
-      
+
         this.setState({checklook: !this.state.checklook});
-      
+
     }
 
     handleKeyPress(e) {
 
-       
-        if (e.key === 'Enter') {
-          
+
+        if (e.key === "Enter") {
+
             this.handleSubmit(e);
         }
     }
 
-    componentWillMount() {
-        document.title="Analízis";
+    componentDidMount() {
+        document.title = "Analízis";
         let login = sessionStorage.getItem("loggedin");
         let loginid = sessionStorage.getItem("id");
-        if (loginid !== null && login === "true")
-            this.props.history.push('/LoggedIn');
+        if (loginid !== null && login === "true") {
+            this.props.history.push("/LoggedIn");
+        }
+    }
+
+
+    componentWillMount() {
+        const loclogged = localStorage.getItem("loggedin");
+        const locid = localStorage.getItem("id");
+
+
+        if (loclogged === "true" && locid) {
+            sessionStorage.setItem("loggedin", loclogged);
+            sessionStorage.setItem("id", locid);
+            this.setState({isLoggedIn: "true"}, this.props.history.push("/LoggedIn"));
+        }
+
+
     }
 
     alertboxshow() {
@@ -74,7 +91,7 @@ class RegistrationForm extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        await fetch('/api/users/login', {
+        await fetch("/api/users/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
@@ -88,10 +105,7 @@ class RegistrationForm extends Component {
                     }
                 }
             )
-            .then(json => {
-
-              
-
+            .then((json) => {
                 if (this.state.checklook === true) {
                     localStorage.setItem("loggedin", "true");
                     localStorage.setItem("id", json.id);
@@ -101,7 +115,7 @@ class RegistrationForm extends Component {
                 sessionStorage.setItem("id", json.id);
                 sessionStorage.setItem("newLogin", true);
 
-                this.props.history.push('/LoggedIn');
+                this.props.history.push("/LoggedIn");
 
             })
             .catch(() => {
@@ -131,7 +145,7 @@ class RegistrationForm extends Component {
                                     <input className="login_color loginform_text" type="text"
                                            name="neptun"
                                            id="neptun"
-                                           value={item.neptun || ''}
+                                           value={item.neptun || ""}
                                            onChange={this.handleChange}
                                     />
 
@@ -139,8 +153,8 @@ class RegistrationForm extends Component {
                                     <input className="login_color loginform_pass"
                                            type="password"
                                            name="password"
-                                           id='password'
-                                           value={item.password || ''}
+                                           id="password"
+                                           value={item.password || ""}
                                            onChange={this.handleChange}
                                     />
                                     <div className="remember_me">

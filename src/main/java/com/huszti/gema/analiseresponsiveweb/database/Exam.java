@@ -13,20 +13,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Exam {
 
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
-    @ApiModelProperty(notes ="Számonkérés típusa")
+    @ApiModelProperty(notes = "Számonkérés típusa")
     private String type;
 
-    @ApiModelProperty(notes ="Számonkérésen szerzett pont")
+    @ApiModelProperty(notes = "Számonkérésen szerzett pont")
     private float score;
 
-    @ApiModelProperty(notes ="Számonkérésen szerzett jegy")
+    @ApiModelProperty(notes = "Számonkérésen szerzett jegy")
     private float mark;
-
-
-    public Exam() {
-    }
 
 }

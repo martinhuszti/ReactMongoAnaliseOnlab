@@ -15,9 +15,6 @@ class Addrequirements extends Component {
 
     constructor(props) {
         super(props);
-       
-        this.fileService = new FileService();
-
         this.state = {
             item: this.emptyReq,
             items: [],
@@ -33,33 +30,31 @@ class Addrequirements extends Component {
         event.preventDefault();
         const {item} = this.state;
 
-        console.log(item);
         await fetch("/api/requirements", {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-        console.log("feltöltés befejeződött");
     }
 
 
     componentWillMount() {
-        fetch(`/api/requirements`, {
+        fetch("/api/requirements", {
             method: "GET"
         })
             .then((result) => result.json())
             .then((requirment) => {
-                
+
                 this.setState({
                     item: requirment
                 });
-                
+
             });
-        
+
     }
 
     handleChange(event) {
-        
+
         const target = event.target;
         const value = target.value;
         const name = target.name;
@@ -71,24 +66,14 @@ class Addrequirements extends Component {
     handleUploadFile = (event) => {
         const data = new FormData();
         //using File API to get chosen file
-        let file = event.target.files[0];
-        console.log("Uploading file", event.target.files[0]);
         data.append("file", event.target.files[0]);
         data.append("name", "my_file");
         data.append("description", "this file is uploaded by young padawan");
 
         //calling async Promise and handling response or error situation
         FileService.uploadFileToServer(data).then(() => {
-            console.log("File " + file.name + " is uploaded");
         }).catch(function (error) {
-           
-            if (error.response) {
-                //HTTP error happened
-                console.log("Upload error. HTTP error/status code=", error.response.status);
-            } else {
-                //some other error happened
-                console.log("Upload error. HTTP error/status code=", error.message);
-            }
+
         });
     };
 

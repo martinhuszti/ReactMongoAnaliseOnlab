@@ -15,25 +15,25 @@ import java.time.LocalDate;
 public class Requirements {
 
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
-    @ApiModelProperty(notes ="Jelenléthez szükséges rövid szöveg")
+    @ApiModelProperty(notes = "Jelenléthez szükséges rövid szöveg")
     private String presence;
 
-    @ApiModelProperty(notes ="Aláírás rövid leírása")
+    @ApiModelProperty(notes = "Aláírás rövid leírása")
     private String signature;
 
-    @ApiModelProperty(notes ="Vizsgához szükséges rövid szöveg")
+    @ApiModelProperty(notes = "Vizsgához szükséges rövid szöveg")
     private String exam;
 
-    @ApiModelProperty(notes ="Zh-hoz szükséges rövid szöveg")
+    @ApiModelProperty(notes = "Zh-hoz szükséges rövid szöveg")
     private String tests;
 
-    @ApiModelProperty(notes ="Pontszámítás rövid leírása")
+    @ApiModelProperty(notes = "Pontszámítás rövid leírása")
     private String points;
 
-    @ApiModelProperty(notes ="Utolsó módosítás. Automatikusan generálódik konstruktorban")
+    @ApiModelProperty(notes = "Utolsó módosítás. Automatikusan generálódik konstruktorban")
     private LocalDate modification_date;
 
 

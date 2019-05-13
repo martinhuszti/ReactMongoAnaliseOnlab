@@ -1,11 +1,6 @@
 import axios from "axios";
 
 class Service {
-
-    constructor() {
-        console.log("Service is constructed");
-    }
-
     getRestClient() {
         if (!this.serviceInstance) {
             this.serviceInstance = axios.create({

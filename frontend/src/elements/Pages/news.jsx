@@ -81,21 +81,25 @@ class Class extends Component {
 
     componentDidMount() {
 
-        fetch(`/api/news/top5`, {
+        fetch("/api/news/top5", {
             method: "GET",
         })
 
             .then((result) => {
-                if (result.ok)
+                if (result.ok) {
                     return result.json();
-                else throw new Error("Backend nem elérhető")
+                } else {
+                    throw new Error("Backend nem elérhető");
+                }
             })
-            .catch(() => {alert("Backend nem elérhető!")})
+            .catch(() => {
+                alert("Backend nem elérhető!");
+            })
 
             .then(items => {
                     this.setState({items});
 
-                  
+
                 }
             );
 

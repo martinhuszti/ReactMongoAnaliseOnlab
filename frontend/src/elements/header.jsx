@@ -45,8 +45,8 @@ class Header extends Component {
         const loclogged = localStorage.getItem("loggedin");
 
         if (sesslogged !== "true" || loclogged !== "true") {
-           
-            this.props.history.push(`/LoginForm`);
+
+            this.props.history.push("/LoginForm");
 
         } else {
             if (loclogged === "true") {

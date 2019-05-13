@@ -18,27 +18,27 @@ import java.util.List;
 public class Test {
 
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
     @NotBlank
-    @ApiModelProperty(notes ="Számonkérés neve")
+    @ApiModelProperty(notes = "Számonkérés neve")
     private String title;
 
-    @ApiModelProperty(notes ="Számonkérés típusa")
+    @ApiModelProperty(notes = "Számonkérés típusa")
     private String type;
 
-    @ApiModelProperty(notes ="Számonkérés ideje")
+    @ApiModelProperty(notes = "Számonkérés ideje")
     private String time;
 
-    @ApiModelProperty(notes ="Számonkérés készítője.")
+    @ApiModelProperty(notes = "Számonkérés készítője.")
     private String creator;
 
-    @ApiModelProperty(notes ="Készítés ideje. Automatikusan generálódik konstruktorban")
+    @ApiModelProperty(notes = "Készítés ideje. Automatikusan generálódik konstruktorban")
     private LocalDate creationTime;
 
     @DBRef(lazy = true)
-    @ApiModelProperty(notes ="Hozzá és diákokhoz tartozó számonkérés. Ebbe tárolódnak a pontok, jegyek, stb.")
+    @ApiModelProperty(notes = "Hozzá és diákokhoz tartozó számonkérés. Ebbe tárolódnak a pontok, jegyek, stb.")
     private List<Exam> exams;
 
 

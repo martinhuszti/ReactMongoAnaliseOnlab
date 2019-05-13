@@ -19,19 +19,19 @@ import java.util.ArrayList;
 public class Student {
 
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
     @Indexed
     @NotBlank
-    @ApiModelProperty(notes ="Azonosító Neptun kód")
+    @ApiModelProperty(notes = "Azonosító Neptun kód")
     private String neptun;
 
     @DBRef
-    @ApiModelProperty(notes ="Diákhoz tartozó számonkérések")
+    @ApiModelProperty(notes = "Diákhoz tartozó számonkérések")
     private ArrayList<Exam> exams;
 
-    @ApiModelProperty(notes ="Diákhoz tartozó gyakorlat")
+    @ApiModelProperty(notes = "Diákhoz tartozó gyakorlat")
     private String gyakid;
 
 

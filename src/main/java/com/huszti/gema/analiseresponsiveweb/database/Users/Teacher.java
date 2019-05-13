@@ -15,20 +15,17 @@ import java.util.List;
 public class Teacher {
 
     @Id
-    @ApiModelProperty(notes ="Generált Id. Nem kell kitölteni")
+    @ApiModelProperty(notes = "Generált Id. Nem kell kitölteni")
     private String id;
 
-    @ApiModelProperty(notes ="Tanár neve")
+    @ApiModelProperty(notes = "Tanár neve")
     private String name;
 
     @NotBlank
-    @ApiModelProperty(notes ="Azonosító Neptun kód")
+    @ApiModelProperty(notes = "Azonosító Neptun kód")
     private String neptun;
 
-    @ApiModelProperty(notes ="Tanárhoz tartozó gyakorlatok")
+    @ApiModelProperty(notes = "Tanárhoz tartozó gyakorlatok")
     private List<String> labor_ids;
 
-    Teacher() {
-
-    }
 }

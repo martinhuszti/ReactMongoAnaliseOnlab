@@ -3,7 +3,7 @@ import Clear from "@material-ui/icons/Clear";
 import "./css/delete_news.css";
 
 
-class Delete_Publication extends Component {
+class DeletePublication extends Component {
     emptyItem = {
         title: "",
         text: "",
@@ -16,6 +16,8 @@ class Delete_Publication extends Component {
             item: this.emptyItem,
             items: [],
         };
+
+        this.headerchange = this.headerchange.bind(this);
     }
 
 
@@ -26,7 +28,6 @@ class Delete_Publication extends Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-        console.log("törlés");
 
         var array = [...this.state.items];
         var index = array.indexOf(item);
@@ -38,12 +39,34 @@ class Delete_Publication extends Component {
     }
 
     componentDidMount() {
-        fetch(`/api/news`, {
+        fetch("/api/news", {
             method: "GET"
         })
             .then((result) => result.json())
-            .then((items) => this.setState({items}));
+            .then((items) => this.setState({items}, this.addClickedmenu()));
     }
+
+    addClickedmenu() {
+        this.state.items.forEach(function (element) {
+            element.clicked = false;
+        });
+    }
+
+    headerchange = (headerstring) => {
+        this.setState({headertext: headerstring.text});
+
+        if (headerstring.clicked === true) {
+            this.state.items.forEach(function (element) {
+                element.clicked = false;
+            });
+        } else {
+            this.state.items.forEach(function (element) {
+                element.clicked = false;
+            });
+            headerstring.clicked = true;
+        }
+
+    };
 
     render() {
 
@@ -53,9 +76,12 @@ class Delete_Publication extends Component {
             <div>
 
                 {items.map(item => <li id="dnews_first" key={item.id}>
-                    <div className="news dnews_head dnews_flex">
+                    <div onClick={this.headerchange.bind(this, item)} className="news dnews_head dnews_flex">
                         <p className="news_text dnews_flexiable">{item.title}</p>
                         <Clear className="dnews_clear" value={item} onClick={this.deleteNewsClick.bind(this, item)}/>
+                    </div>
+                    <div className={item.clicked ? "dnews_show" : "dnews_hide"}>
+                        <div className="news news_body"> {item.text.substring(0, 200)} . . .</div>
                     </div>
 
 
@@ -65,4 +91,4 @@ class Delete_Publication extends Component {
     }
 }
 
-export default Delete_Publication;
+export default DeletePublication;
