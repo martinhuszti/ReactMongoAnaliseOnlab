@@ -13,6 +13,7 @@ import com.huszti.gema.analiseresponsiveweb.webcontrollers.passObject.UpdateStud
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import lombok.var;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,7 +104,11 @@ public class StudentController {
             Teacher teacher = teacherRepository.findByNeptun(neptun);
             assert teacher != null;
             ArrayList<Student> allstudents = new ArrayList<>();
-            teacher.getLabor_ids().forEach(labid -> allstudents.addAll(studentRepository.findAllByGyakid(labid)));
+            var l = teacher.getLabor_ids();
+            if (l == null) {
+                return ResponseEntity.noContent().build();
+            }
+            l.forEach(labid -> allstudents.addAll(studentRepository.findAllByGyakid(labid)));
             System.out.println("Összes student visszaadva GyakId alapján");
             return ResponseEntity.ok(allstudents);
         }
