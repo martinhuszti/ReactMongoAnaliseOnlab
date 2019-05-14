@@ -50,15 +50,13 @@ class NewTest extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         this.toggleBtn();
-
-        var exam = {
+        let exam = {
             title: this.state.item.title,
             type: this.state.examType,
             time: this.state.item.time,
             creator: sessionStorage.getItem("id")
 
         };
-
 
         await fetch("/api/exams/tests", {
             method: "POST",
@@ -68,10 +66,7 @@ class NewTest extends Component {
 
         window.setTimeout(() => {
             this.toggleBtn();
-
         }, 2000);
-
-
     }
 
     toggleBtn = () => {
@@ -91,8 +86,6 @@ class NewTest extends Component {
 
 
     render() {
-
-
         const {item} = this.state;
         const {btnDisabled} = this.state;
 
@@ -131,8 +124,6 @@ class NewTest extends Component {
                 <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
                     Sikeresen felveted a számonkérést!
                 </Alert>
-
-
             </div>
         );
     }
