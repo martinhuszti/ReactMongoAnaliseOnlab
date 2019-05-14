@@ -49,7 +49,6 @@ class NewTest extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-
         this.toggleBtn();
 
         var exam = {

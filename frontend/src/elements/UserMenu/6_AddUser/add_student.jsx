@@ -129,21 +129,21 @@ class ExtraStudent extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Diák neve:</Label>
-                        <Input className="extra_info" type="text" name="name" id="name"
+                        <Input required className="extra_info" type="text" name="name" id="name"
                                value={createdUser.name || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
-                        <Input className="extra_info" type="text" name="email" id="email"
+                        <Input required className="extra_info" type="text" name="email" id="email"
                                value={createdUser.email || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
-                        <Input className="extra_info" type="text" name="neptun" id="neptun"
+                        <Input required className="extra_info" type="text" name="neptun" id="neptun"
                                value={createdUser.neptun || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
@@ -171,7 +171,7 @@ class ExtraStudent extends Component {
                     <label htmlFor="file-upload" className="extra-file-upload">
                         Tallózás...
                     </label>
-                    <input className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
+                    <input required className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
                            onChange={(event) => this.uploadFile(event)}/>
 
                     <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
