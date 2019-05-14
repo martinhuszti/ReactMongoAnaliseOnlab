@@ -4,7 +4,7 @@ services:
   - docker
 script: mvn clean install
 after_success:
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker login -u $DOCKER_USERNAME  --password-stdin $DOCKER_PASSWORD
   - export TAG=latest
   - export IMAGE_NAME=martinhuszti/analisebme
   - docker build -t $IMAGE_NAME .
