@@ -35,6 +35,8 @@ class ExtraTeacher extends Component {
             all: this.all,
             value: [],
             visible: false,
+            btnDisabled: false,
+
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -94,10 +96,22 @@ class ExtraTeacher extends Component {
         }, 2000)
     }
 
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
+
     handleSubmit(event) {
         event.preventDefault();
+        this.toggleBtn();
         this.addteacher(event);
         this.adduser(event);
+        window.setTimeout(() => {
+            this.toggleBtn();
+
+        }, 2000);
     }
 
 
@@ -108,6 +122,8 @@ class ExtraTeacher extends Component {
     render() {
 
         const {all} = this.state;
+        const {btnDisabled} = this.state;
+
 
         const getStudents = (inputValue, callback) => {
 
@@ -128,20 +144,20 @@ class ExtraTeacher extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Név:</Label>
-                        <Input className="extra_info" type="text" name="name" id="name"
+                        <Input required className="extra_info" type="text" name="name" id="name"
                                value={all.name || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Neptun:</Label>
-                        <Input className="extra_info" type="text" name="neptun" id="neptun"
+                        <Input required className="extra_info" type="text" name="neptun" id="neptun"
                                value={all.neptun || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">E-mail:</Label>
-                        <Input className="extra_info" type="text" name="email" id="email"
+                        <Input required className="extra_info" type="text" name="email" id="email"
                                value={all.email || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
@@ -167,7 +183,8 @@ class ExtraTeacher extends Component {
                     />
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={"success"} color="primary" type="submit">Regisztrálás</Button>
+                        <Button disabled={btnDisabled} variant={"success"} color="primary"
+                                type="submit">Regisztrálás</Button>
 
                     </FormGroup>
 
