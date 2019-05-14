@@ -50,7 +50,7 @@ class ListStudents extends Component {
         fetch("/api/students?myGyakId=" + encodedValue, {
             method: "GET"
         })
-            .then( (response) => response.json())
+            .then((response) => response.json())
             .then((studentsList) =>
                 this.setState({studentsList}));
 
@@ -126,13 +126,14 @@ class ListStudents extends Component {
 
                                     <FormGroup className="col-6">
                                         <Label for="pontszam"><h5>Pontszám</h5></Label>
-                                        <Input type="number" name="score" id="pontszam" value={emptyExam.score || ""}
+                                        <Input required min={1} max={100} type="number" name="score" id="pontszam"
+                                               value={emptyExam.score || ""}
                                                placeholder="" onChange={this.handleChange}/>
                                     </FormGroup>
 
                                     <FormGroup className="col-6">
                                         <Label for="mark"><h5>Jegy</h5></Label>
-                                        <Input type="number" name="mark" id="mark" placeholder=""
+                                        <Input required min={1} max={5} type="number" name="mark" id="mark" placeholder=""
                                                value={emptyExam.mark || ""}
                                                onChange={this.handleChange}/>
                                     </FormGroup>

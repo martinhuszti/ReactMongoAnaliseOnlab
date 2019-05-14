@@ -62,14 +62,14 @@ class NewsPublication extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Hír címe</Label>
-                        <Input className="newsP_title" type="text" name="title" id="title"
+                        <Input required className="newsP_title" type="text" name="title" id="title"
                                value={item.title || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Hír szövege</Label>
-                        <textarea className="newsP_textarea" itemType="text" name="text" id="text"
+                        <textarea required className="newsP_textarea" itemType="text" name="text" id="text"
                                   value={item.text || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
