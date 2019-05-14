@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./css/change_pass.css";
-import {Button} from "reactstrap";
+import {Alert, Button} from "reactstrap";
 import Eye from "@material-ui/icons/Visibility";
 import EyeSlash from "@material-ui/icons/VisibilityOff";
 
@@ -20,6 +20,8 @@ class ChangePassword extends Component {
             color: true,
             textPass: "password",
             passwObj: this.passwObj,
+            btnDisabled: false,
+            alertVisible: false,
         };
 
 
@@ -28,9 +30,16 @@ class ChangePassword extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
     async handleSubmit(event) {
         event.preventDefault();
+        this.toggleBtn();
 
         const {passwObj} = this.state;
 
@@ -46,8 +55,14 @@ class ChangePassword extends Component {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(passwObj)
             }).then((resp) => {
+                window.setTimeout(() => {
+                    this.toggleBtn();
+
+                }, 2000);
+
                 return resp.text();
-            })
+            });
+
 
         }
     }
@@ -70,6 +85,8 @@ class ChangePassword extends Component {
     render() {
         let btnClass = this.state.color ? <EyeSlash/> : <Eye/>;
         let passStyle = this.state.color ? "password" : "text";
+        const {btnDisabled} = this.state;
+
 
         const {passwObj} = this.state;
 
@@ -79,13 +96,15 @@ class ChangePassword extends Component {
                     <li>
                         <span>Régi jelszó:</span>
                         <i className="fa fa-eye"/>
-                        <input className="pass_newpass"
-                               type="password"
-                               name="oldPassword"
-                               id="oldPassword"
+                        <input
+                            required
+                            className="pass_newpass"
+                            type="password"
+                            name="oldPassword"
+                            id="oldPassword"
 
-                               value={passwObj.oldPassword || ""}
-                               onChange={this.handleChange}
+                            value={passwObj.oldPassword || ""}
+                            onChange={this.handleChange}
 
                         />
 
@@ -94,25 +113,28 @@ class ChangePassword extends Component {
 
                     <li>
                         <span>Új jelszó: </span>
-                        <input className="pass_newpass"
-                               type={passStyle}
-                               id="newPassword"
-                               name="newPassword"
-                               onChange={this.handleChange}
-                               value={passwObj.newPassword || ""}
+                        <input
+                            required
+                            className="pass_newpass"
+                            type={passStyle}
+                            id="newPassword"
+                            name="newPassword"
+                            onChange={this.handleChange}
+                            value={passwObj.newPassword || ""}
                         />
 
                         <div onClick={this.showPass} className="pass_lookup_button">{btnClass}</div>
                     </li>
                     <li>
                         <span>Megerősítés:</span>
-                        <input className="pass_newpass"
-                               type="password"
-
-                               id="cPassword"
-                               name="cPassword"
-                               onChange={this.handleChange}
-                               value={passwObj.cPassword || ""}
+                        <input
+                            required
+                            className="pass_newpass"
+                            type="password"
+                            id="cPassword"
+                            name="cPassword"
+                            onChange={this.handleChange}
+                            value={passwObj.cPassword || ""}
                         />
                     </li>
                 </ul>
@@ -120,9 +142,15 @@ class ChangePassword extends Component {
                 <div className="pass_flex_display">
                     <div className="pass_short_area"/>
 
-                    <Button type={"submit"} className="button_color button_width" onClick={this.handleSubmit}
+                    <Button disabled={btnDisabled} type={"submit"} className="button_color button_width"
+                            onClick={this.handleSubmit}
                             variant="primary">
                         <p className="button_width">Jelszó változtatás</p></Button>
+
+
+                    <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
+                        Jelszóváltoztatás megtörtént
+                    </Alert>
 
                     <div className="pass_long_area"/>
                 </div>

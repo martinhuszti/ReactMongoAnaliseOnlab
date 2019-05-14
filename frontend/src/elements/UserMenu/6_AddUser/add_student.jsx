@@ -25,7 +25,9 @@ class ExtraStudent extends Component {
             createdUser: this.createdUser,
             createdStudent: this.createdStudent,
             redirect: false,
-            visible: false,
+            alertVisible: false,
+            btnDisabled: false,
+
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -66,10 +68,7 @@ class ExtraStudent extends Component {
             body: JSON.stringify(createdUser)
         });
 
-        this.setState({visible: true});
-        window.setTimeout(() => {
-            this.setState({visible: false});
-        }, 2000);
+        this.setState({alertVisible: true});
 
     }
 
@@ -83,15 +82,27 @@ class ExtraStudent extends Component {
         });
     }
 
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
     handleSubmit(ev) {
         ev.preventDefault();
+        this.toggleBtn();
         this.adduser();
         this.addgyak();
+        window.setTimeout(() => {
+            this.toggleBtn();
+
+        }, 2000);
+
     }
 
     closeAlert() {
-        this.setState({visible: false});
+        this.setState({alertVisible: false});
     }
 
     render() {
@@ -110,6 +121,8 @@ class ExtraStudent extends Component {
         };
 
         const {createdUser} = this.state;
+        const {btnDisabled} = this.state;
+
 
         return (
             <div>
@@ -151,7 +164,7 @@ class ExtraStudent extends Component {
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={"success"} color="primary" type="submit">Regisztrálás</Button>
+                        <Button disabled={btnDisabled} variant={"success"} color="primary" type="submit">Regisztrálás</Button>
 
                     </FormGroup>
 
@@ -161,7 +174,7 @@ class ExtraStudent extends Component {
                     <input className="extra-input" id="file-upload" type="file" accept=".xls,.xlsx"
                            onChange={(event) => this.uploadFile(event)}/>
 
-                    <Alert isOpen={this.state.visible} toggle={this.closeAlert} color="success">
+                    <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
                         Sikeresen felveted a diákot!
                     </Alert>
                 </Form>

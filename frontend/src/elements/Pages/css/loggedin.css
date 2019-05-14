@@ -125,6 +125,11 @@
     margin-top: 15px;
 }
 
+.box_1{
+    display: flex;
+    flex-direction: row;
+}
+
 .menu_items_two {
     color: white;
     vertical-align: middle;

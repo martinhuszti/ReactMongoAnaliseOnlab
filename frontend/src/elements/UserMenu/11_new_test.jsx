@@ -102,7 +102,7 @@ class NewTest extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Számonkérés neve:</Label>
-                        <Input className="newsP_title" type="text" name="title" id="title"
+                        <Input required className="newsP_title" type="text" name="title" id="title"
                                value={item.title || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
@@ -117,7 +117,7 @@ class NewTest extends Component {
                     />
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
-                        <Input className="newsP_title" type="text" name="time" id="time"
+                        <Input required className="newsP_title" type="text" name="time" id="time"
                                value={item.time || ""} onChange={this.handleChange}
                         />
                     </FormGroup>

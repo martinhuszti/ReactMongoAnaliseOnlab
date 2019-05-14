@@ -59,7 +59,7 @@ public class UserController {
     @ApiParam("SimpleUser-t vár")
     public ResponseEntity addUser(@RequestBody SimpleUser user) {
         if (userRepository.findByNeptun(user.getNeptun()) != null) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Már létezik ilyen NEPTUN kóddal felhasználó"); // Már létezik ilyen neptun
         }
         userRepository.save(user);
         System.out.println("Új user hozzáadva: " + user);

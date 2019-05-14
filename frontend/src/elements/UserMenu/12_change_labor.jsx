@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./css/change_labor.css";
-import {Button, Form, FormGroup, Label} from "reactstrap";
+import {Alert, Button, Form, FormGroup, Label} from "reactstrap";
 import Select from "react-select";
 
 
@@ -14,6 +14,8 @@ class ChangeLab extends Component {
             labors: [],
             gyak: "",
             id: "",
+            btnDisabled: false,
+            alertVisible: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -21,6 +23,8 @@ class ChangeLab extends Component {
 
     handleSubmit(ev) {
         ev.preventDefault();
+        this.toggleBtn();
+
         let updateStudent = {
             gyak: this.state.gyak,
             id: this.state.id
@@ -30,6 +34,11 @@ class ChangeLab extends Component {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(updateStudent)
         });
+
+        window.setTimeout(() => {
+            this.toggleBtn();
+
+        }, 2000);
     }
 
 
@@ -51,13 +60,24 @@ class ChangeLab extends Component {
                 this.setState({labors})
             });
 
+
+
     }
+
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
 
     render() {
 
         const {labors} = this.state;
         const {studentsList} = this.state;
+        const {btnDisabled} = this.state;
+
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
@@ -87,10 +107,15 @@ class ChangeLab extends Component {
 
                     </FormGroup>
                     <FormGroup id="buttonFrom">
-                        <Button variant={"success"} color="primary" type="submit">Változtatás</Button>
+                        <Button disabled={btnDisabled} variant={"success"} color="primary" type="submit">Változtatás</Button>
 
                     </FormGroup>
                 </Form>
+
+                <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
+                    Sikeresen megtörtént a csere!
+                </Alert>
+
             </div>
         );
     }
