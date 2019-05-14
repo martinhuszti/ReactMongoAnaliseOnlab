@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./css/news_publication.css";
-import {Button, Form, FormGroup, Input, Label} from "reactstrap";
+import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 
 class newLabor extends Component {
     emptyLab = {
@@ -16,6 +16,8 @@ class newLabor extends Component {
         this.state = {
             item: this.emptyLab,
             items: [],
+            btnDisabled: false,
+            alertVisible: false,
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,46 +36,60 @@ class newLabor extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        this.toggleBtn();
         const {item} = this.state;
-
         await fetch("/api/labors", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(item)
         });
-
+        window.setTimeout(() => {
+            this.toggleBtn();
+        }, 2000);
     }
+
+    toggleBtn = () => {
+        this.setState(prevState => ({
+            btnDisabled: !prevState.btnDisabled,
+            alertVisible: !prevState.alertVisible,
+        }));
+    };
 
     render() {
         const {item} = this.state;
+        const {btnDisabled} = this.state;
+
         return (
             <div>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for="head">Gyakorlat neve:</Label>
-                        <Input className="newsP_title" type="text" name="title" id="title"
+                        <Input required className="newsP_title" type="text" name="title" id="title"
                                value={item.title || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup>
                         <Label for="head">Hely:</Label>
-                        <Input className="newsP_title" type="text" name="place" id="place"
+                        <Input required className="newsP_title" type="text" name="place" id="place"
                                value={item.place || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Label for="head">Időpont:</Label>
-                        <Input className="newsP_title" type="text" name="time" id="time"
+                        <Input required className="newsP_title" type="text" name="time" id="time"
                                value={item.time || ""} onChange={this.handleChange}
                         />
                     </FormGroup>
 
                     <FormGroup id="buttonFrom">
-                        <Button variant={"success"} color="primary" type="submit">Feltöltés</Button>
+                        <Button disabled={btnDisabled} variant={"success"} color="primary"
+                                type="submit">Feltöltés</Button>
                     </FormGroup>
-
                 </Form>
+                <Alert isOpen={this.state.alertVisible} toggle={this.closeAlert} color="success">
+                    Sikeresen felveted a számonkérést!
+                </Alert>
             </div>
         )
     }
