@@ -38,7 +38,8 @@
 
 .pass_lookup_button {
     padding-top: 10px;
-    text-align: center
+    text-align: center;
+    cursor: pointer;
 }
 
 @media ( max-width: 450px ) {
