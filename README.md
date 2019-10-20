@@ -1,6 +1,7 @@
 # Analízis Önlab
 Team Project for BME Onlab with [@gszasza1](https://github.com/gszasza1)
-Made with MongoDb, React and Spring Boot.
+
+Made with MongoDb Atlas, React, Maven, Swagger, Lombok, Docker, Travis, Heroku and Spring Boot.
 
 ## Screenshots
 <img src="readme_res/1.png" width="75%" />
