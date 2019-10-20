@@ -1,5 +1,17 @@
 # Analízis Önlab
-Team Project for BME Onlab
+Team Project for BME Onlab with [@gszasza1](https://github.com/gszasza1)
+Made with MongoDb, React and Spring Boot.
+
+## Screenshots
+<img src="readme_res/1.png" width="75%" />
+<img src="readme_res/2.png" width="75%" />
+<img src="readme_res/3.png" width="45%" />
+<img src="readme_res/4.png" width="75%" />
+<img src="readme_res/5.png" width="75%" />
+<img src="readme_res/6.png" width="75%" />
+<img src="readme_res/7.png" width="75%" />
+
+
 
 Analízis tantárgyhoz oldal készítés
 ## Travis [![Build Status](https://travis-ci.com/martinhuszti/analise.svg?branch=master)](https://travis-ci.com/martinhuszti/analise)
